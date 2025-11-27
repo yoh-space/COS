@@ -3,7 +3,7 @@ import Image from "next/image";
 import SectionTitle from "../Common/SectionTitle";
 import Lottie from "lottie-react";
 import ratingAnimation from "../../../public/images/lottie/rating.json";
-import mobiledevelopment from "../../../public/images/lottie/mobile-development.json";
+import Visa from "../../../public/images/lottie/Visa.json";
 // import GlassCard from "@/components/ui/glass-card";
 
 const checkIcon = (
@@ -63,7 +63,7 @@ const AboutSectionOne = () => {
             </div>
 
             <div className="w-full px-4 lg:w-1/2">
-              <Lottie animationData={mobiledevelopment} />
+              <Lottie animationData={Visa} />
             </div>
           </div>
         </div>

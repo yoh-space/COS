@@ -1,35 +1,56 @@
 import { Feature } from "@/types/feature";
-import { Monitor, Code2, Network, BrainCircuit, Megaphone, Users } from "lucide-react"; 
+import {
+  GraduationCap,
+  Microscope,
+  BookOpen,
+  Users,
+  FlaskConical,
+  Award,
+} from "lucide-react";
 
 const featuresData: Feature[] = [
   {
     id: 1,
-    icon: <Monitor className="w-10 h-10 text-primary" />,
-    title: "Application Development",
+    icon: <GraduationCap className="h-10 w-10 text-primary" />,
+    title: "Quality Education",
     paragraph:
-      "We design, build, and deploy robust, scalable, and user-centric applications for mobile, desktop, and cloud platforms. Our services cover the full software development lifecycle, from initial concept to ongoing maintenance and support.",
+      "We provide high-quality research-based teaching and learning in science and mathematics, preparing students for successful careers across diverse scientific disciplines with cutting-edge curriculum and experienced faculty.",
   },
   {
     id: 2,
-    icon: <Code2 className="w-10 h-10 text-primary" />,
-    title: "Web Development",
+    icon: <Microscope className="h-10 w-10 text-primary" />,
+    title: "Research Excellence",
     paragraph:
-      "Our web development services focus on creating responsive, secure, and high-performance websites and web applications. We utilize modern frameworks and ensure optimal user experience across all devices and browsers.",
+      "Our college is committed to conducting innovative research that addresses societal needs and contributes to scientific advancement. We foster a culture of inquiry and discovery across all departments.",
   },
   {
     id: 3,
-    icon: <Network className="w-10 h-10 text-primary" />,
-    title: "System Development",
+    icon: <FlaskConical className="h-10 w-10 text-primary" />,
+    title: "State-of-the-Art Laboratories",
     paragraph:
-      "We specialize in defining, designing, and implementing complex software systems tailored to your business needs. Our solutions streamline operations, improve data management, and seamlessly integrate with existing infrastructure for greater efficiency.",
+      "Equipped with modern facilities and advanced equipment, our laboratories provide students and researchers with hands-on experience in Chemistry, Physics, Biology, Mathematics, Statistics, and Industrial Chemistry.",
   },
   {
     id: 4,
-    icon: <BrainCircuit className="w-10 h-10 text-primary" />,
-    title: "AI & ML Solutions",
+    icon: <Users className="h-10 w-10 text-primary" />,
+    title: "Community Engagement",
     paragraph:
-      "Leverage the power of artificial intelligence and machine learning to drive innovation. We build intelligent solutions, from predictive analytics and computer vision to natural language processing, that provide actionable insights and automate complex tasks.",
-  }
+      "We actively collaborate with government and non-governmental institutions to support public service activities, meet emerging community needs through research, and promote scientific literacy and development.",
+  },
+  {
+    id: 5,
+    icon: <BookOpen className="h-10 w-10 text-primary" />,
+    title: "Diverse Programs",
+    paragraph:
+      "Offering comprehensive undergraduate and graduate programs in multiple scientific disciplines, we enable students to achieve their full potential through rigorous academic programs designed to meet future challenges.",
+  },
+  {
+    id: 6,
+    icon: <Award className="h-10 w-10 text-primary" />,
+    title: "National Excellence",
+    paragraph:
+      "Striving to become one of the best research and teaching colleges in the university, we are dedicated to producing graduates who serve as national models of excellence in science and mathematics.",
+  },
 ];
 
 export default featuresData;

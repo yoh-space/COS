@@ -1,7 +1,7 @@
 "use client"
 import Lottie from "lottie-react";
 import SectionTitle from "../Common/SectionTitle";
-import webdevelopment from "../../../public/images/lottie/webdevelopement.json";
+import Learning from "../../../public/images/lottie/Learning.json";
 
 const AboutSectionTwo = () => {
   return (
@@ -18,7 +18,7 @@ const AboutSectionTwo = () => {
               className="relative mx-auto mb-12 aspect-25/24 max-w-[500px] text-center lg:m-0"
               data-wow-delay=".15s"
             >
-              <Lottie animationData={webdevelopment} />
+              <Lottie animationData={Learning} />
             </div>
           </div>
           <div className="w-full px-4 lg:w-1/2">
