@@ -23,18 +23,8 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <head>
         {/* ✅ Performance Optimizations */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-
-        {/* Google Fonts - Added for ESLint warning fix */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
 
         {/* ✅ Load Google AdSense Auto Ads (deferred) */}
         <AdSenseComponent pId="ca-pub-7604915619325589" />

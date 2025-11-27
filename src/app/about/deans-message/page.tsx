@@ -81,7 +81,7 @@ const DeansMessagePage = () => {
                                 <div className="flex items-start gap-4">
                                     <Quote className="text-primary flex-shrink-0 mt-1" size={32} />
                                     <p className="text-lg font-medium text-black dark:text-white italic leading-relaxed">
-                                        "You are the future of science. Embrace the opportunities, challenge yourselves, and strive for excellence."
+                                        &ldquo;You are the future of science. Embrace the opportunities, challenge yourselves, and strive for excellence.&rdquo;
                                     </p>
                                 </div>
                             </div>
