@@ -39,8 +39,8 @@ export default function ArticleSEO({
       }}
       description={description}
       publisher={{
-        name: "Yo-Tech",
-        logo: `${BASE_URL}/images/logo/yo-tech-logo.svg`,
+        name: "BDU College of Science",
+        logo: `${BASE_URL}/images/logo/logo.jpeg`,
       }}
       isAccessibleForFree={true}
     />

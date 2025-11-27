@@ -1,7 +1,7 @@
 {
-  "name": "Yo-Tech - Innovative Digital Solutions",
-  "short_name": "Yo-Tech",
-  "description": "Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, and tech consulting to empower your business growth.",
+  "name": "BDU College of Science - Excellence in Science Education",
+  "short_name": "BDU CoS",
+  "description": "Bahir Dar University College of Science - Advancing knowledge and innovation in natural sciences. Wisdom at the source of Blue Nile.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -14,19 +14,19 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/images/logo/yo-tech-logo.svg",
+      "src": "/images/logo/logo.jpeg",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/logo/yo-tech-logo.svg",
+      "src": "/images/logo/logo.jpeg",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["business", "technology", "productivity"],
+  "categories": ["education", "science", "research"],
   "lang": "en-US",
   "dir": "ltr"
 }

@@ -73,7 +73,7 @@ export default function RootLayout({
                 latitude: 9.0320,
                 longitude: 38.7469,
               }}
-              image={`${BASE_URL}/images/logo/yo-tech-logo.svg`}
+              image={`${BASE_URL}/images/logo/logo.jpeg`}
               priceRange="$$"
             />
 
