@@ -290,7 +290,7 @@ const ServicesPage = () => {
                             {/* Closing Statement */}
                             <div className="rounded-sm bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 px-8 py-8 border-l-4 border-primary">
                                 <p className="text-lg font-medium text-black dark:text-white leading-relaxed mb-4">
-                                    By integrating research, education, and community service, Bahir Dar University's College of Science continues to play a vital role in bridging the gap between academia and society.
+                                    By integrating research, education, and community service, Bahir Dar University&apos;s College of Science continues to play a vital role in bridging the gap between academia and society.
                                 </p>
                                 <p className="text-base text-body-color leading-relaxed">
                                     Through these comprehensive community engagement activities, we are <strong>fostering sustainable development and social transformation</strong>, ultimately contributing to the betterment of our local communities and the nation as a whole.
