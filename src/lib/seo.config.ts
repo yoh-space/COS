@@ -1,33 +1,28 @@
 import { Metadata } from 'next';
 
 // Base URL for the site
-export const BASE_URL = 'https://www.yotech.space';
+export const BASE_URL = 'https://www.bdu.edu.et/cos';
 
 // Default metadata configuration
 export const DEFAULT_METADATA: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Yo-Tech | Innovative Digital Solutions, Web & App Development, Tech Services',
-    template: '%s | Yo-Tech',
+    default: 'Bahir Dar University College of Science | Excellence in Science Education',
+    template: '%s | BDU College of Science',
   },
-  description: 'Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, cloud computing, blockchain, IoT, and tech consulting to empower your business growth. Trusted by startups and enterprises worldwide.',
+  description: 'Bahir Dar University College of Science offers world-class education and research in Chemistry, Physics, Mathematics, Biology, Statistics, and Industrial Chemistry. Wisdom at the source of Blue Nile.',
   keywords: [
-    'digital solutions', 'web development', 'mobile app development', 'AI', 'machine learning', 'deep learning',
-    'cloud computing', 'AWS', 'Azure', 'Google Cloud', 'blockchain', 'smart contracts', 'IoT', 'Internet of Things',
-    'tech consulting', 'software development', 'custom software', 'SaaS', 'enterprise solutions', 'startup solutions',
-    'business growth', 'digital transformation', 'DevOps', 'CI/CD', 'microservices', 'API development',
-    'full stack development', 'frontend development', 'backend development', 'React', 'Next.js', 'Node.js',
-    'Python', 'Java', 'TypeScript', 'JavaScript', 'UI/UX design', 'responsive design', 'SEO optimization',
-    'digital marketing', 'e-commerce solutions', 'mobile-first design', 'progressive web apps', 'PWA',
-    'cybersecurity', 'data analytics', 'business intelligence', 'automation', 'RPA', 'chatbots',
-    'virtual assistants', 'AR', 'VR', 'augmented reality', 'virtual reality', 'tech innovation',
-    'agile development', 'scrum', 'product development', 'MVP development', 'prototype', 'scalable solutions',
-    'performance optimization', 'Yo-Tech', 'YoTech', 'Addis Ababa', 'Ethiopia', 'African tech',
-    'web development in Ethiopia', 'app development in Ethiopia', 'AI development in Ethiopia',
+    'Bahir Dar University', 'College of Science', 'BDU', 'Science Education', 'Research', 
+    'Chemistry', 'Physics', 'Mathematics', 'Biology', 'Statistics', 'Industrial Chemistry',
+    'Ethiopia', 'Higher Education', 'Academic Excellence', 'Scientific Research',
+    'Undergraduate Programs', 'Graduate Programs', 'PhD Programs', 'Masters Programs',
+    'Natural Sciences', 'Applied Sciences', 'Laboratory Research', 'Academic Institution',
+    'University in Ethiopia', 'Science Degrees', 'STEM Education', 'Research Publications',
+    'Academic Programs', 'Student Admissions', 'Faculty', 'Bahir Dar', 'Blue Nile',
   ],
-  authors: [{ name: 'Yo-Tech Team', url: BASE_URL }],
-  creator: 'Yo-Tech',
-  publisher: 'Yo-Tech',
+  authors: [{ name: 'Bahir Dar University College of Science', url: BASE_URL }],
+  creator: 'Bahir Dar University',
+  publisher: 'Bahir Dar University',
   robots: {
     index: true,
     follow: true,
@@ -43,44 +38,44 @@ export const DEFAULT_METADATA: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: BASE_URL,
-    siteName: 'Yo-Tech',
-    title: 'Yo-Tech | Innovative Digital Solutions for Business Growth',
-    description: 'Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, cloud computing, blockchain, IoT, and tech consulting to empower your business growth.',
+    siteName: 'BDU College of Science',
+    title: 'Bahir Dar University College of Science | Excellence in Science Education',
+    description: 'Leading institution for science education and research in Ethiopia. Offering undergraduate and graduate programs in natural sciences.',
     images: [
       {
-        url: `${BASE_URL}/images/logo/yo-tech-logo.svg`,
+        url: `${BASE_URL}/images/logo/cos-logo.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Yo-Tech Logo',
-        type: 'image/svg+xml',
+        alt: 'BDU College of Science Logo',
+        type: 'image/jpeg',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Yo-Tech | Innovative Digital Solutions for Business Growth',
-    description: 'Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, and tech consulting to empower your business growth.',
-    creator: '@yotech',
-    site: '@yotech',
-    images: [`${BASE_URL}/images/logo/yo-tech-logo.svg`],
+    title: 'Bahir Dar University College of Science',
+    description: 'Excellence in Science Education & Research - Wisdom at the source of Blue Nile',
+    creator: '@bdueduet',
+    site: '@bdueduet',
+    images: [`${BASE_URL}/images/logo/cos-logo.jpg`],
   },
   icons: {
     icon: '/favicon.ico',
-    apple: '/images/logo/yo-tech-logo.svg',
+    apple: '/images/logo/cos-logo.jpg',
   },
   manifest: '/manifest.json',
   alternates: {
     canonical: BASE_URL,
   },
   other: {
-    'theme-color': '#4A6CF7',
+    'theme-color': '#003366',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
     'format-detection': 'telephone=no',
-    'geo.region': 'ET',
-    'geo.placename': 'Addis Ababa',
+    'geo.region': 'ET-AM',
+    'geo.placename': 'Bahir Dar',
     'language': 'English',
-    'coverage': 'Worldwide',
+    'coverage': 'Ethiopia',
     'distribution': 'Global',
     'rating': 'General',
     'revisit-after': '7 days',
@@ -90,37 +85,37 @@ export const DEFAULT_METADATA: Metadata = {
 // Page-specific metadata configurations
 export const PAGE_METADATA = {
   home: {
-    title: 'Innovative Digital Solutions, Web & App Development, Tech Services',
-    description: 'Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, cloud computing, blockchain, IoT, and tech consulting to empower your business growth. Trusted by startups and enterprises worldwide.',
-    keywords: 'digital solutions, web development, app development, AI, machine learning, cloud computing, blockchain, IoT, tech consulting, business growth, startup solutions, enterprise software, custom software development, SaaS, digital transformation, web development in Ethiopia, app development in Ethiopia',
+    title: 'Excellence in Science Education & Research',
+    description: 'Bahir Dar University College of Science offers world-class education in Chemistry, Physics, Mathematics, Biology, Statistics, and Industrial Chemistry. Wisdom at the source of Blue Nile.',
+    keywords: 'Bahir Dar University, College of Science, BDU, Science Education, Research, Chemistry, Physics, Mathematics, Biology, Statistics, Ethiopia, Higher Education',
     url: BASE_URL,
   },
   
   about: {
-    title: 'About Yo-Tech | Meet Our Expert Team & Mission',
-    description: 'Discover Yo-Tech\'s mission, values, and the passionate team of expert developers, designers, and consultants driving innovative digital solutions for business growth and digital transformation.',
-    keywords: 'about Yo-Tech, YoTech team, company mission, tech company, software development company, digital agency, expert developers, tech consultants, innovation team, business growth experts, Ethiopian tech company',
+    title: 'About College of Science | History, Mission & Vision',
+    description: 'Learn about Bahir Dar University College of Science - our history, mission, vision, and commitment to excellence in science education and research in Ethiopia.',
+    keywords: 'about BDU, College of Science history, mission and vision, academic excellence, science education Ethiopia, research institution, faculty, administration',
     url: `${BASE_URL}/about`,
   },
   
   blog: {
-    title: 'Tech Blog | Latest Insights on Web Development, AI, Cloud & More',
-    description: 'Explore Yo-Tech\'s blog for expert insights, tutorials, and updates on web development, mobile apps, AI/ML, cloud computing, blockchain, IoT, and the latest technology trends.',
-    keywords: 'tech blog, web development blog, AI tutorials, machine learning articles, cloud computing insights, blockchain news, IoT updates, programming tutorials, software development tips, tech trends, developer resources, coding tutorials',
+    title: 'Academic Programs & Departments | Latest Updates',
+    description: 'Explore our academic programs in Chemistry, Industrial Chemistry, Mathematics, Physics, Statistics, and Biology. Stay updated with the latest news and research from our departments.',
+    keywords: 'academic programs, departments, Chemistry, Physics, Mathematics, Biology, Statistics, Industrial Chemistry, undergraduate programs, graduate programs, research updates',
     url: `${BASE_URL}/blog`,
   },
   
   contact: {
-    title: 'Contact Yo-Tech | Get in Touch for Tech Solutions & Consulting',
-    description: 'Contact Yo-Tech for inquiries, support, or to discuss your next digital project. Our expert team is ready to help you grow with innovative tech solutions and consulting services.',
-    keywords: 'contact Yo-Tech, tech support, digital solutions inquiry, business consultation, web development services, app development quote, tech consulting, project inquiry, software development contact, get in touch',
+    title: 'Contact Us | Admissions & Inquiries',
+    description: 'Contact Bahir Dar University College of Science for admissions, research opportunities, and academic inquiries. We welcome prospective students and research collaborators.',
+    keywords: 'contact BDU, admissions inquiry, research collaboration, academic information, student services, contact College of Science, Bahir Dar contact',
     url: `${BASE_URL}/contact`,
   },
   
   pricing: {
-    title: 'Pricing Plans | Affordable Tech Solutions for Every Business',
-    description: 'Explore Yo-Tech\'s flexible pricing plans for web development, mobile apps, AI/ML services, and tech consulting. Find the perfect solution for startups, SMBs, and enterprises.',
-    keywords: 'pricing plans, web development pricing, app development cost, tech consulting rates, affordable tech solutions, startup packages, enterprise solutions, custom software pricing, SaaS pricing, service packages',
+    title: 'Research & Publications | Scientific Excellence',
+    description: 'Discover cutting-edge research and publications from Bahir Dar University College of Science. Explore our research centers, ongoing projects, and academic contributions.',
+    keywords: 'research, publications, scientific research, academic papers, research centers, PhD research, masters research, laboratory research, scientific excellence',
     url: `${BASE_URL}/pricing`,
   },
 };
@@ -140,13 +135,13 @@ export function generatePageMetadata(page: keyof typeof PAGE_METADATA): Metadata
       title: pageData.title,
       description: pageData.description,
       url: pageData.url,
-      siteName: 'Yo-Tech',
+      siteName: 'BDU College of Science',
       images: [
         {
-          url: `${BASE_URL}/images/logo/yo-tech-logo.svg`,
+          url: `${BASE_URL}/images/logo/cos-logo.jpg`,
           width: 1200,
           height: 630,
-          alt: 'Yo-Tech Logo',
+          alt: 'BDU College of Science Logo',
         },
       ],
       type: 'website',
@@ -155,7 +150,7 @@ export function generatePageMetadata(page: keyof typeof PAGE_METADATA): Metadata
       card: 'summary_large_image',
       title: pageData.title,
       description: pageData.description,
-      images: [`${BASE_URL}/images/logo/yo-tech-logo.svg`],
+      images: [`${BASE_URL}/images/logo/cos-logo.jpg`],
     },
   };
 }
@@ -164,30 +159,31 @@ export function generatePageMetadata(page: keyof typeof PAGE_METADATA): Metadata
 export const STRUCTURED_DATA = {
   organization: {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Yo-Tech',
-    alternateName: 'YoTech',
+    '@type': 'EducationalOrganization',
+    name: 'Bahir Dar University College of Science',
+    alternateName: 'BDU College of Science',
     url: BASE_URL,
-    logo: `${BASE_URL}/images/logo/yo-tech-logo.svg`,
-    description: 'Innovative digital solutions, web and mobile app development, AI/ML services, and tech consulting company.',
-    email: 'yohansdam@gmail.com',
-    telephone: '+251911701858',
+    logo: `${BASE_URL}/images/logo/cos-logo.jpg`,
+    description: 'Leading institution for science education and research in Ethiopia.',
+    email: 'bduinfo@bdu.edu.et',
+    telephone: '+251 583 20 9653',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Addis Ababa',
+      addressLocality: 'Bahir Dar',
+      addressRegion: 'Amhara',
       addressCountry: 'ET',
     },
     sameAs: [
-      'https://t.me/yon_fx',
-      'https://www.facebook.com/yotech',
-      'https://twitter.com/yotech',
-      'https://www.linkedin.com/company/yotech',
+      'https://www.facebook.com/bduethiopia',
+      'http://www.twitter.com/bdueduet',
+      'http://journals.bdu.edu.et/',
+      'https://www.bdu.edu.et/cos/',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+251911701858',
-      contactType: 'Customer Service',
-      email: 'yohansdam@gmail.com',
+      telephone: '+251 583 20 9653',
+      contactType: 'Academic Services',
+      email: 'bduinfo@bdu.edu.et',
       availableLanguage: ['English'],
     },
   },
@@ -195,50 +191,45 @@ export const STRUCTURED_DATA = {
   website: {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Yo-Tech',
+    name: 'BDU College of Science',
     url: BASE_URL,
-    description: 'Innovative digital solutions, web and mobile app development, AI/ML services, and tech consulting.',
+    description: 'Excellence in science education and research at Bahir Dar University.',
     publisher: {
-      '@type': 'Organization',
-      name: 'Yo-Tech',
+      '@type': 'EducationalOrganization',
+      name: 'Bahir Dar University',
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE_URL}/images/logo/yo-tech-logo.svg`,
+        url: `${BASE_URL}/images/logo/cos-logo.jpg`,
       },
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${BASE_URL}/blog?search={search_term_string}`,
-      'query-input': 'required name=search_term_string',
     },
   },
   
   localBusiness: {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'EducationalOrganization',
     '@id': BASE_URL,
-    name: 'Yo-Tech',
-    image: `${BASE_URL}/images/logo/yo-tech-logo.svg`,
+    name: 'Bahir Dar University College of Science',
+    image: `${BASE_URL}/images/logo/cos-logo.jpg`,
     url: BASE_URL,
-    telephone: '+251911701858',
-    email: 'yohansdam@gmail.com',
+    telephone: '+251 583 20 9653',
+    email: 'bduinfo@bdu.edu.et',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Addis Ababa',
+      addressLocality: 'Bahir Dar',
+      addressRegion: 'Amhara',
       addressCountry: 'ET',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: '9.0320',
-      longitude: '38.7469',
+      latitude: '11.5742',
+      longitude: '37.3615',
     },
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '18:00',
+      opens: '08:00',
+      closes: '17:00',
     },
-    priceRange: '$$',
   },
   
   breadcrumb: (items: Array<{ name: string; url: string }>) => ({
@@ -249,111 +240,6 @@ export const STRUCTURED_DATA = {
       position: index + 1,
       name: item.name,
       item: item.url,
-    })),
-  }),
-  
-  article: (article: {
-    title: string;
-    description: string;
-    image: string;
-    datePublished: string;
-    dateModified: string;
-    author: string;
-    url: string;
-  }) => ({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.description,
-    image: article.image,
-    datePublished: article.datePublished,
-    dateModified: article.dateModified,
-    author: {
-      '@type': 'Person',
-      name: article.author,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Yo-Tech',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${BASE_URL}/images/logo/yo-tech-logo.svg`,
-      },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': article.url,
-    },
-  }),
-  
-  service: {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: 'Software Development',
-    provider: {
-      '@type': 'Organization',
-      name: 'Yo-Tech',
-      url: BASE_URL,
-    },
-    areaServed: 'Worldwide',
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Digital Services',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Web Development',
-            description: 'Custom web application development using modern technologies',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Mobile App Development',
-            description: 'Native and cross-platform mobile application development',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'AI/ML Solutions',
-            description: 'Artificial Intelligence and Machine Learning services',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Cloud Computing',
-            description: 'Cloud infrastructure and migration services',
-          },
-        },
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: 'Tech Consulting',
-            description: 'Strategic technology consulting and digital transformation',
-          },
-        },
-      ],
-    },
-  },
-  
-  faqPage: (faqs: Array<{ question: string; answer: string }>) => ({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
     })),
   }),
 };

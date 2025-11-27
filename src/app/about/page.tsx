@@ -24,8 +24,8 @@ const AboutPage = () => {
         ]}
       />
       <Breadcrumb
-        pageName="About us"
-        description="Meet our team and learn more about our mission and values."
+        pageName="About College of Science"
+        description="Learn about our history, mission, vision, and commitment to excellence in science education and research."
       />
       <TeamSection />
       <AboutSectionOne />

@@ -29,43 +29,46 @@ const Testimonials = dynamic(() => import("@/components/Testimonials"), {
 });
 
 export const metadata: Metadata = {
-  title: "Yo-Tech | Innovative Digital Solutions, Web & App Development, Tech Services and Latest Blogs",
-  description: "Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, and tech consulting to empower your business growth. Trusted by startups and enterprises.",
+  title: "Bahir Dar University College of Science | Excellence in Science Education & Research",
+  description: "Bahir Dar University College of Science offers world-class education in Chemistry, Physics, Mathematics, Biology, Statistics, and Industrial Chemistry. Wisdom at the source of Blue Nile.",
   keywords: [
-    "digital solutions",
-    "web development",
-    "app development",
-    "AI",
-    "machine learning",
-    "tech consulting",
-    "business growth",
-    "Yo-Tech"
+    "Bahir Dar University",
+    "College of Science",
+    "BDU",
+    "Science Education",
+    "Research",
+    "Chemistry",
+    "Physics",
+    "Mathematics",
+    "Biology",
+    "Statistics",
+    "Ethiopia"
   ],
-  authors: [{ name: "Yo-Tech Team" }],
+  authors: [{ name: "Bahir Dar University College of Science" }],
   robots: "index, follow",
   openGraph: {
     type: "website",
-    url: "https://www.yotech.space/",
-    title: "Yo-Tech | Innovative Digital Solutions for Business Growth",
-    description: "Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, and tech consulting to empower your business growth.",
+    url: "https://www.bdu.edu.et/cos/",
+    title: "Bahir Dar University College of Science | Excellence in Science Education",
+    description: "Leading institution for science education and research in Ethiopia. Offering undergraduate and graduate programs in natural sciences.",
     images: [
       {
-        url: "https://www.yotech.space/images/logo/yo-tech-logo.svg",
+        url: "https://www.bdu.edu.et/cos/sites/default/files/coslogo.jpg",
         width: 1200,
         height: 630,
-        alt: "Yo-Tech Logo"
+        alt: "BDU College of Science Logo"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yo-Tech | Innovative Digital Solutions for Business Growth",
-    description: "Yo-Tech delivers cutting-edge digital solutions, web and mobile app development, AI/ML services, and tech consulting to empower your business growth.",
-    images: ["https://www.yotech.space/images/logo/yo-tech-logo.svg"]
+    title: "Bahir Dar University College of Science",
+    description: "Excellence in Science Education & Research - Wisdom at the source of Blue Nile",
+    images: ["https://www.bdu.edu.et/cos/sites/default/files/coslogo.jpg"]
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/images/logo/yo-tech-logo.svg"
+    apple: "/images/logo/cos-logo.jpg"
   }
 };
 

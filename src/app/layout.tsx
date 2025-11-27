@@ -43,38 +43,38 @@ export default function RootLayout({
           <Providers>
             {/* ✅ Organization Structured Data using next-seo */}
             <OrganizationJsonLd
-              type="Organization"
-              name="Yo-Tech"
+              type="EducationalOrganization"
+              name="Bahir Dar University College of Science"
               url={BASE_URL}
-              logo={`${BASE_URL}/images/logo/yo-tech-logo.svg`}
+              logo={`${BASE_URL}/images/logo/cos-logo.jpg`}
               sameAs={[
-                'https://t.me/yon_fx',
-                'https://www.facebook.com/yotech',
-                'https://twitter.com/yotech',
-                'https://www.linkedin.com/company/yotech',
+                'https://www.facebook.com/bduethiopia',
+                'http://www.twitter.com/bdueduet',
+                'http://journals.bdu.edu.et/',
+                'https://www.bdu.edu.et/cos/',
               ]}
               address={{
-                addressLocality: 'Addis Ababa',
+                addressLocality: 'Bahir Dar',
                 addressCountry: 'ET',
               }}
               contactPoint={{
-                telephone: '+251911701858',
-                contactType: 'Customer Service',
-                email: 'yohansdam@gmail.com',
+                telephone: '+251 583 20 9653',
+                contactType: 'Academic Services',
+                email: 'bduinfo@bdu.edu.et',
               }}
             />
 
             {/* ✅ Local Business Structured Data using next-seo */}
             <LocalBusinessJsonLd
-              type="LocalBusiness"
-              name="Yo-Tech"
-              description="Innovative digital solutions, web and mobile app development, AI/ML services, and tech consulting company."
+              type="EducationalOrganization"
+              name="Bahir Dar University College of Science"
+              description="Leading institution for science education and research in Ethiopia. Offering undergraduate and graduate programs in Chemistry, Physics, Mathematics, Biology, Statistics, and Industrial Chemistry."
               url={BASE_URL}
-              telephone="+251911701858"
+              telephone="+251 583 20 9653"
               address={{
-                streetAddress: '',
-                addressLocality: 'Addis Ababa',
-                addressRegion: 'Addis Ababa',
+                streetAddress: 'Bahir Dar University',
+                addressLocality: 'Bahir Dar',
+                addressRegion: 'Amhara',
                 postalCode: '',
                 addressCountry: 'ET',
               }}
@@ -98,8 +98,12 @@ export default function RootLayout({
                   item: `${BASE_URL}/about`,
                 },
                 {
-                  name: 'Blog',
+                  name: 'Academics',
                   item: `${BASE_URL}/blog`,
+                },
+                {
+                  name: 'Research',
+                  item: `${BASE_URL}/pricing`,
                 },
                 {
                   name: 'Contact',

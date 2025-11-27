@@ -27,10 +27,10 @@ const ContactPage = () => {
             <div className="w-full px-4">
               <div className="text-center">
                 <h1 className="mb-4 text-2xl font-bold leading-tight text-black dark:text-white sm:text-4xl">
-                  Get in Touch with Yo-Tech
+                  Contact College of Science
                 </h1>
                 <p className="text-base text-body-color dark:text-body-color-dark max-w-2xl mx-auto">
-                  We&apos;d love to hear from you! Whether you have a question about our services, need assistance, or want to discuss a potential project, our team is here to help.
+                  We welcome inquiries from prospective students, researchers, and partners. Contact us for admissions, research collaborations, or general information about our programs.
                 </p>
 
                 {/* Improved Social Links */}
@@ -40,7 +40,7 @@ const ContactPage = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h2.28a2 2 0 011.7 1.06l1.1 2.2a2 2 0 01-.45 2.45l-.7.7a16.06 16.06 0 006.36 6.36l.7-.7a2 2 0 012.45-.45l2.2 1.1A2 2 0 0121 18.72V21a2 2 0 01-2 2h-1C9.163 23 1 14.837 1 5V4a2 2 0 012-2z" />
                     </svg>
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">+251911701858</span>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">+251 583 20 9653</span>
                   </div>
 
                   {/* Email */}
@@ -48,19 +48,18 @@ const ContactPage = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12H8m8 0a8 8 0 11-16 0 8 8 0 0116 0zm-8 0v4m0-4V8" />
                     </svg>
-                    <a href="mailto:yohansdam@gmail.com" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition">
-                      yohansdam@gmail.com
+                    <a href="mailto:bduinfo@bdu.edu.et" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition">
+                      bduinfo@bdu.edu.et
                     </a>
                   </div>
 
-                  {/* Telegram */}
+                  {/* Location */}
                   <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 11.5a8.38 8.38 0 01-.9 3.8c-.2.4-.4.8-.7 1.1-.3.3-.7.5-1.1.7a8.38 8.38 0 01-3.8.9c-2.2 0-4.2-.8-5.7-2.3A8.38 8.38 0 013 12.5c0-2.2.8-4.2 2.3-5.7A8.38 8.38 0 0112.5 3c2.2 0 4.2.8 5.7 2.3A8.38 8.38 0 0121 11.5z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <a href="https://t.me/yon_fx" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition">
-                      Telegram
-                    </a>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">Bahir Dar, Ethiopia</span>
                   </div>
                 </div>
               </div>
@@ -71,7 +70,7 @@ const ContactPage = () => {
 
       <Breadcrumb
         pageName="Contact Us"
-        description="Reach out to us for any inquiries, support, or feedback. We're here to help and look forward to connecting with you."
+        description="Get in touch with Bahir Dar University College of Science for admissions, research opportunities, and academic inquiries."
       />
 
       <Contact />

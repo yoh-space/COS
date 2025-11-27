@@ -4,15 +4,15 @@ import NeuralNetworkHero from "@/components/ui/neural-network-hero";
 const Hero = () => {
   return (
     <NeuralNetworkHero
-      title="Innovative Digital Solutions for Your Business Growth"
-      description="YoTech is a cutting-edge technology company dedicated to delivering innovative digital solutions that drive business growth and efficiency."
-      badgeText="Digital Innovation"
-      badgeLabel="YoTech"
+      title="Excellence in Science Education & Research"
+      description="Bahir Dar University College of Science - Advancing knowledge and innovation in natural sciences. Wisdom at the source of Blue Nile."
+      badgeText="Academic Excellence"
+      badgeLabel="BDU College of Science"
       ctaButtons={[
-        { text: "Get In Touch", href: "#contact", primary: true },
-        { text: "Explore More", href: "#about" }
+        { text: "Contact Us", href: "#contact", primary: true },
+        { text: "Learn More", href: "#about" }
       ]}
-      microDetails={["Cutting-edge tech", "Business growth", "Digital efficiency"]}
+      microDetails={["World-class education", "Cutting-edge research", "Academic excellence"]}
     />
   );
 };
