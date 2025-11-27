@@ -53,14 +53,14 @@ const Header = () => {
             <div className="w-60 max-w-full px-4 xl:mr-12">
               <Link href="/">
                 <Image
-                  src="/images/logo/yotech.png"
+                  src="/images/logo/logo.jpeg"
                   alt="logo"
                   width={65}
                   height={65}
                   className="dark:hidden"
                 />
                 <Image
-                  src="/images/logo/yotech.png"
+                  src="/images/logo/logo.jpeg"
                   alt="logo"
                   width={65}
                   height={65}
