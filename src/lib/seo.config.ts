@@ -134,10 +134,17 @@ export const PAGE_METADATA = {
   },
 
   services: {
-    title: 'Services | Laboratories & Community',
-    description: 'Explore our state-of-the-art laboratories and community service initiatives.',
-    keywords: 'services, laboratories, community service, science facilities',
+    title: 'Community Engagement | Services & Outreach',
+    description: 'Discover our community engagement activities, outreach programs, and collaborative initiatives bridging academia and society.',
+    keywords: 'community services, outreach, science education, environmental projects, health programs, volunteerism',
     url: `${BASE_URL}/services`,
+  },
+
+  laboratories: {
+    title: 'Research & Teaching Laboratories | State-of-the-Art Facilities',
+    description: 'Explore our state-of-the-art research and teaching laboratories across Chemistry, Biology, Physics, Computer Science, and Industrial Chemistry departments.',
+    keywords: 'laboratories, research labs, teaching labs, chemistry lab, biology lab, physics lab, computer lab, industrial chemistry, scientific equipment, research facilities',
+    url: `${BASE_URL}/laboratories`,
   },
 
   publication: {

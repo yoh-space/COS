@@ -2,13 +2,16 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { ReactNode } from "react";
 import { ThemeProvider } from "next-themes";
+import { ColorThemeProvider } from "@/contexts/ThemeContext";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <AppRouterCacheProvider>
-        {children}
-      </AppRouterCacheProvider>
+      <ColorThemeProvider>
+        <AppRouterCacheProvider>
+          {children}
+        </AppRouterCacheProvider>
+      </ColorThemeProvider>
     </ThemeProvider>
   );
 }

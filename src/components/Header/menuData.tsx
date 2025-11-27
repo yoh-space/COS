@@ -143,13 +143,13 @@ const menuData: (Menu & { icon?: any })[] = [
       {
         id: 51,
         title: "Laboratories",
-        path: "/services",
+        path: "/laboratories",
         newTab: false,
         icon: FlaskConical,
       },
       {
         id: 52,
-        title: "Community Services",
+        title: "Community Engagement",
         path: "/services",
         newTab: false,
         icon: Users,

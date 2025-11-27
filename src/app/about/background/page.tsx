@@ -53,7 +53,7 @@ const BackgroundPage = () => {
                             {/* Programs & Students Stats */}
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
                                 <div className="rounded-sm bg-white p-8 shadow-three dark:bg-gray-dark hover:shadow-one transition-shadow duration-300">
-                                    <div className="mb-4 flex h-[50px] w-[50px] items-center justify-center rounded-md bg-primary bg-opacity-10 text-primary">
+                                    <div className="mb-4 flex h-[50px] w-[50px] items-center justify-center rounded-md bg-primary bg-opacity-10 text-primary dark:text-white">
                                         <BookOpen size={24} />
                                     </div>
                                     <h3 className="mb-2 text-xl font-bold text-black dark:text-white">Academic Programs</h3>
@@ -66,7 +66,7 @@ const BackgroundPage = () => {
 
                                 <div className="rounded-sm bg-white p-8 shadow-three dark:bg-gray-dark hover:shadow-one transition-shadow duration-300">
                                     <div className="mb-4 flex h-[50px] w-[50px] items-center justify-center rounded-md bg-primary bg-opacity-10 text-primary">
-                                        <Users size={24} color="dark:white" />
+                                        <Users size={24} />
                                     </div>
                                     <h3 className="mb-2 text-xl font-bold text-black dark:text-white">Student Population</h3>
                                     <p className="mb-2 text-3xl font-bold text-primary">1,151</p>
@@ -95,7 +95,7 @@ const BackgroundPage = () => {
                             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                                 <div className="rounded-sm bg-white px-8 py-10 shadow-three dark:bg-gray-dark">
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="flex h-[40px] w-[40px] items-center justify-center rounded-md bg-primary bg-opacity-10 text-primary">
+                                        <div className="flex h-[40px] w-[40px] items-center justify-center rounded-md bg-primary bg-opacity-10 text-primary dark:text-white">
                                             <Award size={20} />
                                         </div>
                                         <h3 className="text-xl font-bold text-black dark:text-white">Staff Development</h3>
@@ -125,7 +125,7 @@ const BackgroundPage = () => {
 
                                 <div className="rounded-sm bg-white px-8 py-10 shadow-three dark:bg-gray-dark">
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="flex h-[40px] w-[40px] items-center justify-center rounded-md bg-primary bg-opacity-10 text-primary">
+                                        <div className="flex h-[40px] w-[40px] items-center justify-center rounded-md bg-primary bg-opacity-10 text-primary dark:text-white">
                                             <Microscope size={20} />
                                         </div>
                                         <h3 className="text-xl font-bold text-black dark:text-white">Research & Community</h3>
@@ -135,15 +135,15 @@ const BackgroundPage = () => {
                                     </p>
                                     <ul className="space-y-3">
                                         <li className="flex items-start gap-3 text-sm font-medium text-body-color">
-                                            <Layers className="mt-1 text-primary" size={16} />
+                                            <Layers className="mt-1 text-primary dark:text-white" size={16} />
                                             <span><strong>30+</strong> Ongoing Research Projects (17 Internal, 13 External)</span>
                                         </li>
                                         <li className="flex items-start gap-3 text-sm font-medium text-body-color">
-                                            <Globe className="mt-1 text-primary" size={16} />
+                                            <Globe className="mt-1 text-primary dark:text-white" size={16} />
                                             <span><strong>20+</strong> Community Service Projects</span>
                                         </li>
                                         <li className="flex items-start gap-3 text-sm font-medium text-body-color">
-                                            <FlaskConical className="mt-1 text-primary" size={16} />
+                                            <FlaskConical className="mt-1 text-primary dark:text-white" size={16} />
                                             <span>Home to the <strong>Washera Geospace and Radar Science Laboratory</strong></span>
                                         </li>
                                     </ul>

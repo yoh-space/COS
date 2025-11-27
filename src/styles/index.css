@@ -18,9 +18,27 @@
   --color-white: #ffffff;
   --color-black: #121723;
   --color-dark: #1d2430;
-  --color-primary: #4a6cf7;
+  --color-primary: var(--theme-primary, #4a6cf7);
   --color-yellow: #fbb040;
   --color-bg-color-dark: #171c28;
+  
+  /* Theme colors - can be overridden by ColorThemeProvider */
+  --theme-primary: #4a6cf7;
+  --theme-primary-light: #6b8aff;
+  --theme-primary-dark: #3451d9;
+  --theme-secondary: #6366f1;
+  --theme-secondary-light: #818cf8;
+  --theme-secondary-dark: #4f46e5;
+  --theme-accent: #3b82f6;
+  --theme-accent-light: #60a5fa;
+  --theme-success: #10b981;
+  --theme-warning: #f59e0b;
+  --theme-error: #ef4444;
+  --theme-info: #3b82f6;
+  --theme-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --theme-gradient-secondary: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  --theme-gradient-accent: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --theme-gradient-hero: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #6366f1 100%);
 
   --color-body-color: #788293;
   --color-body-color-dark: #959cb1;
