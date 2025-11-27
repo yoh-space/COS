@@ -3,10 +3,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { useQuery, useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import blogData from "@/components/Blog/blogData";
 import { useTheme } from "next-themes";
-import type { Id } from "../../../convex/_generated/dataModel";
 import RichTextEditor from "@/components/RichTextEditor";
 
 
@@ -22,8 +20,8 @@ type Block =
   | { type: "table"; headers: string[]; rows: string[][] };
 export default function AdminDashboard() {
   const { theme } = useTheme();
-  const blogs = useQuery(api.blogs.list.getPosts) || [];
-  const loading = !blogs;
+  const blogs = blogData;
+  const loading = false;
   const [form, setForm] = useState<{
     id: string | null;
     title: string;
@@ -70,12 +68,12 @@ export default function AdminDashboard() {
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
     const updates: Partial<typeof form> = { [name]: value } as any;
-    
+
     // Auto-generate slug when title changes (only if slug is empty or editing)
     if (name === 'title' && (!form.slug || !editing)) {
       updates.slug = generateSlug(value);
     }
-    
+
     setForm({ ...form, ...updates });
   }
 
@@ -133,93 +131,19 @@ export default function AdminDashboard() {
     });
   }
 
-  const createBlog = useMutation(api.blogs.list.createBlog);
-  const updateBlog = useMutation(api.blogs.list.updateBlog);
-  const deleteBlog = useMutation(api.blogs.list.deleteBlog);
-
-
-  // Only allow valid properties for each block type
-  function sanitizeBlock(block: any) {
-    switch (block.type) {
-      case "paragraph":
-        return { type: "paragraph", text: block.text || "" };
-      case "heading":
-        return { type: "heading", text: block.text || "", ...(block.level ? { level: block.level } : {}) };
-      case "code":
-        return { type: "code", code: block.code || "", ...(block.language ? { language: block.language } : {}) };
-      case "image":
-        return { type: "image", url: block.url || "", ...(block.alt ? { alt: block.alt } : {}) };
-      case "bulletine":
-        return { type: "bulletine", items: Array.isArray(block.items) ? block.items.filter(Boolean) : [] };
-      case "orderedList":
-        return { type: "orderedList", items: Array.isArray(block.items) ? block.items.filter(Boolean) : [] };
-      case "divider":
-        return { type: "divider" };
-      case "link":
-        return { type: "link", url: block.url || "", text: block.text || "" };
-      case "table":
-        return { type: "table", headers: Array.isArray(block.headers) ? block.headers : [], rows: Array.isArray(block.rows) ? block.rows : [] };
-      default:
-        return block;
-    }
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    try {
-      const sanitizedContent = Array.isArray(form.content) ? form.content.map(sanitizeBlock) : [];
-      if (editing) {
-        await updateBlog({
-          id: form.id as Id<"blogs">,
-          title: form.title,
-          content: sanitizedContent,
-          author: form.author,
-          image_url: form.image_url,
-          tags: form.tags,
-          excerpt: form.excerpt,
-          category: form.category,
-          slug: form.slug,
-        });
-        showNotification("Post updated successfully!");
-      } else {
-        await createBlog({
-          title: form.title,
-          content: sanitizedContent,
-          author: form.author,
-          image_url: form.image_url,
-          tags: form.tags,
-          excerpt: form.excerpt,
-          category: form.category,
-          slug: form.slug,
-        });
-        showNotification("Post created successfully!");
-      }
-      setForm({ id: null, title: "", content: [{ type: "paragraph", text: "" }], author: "", image_url: "", tags: "", excerpt: "", category: "", slug: "" });
-      setEditing(false);
-    } catch (error) {
-      showNotification("Error saving post: " + error.message, "error");
-    }
+    showNotification("Admin functionality is temporarily disabled while building the UI.", "error");
   }
 
 
   function handleEdit(blog: any) {
-    setForm({
-      ...blog,
-      id: blog._id,
-      content: Array.isArray(blog.content) ? blog.content : [{ type: "paragraph", text: blog.content || "" }],
-      excerpt: blog.excerpt || "",
-      category: blog.category || "",
-      slug: blog.slug || "",
-    });
-    setEditing(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    showNotification("Edit functionality is temporarily disabled.", "error");
   }
 
-  async function handleDelete(id: Id<"blogs">) {
-    if (confirm("Are you sure you want to delete this post?")) {
-      await deleteBlog({ id });
-      showNotification("Post deleted successfully!");
-    }
+  async function handleDelete(id: any) {
+    showNotification("Delete functionality is temporarily disabled.", "error");
   }
 
 
@@ -238,7 +162,7 @@ export default function AdminDashboard() {
       <header className="flex flex-col md:flex-row md:justify-between md:items-center mt-10 pt-5 border-t border-gray-200 dark:border-gray-700 gap-4">
         <h1 className="text-3xl font-bold text-primary dark:text-primary-light mb-0">Admin Dashboard</h1>
         <div className="flex gap-3">
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md font-medium transition" onClick={() => setActiveTab("create")}> 
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-md font-medium transition" onClick={() => setActiveTab("create")}>
             {editing ? "Editing Post" : "Create New Post"}
           </button>
         </div>
@@ -246,14 +170,14 @@ export default function AdminDashboard() {
 
       {/* Navigation Tabs */}
       <div className="flex border-b border-gray-200 dark:border-gray-700 mb-8 mt-8">
-        <button 
+        <button
           className={`px-6 py-3 font-medium transition border-b-2 -mb-px focus:outline-none
             ${activeTab === "posts" ? "border-indigo-600 text-indigo-600 dark:text-indigo-400" : "border-transparent text-gray-500 dark:text-gray-400 hover:text-indigo-600"}`}
           onClick={() => setActiveTab("posts")}
         >
           All Posts ({blogs.length})
         </button>
-        <button 
+        <button
           className={`px-6 py-3 font-medium transition border-b-2 -mb-px focus:outline-none
             ${activeTab === "create" ? "border-indigo-600 text-indigo-600 dark:text-indigo-400" : "border-transparent text-gray-500 dark:text-gray-400 hover:text-indigo-600"}`}
           onClick={() => setActiveTab("create")}
@@ -410,19 +334,19 @@ export default function AdminDashboard() {
 
               {/* Submit Buttons */}
               <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
                 >
                   {editing ? "💾 Update Post" : "🚀 Publish Post"}
                 </button>
                 {editing && (
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition"
-                    onClick={() => { 
-                      setForm({ id: null, title: "", content: [{ type: "paragraph", text: "" }], author: "", image_url: "", tags: "", excerpt: "", category: "", slug: "" }); 
-                      setEditing(false); 
+                    onClick={() => {
+                      setForm({ id: null, title: "", content: [{ type: "paragraph", text: "" }], author: "", image_url: "", tags: "", excerpt: "", category: "", slug: "" });
+                      setEditing(false);
                     }}
                   >
                     ✕ Cancel
@@ -455,7 +379,7 @@ export default function AdminDashboard() {
             <div className="text-center py-10 text-gray-500 dark:text-gray-400">
               <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">No posts yet</h3>
               <p className="mb-4">Create your first post to get started</p>
-              <button 
+              <button
                 className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md font-medium transition"
                 onClick={() => setActiveTab("create")}
               >
@@ -484,26 +408,26 @@ export default function AdminDashboard() {
                       {blog.excerpt || (
                         Array.isArray(blog.content)
                           ? blog.content
-                              .filter(block => block.type === "paragraph" || block.type === "heading")
-                              .map(block => block.text)
-                              .filter(Boolean)
-                              .join(" ")
-                              .slice(0, 100) + (blog.content.length > 0 ? "..." : "")
+                            .filter(block => block.type === "paragraph" || block.type === "heading")
+                            .map(block => block.text)
+                            .filter(Boolean)
+                            .join(" ")
+                            .slice(0, 100) + (blog.content.length > 0 ? "..." : "")
                           : typeof blog.content === "string"
-                          ? blog.content.slice(0, 100) + (blog.content.length > 100 ? "..." : "")
-                          : ""
+                            ? blog.content.slice(0, 100) + (blog.content.length > 100 ? "..." : "")
+                            : ""
                       )}
                     </p>
                     <div className="flex flex-col gap-1 text-sm mb-4">
-                      <span className="text-gray-700 dark:text-gray-200 font-medium">By {blog.author}</span>
+                      <span className="text-gray-700 dark:text-gray-200 font-medium">By {blog.author.name}</span>
                       {blog.category && (
                         <span className="text-indigo-600 dark:text-indigo-400 font-medium">
                           Category: {blog.category}
                         </span>
                       )}
                       <span className="text-gray-500 dark:text-gray-400">
-                        {Array.isArray(blog.tags) 
-                          ? blog.tags.join(", ") 
+                        {Array.isArray(blog.tags)
+                          ? blog.tags.join(", ")
                           : (blog.tags || "No tags")
                         }
                       </span>
@@ -514,13 +438,13 @@ export default function AdminDashboard() {
                       )}
                     </div>
                     <div className="flex gap-2 mt-auto">
-                      <button 
+                      <button
                         onClick={() => handleEdit(blog)}
                         className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-1.5 rounded-md text-sm font-medium transition"
                       >
                         Edit
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleDelete(blog._id)}
                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-md text-sm font-medium transition"
                       >

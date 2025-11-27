@@ -6,14 +6,12 @@ import TagButton from "@/components/Blog/TagButton";
 import BlogViewCounter from "@/components/Blog/BlogViewCounter";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { api } from "../../../../convex/_generated/api";
-import { fetchQuery } from "convex/nextjs";
-import type { Id } from "../../../../convex/_generated/dataModel";
+import blogData from "@/components/Blog/blogData";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const blog = await fetchQuery(api.blogs.list.getPostBySlug, { slug: resolvedParams.slug });
+  const blog = blogData.find(b => b.slug === resolvedParams.slug);
   if (!blog) {
     return {
       title: "Blog Not Found | YoTech",
@@ -25,11 +23,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const tags = Array.isArray(blog.tags)
     ? blog.tags
     : blog.tags
-    ? blog.tags.split(",").map((t: string) => t.trim())
-    : [];
+      ? blog.tags.split(",").map((t: string) => t.trim())
+      : [];
   const keywords = [blog.title, ...tags].filter(Boolean).join(", ");
   const image = blog.image_url || "/images/blog/blog-details-01.jpg";
-  
+
   return {
     title,
     description,
@@ -59,10 +57,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  
+
   try {
-    const blog = await fetchQuery(api.blogs.list.getPostBySlug, { slug: resolvedParams.slug });
-    
+    const blog = blogData.find(b => b.slug === resolvedParams.slug);
+
     if (!blog) {
       return notFound();
     }
@@ -74,10 +72,10 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
       tags: Array.isArray(blog.tags)
         ? blog.tags
         : blog.tags
-        ? blog.tags.split(",").map((t: string) => t.trim())
-        : [],
-      author: {
-        name: blog.author || "Yoh",
+          ? blog.tags.split(",").map((t: string) => t.trim())
+          : [],
+      author: blog.author || {
+        name: "Yoh",
         image: "/images/blog/author-01.png",
         designation: "Author",
       },
@@ -112,7 +110,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                         <span className="mr-3">🗓️</span>
                         {new Date(mappedBlog.createdTime).toLocaleDateString()}
                       </p>
-                      <BlogViewCounter blogId={mappedBlog._id} slug={mappedBlog.slug} views={mappedBlog.views} />
+                      <BlogViewCounter views={String(mappedBlog.views)} commentCount={mappedBlog.totalComment} />
                     </div>
                   </div>
                   <div className="mb-5">
@@ -134,94 +132,12 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                 </div>
 
                 <div className="text-body-color mb-10 text-base leading-relaxed font-medium sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                  {Array.isArray(mappedBlog.content)
-                    ? mappedBlog.content.map((block: any, idx: number) => {
-                        switch (block.type) {
-                          case "heading": {
-                            const level = block.level || 2;
-                            const Tag = `h${Math.min(Math.max(level, 1), 6)}`;
-                            const classMap = {
-                              1: "text-4xl font-extrabold my-6 text-blue-700",
-                              2: "text-2xl font-bold my-4 text-blue-600",
-                              3: "text-xl font-semibold my-3 text-blue-500",
-                              4: "text-lg font-semibold my-2 text-blue-400",
-                              5: "text-base font-semibold my-2 text-blue-300",
-                              6: "text-base font-medium my-1 text-blue-200"
-                            };
-
-                            return React.createElement(
-                              String(Tag),
-                              { key: idx, className: classMap[level] || classMap[2] },
-                              block.text
-                            );
-                          }
-                          case "paragraph":
-                            return <p key={idx} className="mb-4">{block.text}</p>;
-                          case "code":
-                            return (
-                              <pre key={idx} className="bg-gray-100 dark:bg-gray-800 rounded p-3 overflow-x-auto mb-4">
-                                <code>{block.code}</code>
-                              </pre>
-                            );
-                          case "image":
-                            return (
-                              <div key={idx} className="my-4 flex justify-center">
-                                <Image src={block.url} alt={block.alt || ""} width={600} height={320} className="rounded max-h-80 object-contain" />
-                              </div>
-                            );
-                          case "bulletine":
-                            return (
-                              <ul key={idx} className="list-disc pl-6 mb-4">
-                                {Array.isArray(block.items) && block.items.map((item, i) => (
-                                  <li key={i}>{item}</li>
-                                ))}
-                              </ul>
-                            );
-                          case "orderedList":
-                            return (
-                              <ol key={idx} className="list-decimal pl-6 mb-4">
-                                {Array.isArray(block.items) && block.items.map((item, i) => (
-                                  <li key={i}>{item}</li>
-                                ))}
-                              </ol>
-                            );
-                          case "divider":
-                            return <hr key={idx} className="my-6 border-t-2 border-gray-300 dark:border-gray-700" />;
-                          case "link":
-                            return <a key={idx} href={block.url} className="text-blue-600 underline break-all" target="_blank" rel="noopener noreferrer">{block.text || block.url}</a>;
-                          case "table":
-                            return (
-                              <div key={idx} className="overflow-x-auto my-6">
-                                <table className="min-w-full border border-gray-300 dark:border-gray-700">
-                                  <thead>
-                                    <tr>
-                                      {block.headers && block.headers.map((header: string, i: number) => (
-                                        <th key={i} className="px-4 py-2 border-b bg-gray-100 dark:bg-gray-800 text-left">{header}</th>
-                                      ))}
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {block.rows && block.rows.map((row: string[], rIdx: number) => (
-                                      <tr key={rIdx}>
-                                        {row.map((cell: string, cIdx: number) => (
-                                          <td key={cIdx} className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">{cell}</td>
-                                        ))}
-                                      </tr>
-                                    ))}
-                                  </tbody>
-                                </table>
-                              </div>
-                            );
-                          default:
-                            return null;
-                        }
-                      })
-                    : mappedBlog.content}
+                  <p>{mappedBlog.content}</p>
                 </div>
 
                 <SharePost slug={mappedBlog.slug} />
-                <CommentSection blogId={mappedBlog._id} />
-                <RelatedPostsSection blogId={mappedBlog._id} tags={mappedBlog.tags} />
+                <CommentSection blogId={String(mappedBlog._id)} />
+                <RelatedPostsSection blogId={String(mappedBlog._id)} tags={mappedBlog.tags} />
               </div>
             </div>
           </div>

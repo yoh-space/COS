@@ -1,11 +1,27 @@
 "use client";
 import { useState } from "react";
-import { useQuery, useMutation } from "convex/react";
-import { useRouter } from "next/navigation"; // Import the Next.js router
-import { api } from "../../../convex/_generated/api";
-import { Id } from "../../../convex/_generated/dataModel";
+import { useRouter } from "next/navigation";
 import { useUser, useClerk } from "@clerk/nextjs";
-import {RainbowButton} from "../ui/rainbow-button";
+import { RainbowButton } from "../ui/rainbow-button";
+
+// Mock comments data
+const mockComments = [
+  {
+    _id: "1",
+    email: "user1@example.com",
+    comment: "Great article! Very informative.",
+    user_Id: "mock_user_1",
+    _creationTime: Date.now() - 3600000, // 1 hour ago
+  },
+  {
+    _id: "2",
+    email: "user2@example.com",
+    comment: "Thanks for sharing this!",
+    user_Id: "mock_user_2",
+    _creationTime: Date.now() - 7200000, // 2 hours ago
+  },
+];
+
 // Helper function
 function timeAgo(timestamp: number) {
   const now = Date.now();
@@ -16,23 +32,18 @@ function timeAgo(timestamp: number) {
   return `${Math.floor(diff / 86400)}d ago`;
 }
 
-export default function CommentSection({ blogId }: { blogId: Id<"blogs"> }) {
+export default function CommentSection({ blogId }: { blogId: string }) {
   const { user, isLoaded } = useUser();
-  const { openSignIn } = useClerk();
-  const router = useRouter(); // Initialize the router hook
+  const router = useRouter();
 
-  const comments = useQuery(api.blogs.list.getCommentsForBlog, { blog_id: blogId });
-  const addComment = useMutation(api.blogs.list.addComment);
-  const deleteComment = useMutation(api.blogs.list.deleteComment);
-  const editComment = useMutation(api.blogs.list.editComment);
+  const comments = mockComments;
 
   const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [error, setError] = useState("");
-  const [editingId, setEditingId] = useState<Id<"comments"> | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
 
-  // This function now pushes to Clerk sign-in with afterSignInUrl as a query param
   const redirectToSignIn = () => {
     if (!user && isLoaded) {
       router.push(`/sign-in?afterSignInUrl=${encodeURIComponent(window.location.pathname)}`);
@@ -41,55 +52,23 @@ export default function CommentSection({ blogId }: { blogId: Id<"blogs"> }) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!content.trim()) return setError("Comment cannot be empty");
-    if (!user || !isLoaded) {
-      // Use router.push to sign-in with afterSignInUrl to redirect back after sign-in
-      router.push(`/sign-in?afterSignInUrl=${encodeURIComponent(window.location.pathname)}`);
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-    try {
-      await addComment({
-        blog_id: blogId,
-        user_Id: user.id,
-        comment: content,
-        email: user.primaryEmailAddress?.emailAddress || "anon@example.com",
-      });
-      setContent("");
-    } catch (err) {
-      console.error(err);
-      setError("Failed to add comment");
-    } finally {
-      setLoading(false);
-    }
+    setError("Comments are temporarily disabled while building the UI.");
   }
 
-  async function handleDelete(commentId: Id<"comments">) {
-    try {
-      await deleteComment({ commentId });
-    } catch (err) {
-      console.error(err);
-    }
+  async function handleDelete(commentId: string) {
+    console.log("Delete disabled:", commentId);
   }
 
-  async function handleEditSave(commentId: Id<"comments">) {
-    if (!editContent.trim()) return;
-    try {
-      await editComment({ commentId, content: editContent });
-      setEditingId(null);
-      setEditContent("");
-    } catch (err) {
-      console.error(err);
-    }
+  async function handleEditSave(commentId: string) {
+    console.log("Edit disabled:", commentId);
+    setEditingId(null);
   }
 
   return (
     <div className="mt-10">
       <h3 className="text-lg font-semibold mb-4">Comments</h3>
 
-      {comments === undefined || !isLoaded ? (
+      {!isLoaded ? (
         <div>Loading comments...</div>
       ) : comments.length === 0 ? (
         <div className="text-gray-500">No comments yet. Be the first!</div>
@@ -159,7 +138,7 @@ export default function CommentSection({ blogId }: { blogId: Id<"blogs"> }) {
       )}
 
       <form
-        onSubmit={handleSubmit} // The submit handler is now always `handleSubmit`
+        onSubmit={handleSubmit}
         className="flex flex-col gap-2"
       >
         <textarea
@@ -168,7 +147,6 @@ export default function CommentSection({ blogId }: { blogId: Id<"blogs"> }) {
           onChange={(e) => setContent(e.target.value)}
           placeholder="Write your comment or question..."
           disabled={loading}
-          // The onFocus handler now uses the local redirectToSignIn function
           onFocus={redirectToSignIn}
         />
         {error && <div className="text-red-500 text-sm">{error}</div>}

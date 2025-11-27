@@ -1,12 +1,10 @@
 "use client";
-import { useQuery } from "convex/react";
-import { api } from "@/../convex/_generated/api";
+import blogData from "./blogData";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function PopularPosts({ limit = 5 }: { limit?: number }) {
-  const posts = useQuery(api.blogs.list.getPopularPosts, { limit });
-  if (!posts) return <div>Loading...</div>;
+  const posts = blogData.slice(0, limit);
   if (posts.length === 0) return <div>No trending posts.</div>;
   return (
     <div className="bg-white dark:bg-dark rounded shadow p-4 mb-8">

@@ -1,12 +1,10 @@
-
 "use client";
 import SectionTitle from "../Common/SectionTitle";
 import SingleBlog from "./SingleBlog";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import blogData from "./blogData";
 
 const Blog = () => {
-const blogs = useQuery(api.blogs.list.getPosts);
+  const blogs = blogData;
   return (
     <section
       id="blog"
@@ -34,10 +32,10 @@ const blogs = useQuery(api.blogs.list.getPosts);
                 tags: Array.isArray(blog.tags)
                   ? blog.tags
                   : blog.tags
-                  ? blog.tags.split(",").map((t) => t.trim())
-                  : [],
+                    ? blog.tags.split(",").map((t) => t.trim())
+                    : [],
                 author: {
-                  name: blog.author || "Yoh",
+                  name: blog.author.name || "Yoh",
                   image: "/images/blog/author-01.png",
                   designation: "Author",
                 },
@@ -67,10 +65,10 @@ const blogs = useQuery(api.blogs.list.getPosts);
                   tags: Array.isArray(blog.tags)
                     ? blog.tags
                     : blog.tags
-                    ? blog.tags.split(",").map((t) => t.trim())
-                    : [],
+                      ? blog.tags.split(",").map((t) => t.trim())
+                      : [],
                   author: {
-                    name: blog.author || "Yoh",
+                    name: blog.author.name || "Yoh",
                     image: "/images/blog/author-01.png",
                     designation: "Author",
                   },

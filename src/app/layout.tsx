@@ -28,7 +28,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-        
+
         {/* Google Fonts - Added for ESLint warning fix */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
@@ -43,7 +43,7 @@ export default function RootLayout({
           <Providers>
             {/* ✅ Organization Structured Data using next-seo */}
             <OrganizationJsonLd
-              type="EducationalOrganization"
+              type="Organization"
               name="Bahir Dar University College of Science"
               url={BASE_URL}
               logo={`${BASE_URL}/images/logo/cos-logo.jpg`}

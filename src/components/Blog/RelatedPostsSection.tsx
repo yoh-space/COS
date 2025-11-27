@@ -1,14 +1,10 @@
 "use client";
-import { useQuery } from "convex/react";
-import { api } from "@/../convex/_generated/api";
+import blogData from "./blogData";
 import RelatedPost from "./RelatedPost";
 
 export default function RelatedPostsSection({ blogId, tags }: { blogId: string, tags: string[] }) {
   // Fetch all posts with at least one matching tag, excluding current post
-  const posts = useQuery(api.blogs.list.getPosts);
-  if (!posts) {
-    return <div className="mt-12 text-center text-gray-400">Loading related posts...</div>;
-  }
+  const posts = blogData;
   if (posts.length === 0) {
     return <div className="mt-12 text-center text-gray-400">No posts found in the system.</div>;
   }

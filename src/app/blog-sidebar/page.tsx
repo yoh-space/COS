@@ -5,16 +5,21 @@ import PopularPosts from "@/components/Blog/PopularPosts";
 import SharePost from "@/components/Blog/SharePost";
 import TagButton from "@/components/Blog/TagButton";
 import NewsLatterBox from "@/components/Contact/NewsLatterBox";
-import { useQuery } from "convex/react";
-import { useState } from "react";
-import { api } from "../../../convex/_generated/api";
+import blogData from "@/components/Blog/blogData";
+import { useState, useMemo } from "react";
 
 const BlogSidebarPage = () => {
   const [search, setSearch] = useState("");
-  const blogsBySearch = useQuery(api.blogs.list.getPostsBySearch, { q: search });
-  const allBlogs = useQuery(api.blogs.list.getPosts);
+  const allBlogs = blogData;
 
-  const blogs = search.trim() ? blogsBySearch : allBlogs;
+  // Client-side filtering
+  const blogs = useMemo(() => {
+    if (!search.trim()) return allBlogs;
+    return allBlogs.filter(blog =>
+      blog.title.toLowerCase().includes(search.toLowerCase()) ||
+      blog.paragraph.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, allBlogs]);
 
   // Compute popular tags and categories from blogs in real time
   const tagCount: Record<string, number> = {};
@@ -25,8 +30,8 @@ const BlogSidebarPage = () => {
       let tagArr = Array.isArray(blog.tags)
         ? blog.tags
         : blog.tags
-        ? blog.tags.split(",").map((t: string) => t.trim())
-        : [];
+          ? blog.tags.split(",").map((t: string) => t.trim())
+          : [];
       tagArr.forEach((tag) => {
         if (tag) tagCount[tag] = (tagCount[tag] || 0) + 1;
       });
@@ -58,9 +63,7 @@ const BlogSidebarPage = () => {
               </h1>
 
               <div className="mb-10 space-y-6">
-                {blogs === undefined ? (
-                  <p className="text-gray-500 dark:text-gray-400">Loading blogs...</p>
-                ) : blogs.length === 0 ? (
+                {blogs.length === 0 ? (
                   <p className="text-gray-600 dark:text-gray-400">
                     No blogs found. Check back soon!
                   </p>
@@ -73,8 +76,8 @@ const BlogSidebarPage = () => {
                       tags: Array.isArray(blog.tags)
                         ? blog.tags
                         : blog.tags
-                        ? blog.tags.split(",").map((t) => t.trim())
-                        : [],
+                          ? blog.tags.split(",").map((t) => t.trim())
+                          : [],
                       author: {
                         name: blog.author || "Yoh",
                         image: "/images/blog/author-01.png",
@@ -140,8 +143,8 @@ const BlogSidebarPage = () => {
                       tags: Array.isArray(blog.tags)
                         ? blog.tags
                         : blog.tags
-                        ? blog.tags.split(",").map((t) => t.trim())
-                        : [],
+                          ? blog.tags.split(",").map((t) => t.trim())
+                          : [],
                       author: {
                         name: blog.author || "Yoh",
                         image: "/images/blog/author-01.png",

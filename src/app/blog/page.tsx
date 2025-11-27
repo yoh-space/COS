@@ -3,27 +3,14 @@
 import React from "react";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import blogData from "@/components/Blog/blogData";
 import Lottie from "lottie-react";
 import loadingAnimation from "../../../public/images/lottie/loading.json";
 import { BreadcrumbJsonLd } from 'next-seo';
 import { BASE_URL } from '@/lib/seo.config';
 
 const Blog = () => {
-  const blogs = useQuery(api.blogs.list.getPosts);
-
-  // Loading state
-  if (blogs === undefined) {
-    return (
-      <section className="pt-[120px] pb-[120px] text-center">
-        <div className="flex flex-col items-center justify-center">
-          <Lottie animationData={loadingAnimation} className="w-32 h-32" />
-          <p className="text-lg text-gray-500 dark:text-gray-400 mt-4">Loading blogs...</p>
-        </div>
-      </section>
-    );
-  }
+  const blogs = blogData;
 
   return (
     <>
@@ -60,12 +47,12 @@ const Blog = () => {
                   tags: Array.isArray(blog.tags)
                     ? blog.tags
                     : blog.tags
-                    ? blog.tags.split(",").map((t) => t.trim())
-                    : [],
+                      ? blog.tags.split(",").map((t) => t.trim())
+                      : [],
                   author: {
-                    name: blog.author || "Unknown",
-                    image: "/images/blog/author-01.png",
-                    designation: "Author",
+                    name: blog.author?.name || "Unknown",
+                    image: blog.author?.image || "/images/blog/author-01.png",
+                    designation: blog.author?.designation || "Author",
                   },
                 };
                 return (

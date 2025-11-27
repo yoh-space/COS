@@ -12,7 +12,7 @@ export const DEFAULT_METADATA: Metadata = {
   },
   description: 'Bahir Dar University College of Science offers world-class education and research in Chemistry, Physics, Mathematics, Biology, Statistics, and Industrial Chemistry. Wisdom at the source of Blue Nile.',
   keywords: [
-    'Bahir Dar University', 'College of Science', 'BDU', 'Science Education', 'Research', 
+    'Bahir Dar University', 'College of Science', 'BDU', 'Science Education', 'Research',
     'Chemistry', 'Physics', 'Mathematics', 'Biology', 'Statistics', 'Industrial Chemistry',
     'Ethiopia', 'Higher Education', 'Academic Excellence', 'Scientific Research',
     'Undergraduate Programs', 'Graduate Programs', 'PhD Programs', 'Masters Programs',
@@ -90,40 +90,152 @@ export const PAGE_METADATA = {
     keywords: 'Bahir Dar University, College of Science, BDU, Science Education, Research, Chemistry, Physics, Mathematics, Biology, Statistics, Ethiopia, Higher Education',
     url: BASE_URL,
   },
-  
+
   about: {
     title: 'About College of Science | History, Mission & Vision',
     description: 'Learn about Bahir Dar University College of Science - our history, mission, vision, and commitment to excellence in science education and research in Ethiopia.',
     keywords: 'about BDU, College of Science history, mission and vision, academic excellence, science education Ethiopia, research institution, faculty, administration',
     url: `${BASE_URL}/about`,
   },
-  
+
   blog: {
     title: 'Academic Programs & Departments | Latest Updates',
     description: 'Explore our academic programs in Chemistry, Industrial Chemistry, Mathematics, Physics, Statistics, and Biology. Stay updated with the latest news and research from our departments.',
     keywords: 'academic programs, departments, Chemistry, Physics, Mathematics, Biology, Statistics, Industrial Chemistry, undergraduate programs, graduate programs, research updates',
     url: `${BASE_URL}/blog`,
   },
-  
+
   contact: {
     title: 'Contact Us | Admissions & Inquiries',
     description: 'Contact Bahir Dar University College of Science for admissions, research opportunities, and academic inquiries. We welcome prospective students and research collaborators.',
     keywords: 'contact BDU, admissions inquiry, research collaboration, academic information, student services, contact College of Science, Bahir Dar contact',
     url: `${BASE_URL}/contact`,
   },
-  
+
   pricing: {
     title: 'Research & Publications | Scientific Excellence',
     description: 'Discover cutting-edge research and publications from Bahir Dar University College of Science. Explore our research centers, ongoing projects, and academic contributions.',
     keywords: 'research, publications, scientific research, academic papers, research centers, PhD research, masters research, laboratory research, scientific excellence',
     url: `${BASE_URL}/pricing`,
   },
+
+  academics: {
+    title: 'Academics | Departments & Programs',
+    description: 'Explore our academic departments including Chemistry, Biology, Physics, Mathematics, Statistics, and Industrial Chemistry.',
+    keywords: 'academics, departments, science programs, undergraduate, graduate, PhD',
+    url: `${BASE_URL}/academics`,
+  },
+
+  research: {
+    title: 'Research | Innovation & Discovery',
+    description: 'Discover our cutting-edge research initiatives, publications, and scientific contributions.',
+    keywords: 'research, science research, publications, innovation, discovery',
+    url: `${BASE_URL}/research`,
+  },
+
+  services: {
+    title: 'Services | Laboratories & Community',
+    description: 'Explore our state-of-the-art laboratories and community service initiatives.',
+    keywords: 'services, laboratories, community service, science facilities',
+    url: `${BASE_URL}/services`,
+  },
+
+  publication: {
+    title: 'Publications | Research Output',
+    description: 'Browse our latest research publications and academic outputs.',
+    keywords: 'publications, research papers, academic journals, science publications',
+    url: `${BASE_URL}/publication`,
+  },
+
+  chemistry: {
+    title: 'Department of Chemistry',
+    description: 'Explore the fundamental properties of matter and chemical reactions at the Department of Chemistry.',
+    keywords: 'chemistry, chemical science, matter, reactions',
+    url: `${BASE_URL}/academics/chemistry`,
+  },
+
+  'industrial-chemistry': {
+    title: 'Department of Industrial Chemistry',
+    description: 'Apply chemical principles to industrial processes and product development.',
+    keywords: 'industrial chemistry, chemical engineering, industrial processes',
+    url: `${BASE_URL}/academics/industrial-chemistry`,
+  },
+
+  biology: {
+    title: 'Department of Biology',
+    description: 'Study living organisms, their structure, function, growth, and evolution.',
+    keywords: 'biology, life sciences, organisms, evolution',
+    url: `${BASE_URL}/academics/biology`,
+  },
+
+  physics: {
+    title: 'Department of Physics',
+    description: 'Investigate the nature of matter, energy, space, and time.',
+    keywords: 'physics, matter, energy, space, time',
+    url: `${BASE_URL}/academics/physics`,
+  },
+
+  mathematics: {
+    title: 'Department of Mathematics',
+    description: 'Engage with the abstract science of number, quantity, and space.',
+    keywords: 'mathematics, math, numbers, logic',
+    url: `${BASE_URL}/academics/mathematics`,
+  },
+
+  statistics: {
+    title: 'Department of Statistics',
+    description: 'Learn the science of collecting, analyzing, interpreting, and presenting data.',
+    keywords: 'statistics, data analysis, probability, data science',
+    url: `${BASE_URL}/academics/statistics`,
+  },
+
+  background: {
+    title: 'Background | History & Context',
+    description: 'Learn about the history and background of Bahir Dar University College of Science.',
+    keywords: 'background, history, college history, BDU history',
+    url: `${BASE_URL}/about/background`,
+  },
+
+  'vision-mission': {
+    title: 'Vision & Mission',
+    description: 'Our vision and mission statements guiding the College of Science towards excellence.',
+    keywords: 'vision, mission, goals, strategic plan',
+    url: `${BASE_URL}/about/vision-mission`,
+  },
+
+  administration: {
+    title: 'Administration',
+    description: 'Meet the administration team leading the College of Science.',
+    keywords: 'administration, dean, leadership, management',
+    url: `${BASE_URL}/about/administration`,
+  },
+
+  structure: {
+    title: 'Organizational Structure',
+    description: 'Understand the organizational structure of the College of Science.',
+    keywords: 'structure, organization, organogram, hierarchy',
+    url: `${BASE_URL}/about/structure`,
+  },
+
+  'deans-message': {
+    title: "Dean's Message",
+    description: "Read the message from the Dean of the College of Science.",
+    keywords: "dean's message, welcome message, dean",
+    url: `${BASE_URL}/about/deans-message`,
+  },
+
+  reports: {
+    title: 'Reports & Documents',
+    description: 'Access annual reports and official documents of the College of Science.',
+    keywords: 'reports, documents, annual report, publications',
+    url: `${BASE_URL}/about/reports`,
+  },
 };
 
 // Helper function to generate page metadata
 export function generatePageMetadata(page: keyof typeof PAGE_METADATA): Metadata {
   const pageData = PAGE_METADATA[page];
-  
+
   return {
     title: pageData.title,
     description: pageData.description,
@@ -187,7 +299,7 @@ export const STRUCTURED_DATA = {
       availableLanguage: ['English'],
     },
   },
-  
+
   website: {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -203,7 +315,7 @@ export const STRUCTURED_DATA = {
       },
     },
   },
-  
+
   localBusiness: {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
@@ -231,7 +343,7 @@ export const STRUCTURED_DATA = {
       closes: '17:00',
     },
   },
-  
+
   breadcrumb: (items: Array<{ name: string; url: string }>) => ({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
