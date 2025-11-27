@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import AdSenseComponent from "@/components/AdSense";
 import ScrollToTop from "@/components/ScrollToTop";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import "../styles/index.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./providers";
@@ -116,6 +117,7 @@ export default function RootLayout({
             {children}
             <Footer />
             <ScrollToTop />
+            <ThemeSwitcher />
           </Providers>
         </ClerkProvider>
       </body>
