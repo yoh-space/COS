@@ -29,8 +29,8 @@ const AboutSectionOne = () => {
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-1/2">
               <SectionTitle
-                title="Mobile App Development"
-                paragraph="Custom mobile apps for iOS and Android platforms, ensuring a seamless user experience across devices."
+                title="Excellence in Science Education & Research"
+                paragraph="Bahir Dar University College of Science is committed to advancing scientific knowledge through world-class education, cutting-edge research, and community engagement."
                 mb="44px"
               />
 
@@ -40,23 +40,23 @@ const AboutSectionOne = () => {
               >
                 <div className="mx-[-12px] flex flex-wrap">
                   <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
-                    <List text="Premium quality" />
-                    <List text="Fast development" />
-                    <List text="Interactive ui/ux" />
-                    <List text="Seamless integration" />
+                    <List text="World-class faculty" />
+                    <List text="State-of-the-art laboratories" />
+                    <List text="Cutting-edge research" />
+                    <List text="Industry partnerships" />
                   </div>
 
                   <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
-                    <List text="Best performance" />
-                    <List text="Developer friendly" />
-                    <List text="Regular updates" />
-                    <List text="24/7 support" />
+                    <List text="International collaborations" />
+                    <List text="Community engagement" />
+                    <List text="Quality education" />
+                    <List text="Career development" />
                   </div>
                 </div>
                 <div className="mt-8 flex items-center gap-4">
                   <Lottie animationData={ratingAnimation} className="w-16 h-16" />
                   <p className="text-sm text-body-color dark:text-body-color-dark">
-                    Trusted by 500+ clients worldwide
+                    Educating 1000+ students annually across 6 departments
                   </p>
                 </div>
               </div>

@@ -10,8 +10,8 @@ const AboutSectionTwo = () => {
         <div className="-mx-4 flex flex-wrap items-center">
           <div className="w-full px-4 lg:w-1/2">
             <SectionTitle
-              title="Web Development"
-              paragraph="Custom web applications for various platforms, ensuring a seamless user experience across devices."
+              title="Research & Innovation"
+              paragraph="Advancing scientific knowledge through cutting-edge research across chemistry, physics, biology, mathematics, and applied sciences."
               mb="44px"
             />
             <div
@@ -25,29 +25,26 @@ const AboutSectionTwo = () => {
             <div className="max-w-[470px]">
               <div className="mb-9">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Ultra fast performance
+                  Cutting-Edge Facilities
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  Full-stack web development services to create responsive,
-                  user-friendly websites and applications.
+                  State-of-the-art laboratories equipped with modern instrumentation including GC-MS, ICP-OES, and advanced computing clusters for groundbreaking research.
                 </p>
               </div>
               <div className="mb-9">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Premier support
+                  International Collaboration
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  Our team provides ongoing support and maintenance to ensure your
-                  web applications run smoothly and efficiently.
+                  Our faculty and students collaborate with leading universities and research institutions worldwide, contributing to global scientific advancement.
                 </p>
               </div>
               <div className="mb-1">
                 <h3 className="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Enhanced SEO
+                  Impactful Publications
                 </h3>
                 <p className="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
-                  Our web development services are optimized for search engines,
-                  ensuring your website ranks higher in search results.
+                  Over 200+ annual publications in high-impact international journals, advancing knowledge in space science, environmental sustainability, and biotechnology.
                 </p>
               </div>
             </div>

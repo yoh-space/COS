@@ -6,8 +6,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ThemeSwitcher() {
-  const { colorTheme, setColorTheme, availableThemes, currentThemeName } =
-    useColorTheme();
+  const { setColorTheme, availableThemes, currentThemeName } = useColorTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   const themeColors: Record<string, string> = {
@@ -44,35 +43,36 @@ export default function ThemeSwitcher() {
                   title={theme.charAt(0).toUpperCase() + theme.slice(1)}
                 >
                   <div
-                    className={`h-12 w-12 rounded-xl shadow-lg transition-all duration-300 hover:scale-110 ${
-                      currentThemeName === theme
-                        ? "ring-4 ring-offset-2 dark:ring-offset-gray-dark"
-                        : ""
-                    }`}
+                    className={`relative h-12 w-12 rounded-xl shadow-lg transition-all duration-300 hover:scale-110`}
                     style={{
                       backgroundColor: themeColors[theme],
-                      ringColor:
-                        currentThemeName === theme
-                          ? themeColors[theme]
-                          : "transparent",
                     }}
                   >
                     {currentThemeName === theme && (
-                      <div className="flex h-full items-center justify-center">
-                        <svg
-                          className="h-6 w-6 text-white"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={3}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div>
+                      <>
+                        <div
+                          className="absolute -inset-1 rounded-xl"
+                          style={{
+                            border: `3px solid ${themeColors[theme]}`,
+                            opacity: 0.5,
+                          }}
+                        />
+                        <div className="flex h-full items-center justify-center">
+                          <svg
+                            className="h-6 w-6 text-white"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={3}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        </div>
+                      </>
                     )}
                   </div>
                   <span className="text-xs font-medium capitalize text-body-color">

@@ -3,100 +3,94 @@ import { useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
 import PricingGlassCard from "@/components/ui/pricing-glass-card";
 
-const Pricing = () => {
+const AcademicPrograms = () => {
   const [isMonthly, setIsMonthly] = useState(true);
 
-  const packages = [
+  const programs = [
     {
-      packageName: "Portfolio",
-      price: "11,999",
-      duration: "ETB",
+      packageName: "Undergraduate",
+      price: "BSc",
+      duration: "4 Years",
       bgColor: "bg-black text-white",
-      subtitle: "Perfect for personal portfolios and small projects.",
+      subtitle: "Bachelor of Science programs across six departments.",
       features: [
-        { text: "Domain name (1 Year)", status: "active" as const },
-        { text: "Hosting (1 Year)", status: "active" as const },
-        { text: "Strategy & Consulting", status: "active" as const },
-        { text: "Creative Web Design", status: "active" as const },
-        { text: "Responsive Website", status: "active" as const },
-        { text: "User Experience", status: "active" as const },
-        { text: "SEO", status: "active" as const },
-        { text: "1 Month Maintenance", status: "active" as const },
-        { text: "All free Plugins Installed", status: "inactive" as const },
-        { text: "10 Post Featured Image", status: "inactive" as const },
-        { text: "Web Page Advertisement", status: "inactive" as const },
-        { text: "Installing Sub-domains", status: "inactive" as const },
-        { text: "Fascinated Features", status: "inactive" as const },
-        { text: "Marketing Features", status: "inactive" as const },
+        { text: "Chemistry", status: "active" as const },
+        { text: "Industrial Chemistry", status: "active" as const },
+        { text: "Biology", status: "active" as const },
+        { text: "Physics", status: "active" as const },
+        { text: "Mathematics", status: "active" as const },
+        { text: "Statistics & Data Science", status: "active" as const },
+        { text: "Laboratory Training", status: "active" as const },
+        { text: "Research Projects", status: "active" as const },
+        { text: "Industry Internships", status: "inactive" as const },
+        { text: "Career Development", status: "inactive" as const },
+        { text: "International Exchange", status: "inactive" as const },
+        { text: "Advanced Certifications", status: "inactive" as const },
       ],
     },
     {
-      packageName: "Blog",
-      price: "19,999",
-      duration: "ETB",
+      packageName: "Graduate",
+      price: "MSc",
+      duration: "2 Years",
       bgColor: "bg-black text-white",
-      subtitle: "Ideal for bloggers and content creators.",
+      subtitle: "Master of Science programs with research focus.",
       features: [
-        { text: "Domain name (1 Year)", status: "active" as const },
-        { text: "Hosting (1 Year)", status: "active" as const },
-        { text: "Strategy & Consulting", status: "active" as const },
-        { text: "Creative Web Design", status: "active" as const },
-        { text: "Responsive Web Design", status: "active" as const },
-        { text: "User Experience", status: "active" as const },
-        { text: "SEO", status: "active" as const },
-        { text: "2 Month Maintenance", status: "active" as const },
-        { text: "All free Plugins Installed", status: "active" as const },
-        { text: "5 Post Featured Image", status: "active" as const },
-        { text: "Web Page Advertisement", status: "active" as const },
-        { text: "Installing Sub-domains", status: "inactive" as const },
-        { text: "Fascinated Features", status: "inactive" as const },
-        { text: "Marketing Features", status: "inactive" as const },
+        { text: "Advanced Coursework", status: "active" as const },
+        { text: "Thesis Research", status: "active" as const },
+        { text: "Laboratory Access", status: "active" as const },
+        { text: "Research Publications", status: "active" as const },
+        { text: "Teaching Assistantships", status: "active" as const },
+        { text: "Conference Presentations", status: "active" as const },
+        { text: "Industry Collaboration", status: "active" as const },
+        { text: "Specialized Training", status: "active" as const },
+        { text: "International Conferences", status: "active" as const },
+        { text: "Research Grants", status: "active" as const },
+        { text: "Mentorship Programs", status: "inactive" as const },
+        { text: "Career Placement", status: "inactive" as const },
       ],
     },
     {
-      packageName: "Business",
-      price: "24,999",
-      duration: "ETB",
+      packageName: "Doctoral",
+      price: "PhD",
+      duration: "3-4 Years",
       bgColor: "bg-black text-white",
-      subtitle: "For enterprises needing a robust and scalable website.",
+      subtitle: "Doctor of Philosophy programs for research excellence.",
       features: [
-        { text: "Domain name (1 Year)", status: "active" as const },
-        { text: "Hosting (1 Year)", status: "active" as const },
-        { text: "Strategy & Consulting", status: "active" as const },
-        { text: "Creative Web Design", status: "active" as const },
-        { text: "Responsive Web Design", status: "active" as const },
-        { text: "User Experience", status: "active" as const },
-        { text: "SEO", status: "active" as const },
-        { text: "3 Month Maintenance", status: "active" as const },
-        { text: "All free Plugins Installed", status: "active" as const },
-        { text: "10 Post Featured Image", status: "active" as const },
-        { text: "Web Page Advertisement", status: "active" as const },
-        { text: "Installing Sub-domain", status: "active" as const },
-        { text: "Fascinated Features", status: "active" as const },
-        { text: "Database Customization", status: "active" as const },
+        { text: "Original Research", status: "active" as const },
+        { text: "Dissertation Defense", status: "active" as const },
+        { text: "Advanced Lab Facilities", status: "active" as const },
+        { text: "International Publications", status: "active" as const },
+        { text: "Conference Presentations", status: "active" as const },
+        { text: "Research Funding", status: "active" as const },
+        { text: "Teaching Experience", status: "active" as const },
+        { text: "Collaborative Research", status: "active" as const },
+        { text: "International Partnerships", status: "active" as const },
+        { text: "Post-doctoral Opportunities", status: "active" as const },
+        { text: "Academic Career Path", status: "active" as const },
+        { text: "Industry Leadership Roles", status: "active" as const },
       ],
     },
   ];
 
   return (
-    <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
+    <section id="programs" className="relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
         <SectionTitle
-          title="Our Service Packages"
-          paragraph="Choose the package that suits your needs. Our comprehensive solutions include everything to get your project completed successfully."
+          title="Academic Programs"
+          paragraph="Explore our comprehensive science education programs designed to prepare the next generation of scientists, researchers, and innovators."
           center
           width="665px"
         />
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {packages.map((pkg, index) => (
+          {programs.map((program, index) => (
             <PricingGlassCard
               key={index}
-              packageName={pkg.packageName}
-              price={pkg.price}
-              duration={pkg.duration}
-              subtitle={pkg.subtitle}
-              features={pkg.features}
+              packageName={program.packageName}
+              price={program.price}
+              duration={program.duration}
+              subtitle={program.subtitle}
+              features={program.features}
             />
           ))}
         </div>
@@ -105,4 +99,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default AcademicPrograms;

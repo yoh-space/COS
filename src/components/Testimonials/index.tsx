@@ -9,54 +9,52 @@ import { Star, User, Award, Heart, Trophy } from "lucide-react";
 const testimonialData: Testimonial[] = [
   {
     id: 1,
-    name: "FreshMan Students",
-    designation: "🎓 FreshMate is crafted specifically for Ethiopian university first-year students! Make your transition to campus life easier, smarter, and more productive. From acing modules, notes, exams to managing assignments, FreshMate puts all your student essentials in one easy-to-use app.",
+    name: "Research Excellence",
+    designation: "🔬 Our faculty and students publish cutting-edge research in international journals, contributing to scientific advancement in chemistry, physics, biology, and mathematics. Over 200+ publications annually in high-impact journals.",
     content:
-      "Over 2000 downloads with 4.9+ rating",
-    image: "/images/testimonials/freshmate.webp",
-    url:"https://www.appbrain.com/app/freshmate/com.freshmanmoduleplus",
-    star: 5,
-  },  
-  {
-    id: 4,
-    name: "BioMedical Engineer Ermias M.",
-    designation: "Founder Zybio Medical Supply",
-    content:
-      "Best service ever. I use them for my business and they are worth much more than I pay.",
-    image: "/images/testimonials/generallabs.png",
-    url: "https://ermias-mulusew.vercel.app",
+      "200+ Annual Publications in Top Journals",
+    image: "/images/testimonials/research.jpg",
+    url: "/publication",
     star: 5,
   },
-   {
+  {
+    id: 2,
+    name: "Alumni Success",
+    designation: "Distinguished Graduates Leading in Academia and Industry",
+    content:
+      "Our alumni hold prestigious positions in universities, research institutions, and industries worldwide, making significant contributions to science and technology.",
+    image: "/images/testimonials/alumni.jpg",
+    url: "/about/background",
+    star: 5,
+  },
+  {
     id: 3,
-    name: "Author Ibroo W. (A.G)",
-    designation: "Author of Handhurra Oromo Arisi Book",
+    name: "Laboratory Excellence",
+    designation: "State-of-the-Art Research Facilities",
     content:
-      "user friendly support team. I recommend Yo-Tech for anyone looking for quality and affordable app development services.",
-    image: "/images/testimonials/hand.webp",
-    url: "https://play.google.com/store/apps/details?id=com.custompdfreader&hl=en",
-    star: 5,
-  }, 
-  {
-    id: 4,
-    name: "Mekuria M. MSC",
-    designation: "General Manager at Hike Engineering",
-    content:
-      "Great service and support team. They really care about their customers and go above and beyond to help you.",
-    image: "/images/testimonials/hikelogo.jpg",
-    url: "https://hikengineering.com",
+      "Equipped with modern instrumentation including GC-MS, ICP-OES, and advanced computing clusters for cutting-edge research across all departments.",
+    image: "/images/testimonials/lab.jpg",
+    url: "/laboratories",
     star: 5,
   },
-
-
+  {
+    id: 4,
+    name: "Student Achievements",
+    designation: "National and International Recognition",
+    content:
+      "Our students consistently win awards in national science competitions and secure scholarships for international graduate programs.",
+    image: "/images/testimonials/students.jpg",
+    url: "/academics",
+    star: 5,
+  },
   {
     id: 5,
-    name: "Author Kadiir A.",
-    designation: "CEO of kadiir.com and kadiir Tech",
+    name: "Community Impact",
+    designation: "Bridging Science and Society",
     content:
-      "I ordered mobile app development and they delivered before deadline. Yo-Tech is the best",
-    image: "/images/testimonials/kadiir.png",
-    url: "https://play.google.com/store/apps/details?id=com.kadiir.tech&hl=en",
+      "Through outreach programs, we engage with local communities, schools, and industries to promote STEM education and sustainable development.",
+    image: "/images/testimonials/community.jpg",
+    url: "/services",
     star: 5,
   },
 ];
@@ -79,10 +77,10 @@ const Testimonials = () => {
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-black dark:text-white mb-4">
-            What Our Users Say
+            Our Success Stories
           </h2>
           <p className="text-base text-body-color dark:text-body-color-dark max-w-2xl mx-auto">
-            Real feedback from our satisfied clients who trust us with their digital solutions.
+            Celebrating achievements in research, education, and community impact at the College of Science.
           </p>
         </div>
 
