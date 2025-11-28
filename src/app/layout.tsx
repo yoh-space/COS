@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import AdSenseComponent from "@/components/AdSense";
 import ScrollToTop from "@/components/ScrollToTop";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import SpotlightCursor from "@/components/SpotlightCursor";
 import "../styles/index.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./providers";
@@ -103,6 +104,7 @@ export default function RootLayout({
               ]}
             />
 
+            <SpotlightCursor />
             <Header />
             {children}
             <Footer />
