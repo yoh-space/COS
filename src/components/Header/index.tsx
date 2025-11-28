@@ -105,7 +105,7 @@ const Header = () => {
                             <Link
                               href={menuItem.path || "#"}
                               onClick={menuItem.path ? undefined : () => handleSubmenu(index)}
-                              className={`flex cursor-pointer items-center justify-between py-2 text-sm lg:px-2 lg:py-3 lg:text-xs group-hover:text-primary dark:group-hover:text-white ${usePathName === menuItem.path
+                              className={`flex cursor-pointer items-center justify-between py-2 text-sm lg:px-2 lg:py-4 lg:text-sm group-hover:text-primary dark:group-hover:text-white ${usePathName === menuItem.path
                                 ? "text-primary dark:text-white"
                                 : "text-dark dark:text-white/70"
                                 }`}
@@ -139,7 +139,7 @@ const Header = () => {
                                 <Link
                                   href={submenuItem.path}
                                   key={subIndex}
-                                  className="text-dark hover:text-primary flex items-center gap-2 block rounded-sm py-2 text-xs lg:px-2 dark:text-white/70 dark:hover:text-white"
+                                  className="text-dark hover:text-primary flex items-center gap-2 block rounded-sm py-2 text-sm lg:px-2 dark:text-white/70 dark:hover:text-white"
                                 >
                                   {submenuItem.icon && (
                                     <submenuItem.icon className="w-3 h-3 mr-1" aria-hidden="true" />
@@ -152,7 +152,7 @@ const Header = () => {
                         ) : (
                           <Link
                             href={menuItem.path}
-                            className={`flex items-center gap-2 py-2 text-sm lg:px-2 lg:py-3 lg:text-xs transition-colors ${usePathName === menuItem.path
+                            className={`flex items-center gap-2 py-2 text-sm lg:px-2 lg:py-4 lg:text-sm transition-colors ${usePathName === menuItem.path
                               ? "text-primary dark:text-white"
                               : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                               }`}
