@@ -84,11 +84,16 @@ module.exports = {
       },
       animation: {
         rainbow: "rainbow var(--speed, 2s) infinite linear",
+        "fade-in": "fadeIn 0.6s ease-in-out forwards",
       },
       keyframes: {
         rainbow: {
           "0%": { "background-position": "0%" },
           "100%": { "background-position": "200%" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
     },
