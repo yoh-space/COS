@@ -8,6 +8,8 @@ export const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({
     log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+    // Always use Prisma Accelerate URL if available
+    accelerateUrl: process.env.PRISMA_DATABASE_URL,
   });
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
