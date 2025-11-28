@@ -119,22 +119,22 @@ const menuData: (Menu & { icon?: any })[] = [
   },
   {
     id: 4,
-    title: "Research",
-    path: "/research",
+    title: "Resources",
+    path: "/resources",
     newTab: false,
     icon: Microscope,
     submenu: [
       {
         id: 41,
-        title: "Overview",
-        path: "/research",
+        title: "Research",
+        path: "/resources/research",
         newTab: false,
         icon: Info,
       },
       {
         id: 42,
         title: "Publications",
-        path: "/publication",
+        path: "/resources/publication",
         newTab: false,
         icon: FileText,
       },
