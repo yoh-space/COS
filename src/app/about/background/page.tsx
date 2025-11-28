@@ -44,10 +44,10 @@ const BackgroundPage = () => {
                                             History & Evolution
                                         </h2>
                                         <p className="mb-6 text-base leading-relaxed text-gray-600 dark:text-gray-300">
-                                            The College of Science at Bahir Dar University, originally a part of the former Faculty of Education, became an independent college in 2008 following the university's restructuring and the increased focus on the Science and Technology sectors.
+                                            The College of Science at Bahir Dar University, originally a part of the former Faculty of Education, became an independent college in 2008 following the university&apos;s restructuring and the increased focus on the Science and Technology sectors.
                                         </p>
                                         <p className="text-base leading-relaxed text-gray-600 dark:text-gray-300">
-                                            Today, the college offers high-quality education across seven programs: <strong className="text-gray-900 dark:text-white">Biology, Chemistry, Mathematics, Physics, Industrial Chemistry, Statistics, and Data Science</strong> at the Undergraduate, Master's, and Doctorate levels.
+                                            Today, the college offers high-quality education across seven programs: <strong className="text-gray-900 dark:text-white">Biology, Chemistry, Mathematics, Physics, Industrial Chemistry, Statistics, and Data Science</strong> at the Undergraduate, Master&apos;s, and Doctorate levels.
                                         </p>
                                     </div>
                                 </div>
