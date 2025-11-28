@@ -1,6 +1,17 @@
-import { clerkMiddleware } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-export default clerkMiddleware()
+// Define protected routes that require authentication
+const isProtectedRoute = createRouteMatcher([
+  '/admin(.*)',
+  '/api/cms(.*)',
+])
+
+export default clerkMiddleware(async (auth, req) => {
+  // Protect admin routes
+  if (isProtectedRoute(req)) {
+    await auth.protect()
+  }
+})
 
 export const config = {
   matcher: [
