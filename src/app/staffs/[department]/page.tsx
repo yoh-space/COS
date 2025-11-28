@@ -88,7 +88,7 @@ const DepartmentPage = ({ params }: DepartmentPageProps) => {
       item: `${BASE_URL}/`,
     },
     {
-      name: "Staff Directory",
+      name: "Staffs",
       item: `${BASE_URL}/staffs`,
     },
     {
@@ -99,7 +99,7 @@ const DepartmentPage = ({ params }: DepartmentPageProps) => {
 
   const breadcrumbItems = [
     { name: "Home", href: "/" },
-    { name: "Staff Directory", href: "/staffs" },
+    { name: "Staffs", href: "/staffs" },
     { name: department.name },
   ];
 

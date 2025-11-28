@@ -45,13 +45,13 @@ const StaffsPage = () => {
             item: `${BASE_URL}/`,
           },
           {
-            name: 'Staff Directory',
+            name: 'Staffs',
             item: `${BASE_URL}/staffs`,
           },
         ]}
       />
       <Breadcrumb
-        pageName="Staff Directory"
+        pageName="Staffs"
         description="Explore our dedicated faculty and staff members across all academic departments. Find contact information and specializations for our experienced educators and researchers."
       />
       <section className="pb-[120px] pt-[120px]">
