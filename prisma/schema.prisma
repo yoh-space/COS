@@ -62,6 +62,8 @@ model BlogPost {
   canonicalUrl    String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  versions        ContentVersion[] @relation("BlogPostVersions")
+  auditLogs       AuditLog[] @relation("BlogPostAuditLogs")
 }
 
 model Resource {
@@ -79,6 +81,7 @@ model Resource {
   downloadCount   Int      @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("ResourceAuditLogs")
 }
 
 model StaffMember {
@@ -97,6 +100,7 @@ model StaffMember {
   status          String   @default("active") // active, inactive
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("StaffMemberAuditLogs")
 }
 
 model Department {
@@ -109,6 +113,7 @@ model Department {
   users           User[]   @relation("UserDepartment")
   staffMembers    StaffMember[]
   academicSections AcademicSection[]
+  auditLogs       AuditLog[] @relation("DepartmentAuditLogs")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
@@ -123,6 +128,8 @@ model DeanMessage {
   scheduledFor    DateTime?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  versions        ContentVersion[] @relation("DeanMessageVersions")
+  auditLogs       AuditLog[] @relation("DeanMessageAuditLogs")
 }
 
 model VisionMission {
@@ -131,6 +138,8 @@ model VisionMission {
   content         String   @db.Text
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  versions        ContentVersion[] @relation("VisionMissionVersions")
+  auditLogs       AuditLog[] @relation("VisionMissionAuditLogs")
 }
 
 model AdministrativePosition {
@@ -145,6 +154,7 @@ model AdministrativePosition {
   documentUrl     String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("AdminPositionAuditLogs")
 }
 
 model AcademicSection {
@@ -159,6 +169,7 @@ model AcademicSection {
   documentUrl     String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("AcademicSectionAuditLogs")
 }
 
 model Service {
@@ -172,6 +183,7 @@ model Service {
   status          String   @default("active")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("ServiceAuditLogs")
 }
 
 // Supporting Models
@@ -183,6 +195,11 @@ model ContentVersion {
   content         String?  @db.Text
   versionNumber   Int
   createdAt       DateTime @default(now())
+  
+  // Relations (polymorphic)
+  blogPost        BlogPost? @relation("BlogPostVersions", fields: [contentId], references: [id], onDelete: Cascade, map: "ContentVersion_blogPost_fkey")
+  deanMessage     DeanMessage? @relation("DeanMessageVersions", fields: [contentId], references: [id], onDelete: Cascade, map: "ContentVersion_deanMessage_fkey")
+  visionMission   VisionMission? @relation("VisionMissionVersions", fields: [contentId], references: [id], onDelete: Cascade, map: "ContentVersion_visionMission_fkey")
   
   @@unique([contentId, versionNumber])
 }
@@ -198,6 +215,17 @@ model AuditLog {
   ipAddress       String?
   userAgent       String?
   createdAt       DateTime @default(now())
+  
+  // Relations (polymorphic)
+  blogPost        BlogPost? @relation("BlogPostAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_blogPost_fkey")
+  resource        Resource? @relation("ResourceAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_resource_fkey")
+  staffMember     StaffMember? @relation("StaffMemberAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_staffMember_fkey")
+  department      Department? @relation("DepartmentAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_department_fkey")
+  deanMessage     DeanMessage? @relation("DeanMessageAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_deanMessage_fkey")
+  visionMission   VisionMission? @relation("VisionMissionAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_visionMission_fkey")
+  adminPosition   AdministrativePosition? @relation("AdminPositionAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_adminPosition_fkey")
+  academicSection AcademicSection? @relation("AcademicSectionAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_academicSection_fkey")
+  service         Service? @relation("ServiceAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_service_fkey")
 }
 
 model MediaFile {
