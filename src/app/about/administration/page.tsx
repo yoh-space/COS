@@ -2,6 +2,8 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
+import AdministratorCard from "@/components/Administration/AdministratorCard";
+import { administrators } from "@/data/administrators";
 
 export const metadata: Metadata = generatePageMetadata('administration');
 
@@ -31,29 +33,23 @@ const AdministrationPage = () => {
             <section className="pb-[120px] pt-[120px]">
                 <div className="container">
                     <div className="-mx-4 flex flex-wrap justify-center">
-                        <div className="w-full px-4 lg:w-8/12">
-                            <div className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]">
-                                <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
-                                    College Leadership
+                        <div className="w-full px-4">
+                            <div className="mb-12 text-center">
+                                <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
+                                    College Administration
                                 </h2>
-                                <p className="mb-8 text-base font-medium text-body-color">
-                                    The College of Science is led by a dedicated team of administrators who are committed to the success of our students and faculty.
+                                <p className="text-base font-medium text-body-color">
+                                    The College of Science is led by a dedicated team of administrators committed to excellence in education, research, and community service.
                                 </p>
-                                <div className="mb-8">
-                                    <h3 className="mb-2 text-xl font-bold text-black dark:text-white">Dean</h3>
-                                    <p className="text-base font-medium text-body-color">[Dean&apos;s Name]</p>
-                                </div>
-                                <div className="mb-8">
-                                    <h3 className="mb-2 text-xl font-bold text-black dark:text-white">Vice Dean</h3>
-                                    <p className="text-base font-medium text-body-color">[Vice Dean&apos;s Name]</p>
-                                </div>
-                                <div>
-                                    <h3 className="mb-2 text-xl font-bold text-black dark:text-white">Administrative Staff</h3>
-                                    <p className="text-base font-medium text-body-color">
-                                        Our administrative staff provides essential support for the daily operations of the college.
-                                    </p>
-                                </div>
                             </div>
+
+                            {/* Render all administrators */}
+                            {administrators.map((administrator) => (
+                                <AdministratorCard
+                                    key={administrator.id}
+                                    administrator={administrator}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -63,3 +59,4 @@ const AdministrationPage = () => {
 };
 
 export default AdministrationPage;
+
