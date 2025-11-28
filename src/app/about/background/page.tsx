@@ -29,22 +29,25 @@ const BackgroundPage = () => {
                 pageName="Background"
                 description="College of Science Basic Information"
             />
-            <section className="pb-[120px] pt-[120px]">
+            <section className="pb-[120px] pt-[120px] bg-gray-50 dark:bg-black">
                 <div className="container">
                     <div className="-mx-4 flex flex-wrap justify-center">
                         <div className="w-full px-4 lg:w-10/12">
                             {/* Introduction Section */}
-                            <div className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:mb-10 lg:px-8 xl:p-[55px]">
+                            <div className="mb-12 rounded-lg bg-white px-8 py-12 shadow-sm border border-gray-100 dark:border-gray-800 dark:bg-gray-dark sm:p-[55px] lg:mb-10 lg:px-8 xl:p-[55px]">
                                 <div className="flex flex-col md:flex-row items-start gap-8">
                                     <div className="w-full md:w-full">
-                                        <h2 className="mb-4 text-2xl font-bold text-black dark:text-white sm:text-3xl">
+                                        <div className="mb-3 inline-block rounded-md bg-blue-50 dark:bg-blue-950/30 px-4 py-1.5">
+                                            <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Our Story</span>
+                                        </div>
+                                        <h2 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
                                             History & Evolution
                                         </h2>
-                                        <p className="mb-6 text-base leading-relaxed text-body-color">
-                                            The College of Science at Bahir Dar University, originally a part of the former Faculty of Education, became an independent college in 2008 following the university’s restructuring and the increased focus on the Science and Technology sectors.
+                                        <p className="mb-6 text-base leading-relaxed text-gray-600 dark:text-gray-300">
+                                            The College of Science at Bahir Dar University, originally a part of the former Faculty of Education, became an independent college in 2008 following the university's restructuring and the increased focus on the Science and Technology sectors.
                                         </p>
-                                        <p className="text-base leading-relaxed text-body-color">
-                                            Today, the college offers high-quality education across seven programs: <strong>Biology, Chemistry, Mathematics, Physics, Industrial Chemistry, Statistics, and Data Science</strong> at the Undergraduate, Master’s, and Doctorate levels.
+                                        <p className="text-base leading-relaxed text-gray-600 dark:text-gray-300">
+                                            Today, the college offers high-quality education across seven programs: <strong className="text-gray-900 dark:text-white">Biology, Chemistry, Mathematics, Physics, Industrial Chemistry, Statistics, and Data Science</strong> at the Undergraduate, Master's, and Doctorate levels.
                                         </p>
                                     </div>
                                 </div>
