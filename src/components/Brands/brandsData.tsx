@@ -1,13 +1,43 @@
 import { Brand } from "@/types/brand";
-import { Atom, Boxes, Smartphone, Rocket, Layers, Paintbrush } from "lucide-react";
+import { FlaskConical, Atom, Calculator, Dna, BarChart3, GraduationCap } from "lucide-react";
 
 const brandsData: Brand[] = [
-  { id: 1, name: "React", href: "https://react.dev/", icon: Atom },
-  { id: 2, name: "Next.js", href: "https://nextjs.org/", icon: Boxes },
-  { id: 3, name: "React Native", href: "https://reactnative.dev/", icon: Smartphone },
-  { id: 4, name: "Expo", href: "https://expo.dev/", icon: Rocket },
-  { id: 5, name: "Vue.js", href: "https://vuejs.org/", icon: Layers },
-  { id: 6, name: "Tailwind CSS", href: "https://tailwindcss.com/", icon: Paintbrush },
+  { 
+    id: 1, 
+    name: "Chemistry", 
+    href: "https://www.bdu.edu.et/cos/", 
+    icon: FlaskConical 
+  },
+  { 
+    id: 2, 
+    name: "Physics", 
+    href: "https://www.bdu.edu.et/cos/", 
+    icon: Atom 
+  },
+  { 
+    id: 3, 
+    name: "Mathematics", 
+    href: "https://www.bdu.edu.et/cos/", 
+    icon: Calculator 
+  },
+  { 
+    id: 4, 
+    name: "Biology", 
+    href: "https://www.bdu.edu.et/cos/", 
+    icon: Dna 
+  },
+  { 
+    id: 5, 
+    name: "Statistics", 
+    href: "https://www.bdu.edu.et/cos/", 
+    icon: BarChart3 
+  },
+  { 
+    id: 6, 
+    name: "Data Science", 
+    href: "https://www.bdu.edu.et/cos/", 
+    icon: GraduationCap 
+  },
 ];
 
 export default brandsData;

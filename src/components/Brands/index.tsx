@@ -1,5 +1,4 @@
 import { Brand as BrandType } from "@/types/brand";
-import Image from "next/image";
 import brandsData from "./brandsData";
 
 const Brands = () => {
@@ -10,7 +9,7 @@ const Brands = () => {
           <div className="w-full px-4">
             <div className="mb-12 text-center">
               <h2 className="mb-3 text-3xl font-bold text-black dark:text-white">
-                Framework and Tools We Work With
+                Our Academic Departments
               </h2>
             </div>
             <div className="flex flex-wrap items-center justify-center rounded-xs bg-gray-light px-8 py-8 dark:bg-gray-dark sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
