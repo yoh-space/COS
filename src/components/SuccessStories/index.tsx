@@ -14,7 +14,7 @@ const testimonialData: Testimonial[] = [
     content:
       "200+ Annual Publications in Top Journals",
     image: "/images/success-stories/research.jpg",
-    url: "/publication",
+    url: "/resources/publication",
     star: 5,
   },
   {

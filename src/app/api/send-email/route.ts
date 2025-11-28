@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Replace with your real developer email
-    const developerEmail = "yohansdam@gmail.com";
+    const developerEmail = "yohannesdamtie34@gmail.com";
 
     const { data, error } = await resend.emails.send({
       from: "Yo-Tech <info@yotech.space>",
