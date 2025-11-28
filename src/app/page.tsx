@@ -12,20 +12,20 @@ const Blog = dynamic(() => import("@/components/Blog"), {
   loading: () => <div className="py-16 text-center">Loading blogs...</div>,
 });
 
-const Brands = dynamic(() => import("@/components/Brands"), {
-  loading: () => <div className="py-16 text-center">Loading brands...</div>,
+const Partners = dynamic(() => import("@/components/Partners"), {
+  loading: () => <div className="py-16 text-center">Loading partners...</div>,
 });
 
 const Contact = dynamic(() => import("@/components/Contact"), {
   loading: () => <div className="py-16 text-center">Loading contact...</div>,
 });
 
-const Pricing = dynamic(() => import("@/components/Pricing"), {
-  loading: () => <div className="py-16 text-center">Loading pricing...</div>,
+const AcademicPrograms = dynamic(() => import("@/components/AcademicPrograms"), {
+  loading: () => <div className="py-16 text-center">Loading academic programs...</div>,
 });
 
-const Testimonials = dynamic(() => import("@/components/Testimonials"), {
-  loading: () => <div className="py-16 text-center">Loading testimonials...</div>,
+const SuccessStories = dynamic(() => import("@/components/SuccessStories"), {
+  loading: () => <div className="py-16 text-center">Loading success stories...</div>,
 });
 
 export const metadata: Metadata = {
@@ -78,11 +78,11 @@ export default function Home() {
       <ScrollUp />
       <Hero />
       <Features />
-      <Brands />
+      <Partners />
       <AboutSectionOne />
       <AboutSectionTwo />
-      <Testimonials />
-      <Pricing />
+      <SuccessStories />
+      <AcademicPrograms />
       <Blog />
       <Contact />
     </>

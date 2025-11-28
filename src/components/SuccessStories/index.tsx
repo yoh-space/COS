@@ -13,7 +13,7 @@ const testimonialData: Testimonial[] = [
     designation: "🔬 Our faculty and students publish cutting-edge research in international journals, contributing to scientific advancement in chemistry, physics, biology, and mathematics. Over 200+ publications annually in high-impact journals.",
     content:
       "200+ Annual Publications in Top Journals",
-    image: "/images/testimonials/research.jpg",
+    image: "/images/success-stories/research.jpg",
     url: "/publication",
     star: 5,
   },
@@ -23,7 +23,7 @@ const testimonialData: Testimonial[] = [
     designation: "Distinguished Graduates Leading in Academia and Industry",
     content:
       "Our alumni hold prestigious positions in universities, research institutions, and industries worldwide, making significant contributions to science and technology.",
-    image: "/images/testimonials/alumni.jpg",
+    image: "/images/success-stories/alumni.jpg",
     url: "/about/background",
     star: 5,
   },
@@ -33,7 +33,7 @@ const testimonialData: Testimonial[] = [
     designation: "State-of-the-Art Research Facilities",
     content:
       "Equipped with modern instrumentation including GC-MS, ICP-OES, and advanced computing clusters for cutting-edge research across all departments.",
-    image: "/images/testimonials/lab.jpg",
+    image: "/images/success-stories/lab.jpg",
     url: "/laboratories",
     star: 5,
   },
@@ -43,7 +43,7 @@ const testimonialData: Testimonial[] = [
     designation: "National and International Recognition",
     content:
       "Our students consistently win awards in national science competitions and secure scholarships for international graduate programs.",
-    image: "/images/testimonials/students.jpg",
+    image: "/images/success-stories/students.jpg",
     url: "/academics",
     star: 5,
   },
@@ -53,7 +53,7 @@ const testimonialData: Testimonial[] = [
     designation: "Bridging Science and Society",
     content:
       "Through outreach programs, we engage with local communities, schools, and industries to promote STEM education and sustainable development.",
-    image: "/images/testimonials/community.jpg",
+    image: "/images/success-stories/community.jpg",
     url: "/services",
     star: 5,
   },

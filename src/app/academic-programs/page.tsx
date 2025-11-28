@@ -1,5 +1,5 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import Pricing from "@/components/Pricing";
+import AcademicPrograms from "@/components/AcademicPrograms";
 import Features from "@/components/Features";
 import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
@@ -7,7 +7,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = generatePageMetadata('pricing');
 
-const PricingPage = () => {
+const AcademicProgramsPage = () => {
   return (
     <>
       <BreadcrumbJsonLd
@@ -17,19 +17,19 @@ const PricingPage = () => {
             item: `${BASE_URL}/`,
           },
           {
-            name: 'Pricing',
-            item: `${BASE_URL}/pricing`,
+            name: 'Academic Programs',
+            item: `${BASE_URL}/academic-programs`,
           },
         ]}
       />
       <Breadcrumb
-        pageName="Services & Pricing"
-        description="Choose a plan that fits your needs. Our flexible pricing options are designed to help your business grow."
+        pageName="Academic Programs"
+        description="Explore our comprehensive academic programs designed to prepare students for success in science and technology."
       />
       <Features />
-      <Pricing />
+      <AcademicPrograms />
     </>
   );
 };
 
-export default PricingPage;
+export default AcademicProgramsPage;

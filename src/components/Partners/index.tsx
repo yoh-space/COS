@@ -1,7 +1,7 @@
 import { Brand as BrandType } from "@/types/brand";
-import brandsData from "./brandsData";
+import partnersData from "./partnersData";
 
-const Brands = () => {
+const Partners = () => {
   return (
     <section className="pt-16">
       <div className="container">
@@ -13,7 +13,7 @@ const Brands = () => {
               </h2>
             </div>
             <div className="flex flex-wrap items-center justify-center rounded-xs bg-gray-light px-8 py-8 dark:bg-gray-dark sm:px-10 md:px-[50px] md:py-[40px] xl:p-[50px] 2xl:px-[70px] 2xl:py-[60px]">
-              {brandsData.map((brand) => (
+              {partnersData.map((brand) => (
                 <SingleBrand key={brand.id} brand={brand} />
               ))}
             </div>
@@ -24,7 +24,7 @@ const Brands = () => {
   );
 };
 
-export default Brands;
+export default Partners;
 
 const SingleBrand = ({ brand }: { brand: BrandType }) => {
   const { href, name, icon: Icon } = brand; // 👈 icon comes from props

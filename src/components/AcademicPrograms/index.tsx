@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import SectionTitle from "../Common/SectionTitle";
-import PricingGlassCard from "@/components/ui/pricing-glass-card";
+import ProgramGlassCard from "@/components/ui/program-glass-card";
 
 const AcademicPrograms = () => {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -84,7 +84,7 @@ const AcademicPrograms = () => {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {programs.map((program, index) => (
-            <PricingGlassCard
+            <ProgramGlassCard
               key={index}
               packageName={program.packageName}
               price={program.price}

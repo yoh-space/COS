@@ -1,4 +1,4 @@
-const PricingBox = (props: {
+const ProgramCard = (props: {
   price: string;
   duration: string;
   packageName: string;
@@ -77,4 +77,4 @@ const PricingBox = (props: {
   );
 };
 
-export default PricingBox;
+export default ProgramCard;
