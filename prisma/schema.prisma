@@ -1,0 +1,215 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+// User and Authentication Models
+model User {
+  id                String      @id @default(cuid())
+  clerkId           String      @unique
+  email             String      @unique
+  firstName         String?
+  lastName          String?
+  profileImage      String?
+  departmentId      String?
+  department        Department? @relation("UserDepartment", fields: [departmentId], references: [id])
+  roles             Role[]      @relation("UserRoles")
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  auditLogs         AuditLog[]
+  blogPosts         BlogPost[]  @relation("BlogAuthor")
+  resources         Resource[]  @relation("ResourceUploader")
+  departmentHead    Department? @relation("DepartmentHead")
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  permissions String[] // JSON array of permission strings
+  users       User[]   @relation("UserRoles")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Content Models
+model BlogPost {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  content         String   @db.Text
+  excerpt         String?
+  featuredImage   String?
+  status          String   @default("draft") // draft, pending_review, published, archived
+  authorId        String
+  author          User     @relation("BlogAuthor", fields: [authorId], references: [id])
+  publishedAt     DateTime?
+  scheduledFor    DateTime?
+  seoTitle        String?
+  seoDescription  String?
+  seoKeywords     String?
+  canonicalUrl    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Resource {
+  id              String   @id @default(cuid())
+  title           String
+  description     String?
+  category        String   // yearly_reports, research_papers, etc.
+  year            Int?
+  fileUrl         String
+  fileName        String
+  fileSize        Int
+  uploaderId      String
+  uploader        User     @relation("ResourceUploader", fields: [uploaderId], references: [id])
+  status          String   @default("published")
+  downloadCount   Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model StaffMember {
+  id              String   @id @default(cuid())
+  name            String
+  title           String
+  specialization  String
+  email           String   @unique
+  profileImage    String?
+  departmentId    String
+  department      Department @relation(fields: [departmentId], references: [id])
+  telegram        String?
+  twitter         String?
+  linkedin        String?
+  bio             String?   @db.Text
+  status          String   @default("active") // active, inactive
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Department {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  slug            String   @unique
+  description     String?  @db.Text
+  headId          String?  @unique
+  head            User?    @relation("DepartmentHead", fields: [headId], references: [id])
+  users           User[]   @relation("UserDepartment")
+  staffMembers    StaffMember[]
+  academicSections AcademicSection[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model DeanMessage {
+  id              String   @id @default(cuid())
+  title           String
+  content         String   @db.Text
+  image           String?
+  status          String   @default("draft")
+  publishedAt     DateTime?
+  scheduledFor    DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model VisionMission {
+  id              String   @id @default(cuid())
+  type            String   // vision, mission
+  content         String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model AdministrativePosition {
+  id              String   @id @default(cuid())
+  title           String
+  description     String?  @db.Text
+  responsibilities String? @db.Text
+  personName      String?
+  parentPositionId String?
+  parent          AdministrativePosition? @relation("PositionHierarchy", fields: [parentPositionId], references: [id])
+  children        AdministrativePosition[] @relation("PositionHierarchy")
+  documentUrl     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model AcademicSection {
+  id              String   @id @default(cuid())
+  name            String
+  description     String?  @db.Text
+  departmentId    String
+  department      Department @relation(fields: [departmentId], references: [id])
+  duration        String?
+  requirements    String?  @db.Text
+  learningOutcomes String? @db.Text
+  documentUrl     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Service {
+  id              String   @id @default(cuid())
+  name            String
+  description     String?  @db.Text
+  category        String   // academic_support, administrative, library, it, etc.
+  contactInfo     String?
+  location        String?
+  documentUrl     String?
+  status          String   @default("active")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Supporting Models
+model ContentVersion {
+  id              String   @id @default(cuid())
+  contentType     String   // blog_post, dean_message, vision_mission
+  contentId       String
+  title           String?
+  content         String?  @db.Text
+  versionNumber   Int
+  createdAt       DateTime @default(now())
+  
+  @@unique([contentId, versionNumber])
+}
+
+model AuditLog {
+  id              String   @id @default(cuid())
+  action          String   // create, update, delete, publish, unpublish
+  entityType      String   // blog_post, staff_member, etc.
+  entityId        String
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  changes         String?  @db.Text // JSON of what changed
+  ipAddress       String?
+  userAgent       String?
+  createdAt       DateTime @default(now())
+}
+
+model MediaFile {
+  id              String   @id @default(cuid())
+  fileName        String
+  originalName    String
+  mimeType        String
+  size            Int
+  url             String
+  thumbnailUrl    String?
+  uploadedBy      String
+  usageCount      Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
