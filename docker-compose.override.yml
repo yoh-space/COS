@@ -1,0 +1,25 @@
+# ============================================
+# Docker Compose Override for Development
+# This file is automatically merged with docker-compose.yml
+# Optimized for hot reload and development workflow
+# ============================================
+
+version: '3.9'
+
+services:
+  nextjs-app:
+    # Use polling for file watching (better for Docker on Linux)
+    environment:
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_USEPOLLING: "true"
+    # Additional volume mounts for better performance
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+      - /app/.pnpm-store
+    # Increase memory for development
+    deploy:
+      resources:
+        limits:
+          memory: 2G
