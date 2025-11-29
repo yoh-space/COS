@@ -1,5 +1,5 @@
 /**
- * Health check endpoint for Docker container monitoring
+ * Health check endpoint for Docker and monitoring
  * GET /api/health
  */
 
@@ -16,6 +16,7 @@ export async function GET() {
         status: 'healthy',
         timestamp: new Date().toISOString(),
         database: 'connected',
+        service: 'COS CMS',
       },
       { status: 200 }
     );
