@@ -18,7 +18,9 @@ import {
   MessageSquare,
   Award,
   Layers,
-  Library
+  Library,
+  Newspaper
+  
 } from "lucide-react";
 
 const menuData: (Menu & { icon?: any })[] = [
@@ -193,6 +195,13 @@ const menuData: (Menu & { icon?: any })[] = [
   },
   {
     id: 6,
+    title: "Blogs",
+    path: "/blog",
+    newTab: false,
+    icon: Newspaper, 
+  },
+  {
+    id: 7,
     title: "Contact",
     path: "/contact",
     newTab: false,
