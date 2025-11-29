@@ -12,9 +12,9 @@ import {
 import { DepartmentSlug } from "@/types/staff";
 
 interface DepartmentPageProps {
-  params: {
+  params: Promise<{
     department: string;
-  };
+  }>;
 }
 
 // Generate static params for all departments
@@ -28,7 +28,8 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   { params }: DepartmentPageProps
 ): Promise<Metadata> {
-  const department = getDepartmentBySlug(params.department);
+  const resolvedParams = await params;
+  const department = getDepartmentBySlug(resolvedParams.department);
 
   if (!department) {
     return {
@@ -72,8 +73,9 @@ export async function generateMetadata(
   };
 }
 
-const DepartmentPage = ({ params }: DepartmentPageProps) => {
-  const department = getDepartmentBySlug(params.department);
+const DepartmentPage = async ({ params }: DepartmentPageProps) => {
+  const resolvedParams = await params;
+  const department = getDepartmentBySlug(resolvedParams.department);
 
   // Handle invalid department slug
   if (!department) {

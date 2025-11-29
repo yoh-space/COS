@@ -6,27 +6,63 @@ import TagButton from "@/components/Blog/TagButton";
 import BlogViewCounter from "@/components/Blog/BlogViewCounter";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import blogData from "@/components/Blog/blogData";
 import { Metadata } from "next";
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string | null;
+  featuredImage: string | null;
+  publishedAt: string | null;
+  createdAt: string;
+  seoTitle: string | null;
+  seoDescription: string | null;
+  seoKeywords: string | null;
+  author: {
+    id: string;
+    email: string;
+    firstName: string | null;
+    lastName: string | null;
+    profileImage: string | null;
+  };
+}
+
+async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/blog/${slug}`, {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const result = await response.json();
+    return result.success ? result.data : null;
+  } catch (error) {
+    console.error('Error fetching blog post:', error);
+    return null;
+  }
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const blog = blogData.find(b => b.slug === resolvedParams.slug);
+  const blog = await fetchBlogPost(resolvedParams.slug);
+  
   if (!blog) {
     return {
       title: "Blog Not Found | YoTech",
       description: "This blog post could not be found.",
     };
   }
-  const title = blog.title ? `${blog.title} | YoTech Blog` : "Yo-Tech Blog Post";
-  const description = blog.excerpt || "Read this insightful post on YoTech Blog covering the latest in technology and innovation.";
-  const tags = Array.isArray(blog.tags)
-    ? blog.tags
-    : blog.tags
-      ? blog.tags.split(",").map((t: string) => t.trim())
-      : [];
-  const keywords = [blog.title, ...tags].filter(Boolean).join(", ");
-  const image = blog.image_url || "/images/blog/blog-details-01.jpg";
+
+  const title = blog.seoTitle || blog.title ? `${blog.seoTitle || blog.title} | YoTech Blog` : "Yo-Tech Blog Post";
+  const description = blog.seoDescription || blog.excerpt || "Read this insightful post on YoTech Blog covering the latest in technology and innovation.";
+  const keywords = blog.seoKeywords || blog.title;
+  const image = blog.featuredImage || "/images/blog/blog-details-01.jpg";
 
   return {
     title,
@@ -36,7 +72,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title,
       description,
       type: "article",
-      url: `https://www.yotech.space/blog-details/${blog.slug}`,
+      url: `https://www.cos.yotech.space/blog-details/${blog.slug}`,
       images: [
         {
           url: image,
@@ -59,26 +95,31 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
   const resolvedParams = await params;
 
   try {
-    const blog = blogData.find(b => b.slug === resolvedParams.slug);
+    const blog = await fetchBlogPost(resolvedParams.slug);
 
     if (!blog) {
       return notFound();
     }
 
+    const authorName = blog.author.firstName && blog.author.lastName
+      ? `${blog.author.firstName} ${blog.author.lastName}`
+      : blog.author.email;
+
     const mappedBlog = {
-      ...blog,
-      image: blog.image_url,
-      createdTime: blog.created_at,
-      tags: Array.isArray(blog.tags)
-        ? blog.tags
-        : blog.tags
-          ? blog.tags.split(",").map((t: string) => t.trim())
-          : [],
-      author: blog.author || {
-        name: "Yoh",
-        image: "/images/blog/author-01.png",
+      _id: blog.id,
+      title: blog.title,
+      image: blog.featuredImage || "/images/blog/blog-details-01.jpg",
+      createdTime: blog.publishedAt || blog.createdAt,
+      tags: [],
+      author: {
+        name: authorName,
+        image: blog.author.profileImage || "/images/blog/author-01.png",
         designation: "Author",
       },
+      content: blog.content,
+      views: 0,
+      totalComment: 0,
+      slug: blog.slug,
     };
 
     return (
@@ -113,17 +154,19 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                       <BlogViewCounter views={String(mappedBlog.views)} commentCount={mappedBlog.totalComment} />
                     </div>
                   </div>
-                  <div className="mb-5">
-                    {mappedBlog.tags.map((tag: string) => (
-                      <TagButton key={tag} text={tag} />
-                    ))}
-                  </div>
+                  {mappedBlog.tags.length > 0 && (
+                    <div className="mb-5">
+                      {mappedBlog.tags.map((tag: string) => (
+                        <TagButton key={tag} text={tag} />
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="mb-10 w-full overflow-hidden rounded-sm">
                   <div className="relative aspect-97/60 w-full sm:aspect-97/44">
                     <Image
-                      src={mappedBlog.image || "/images/blog/blog-details-01.jpg"}
+                      src={mappedBlog.image}
                       alt={mappedBlog.title || "image"}
                       fill
                       className="object-cover object-center"
@@ -131,8 +174,8 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                   </div>
                 </div>
 
-                <div className="text-body-color mb-10 text-base leading-relaxed font-medium sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
-                  <p>{mappedBlog.content}</p>
+                <div className="text-body-color mb-10 text-base leading-relaxed font-medium sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed prose dark:prose-invert max-w-none">
+                  <div dangerouslySetInnerHTML={{ __html: mappedBlog.content }} />
                 </div>
 
                 <SharePost slug={mappedBlog.slug} />
