@@ -1,0 +1,64 @@
+services:
+  # Next.js Application (Production)
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+      args:
+        NODE_ENV: production
+    container_name: cos-nextjs-prod
+    restart: always
+    command: sh -c "node server.js"
+    environment:
+      # Database - Use your cloud PostgreSQL (Prisma, Supabase, etc.)
+      DATABASE_URL: ${DATABASE_URL}
+      POSTGRES_URL: ${POSTGRES_URL}
+      
+      # Prisma Accelerate (if using)
+      PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
+      
+      # Clerk Authentication
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      
+      # Vercel Blob Storage
+      BLOB_READ_WRITE_TOKEN: ${BLOB_READ_WRITE_TOKEN}
+      
+      # Resend Email
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      
+      # App Configuration
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: 1
+      PORT: 3000
+      HOSTNAME: "0.0.0.0"
+      
+      # Optional: Convex
+      NEXT_PUBLIC_CONVEX_URL: ${NEXT_PUBLIC_CONVEX_URL:-}
+      
+      # Optional: Vercel OIDC
+      VERCEL_OIDC_TOKEN: ${VERCEL_OIDC_TOKEN:-}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    networks:
+      - cos-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+networks:
+  cos-network:
+    driver: bridge

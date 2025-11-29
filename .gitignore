@@ -27,6 +27,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.docker.local
+.env.production
 
 # vercel
 .vercel
@@ -36,6 +38,5 @@ yarn-error.log*
 
 task.md
 .kiro/
-
 /generated/prisma
 .env

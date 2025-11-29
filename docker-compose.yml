@@ -1,0 +1,103 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: cos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-cosuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cospassword}
+      POSTGRES_DB: ${POSTGRES_DB:-cosdb}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cos-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-cosuser} -d ${POSTGRES_DB:-cosdb}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Next.js Application (Development)
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps
+    container_name: cos-nextjs-dev
+    restart: unless-stopped
+    command: sh -c "pnpm prisma generate && pnpm prisma migrate deploy && pnpm dev"
+    environment:
+      # Database
+      DATABASE_URL: postgresql://${POSTGRES_USER:-cosuser}:${POSTGRES_PASSWORD:-cospassword}@postgres:5432/${POSTGRES_DB:-cosdb}?schema=public
+      
+      # Clerk Authentication
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      
+      # Vercel Blob Storage
+      BLOB_READ_WRITE_TOKEN: ${BLOB_READ_WRITE_TOKEN}
+      
+      # Resend Email
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      
+      # App Configuration
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      NODE_ENV: development
+      NEXT_TELEMETRY_DISABLED: 1
+      
+      # Optional: Prisma Accelerate (if using)
+      # Leave empty to use local Docker PostgreSQL
+      # PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL:-}
+      
+      # Optional: Convex
+      NEXT_PUBLIC_CONVEX_URL: ${NEXT_PUBLIC_CONVEX_URL:-}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    volumes:
+      # Mount source code for hot reload
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - cos-network
+    stdin_open: true
+    tty: true
+
+  # Prisma Studio (Optional - for database management)
+  prisma-studio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps
+    container_name: cos-prisma-studio
+    restart: unless-stopped
+    command: sh -c "pnpm prisma generate && pnpm prisma studio --port 5555 --browser none"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-cosuser}:${POSTGRES_PASSWORD:-cospassword}@postgres:5432/${POSTGRES_DB:-cosdb}?schema=public
+    ports:
+      - "${PRISMA_STUDIO_PORT:-5555}:5555"
+    volumes:
+      - ./prisma:/app/prisma
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - cos-network
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  cos-network:
+    driver: bridge
