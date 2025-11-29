@@ -16,9 +16,9 @@ import { PERMISSIONS } from '@/lib/permissions';
 import { validateRoleAssignment } from '@/lib/role-validation';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 /**
@@ -32,7 +32,7 @@ export const POST = withPermission(
   PERMISSIONS.USER_UPDATE,
   async (request: NextRequest, currentUser, { params }: RouteParams) => {
     try {
-      const { id: userId } = params;
+      const { id: userId } = await params;
       const body = await request.json();
       const { roleIds, departmentId } = body;
 
