@@ -38,10 +38,18 @@ Thumbs.db
 # Testing
 coverage
 .nyc_output
-*.test.js
-*.spec.js
-__tests__
-__mocks__
+*.lcov
+
+# Misc
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
 
 # Documentation
 README.md
@@ -49,33 +57,18 @@ CHANGELOG.md
 LICENSE
 *.md
 
-# Docker
-Dockerfile
-docker-compose*.yml
-.dockerignore
-
 # CI/CD
 .github
 .gitlab-ci.yml
 .travis.yml
-.circleci
-
-# Misc
-*.log
-.cache
-.temp
-tmp
-temp
 
 # Vercel
 .vercel
 
-# Lighthouse
+# Lighthouse reports
 lighthouse-reports
 
-# Prisma (keep schema but ignore migrations in some cases)
-# prisma/migrations
-
-# Keep these
-!prisma/schema.prisma
-!prisma/seed.ts
+# Temporary files
+tmp
+temp
+*.tmp

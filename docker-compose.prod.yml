@@ -1,3 +1,11 @@
+# ============================================
+# Docker Compose for Production
+# No volume mounts, optimized build
+# Use with cloud PostgreSQL (Prisma Accelerate)
+# ============================================
+
+version: '3.9'
+
 services:
   # Next.js Application (Production)
   nextjs-app:
@@ -5,17 +13,12 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runner
-      args:
-        NODE_ENV: production
     container_name: cos-nextjs-prod
     restart: always
-    command: sh -c "node server.js"
     environment:
-      # Database - Use your cloud PostgreSQL (Prisma, Supabase, etc.)
+      # Use cloud database URLs from environment
       DATABASE_URL: ${DATABASE_URL}
       POSTGRES_URL: ${POSTGRES_URL}
-      
-      # Prisma Accelerate (if using)
       PRISMA_DATABASE_URL: ${PRISMA_DATABASE_URL}
       
       # Clerk Authentication
@@ -28,20 +31,17 @@ services:
       # Resend Email
       RESEND_API_KEY: ${RESEND_API_KEY}
       
-      # App Configuration
-      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      # Convex
+      NEXT_PUBLIC_CONVEX_URL: ${NEXT_PUBLIC_CONVEX_URL}
+      
+      # Next.js Production
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://yourdomain.com}
       NODE_ENV: production
       NEXT_TELEMETRY_DISABLED: 1
       PORT: 3000
       HOSTNAME: "0.0.0.0"
-      
-      # Optional: Convex
-      NEXT_PUBLIC_CONVEX_URL: ${NEXT_PUBLIC_CONVEX_URL:-}
-      
-      # Optional: Vercel OIDC
-      VERCEL_OIDC_TOKEN: ${VERCEL_OIDC_TOKEN:-}
     ports:
-      - "${APP_PORT:-3000}:3000"
+      - "3000:3000"
     networks:
       - cos-network
     healthcheck:
