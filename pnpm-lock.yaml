@@ -29,6 +29,9 @@ importers:
       '@prisma/client':
         specifier: ^7.0.1
         version: 7.0.1(prisma@7.0.1(@types/react@19.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2))(typescript@5.9.2)
+      '@prisma/extension-accelerate':
+        specifier: ^3.0.0
+        version: 3.0.0(@prisma/client@7.0.1(prisma@7.0.1(@types/react@19.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2))(typescript@5.9.2))
       '@react-three/drei':
         specifier: ^10.7.7
         version: 10.7.7(@react-three/fiber@9.4.0(@types/react@19.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(three@0.181.2))(@types/react@19.1.0)(@types/three@0.181.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(three@0.181.2)
@@ -967,6 +970,12 @@ packages:
 
   '@prisma/engines@7.0.1':
     resolution: {integrity: sha512-f+D/vdKeImqUHysd5Bgv8LQ1whl4sbLepHyYMQQMK61cp4WjwJVryophleLUrfEJRpBLGTBI/7fnLVENxxMFPQ==}
+
+  '@prisma/extension-accelerate@3.0.0':
+    resolution: {integrity: sha512-xOhRCdPTdAwwdbxDr14s0rg73o8LunzRf8VtzFi4P6G/SvA3n/OgRIClXpihEQvoyDWVEIE29MdSxaaYdjsIMw==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@prisma/client': '>=4.16.1'
 
   '@prisma/fetch-engine@7.0.1':
     resolution: {integrity: sha512-5DnSairYIYU7dcv/9pb1KCwIRHZfhVOd34855d01lUI5QdF9rdCkMywPQbBM67YP7iCgQoEZO0/COtOMpR4i9A==}
@@ -4556,6 +4565,10 @@ snapshots:
       '@prisma/engines-version': 7.1.0-2.f09f2815f091dbba658cdcd2264306d88bb5bda6
       '@prisma/fetch-engine': 7.0.1
       '@prisma/get-platform': 7.0.1
+
+  '@prisma/extension-accelerate@3.0.0(@prisma/client@7.0.1(prisma@7.0.1(@types/react@19.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2))(typescript@5.9.2))':
+    dependencies:
+      '@prisma/client': 7.0.1(prisma@7.0.1(@types/react@19.1.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(typescript@5.9.2))(typescript@5.9.2)
 
   '@prisma/fetch-engine@7.0.1':
     dependencies:

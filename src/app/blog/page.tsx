@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SingleBlog from "@/components/Blog/SingleBlog";
 import Breadcrumb from "@/components/Common/Breadcrumb";
 import Lottie from "lottie-react";
@@ -42,11 +42,7 @@ const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchInput, setSearchInput] = useState("");
 
-  useEffect(() => {
-    fetchBlogs();
-  }, [currentPage, searchQuery]);
-
-  const fetchBlogs = async () => {
+  const fetchBlogs = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -75,7 +71,11 @@ const Blog = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchQuery]);
+
+  useEffect(() => {
+    fetchBlogs();
+  }, [fetchBlogs]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

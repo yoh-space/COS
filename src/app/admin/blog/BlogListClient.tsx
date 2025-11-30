@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -38,11 +38,7 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
-  useEffect(() => {
-    fetchBlogPosts();
-  }, [page, search, statusFilter]);
-
-  async function fetchBlogPosts() {
+  const fetchBlogPosts = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -68,7 +64,11 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [page, search, statusFilter]);
+
+  useEffect(() => {
+    fetchBlogPosts();
+  }, [fetchBlogPosts]);
 
   async function handleDelete(id: string) {
     if (!confirm('Are you sure you want to delete this blog post?')) {
