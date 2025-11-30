@@ -60,8 +60,8 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
       }
 
       const data = await response.json();
-      setBlogPosts(data.data.blogPosts);
-      setTotalPages(data.data.pagination.totalPages);
+      setBlogPosts(data.blogPosts || []);
+      setTotalPages(data.pagination?.totalPages || 1);
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

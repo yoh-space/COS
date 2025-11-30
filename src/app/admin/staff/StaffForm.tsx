@@ -46,7 +46,7 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
       const response = await fetch('/api/cms/departments');
       if (!response.ok) throw new Error('Failed to fetch departments');
       const data = await response.json();
-      setDepartments(data.data.departments || []);
+      setDepartments(data.departments || []);
     } catch (err) {
       console.error('Error fetching departments:', err);
     }

@@ -1,9 +1,9 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
+import { BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import Link from "next/link";
-import { departments, getStaffByDepartment } from "@/data/staffMembers";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: 'Staff Directory | College of Science',
@@ -35,7 +35,29 @@ export const metadata: Metadata = {
   },
 };
 
-const StaffsPage = () => {
+const StaffsPage = async () => {
+  // Fetch departments with staff count from database
+  const departments = await prisma.department.findMany({
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      description: true,
+      _count: {
+        select: {
+          staffMembers: {
+            where: {
+              status: 'active'
+            }
+          }
+        }
+      }
+    },
+    orderBy: {
+      name: 'asc'
+    }
+  });
+
   return (
     <>
       <BreadcrumbJsonLd
@@ -58,7 +80,7 @@ const StaffsPage = () => {
         <div className="container">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
             {departments.map((dept) => {
-              const staffCount = getStaffByDepartment(dept.slug).length;
+              const staffCount = dept._count.staffMembers;
               return (
                 <div key={dept.slug} className="w-full">
                   <div className="wow fadeInUp group relative overflow-hidden rounded-sm bg-white shadow-one duration-300 hover:shadow-two dark:bg-dark dark:hover:shadow-gray-dark p-6 lg:p-8">

@@ -135,7 +135,6 @@ const menuData: (Menu & { icon?: any })[] = [
   {
     id: 4,
     title: "Resources",
-    path: "/resources",
     newTab: false,
     icon: Microscope,
     submenu: [
