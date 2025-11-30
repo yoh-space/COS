@@ -69,6 +69,11 @@ export const PERMISSIONS = {
   VISION_MISSION_DELETE: 'vision_mission:delete',
   VISION_MISSION_ALL: 'vision_mission:*',
 
+  // Background content permissions
+  BACKGROUND_READ: 'background:read',
+  BACKGROUND_UPDATE: 'background:update',
+  BACKGROUND_ALL: 'background:*',
+
   // Administrative position permissions
   ADMIN_POSITION_CREATE: 'admin_position:create',
   ADMIN_POSITION_READ: 'admin_position:read',
