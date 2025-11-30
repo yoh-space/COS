@@ -1,55 +1,74 @@
-"use client";
-
 import RelatedPost from "@/components/Blog/RelatedPost";
 import PopularPosts from "@/components/Blog/PopularPosts";
 import SharePost from "@/components/Blog/SharePost";
 import TagButton from "@/components/Blog/TagButton";
 import NewsLatterBox from "@/components/Contact/NewsLatterBox";
-import blogData from "@/components/Blog/blogData";
-import { useState, useMemo } from "react";
+import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 
-const BlogSidebarPage = () => {
-  const [search, setSearch] = useState("");
-  const allBlogs = blogData;
+// Force dynamic rendering - fetch fresh data from database
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-  // Client-side filtering
-  const blogs = useMemo(() => {
-    if (!search.trim()) return allBlogs;
-    return allBlogs.filter(blog =>
-      blog.title.toLowerCase().includes(search.toLowerCase()) ||
-      blog.paragraph.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [search, allBlogs]);
+interface BlogSidebarPageProps {
+  searchParams: Promise<{
+    search?: string;
+  }>;
+}
 
-  // Compute popular tags and categories from blogs in real time
+async function getBlogData(search: string) {
+  // Build where clause - only published posts
+  const where: any = {
+    status: 'published',
+  };
+
+  if (search) {
+    where.OR = [
+      { title: { contains: search, mode: 'insensitive' } },
+      { content: { contains: search, mode: 'insensitive' } },
+      { excerpt: { contains: search, mode: 'insensitive' } },
+    ];
+  }
+
+  // Fetch blog posts
+  const blogs = await prisma.blogPost.findMany({
+    where,
+    include: {
+      author: {
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          profileImage: true,
+        },
+      },
+    },
+    orderBy: {
+      publishedAt: 'desc',
+    },
+    take: 20, // Limit to recent 20 posts for sidebar view
+  });
+
+  return blogs;
+}
+
+const BlogSidebarPage = async ({ searchParams }: BlogSidebarPageProps) => {
+  const resolvedSearchParams = await searchParams;
+  const search = resolvedSearchParams.search || '';
+  const blogs = await getBlogData(search);
+
+  // Compute popular tags and categories from blogs (simplified for now)
+  // In a real app, you might want to have separate tables for tags/categories
   const tagCount: Record<string, number> = {};
   const categoryCount: Record<string, number> = {};
-  if (blogs) {
-    blogs.forEach((blog) => {
-      // Tags
-      let tagArr = Array.isArray(blog.tags)
-        ? blog.tags
-        : blog.tags
-          ? blog.tags.split(",").map((t: string) => t.trim())
-          : [];
-      tagArr.forEach((tag) => {
-        if (tag) tagCount[tag] = (tagCount[tag] || 0) + 1;
-      });
-      // Categories
-      if (blog.category) {
-        categoryCount[blog.category] = (categoryCount[blog.category] || 0) + 1;
-      }
-    });
-  }
-  // Sort and get top 8 tags/categories
-  const popularTags = Object.entries(tagCount)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8)
-    .map(([tag]) => tag);
-  const popularCategories = Object.entries(categoryCount)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8)
-    .map(([cat]) => cat);
+
+  // Note: Current schema might not have tags/category fields fully implemented or populated
+  // This logic assumes if they existed they would be handled here.
+  // For now, we'll skip complex tag logic if fields are missing or use placeholders.
+
+  const popularTags: string[] = []; // Placeholder
+  const popularCategories: string[] = []; // Placeholder
 
   return (
     <section className="overflow-hidden pt-[180px] pb-[120px]">
@@ -65,30 +84,31 @@ const BlogSidebarPage = () => {
               <div className="mb-10 space-y-6">
                 {blogs.length === 0 ? (
                   <p className="text-gray-600 dark:text-gray-400">
-                    No blogs found. Check back soon!
+                    {search
+                      ? `No blogs found matching "${search}".`
+                      : "No blogs found. Check back soon!"}
                   </p>
                 ) : (
                   blogs.map((blog) => {
                     const mapped = {
-                      ...blog,
-                      image: blog.image_url,
-                      createdTime: blog.created_at,
-                      tags: Array.isArray(blog.tags)
-                        ? blog.tags
-                        : blog.tags
-                          ? blog.tags.split(",").map((t) => t.trim())
-                          : [],
+                      _id: blog.id,
+                      title: blog.title,
+                      image: blog.featuredImage || "/images/blog/blog-01.jpg",
+                      createdTime: blog.publishedAt || blog.createdAt,
+                      slug: blog.slug,
                       author: {
-                        name: blog.author || "Yoh",
-                        image: "/images/blog/author-01.png",
+                        name: blog.author.firstName && blog.author.lastName
+                          ? `${blog.author.firstName} ${blog.author.lastName}`
+                          : blog.author.email,
+                        image: blog.author.profileImage || "/images/blog/author-01.png",
                         designation: "Author",
                       },
                     };
                     return (
                       <RelatedPost
-                        key={blog._id}
+                        key={blog.id}
                         image={mapped.image}
-                        slug={`/blog-details/${blog.slug}`}
+                        slug={`/blog/${blog.slug}`}
                         title={mapped.title}
                         date={new Date(mapped.createdTime).toLocaleDateString()}
                       />
@@ -97,7 +117,7 @@ const BlogSidebarPage = () => {
                 )}
               </div>
 
-              {blogs && blogs.length > 0 && blogs[0]._id && (
+              {blogs && blogs.length > 0 && (
                 <SharePost slug={blogs[0].slug} />
               )}
             </article>
@@ -107,55 +127,46 @@ const BlogSidebarPage = () => {
           <aside className="w-full px-4 lg:w-4/12">
             {/* Trending/Popular Posts */}
             <PopularPosts limit={5} />
+
             {/* Search */}
             <div className="shadow-three dark:bg-gray-dark mt-12 mb-10 rounded-xs bg-white p-6 lg:mt-0 dark:shadow-none">
-              <div className="flex items-center justify-between">
+              <form action="/blog-sidebar" method="GET" className="flex items-center justify-between">
                 <input
                   type="text"
+                  name="search"
                   placeholder="Search here..."
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
+                  defaultValue={search}
                   className="dark:text-body-color-dark dark:shadow-two text-body-color focus:border-primary dark:focus:border-primary mr-4 w-full rounded-xs border border-stroke bg-[#f8f8f8] px-6 py-3 text-base outline-hidden transition-all duration-300 dark:border-transparent dark:bg-[#2C303B]"
                 />
                 <button
                   aria-label="search button"
                   className="bg-primary flex h-[50px] w-[50px] items-center justify-center rounded-xs text-white"
-                  onClick={() => setSearch("")}
-                  type="button"
+                  type="submit"
                 >
-                  {search ? "✖" : "🔍"}
+                  🔍
                 </button>
-              </div>
+              </form>
             </div>
 
             {/* Related Posts */}
             <div className="shadow-three dark:bg-gray-dark mb-10 rounded-xs bg-white dark:shadow-none">
               <h2 className="border-body-color/10 border-b px-8 py-4 text-lg font-semibold text-black dark:border-white/10 dark:text-white">
-                Related Posts
+                Recent Posts
               </h2>
               <ul className="p-8 space-y-6">
                 {blogs && blogs.length > 0 ? (
                   blogs.slice(0, 3).map((blog) => {
                     const mapped = {
-                      ...blog,
-                      image: blog.image_url,
-                      createdTime: blog.created_at,
-                      tags: Array.isArray(blog.tags)
-                        ? blog.tags
-                        : blog.tags
-                          ? blog.tags.split(",").map((t) => t.trim())
-                          : [],
-                      author: {
-                        name: blog.author || "Yoh",
-                        image: "/images/blog/author-01.png",
-                        designation: "Author",
-                      },
+                      title: blog.title,
+                      image: blog.featuredImage || "/images/blog/blog-01.jpg",
+                      createdTime: blog.publishedAt || blog.createdAt,
+                      slug: blog.slug,
                     };
                     return (
-                      <li key={blog._id}>
+                      <li key={blog.id}>
                         <RelatedPost
                           image={mapped.image}
-                          slug={`/blog-details/${blog.slug}`}
+                          slug={`/blog/${blog.slug}`}
                           title={mapped.title}
                           date={new Date(mapped.createdTime).toLocaleDateString()}
                         />
@@ -163,7 +174,7 @@ const BlogSidebarPage = () => {
                     );
                   })
                 ) : (
-                  <li className="text-gray-400">No related posts found.</li>
+                  <li className="text-gray-400">No recent posts found.</li>
                 )}
               </ul>
             </div>

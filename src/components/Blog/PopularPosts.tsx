@@ -12,13 +12,13 @@ export default function PopularPosts({ limit = 5 }: { limit?: number }) {
       <ul className="space-y-4">
         {posts.map((post: any) => (
           <li key={post._id} className="flex items-center gap-3">
-            <Link href={`/blog-details/${post.slug}`} className="flex-shrink-0">
+            <Link href={`/blog/${post.slug}`} className="flex-shrink-0">
               <div className="relative w-14 h-10 rounded overflow-hidden">
                 <Image src={post.image_url || "/images/blog/blog-01.jpg"} alt={post.title} fill className="object-cover" />
               </div>
             </Link>
             <div className="flex-1">
-              <Link href={`/blog-details/${post.slug}`} className="font-medium text-sm hover:text-primary dark:text-white dark:hover:text-primary">
+              <Link href={`/blog/${post.slug}`} className="font-medium text-sm hover:text-primary dark:text-white dark:hover:text-primary">
                 {post.title}
               </Link>
               <div className="text-xs text-gray-500 dark:text-gray-300">{post.views} views</div>

@@ -8,7 +8,7 @@ const SingleBlog = ({ blog, compact = false }: { blog: Blog; compact?: boolean }
   return (
     <>
       <div className={`group shadow-one hover:shadow-two dark:bg-dark dark:hover:shadow-gray-dark relative overflow-hidden rounded-xs bg-white duration-300 ${compact ? 'h-96' : ''}`}>
-        <Link href={`/blog-details/${blog.slug}`}
+        <Link href={`/blog/${blog.slug}`}
           className="relative block aspect-37/22 w-full"
         >
           <span className="bg-primary absolute top-6 right-6 z-20 inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-white capitalize">
@@ -26,7 +26,7 @@ const SingleBlog = ({ blog, compact = false }: { blog: Blog; compact?: boolean }
         <div className={compact ? "p-4" : "p-6 sm:p-8 md:px-6 md:py-8 lg:p-8 xl:px-5 xl:py-8 2xl:p-8"}>
           <h3>
             <Link
-              href={`/blog-details/${blog.slug}`}
+              href={`/blog/${blog.slug}`}
               className={`hover:text-primary dark:hover:text-primary mb-3 block font-bold text-black dark:text-white ${compact ? 'text-lg' : 'text-xl sm:text-2xl'}`}
             >
               {title}

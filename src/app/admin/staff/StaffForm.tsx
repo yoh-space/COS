@@ -43,10 +43,10 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
 
   async function fetchDepartments() {
     try {
-      const response = await fetch('/api/cms/departments');
+      const response = await fetch('/api/departments');
       if (!response.ok) throw new Error('Failed to fetch departments');
       const data = await response.json();
-      setDepartments(data.data.departments || []);
+      setDepartments(data || []);
     } catch (err) {
       console.error('Error fetching departments:', err);
     }
@@ -57,7 +57,7 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
   ) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
+
     // Clear error for this field
     if (errors[name]) {
       setErrors((prev) => {
@@ -156,11 +156,10 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${
-                errors.name
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.name
                   ? 'border-red-500 dark:border-red-500'
                   : 'border-gray-300 dark:border-gray-600'
-              }`}
+                }`}
               placeholder="John Doe"
             />
             {errors.name && (
@@ -178,11 +177,10 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${
-                errors.email
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.email
                   ? 'border-red-500 dark:border-red-500'
                   : 'border-gray-300 dark:border-gray-600'
-              }`}
+                }`}
               placeholder="john.doe@example.com"
             />
             {errors.email && (
@@ -200,11 +198,10 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${
-                errors.title
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.title
                   ? 'border-red-500 dark:border-red-500'
                   : 'border-gray-300 dark:border-gray-600'
-              }`}
+                }`}
               placeholder="Professor, Assistant Professor, etc."
             />
             {errors.title && (
@@ -222,11 +219,10 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               name="specialization"
               value={formData.specialization}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${
-                errors.specialization
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.specialization
                   ? 'border-red-500 dark:border-red-500'
                   : 'border-gray-300 dark:border-gray-600'
-              }`}
+                }`}
               placeholder="Computer Science, Mathematics, etc."
             />
             {errors.specialization && (
@@ -245,11 +241,10 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               name="departmentId"
               value={formData.departmentId}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${
-                errors.departmentId
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.departmentId
                   ? 'border-red-500 dark:border-red-500'
                   : 'border-gray-300 dark:border-gray-600'
-              }`}
+                }`}
             >
               <option value="">Select Department</option>
               {departments.map((dept) => (

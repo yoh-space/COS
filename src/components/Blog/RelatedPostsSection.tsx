@@ -37,7 +37,7 @@ export default function RelatedPostsSection({ blogId, tags }: { blogId: string, 
             <RelatedPost
               key={post._id}
               image={post.image_url}
-              slug={`/blog-details/${post.slug}`}
+              slug={`/blog/${post.slug}`}
               title={post.title}
               date={new Date(post.created_at).toLocaleDateString()}
             />

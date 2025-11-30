@@ -38,10 +38,10 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
 
   async function fetchDepartments() {
     try {
-      const response = await fetch('/api/cms/departments');
+      const response = await fetch('/api/departments');
       if (!response.ok) throw new Error('Failed to fetch departments');
       const data = await response.json();
-      setDepartments(data.data.departments || []);
+      setDepartments(data || []);
     } catch (err) {
       console.error('Error fetching departments:', err);
     }
@@ -63,8 +63,12 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
       if (!response.ok) throw new Error('Failed to fetch staff members');
 
       const data = await response.json();
-      setStaffMembers(data.data.staffMembers || []);
-      setTotalPages(data.data.pagination?.totalPages || 1);
+      // Handle both possible response structures
+      const staffData = data.staffMembers || data.data?.staffMembers || [];
+      const paginationData = data.pagination || data.data?.pagination;
+
+      setStaffMembers(staffData);
+      setTotalPages(paginationData?.totalPages || 1);
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load staff members');
@@ -249,11 +253,10 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          staff.status === 'active'
-                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                            : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
-                        }`}
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${staff.status === 'active'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                          : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                          }`}
                       >
                         {staff.status}
                       </span>

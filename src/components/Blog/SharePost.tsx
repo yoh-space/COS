@@ -8,8 +8,8 @@ type SharePostProps = {
 
 const SharePost = ({ slug }: SharePostProps) => {
   // Construct the full blog post URL
-  const postUrl = useMemo(() => `https://www.yotech.space/blog-details/${slug}`
-  , [slug]);
+  const postUrl = useMemo(() => `https://www.yotech.space/blog/${slug}`
+    , [slug]);
 
   return (
     <>
