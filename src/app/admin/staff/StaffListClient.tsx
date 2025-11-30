@@ -49,7 +49,7 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
       const response = await fetch('/api/cms/departments');
       if (!response.ok) throw new Error('Failed to fetch departments');
       const data = await response.json();
-      setDepartments(data.data.departments || []);
+      setDepartments(data.departments || []);
     } catch (err) {
       console.error('Error fetching departments:', err);
     }
@@ -71,8 +71,8 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
       if (!response.ok) throw new Error('Failed to fetch staff members');
 
       const data = await response.json();
-      setStaffMembers(data.data.staffMembers || []);
-      setTotalPages(data.data.pagination?.totalPages || 1);
+      setStaffMembers(data.staffMembers || []);
+      setTotalPages(data.pagination?.totalPages || 1);
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load staff members');
