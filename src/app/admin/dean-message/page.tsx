@@ -83,7 +83,7 @@ export default function DeanMessagePage() {
         <div className="container mx-auto px-4 py-8">
             <div className="mb-8">
                 <h1 className="text-3xl font-bold text-black dark:text-white">
-                    Dean's Message
+                    Dean&apos;s Message
                 </h1>
                 <p className="mt-2 text-body-color">
                     Edit the message from the Dean of the College of Science
@@ -143,7 +143,7 @@ export default function DeanMessagePage() {
                             onChange={(e) => setMessage({ ...message, content: e.target.value })}
                             rows={20}
                             className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
-                            placeholder="Enter the dean's message here. Use double line breaks for paragraphs."
+                            placeholder="Enter the dean&apos;s message here. Use double line breaks for paragraphs."
                             required
                         />
                         <p className="mt-2 text-sm text-body-color">
