@@ -5,6 +5,9 @@ import { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 
+// Revalidate on every request to show fresh data
+export const revalidate = 0;
+
 type Props = {
     params: Promise<{ slug: string }>;
 };

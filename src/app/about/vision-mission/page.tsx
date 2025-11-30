@@ -8,6 +8,9 @@ import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = generatePageMetadata('vision-mission');
 
+// Revalidate on every request to show fresh data
+export const revalidate = 0;
+
 async function getVisionMission() {
   const [vision, mission] = await Promise.all([
     prisma.visionMission.findFirst({
