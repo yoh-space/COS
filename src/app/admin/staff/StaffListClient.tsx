@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -36,14 +36,6 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
-    fetchDepartments();
-  }, []);
-
-  useEffect(() => {
-    fetchStaffMembers();
-  }, [search, statusFilter, departmentFilter, page]);
-
   async function fetchDepartments() {
     try {
       const response = await fetch('/api/cms/departments');
@@ -55,7 +47,7 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
     }
   }
 
-  async function fetchStaffMembers() {
+  const fetchStaffMembers = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -79,7 +71,15 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [search, statusFilter, departmentFilter, page]);
+
+  useEffect(() => {
+    fetchDepartments();
+  }, []);
+
+  useEffect(() => {
+    fetchStaffMembers();
+  }, [fetchStaffMembers]);
 
   async function handleDelete(id: string, name: string) {
     if (!confirm(`Are you sure you want to delete ${name}?`)) return;

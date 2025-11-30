@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import Image from "next/image";
 
 interface Role {
   id: string;
@@ -56,13 +57,7 @@ export default function UserDetailPage() {
     }
   }, [isLoaded, currentUserId, router]);
 
-  useEffect(() => {
-    if (isLoaded && currentUserId) {
-      fetchData();
-    }
-  }, [isLoaded, currentUserId, userId]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -100,7 +95,13 @@ export default function UserDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
+
+  useEffect(() => {
+    if (isLoaded && currentUserId) {
+      fetchData();
+    }
+  }, [isLoaded, currentUserId, fetchData]);
 
   const handleRoleToggle = (roleId: string) => {
     setSelectedRoleIds((prev) => {
@@ -267,10 +268,13 @@ export default function UserDetailPage() {
         </h2>
         <div className="flex items-center space-x-4">
           {user.profileImage ? (
-            <img
+            // TODO: Verify and update the aspect ratio for this image
+            <Image
               src={user.profileImage}
               alt={getUserDisplayName(user)}
-              className="h-16 w-16 rounded-full"
+              width={96}
+              height={96}
+              className="h-16 w-16 rounded-full object-cover"
             />
           ) : (
             <div className="h-16 w-16 rounded-full bg-indigo-600 flex items-center justify-center">

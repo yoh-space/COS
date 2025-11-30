@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import Image from "next/image";
 
 interface Role {
   id: string;
@@ -58,13 +59,7 @@ export default function UsersPage() {
     }
   }, [isLoaded, userId, router]);
 
-  useEffect(() => {
-    if (isLoaded && userId) {
-      fetchUsers();
-    }
-  }, [isLoaded, userId, pagination.page, searchTerm, roleFilter, departmentFilter]);
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -93,7 +88,13 @@ export default function UsersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.page, pagination.limit, searchTerm, roleFilter, departmentFilter]);
+
+  useEffect(() => {
+    if (isLoaded && userId) {
+      fetchUsers();
+    }
+  }, [isLoaded, userId, fetchUsers]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -254,10 +255,13 @@ export default function UsersPage() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           {user.profileImage ? (
-                            <img
+                            // TODO: Verify and update the aspect ratio for this image
+                            <Image
                               src={user.profileImage}
                               alt={getUserDisplayName(user)}
-                              className="h-10 w-10 rounded-full"
+                              width={40}
+                              height={40}
+                              className="h-10 w-10 rounded-full object-cover"
                             />
                           ) : (
                             <div className="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center">
