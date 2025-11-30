@@ -40,11 +40,11 @@
   --theme-gradient-accent: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   --theme-gradient-hero: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #6366f1 100%);
 
-  --color-body-color: #788293;
-  --color-body-color-dark: #959cb1;
+  --color-body-color: #5a6475;
+  --color-body-color-dark: #b8bfce;
 
-  --color-stroke-stroke: #e3e8ef;
-  --color-stroke-dark: #353943;
+  --color-stroke-stroke: #d1d5db;
+  --color-stroke-dark: #4a5568;
 
   --color-gray-50: #f9fafb;
   --color-gray-100: #f3f4f6;
@@ -53,7 +53,7 @@
   --color-gray-400: #9ca3af;
   --color-gray-500: #6b7280;
   --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
+  --color-gray-700: #2d3748;
   --color-gray-800: #1f2937;
   --color-gray-900: #111827;
   --color-gray-950: #030712;
