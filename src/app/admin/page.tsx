@@ -10,6 +10,7 @@ import {
     Target,
     Building2,
     UserCog,
+    Shield,
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -51,6 +52,12 @@ export default function AdminDashboard() {
                     href: '/admin/staff',
                     icon: Users,
                     description: 'Manage faculty and staff',
+                },
+                {
+                    name: 'Administrators',
+                    href: '/admin/administrators',
+                    icon: Shield,
+                    description: 'Manage college administrators',
                 },
             ],
         },

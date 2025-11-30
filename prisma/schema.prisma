@@ -164,6 +164,21 @@ model AdministrativePosition {
   auditLogs       AuditLog[] @relation("AdminPositionAuditLogs")
 }
 
+model Administrator {
+  id                      String   @id @default(cuid())
+  positionId              String   @unique
+  title                   String
+  name                    String?
+  imagePath               String?
+  accountabilityStatement String?  @db.Text
+  duties                  String[] // Array of duty strings
+  status                  String   @default("active") // active, inactive
+  displayOrder            Int      @default(0)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  auditLogs               AuditLog[] @relation("AdministratorAuditLogs")
+}
+
 model AcademicSection {
   id              String   @id @default(cuid())
   name            String
@@ -233,6 +248,7 @@ model AuditLog {
   adminPosition   AdministrativePosition? @relation("AdminPositionAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_adminPosition_fkey")
   academicSection AcademicSection? @relation("AcademicSectionAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_academicSection_fkey")
   service         Service? @relation("ServiceAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_service_fkey")
+  administrator   Administrator? @relation("AdministratorAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_administrator_fkey")
 }
 
 model MediaFile {
