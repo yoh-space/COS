@@ -9,6 +9,9 @@ import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = generatePageMetadata('deans-message');
 
+// Revalidate on every request to show fresh data
+export const revalidate = 0;
+
 async function getDeanMessage() {
     const deanMessage = await prisma.deanMessage.findFirst({
         where: { status: 'published' },
