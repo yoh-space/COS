@@ -170,20 +170,22 @@ const Header = () => {
 
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
-                <SignedOut>
-                  <div className="hidden md:flex items-center gap-2">
-                    <Link href="/sign-in">
-                      <RainbowButton className="!px-6 !py-2 !text-sm !h-9">
-                        Sign In
-                      </RainbowButton>
-                    </Link>
-                    <Link href="/sign-up">
-                      <RainbowButton className="!px-6 !py-2 !text-sm !h-9">
-                        Sign Up
-                      </RainbowButton>
-                    </Link>
-                  </div>
-                </SignedOut>
+              <SignedOut>
+                <div className="hidden md:flex items-center gap-2">
+                  <Link href="/sign-in">
+                    {/* Changed !text-xm to !text-xs */}
+                    <RainbowButton className="!px-6 !py-2 !text-xs !h-9">
+                      Sign In
+                    </RainbowButton>
+                  </Link>
+                  <Link href="/sign-up">
+                    {/* Changed !text-xm to !text-xs */}
+                    <RainbowButton className="!px-6 !py-2 !text-xs !h-9">
+                      Sign Up
+                    </RainbowButton>
+                  </Link>
+                </div>
+              </SignedOut>
                 <SignedIn>
                   <UserButton afterSignOutUrl="/" />
                 </SignedIn>

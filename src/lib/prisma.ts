@@ -5,8 +5,8 @@ import { withAccelerate } from '@prisma/extension-accelerate';
 // exhausting your database connection limit.
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-// Prisma configuration
-// DATABASE_URL is read from environment variables (.env.local or .env)
+// Prisma 7 configuration
+// DATABASE_URL is read from prisma.config.ts
 // Use Prisma Accelerate URL if available for better performance
 export const prisma =
   globalForPrisma.prisma ||

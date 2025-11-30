@@ -1,0 +1,257 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    COS CMS DOCKER COMMANDS CHEAT SHEET                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🚀 INITIAL SETUP                                                             │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Quick start (recommended)
+./docker-start.sh
+
+# Manual setup
+cp .env.docker .env.local
+# Edit .env.local with your credentials
+docker-compose build
+docker-compose up -d
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🎮 BASIC OPERATIONS                                                          │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Build images
+docker-compose build
+
+# Start services (detached)
+docker-compose up -d
+
+# Start services (with logs)
+docker-compose up
+
+# Stop services
+docker-compose down
+
+# Restart all services
+docker-compose restart
+
+# Restart specific service
+docker-compose restart nextjs-app
+
+# Rebuild and restart
+docker-compose up -d --build
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 📊 MONITORING & LOGS                                                         │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# View all logs (follow)
+docker-compose logs -f
+
+# View specific service logs
+docker-compose logs -f nextjs-app
+docker-compose logs -f postgres
+
+# View last 100 lines
+docker-compose logs --tail=100
+
+# Check service status
+docker-compose ps
+
+# Check container stats
+docker stats
+
+# Check health endpoint
+curl http://localhost:3000/api/health
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🗄️ DATABASE OPERATIONS                                                       │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Run migrations
+docker-compose exec nextjs-app pnpm prisma migrate deploy
+
+# Generate Prisma Client
+docker-compose exec nextjs-app pnpm prisma generate
+
+# Seed database
+docker-compose exec nextjs-app pnpm prisma db seed
+
+# Reset database (WARNING: deletes all data)
+docker-compose exec nextjs-app pnpm prisma migrate reset
+
+# Open Prisma Studio
+docker-compose --profile tools up prisma-studio
+# Access at http://localhost:5555
+
+# Connect to PostgreSQL directly
+docker-compose exec postgres psql -U cosuser -d cosdb
+
+# Backup database
+docker-compose exec postgres pg_dump -U cosuser cosdb > backup.sql
+
+# Restore database
+docker-compose exec -T postgres psql -U cosuser cosdb < backup.sql
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🛠️ DEVELOPMENT                                                               │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Execute shell in container
+docker-compose exec nextjs-app sh
+
+# Install new package
+docker-compose exec nextjs-app pnpm install package-name
+
+# Run any pnpm command
+docker-compose exec nextjs-app pnpm <command>
+
+# View environment variables
+docker-compose exec nextjs-app env
+
+# Inspect container configuration
+docker inspect cos-nextjs
+
+# Check Docker configuration
+docker-compose config
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🏭 PRODUCTION DEPLOYMENT                                                     │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Build production image
+docker-compose -f docker-compose.prod.yml build
+
+# Start production services
+docker-compose -f docker-compose.prod.yml up -d
+
+# With custom environment file
+docker-compose -f docker-compose.prod.yml --env-file .env.production up -d
+
+# View production logs
+docker-compose -f docker-compose.prod.yml logs -f
+
+# Stop production
+docker-compose -f docker-compose.prod.yml down
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🧹 CLEANUP                                                                   │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Stop containers
+docker-compose down
+
+# Stop and remove volumes (deletes database!)
+docker-compose down -v
+
+# Stop and remove everything including images
+docker-compose down -v --rmi all
+
+# Clean up Docker system
+docker system prune
+
+# Clean up everything (aggressive)
+docker system prune -a --volumes
+
+# Remove specific volume
+docker volume rm cos_postgres_data
+
+# Check disk usage
+docker system df
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 🔍 TROUBLESHOOTING                                                           │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Check what's using port 3000
+lsof -i :3000
+
+# Kill process on port 3000
+kill -9 $(lsof -t -i:3000)
+
+# Rebuild without cache
+docker-compose build --no-cache
+
+# Force recreate containers
+docker-compose up -d --force-recreate
+
+# Check PostgreSQL health
+docker-compose exec postgres pg_isready -U cosuser
+
+# View container processes
+docker-compose top
+
+# Check network
+docker network ls
+docker network inspect cos_cos-network
+
+# Check volumes
+docker volume ls
+docker volume inspect cos_postgres_data
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 📍 ACCESS POINTS                                                             │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+Application:     http://localhost:3000
+Health Check:    http://localhost:3000/api/health
+Prisma Studio:   http://localhost:5555 (with --profile tools)
+PostgreSQL:      localhost:5432
+  Database:      cosdb
+  Username:      cosuser
+  Password:      cospassword
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ ⚡ QUICK FIXES                                                               │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+# Hot reload not working
+docker-compose down && docker-compose up -d --build
+
+# Database connection failed
+docker-compose restart postgres
+sleep 10
+docker-compose restart nextjs-app
+
+# Prisma Client issues
+docker-compose exec nextjs-app pnpm prisma generate
+docker-compose restart nextjs-app
+
+# Environment variables not loading
+docker-compose down
+docker-compose up -d
+
+# Out of memory
+docker stats
+# Then increase memory in docker-compose.yml
+
+# Complete reset (nuclear option)
+docker-compose down -v
+rm -rf node_modules .next
+docker-compose build --no-cache
+docker-compose up -d
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 📚 DOCUMENTATION FILES                                                       │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+DOCKER_SETUP.md           - Complete setup guide with troubleshooting
+DOCKER_QUICK_REFERENCE.md - Quick reference for common tasks
+DOCKER_COMMANDS.txt       - This file (command cheat sheet)
+.env.docker               - Environment variables template
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ ✅ VERIFICATION CHECKLIST                                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+□ Docker and Docker Compose installed
+□ .env.local created and configured
+□ Services built: docker-compose build
+□ Services running: docker-compose ps
+□ Health check passing: curl http://localhost:3000/api/health
+□ Database connected: docker-compose exec postgres psql -U cosuser -d cosdb
+□ Application accessible: http://localhost:3000
+□ No errors in logs: docker-compose logs -f
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           Happy Dockerizing! 🐳                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
