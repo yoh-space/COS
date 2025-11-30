@@ -41,6 +41,7 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
   const fetchBlogPosts = useCallback(async () => {
     try {
       setLoading(true);
+      setError(null);
       const params = new URLSearchParams({
         page: page.toString(),
         limit: '10',
@@ -49,18 +50,44 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
       if (search) params.append('search', search);
       if (statusFilter) params.append('status', statusFilter);
 
+      console.log('Fetching blog posts from:', `/api/blog?${params}`);
       const response = await fetch(`/api/cms/blog?${params}`);
       
-      if (!response.ok) {
-        throw new Error('Failed to fetch blog posts');
-      }
-
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+      
       const data = await response.json();
-      setBlogPosts(data.data.blogPosts);
-      setTotalPages(data.data.pagination.totalPages);
+      console.log('API Response data:', JSON.stringify(data, null, 2));
+      
+      if (!response.ok) {
+        throw new Error(data.error || `HTTP ${response.status}: Failed to fetch blog posts`);
+      }
+      
+      // Handle multiple possible response structures
+      if (data.blogPosts !== undefined) {
+        // CMS API format: { blogPosts: [...], pagination: {...} }
+        console.log('Setting blog posts (CMS format):', data.blogPosts.length, 'posts');
+        setBlogPosts(data.blogPosts);
+        setTotalPages(data.pagination?.totalPages || 1);
+      } else if (data.data?.blogPosts !== undefined) {
+        // Public API format: { success: true, data: { blogPosts: [...], pagination: {...} } }
+        console.log('Setting blog posts (public format):', data.data.blogPosts.length, 'posts');
+        setBlogPosts(data.data.blogPosts);
+        setTotalPages(data.data.pagination?.totalPages || 1);
+      } else if (Array.isArray(data)) {
+        // If data is directly an array
+        console.log('Data is array, setting:', data.length, 'posts');
+        setBlogPosts(data);
+        setTotalPages(1);
+      } else {
+        console.error('Unexpected API response structure:', data);
+        throw new Error(`Invalid response format from server. Received: ${JSON.stringify(data)}`);
+      }
       setError(null);
     } catch (err) {
+      console.error('Error fetching blog posts:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
+      setBlogPosts([]);
     } finally {
       setLoading(false);
     }

@@ -152,7 +152,7 @@ const Blog = async ({ searchParams }: BlogPageProps) => {
                   paragraph: blog.excerpt || blog.content.substring(0, 150) + '...',
                   image: blog.featuredImage || "/images/blog/blog-01.jpg",
                   content: blog.content,
-                  createdTime: blog.publishedAt || blog.createdAt,
+                  createdTime: (blog.publishedAt || blog.createdAt).toISOString(),
                   author: {
                     name: blog.author.firstName && blog.author.lastName
                       ? `${blog.author.firstName} ${blog.author.lastName}`
@@ -161,9 +161,9 @@ const Blog = async ({ searchParams }: BlogPageProps) => {
                     designation: "Author",
                   },
                   image_url: blog.featuredImage || "/images/blog/blog-01.jpg",
-                  created_at: blog.publishedAt || blog.createdAt,
+                  created_at: (blog.publishedAt || blog.createdAt).toISOString(),
                   views: 0,
-                  updated_at: blog.createdAt,
+                  updated_at: blog.createdAt.toISOString(),
                   excerpt: blog.excerpt || blog.content.substring(0, 150) + '...',
                   slug: blog.slug,
                   tags: [],
