@@ -4,10 +4,9 @@
  */
 
 import { PrismaClient } from '@prisma/client';
-import { withAccelerate } from '@prisma/extension-accelerate';
 import { PERMISSIONS, ROLES } from '../src/lib/permissions';
 
-const prisma = new PrismaClient().$extends(withAccelerate());
+const prisma = new PrismaClient();
 
 async function main() {
   console.log('Starting database seed...');
