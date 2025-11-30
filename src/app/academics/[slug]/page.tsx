@@ -5,6 +5,8 @@ import { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 
+// Force dynamic rendering - no caching, always fetch fresh data
+export const dynamic = 'force-dynamic';
 // Revalidate on every request to show fresh data
 export const revalidate = 0;
 

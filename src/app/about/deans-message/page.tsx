@@ -9,7 +9,8 @@ import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = generatePageMetadata('deans-message');
 
-// Revalidate on every request to show fresh data
+// Force dynamic rendering - no caching, always fetch fresh data
+export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 async function getDeanMessage() {
