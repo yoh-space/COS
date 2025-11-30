@@ -111,7 +111,7 @@ const Footer = () => {
             <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
               <div className="mb-12 lg:mb-16">
                 <h2 className="mb-10 text-xl font-bold text-black dark:text-white">
-                  Useful Links
+                  About College
                 </h2>
                 <ul>
                   <li>
@@ -119,7 +119,23 @@ const Footer = () => {
                       href="/about"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      About
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/academics"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                    >
+                      Departments
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/research"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                    >
+                      Research Centers
                     </Link>
                   </li>
                   <li>
@@ -127,15 +143,7 @@ const Footer = () => {
                       href="/blog"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/academic-programs"
-                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                    >
-                      Academic Programs
+                      News & Events
                     </Link>
                   </li>
                 </ul>
@@ -145,31 +153,31 @@ const Footer = () => {
             <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
               <div className="mb-12 lg:mb-16">
                 <h2 className="mb-10 text-xl font-bold text-black dark:text-white">
-                  Social Media
+                  Academics
                 </h2>
                 <ul>
                   <li>
                     <Link
-                      href="https://www.facebook.com/bduethiopia"
+                      href="/academic-programs"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Facebook
+                      Programs
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="http://www.twitter.com/bdueduet"
+                      href="/#"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Twitter
+                      Admissions
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="http://journals.bdu.edu.et/"
+                      href="/staffs"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Journals
+                      Faculty & Staff
                     </Link>
                   </li>
                 </ul>
@@ -179,23 +187,15 @@ const Footer = () => {
             <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-3/12">
               <div className="mb-12 lg:mb-16">
                 <h2 className="mb-10 text-xl font-bold text-black dark:text-white">
-                  Resources
+                  Research & Resources
                 </h2>
                 <ul>
                   <li>
                     <Link
-                      href="/documents"
+                      href="/resources/research"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Documents
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/reports"
-                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                    >
-                      Reports
+                      Research Projects
                     </Link>
                   </li>
                   <li>
@@ -208,10 +208,18 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      href="/research"
+                      href="/resources/documents"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Researches
+                      Library & Documents
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/reports"
+                      className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                    >
+                      Annual Reports
                     </Link>
                   </li>
                 </ul>
@@ -221,23 +229,23 @@ const Footer = () => {
           <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-3/12">
             <div className="mb-12 lg:mb-16">
               <h2 className="mb-10 text-xl font-bold text-black dark:text-white">
-                Support & Help
+                Quick Links
               </h2>
               <ul>
+                <li>
+                  <Link
+                    href="/#"
+                    className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  >
+                    Alumni
+                  </Link>
+                </li>
                 <li>
                   <Link
                     href="/contact"
                     className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                   >
                     Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/"
-                    className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
-                  >
-                    Terms of Use
                   </Link>
                 </li>
                 <li>
