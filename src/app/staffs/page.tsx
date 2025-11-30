@@ -3,7 +3,7 @@ import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import Link from "next/link";
-import { departments, getStaffByDepartment } from "@/data/staffMembers";
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Staff Directory | College of Science',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Staff Directory | College of Science',
-    description: 'Browse our comprehensive staff directory organized by  academic departments.',
+    description: 'Browse our comprehensive staff directory organized by academic departments.',
     url: `${BASE_URL}/staffs`,
     siteName: 'BDU College of Science',
     images: [
@@ -35,7 +35,30 @@ export const metadata: Metadata = {
   },
 };
 
-const StaffsPage = () => {
+// Force dynamic rendering - fetch fresh data from database
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+async function getDepartmentsWithStaffCount() {
+  const departments = await prisma.department.findMany({
+    orderBy: { name: 'asc' },
+    include: {
+      _count: {
+        select: {
+          staffMembers: {
+            where: { status: 'active' }
+          }
+        }
+      }
+    }
+  });
+
+  return departments;
+}
+
+export default async function StaffsPage() {
+  const departments = await getDepartmentsWithStaffCount();
+
   return (
     <>
       <BreadcrumbJsonLd
@@ -58,7 +81,7 @@ const StaffsPage = () => {
         <div className="container">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
             {departments.map((dept) => {
-              const staffCount = getStaffByDepartment(dept.slug).length;
+              const staffCount = dept._count.staffMembers;
               return (
                 <div key={dept.slug} className="w-full">
                   <div className="wow fadeInUp group relative overflow-hidden rounded-sm bg-white shadow-one duration-300 hover:shadow-two dark:bg-dark dark:hover:shadow-gray-dark p-6 lg:p-8">
@@ -68,11 +91,11 @@ const StaffsPage = () => {
                       </Link>
                     </h3>
                     <p className="mb-6 border-b border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
-                      {dept.description}
+                      {dept.description || `Department of ${dept.name}`}
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-body-color dark:text-gray-400">
-                        {staffCount} Staff Members
+                        {staffCount} Staff {staffCount === 1 ? 'Member' : 'Members'}
                       </span>
                       <Link
                         href={`/staffs/${dept.slug}`}
@@ -86,10 +109,14 @@ const StaffsPage = () => {
               );
             })}
           </div>
+
+          {departments.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-body-color">No departments found.</p>
+            </div>
+          )}
         </div>
       </section>
     </>
   );
-};
-
-export default StaffsPage;
+}

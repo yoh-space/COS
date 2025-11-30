@@ -51,16 +51,16 @@ async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const blog = await fetchBlogPost(resolvedParams.slug);
-  
+
   if (!blog) {
     return {
-      title: "Blog Not Found | YoTech",
+      title: "Blog Not Found | BDU College of Science",
       description: "This blog post could not be found.",
     };
   }
 
-  const title = blog.seoTitle || blog.title ? `${blog.seoTitle || blog.title} | YoTech Blog` : "Yo-Tech Blog Post";
-  const description = blog.seoDescription || blog.excerpt || "Read this insightful post on YoTech Blog covering the latest in technology and innovation.";
+  const title = blog.seoTitle || blog.title ? `${blog.seoTitle || blog.title} | BDU College of Science Blog` : "Yo-Tech Blog Post";
+  const description = blog.seoDescription || blog.excerpt || "Read this insightful post on BDU College of Science Blog covering the latest in technology and innovation.";
   const keywords = blog.seoKeywords || blog.title;
   const image = blog.featuredImage || "/images/blog/blog-details-01.jpg";
 
@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
           url: image,
           width: 1200,
           height: 630,
-          alt: blog.title || "YoTech Blog Post",
+          alt: blog.title || "BDU College of Science Blog Post",
         },
       ],
     },

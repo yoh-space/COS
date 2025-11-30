@@ -3,11 +3,41 @@ import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import AdministratorCard from "@/components/Administration/AdministratorCard";
-import { administrators } from "@/data/administrators";
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = generatePageMetadata('administration');
 
-const AdministrationPage = () => {
+// Force dynamic rendering - fetch fresh data from database
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+async function getAdministrators() {
+    // Fetch staff members with admin/leadership roles
+    const administrators = await prisma.staffMember.findMany({
+        where: {
+            status: 'active',
+            OR: [
+                { title: { contains: 'Dean', mode: 'insensitive' } },
+                { title: { contains: 'Director', mode: 'insensitive' } },
+                { title: { contains: 'Head', mode: 'insensitive' } },
+                { title: { contains: 'Coordinator', mode: 'insensitive' } },
+            ]
+        },
+        orderBy: [
+            { title: 'asc' },
+            { name: 'asc' }
+        ],
+        include: {
+            department: true
+        }
+    });
+
+    return administrators;
+}
+
+export default async function AdministrationPage() {
+    const administrators = await getAdministrators();
+
     return (
         <>
             <BreadcrumbJsonLd
@@ -47,16 +77,26 @@ const AdministrationPage = () => {
                             {administrators.map((administrator) => (
                                 <AdministratorCard
                                     key={administrator.id}
-                                    administrator={administrator}
+                                    administrator={{
+                                        id: administrator.id,
+                                        title: administrator.title,
+                                        name: administrator.name,
+                                        imagePath: administrator.profileImage || '/images/staff/default-avatar.jpg',
+                                        accountabilityStatement: administrator.bio || undefined,
+                                        duties: [],
+                                    }}
                                 />
                             ))}
+
+                            {administrators.length === 0 && (
+                                <div className="text-center py-12">
+                                    <p className="text-body-color">No administrators found.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </section>
         </>
     );
-};
-
-export default AdministrationPage;
-
+}
