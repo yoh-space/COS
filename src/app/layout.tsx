@@ -6,11 +6,13 @@ import AdSenseComponent from "@/components/AdSense";
 import ScrollToTop from "@/components/ScrollToTop";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import SpotlightCursor from "@/components/SpotlightCursor";
+import { InitialLoader, NavigationLoader } from "@/components/Loading";
 import "../styles/index.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./providers";
 import { OrganizationJsonLd, LocalBusinessJsonLd, BreadcrumbJsonLd } from 'next-seo';
 import { BASE_URL } from '@/lib/seo.config';
+import { Suspense } from "react";
 
 // Fallback font configuration to handle Google Fonts timeout during build
 const fontFamily = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
@@ -104,6 +106,10 @@ export default function RootLayout({
               ]}
             />
 
+            <InitialLoader />
+            <Suspense fallback={null}>
+              <NavigationLoader />
+            </Suspense>
             <SpotlightCursor />
             <Header />
             {children}

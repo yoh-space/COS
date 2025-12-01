@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
+import AdminBreadcrumb from "@/components/Admin/Breadcrumb";
 
 interface Role {
   id: string;
@@ -158,7 +159,7 @@ export default function UserDetailPage() {
 
       await response.json();
       setSuccess("User roles updated successfully");
-      
+
       // Refresh user data
       await fetchData();
 
@@ -218,6 +219,14 @@ export default function UserDetailPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
+      <AdminBreadcrumb
+        items={[
+          { label: "Users & Roles", href: "/admin/users" },
+          { label: "Manage User" }
+        ]}
+        className="mb-4"
+      />
+
       {/* Header */}
       <div className="mb-8">
         <button

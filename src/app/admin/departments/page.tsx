@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
+import { DataLoader } from '@/components/Loading';
 
 interface Department {
     id: string;
@@ -16,7 +17,6 @@ interface Department {
 }
 
 export default function DepartmentsPage() {
-    const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [departments, setDepartments] = useState<Department[]>([]);
 
@@ -64,16 +64,18 @@ export default function DepartmentsPage() {
     if (loading) {
         return (
             <div className="flex min-h-screen items-center justify-center">
-                <div className="text-center">
-                    <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto"></div>
-                    <p className="mt-4 text-body-color">Loading...</p>
-                </div>
+                <DataLoader size="lg" text="Loading departments..." />
             </div>
         );
     }
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <AdminBreadcrumb
+                items={[{ label: "Departments" }]}
+                className="mb-4"
+            />
+
             <div className="mb-8 flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-bold text-black dark:text-white">
@@ -112,7 +114,7 @@ export default function DepartmentsPage() {
                         <div className="flex gap-2">
                             <Link
                                 href={`/admin/departments/${dept.id}`}
-                                className="flex-1 inline-flex items-center justify-center rounded-md border border-primary px-4 py-2 text-sm font-medium text-primary hover:bg-primary hover:text-white transition-all"
+                                className="flex-1 inline-flex items-center justify-center rounded-md border border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white transition-all"
                             >
                                 Edit
                             </Link>

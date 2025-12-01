@@ -4,6 +4,7 @@ import { hasPermission } from '@/lib/permissions';
 import { PERMISSIONS } from '@/lib/permissions';
 import Link from 'next/link';
 import StaffListClient from './StaffListClient';
+import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 export default async function StaffListPage() {
   const user = await getCurrentUser();
@@ -20,6 +21,11 @@ export default async function StaffListPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <AdminBreadcrumb
+        items={[{ label: "Staff Members" }]}
+        className="mb-4"
+      />
+
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>

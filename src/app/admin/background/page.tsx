@@ -3,6 +3,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { prisma } from '@/lib/prisma';
 import { hasPermission, PERMISSIONS } from '@/lib/permissions';
 import BackgroundEditor from './BackgroundEditor';
+import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 export default async function BackgroundManagementPage() {
   const clerkUser = await currentUser();
@@ -28,6 +29,11 @@ export default async function BackgroundManagementPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <AdminBreadcrumb
+        items={[{ label: "Background Content" }]}
+        className="mb-4"
+      />
+
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Background Content Management

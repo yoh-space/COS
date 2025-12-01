@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { DataLoader } from '@/components/Loading';
 import { useRouter } from 'next/navigation';
+
 
 interface Author {
   id: string;
@@ -52,17 +54,17 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
 
       console.log('Fetching blog posts from:', `/api/blog?${params}`);
       const response = await fetch(`/api/cms/blog?${params}`);
-      
+
       console.log('Response status:', response.status);
       console.log('Response ok:', response.ok);
-      
+
       const data = await response.json();
       console.log('API Response data:', JSON.stringify(data, null, 2));
-      
+
       if (!response.ok) {
         throw new Error(data.error || `HTTP ${response.status}: Failed to fetch blog posts`);
       }
-      
+
       // Handle multiple possible response structures
       if (data.blogPosts !== undefined) {
         // CMS API format: { blogPosts: [...], pagination: {...} }
@@ -141,11 +143,7 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
   }
 
   if (loading && blogPosts.length === 0) {
-    return (
-      <div className="flex items-center justify-center py-12">
-        <div className="text-gray-500 dark:text-gray-400">Loading blog posts...</div>
-      </div>
-    );
+    return <DataLoader size="lg" text="Loading blog posts..." />;
   }
 
   if (error) {
@@ -204,7 +202,7 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
           <p className="text-gray-500 dark:text-gray-400 mb-4">No blog posts found</p>
           <Link
             href="/admin/blog/new"
-            className="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
+            className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
           >
             Create Your First Post
           </Link>

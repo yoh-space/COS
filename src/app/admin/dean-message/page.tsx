@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 export default function DeanMessagePage() {
     const router = useRouter();
@@ -81,6 +82,11 @@ export default function DeanMessagePage() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <AdminBreadcrumb
+                items={[{ label: "Dean's Message" }]}
+                className="mb-4"
+            />
+
             <div className="mb-8">
                 <h1 className="text-3xl font-bold text-black dark:text-white">
                     Dean&apos;s Message

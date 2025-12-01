@@ -3,6 +3,7 @@
 import { useState, useEffect, use } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import AdminBreadcrumb from "@/components/Admin/Breadcrumb";
 
 interface Administrator {
   id: string;
@@ -120,6 +121,14 @@ export default function EditAdministratorPage({
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <AdminBreadcrumb
+        items={[
+          { label: "Administrators", href: "/admin/administrators" },
+          { label: "Edit Administrator" }
+        ]}
+        className="mb-4"
+      />
+
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Edit Administrator</h1>
       </div>

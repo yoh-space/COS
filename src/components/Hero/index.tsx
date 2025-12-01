@@ -17,7 +17,7 @@ const Hero = () => {
         "Cutting-edge research",
         "Academic excellence",
       ]}
-      backgroundImage="/images/hero/wisdom-building.jpeg"
+      backgroundImage=" /images/hero/wisdom-building.jpeg"
     />
   );
 };

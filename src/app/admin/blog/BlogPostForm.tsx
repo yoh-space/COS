@@ -118,7 +118,7 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
       const url = blogPost
         ? `/api/cms/blog/${blogPost.id}`
         : '/api/cms/blog';
-      
+
       const method = blogPost ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -277,7 +277,13 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
                 type="submit"
                 variant="contained"
                 disabled={loading}
-                sx={{ minWidth: 120 }}
+                sx={{
+                  minWidth: 120,
+                  bgcolor: blogPost ? '#2563eb' : '#16a34a',
+                  '&:hover': {
+                    bgcolor: blogPost ? '#1d4ed8' : '#15803d',
+                  },
+                }}
               >
                 {loading ? 'Saving...' : blogPost ? 'Update Post' : 'Create Post'}
               </Button>

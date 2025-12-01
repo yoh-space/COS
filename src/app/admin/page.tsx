@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import {
-    BookOpen,
     Users,
     FileText,
     GraduationCap,
     MessageSquare,
     Target,
-    Building2,
     UserCog,
     Shield,
 } from 'lucide-react';
@@ -19,7 +17,7 @@ export default function AdminDashboard() {
             title: 'Content Management',
             items: [
                 {
-                    name: 'Dean Message',
+                    name: 'Dean&apos;s Message',
                     href: '/admin/dean-message',
                     icon: MessageSquare,
                     description: 'Edit the message from the Dean',
@@ -100,7 +98,7 @@ export default function AdminDashboard() {
                                         href={item.href}
                                         className="group rounded-sm bg-white px-6 py-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all"
                                     >
-                                        <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-chart-2 group-hover:bg-primary group-hover:text-chart-2 transition-all">
+                                        <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all">
                                             <Icon size={24} />
                                         </div>
                                         <h3 className="mb-2 text-lg font-bold text-black dark:text-white">

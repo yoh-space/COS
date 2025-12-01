@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/lib/auth';
 import { hasPermission } from '@/lib/permissions';
 import { PERMISSIONS } from '@/lib/permissions';
 import StaffForm from '../StaffForm';
+import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 async function getStaffMember(id: string) {
   try {
@@ -49,6 +50,14 @@ export default async function EditStaffPage({
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <AdminBreadcrumb
+        items={[
+          { label: "Staff Members", href: "/admin/staff" },
+          { label: "Edit Staff" }
+        ]}
+        className="mb-4"
+      />
+
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Edit Staff Member

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { DataLoader } from '@/components/Loading';
 
 interface StaffMember {
   id: string;
@@ -105,11 +106,7 @@ export default function StaffListClient({ userId }: StaffListClientProps) {
   }
 
   if (loading && staffMembers.length === 0) {
-    return (
-      <div className="flex justify-center items-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-      </div>
-    );
+    return <DataLoader size="lg" text="Loading staff members..." />;
   }
 
   if (error) {
