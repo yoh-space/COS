@@ -313,7 +313,7 @@ export default function LibraryPage() {
               {/* Library Features */}
               <div className="mb-12 rounded-sm bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 px-8 py-11 border-2 border-primary/30 sm:p-[55px] lg:px-8 xl:p-[55px]">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary text-white shadow-lg">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-blue-100 text-blue-600 shadow-lg">
                     <Lightbulb size={28} />
                   </div>
                   <h3 className="text-2xl font-bold text-black dark:text-white">
@@ -345,19 +345,19 @@ export default function LibraryPage() {
               </div>
 
               {/* Call to Action */}
-              <div className="rounded-sm bg-gradient-to-r from-primary to-primary/80 px-8 py-10 text-center shadow-lg">
-                <h3 className="text-2xl font-bold text-white mb-4">
+              <div className="rounded-sm bg-white dark:bg-gray-dark px-8 py-10 text-center shadow-lg border-2 border-gray-200 dark:border-gray-700">
+                <h3 className="text-2xl font-bold text-black dark:text-white mb-4">
                   Visit Our Library Today
                 </h3>
-                <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+                <p className="text-body-color mb-6 max-w-2xl mx-auto">
                   Discover a world of knowledge and resources. Whether you&apos;re conducting research, studying for exams, or exploring new topics, our library is here to support your academic journey.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <button className="inline-flex items-center justify-center rounded-md bg-white px-8 py-3 text-base font-medium text-primary hover:bg-gray-100 transition-colors">
+                  <button className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary/90 transition-colors">
                     <Library className="mr-2" size={20} />
                     Plan Your Visit
                   </button>
-                  <button className="inline-flex items-center justify-center rounded-md border-2 border-white px-8 py-3 text-base font-medium text-white hover:bg-white hover:text-primary transition-colors">
+                  <button className="inline-flex items-center justify-center rounded-md border-2 border-primary px-8 py-3 text-base font-medium text-primary hover:bg-primary hover:text-white transition-colors">
                     <Search className="mr-2" size={20} />
                     Search Catalog
                   </button>

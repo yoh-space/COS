@@ -237,6 +237,13 @@ export const PAGE_METADATA = {
     keywords: 'reports, documents, annual report, publications',
     url: `${BASE_URL}/about/reports`,
   },
+
+  library: {
+    title: 'Library Services | Resources & Facilities',
+    description: 'Access our comprehensive library resources, digital collections, and modern study facilities at the College of Science Library.',
+    keywords: 'library, library services, digital resources, study facilities, research support, e-journals, books, academic resources',
+    url: `${BASE_URL}/services/library`,
+  },
 };
 
 // Helper function to generate page metadata

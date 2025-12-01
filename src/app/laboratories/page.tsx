@@ -38,7 +38,7 @@ const LaboratoriesPage = () => {
                             {/* Overview Section */}
                             <div className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:px-8 xl:p-[55px] hover:shadow-one transition-shadow duration-300">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white shadow-lg">
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-blue-100 text-blue-600 shadow-lg">
                                         <Microscope size={32} />
                                     </div>
                                     <h2 className="text-3xl font-bold text-black dark:text-white">
@@ -372,7 +372,7 @@ const LaboratoriesPage = () => {
                             {/* Commitment Section */}
                             <div className="rounded-sm bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 px-8 py-11 border-2 border-primary/30 sm:p-[55px] lg:px-8 xl:p-[55px]">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary text-white shadow-lg">
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-blue-100 text-blue-600 shadow-lg">
                                         <Building2 size={32} />
                                     </div>
                                     <h3 className="text-2xl font-bold text-black dark:text-white">
