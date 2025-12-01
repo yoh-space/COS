@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
@@ -17,13 +17,7 @@ export default function EditDepartmentPage() {
         description: '',
     });
 
-    useEffect(() => {
-        if (id) {
-            fetchDepartment();
-        }
-    }, [id]);
-
-    const fetchDepartment = async () => {
+    const fetchDepartment = useCallback(async () => {
         try {
             const response = await fetch(`/api/departments?id=${id}`);
             if (response.ok) {
@@ -39,7 +33,13 @@ export default function EditDepartmentPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [id]);
+
+    useEffect(() => {
+        if (id) {
+            fetchDepartment();
+        }
+    }, [id, fetchDepartment]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

@@ -350,7 +350,7 @@ export default function LibraryPage() {
                   Visit Our Library Today
                 </h3>
                 <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-                  Discover a world of knowledge and resources. Whether you're conducting research, studying for exams, or exploring new topics, our library is here to support your academic journey.
+                  Discover a world of knowledge and resources. Whether you&apos;re conducting research, studying for exams, or exploring new topics, our library is here to support your academic journey.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <button className="inline-flex items-center justify-center rounded-md bg-white px-8 py-3 text-base font-medium text-primary hover:bg-gray-100 transition-colors">
