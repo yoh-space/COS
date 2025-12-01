@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 // GET all administrators
 export async function GET() {
@@ -14,10 +12,8 @@ export async function GET() {
     return NextResponse.json(administrators);
   } catch (error) {
     console.error("Error fetching administrators:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch administrators" },
-      { status: 500 }
-    );
+    // Return empty array instead of error object to prevent frontend crashes
+    return NextResponse.json([], { status: 200 });
   }
 }
 

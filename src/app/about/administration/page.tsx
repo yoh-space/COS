@@ -12,24 +12,15 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 async function getAdministrators() {
-    // Fetch staff members with admin/leadership roles
-    const administrators = await prisma.staffMember.findMany({
+    // Fetch administrators from the Administrator model
+    const administrators = await prisma.administrator.findMany({
         where: {
             status: 'active',
-            OR: [
-                { title: { contains: 'Dean', mode: 'insensitive' } },
-                { title: { contains: 'Director', mode: 'insensitive' } },
-                { title: { contains: 'Head', mode: 'insensitive' } },
-                { title: { contains: 'Coordinator', mode: 'insensitive' } },
-            ]
         },
         orderBy: [
-            { title: 'asc' },
-            { name: 'asc' }
+            { displayOrder: 'asc' },
+            { title: 'asc' }
         ],
-        include: {
-            department: true
-        }
     });
 
     return administrators;
@@ -80,10 +71,10 @@ export default async function AdministrationPage() {
                                     administrator={{
                                         id: administrator.id,
                                         title: administrator.title,
-                                        name: administrator.name,
-                                        imagePath: administrator.profileImage || '/images/staff/default-avatar.jpg',
-                                        accountabilityStatement: administrator.bio || undefined,
-                                        duties: [],
+                                        name: administrator.name || undefined,
+                                        imagePath: administrator.imagePath || '/images/staff/default-avatar.jpg',
+                                        accountabilityStatement: administrator.accountabilityStatement || undefined,
+                                        duties: administrator.duties,
                                     }}
                                 />
                             ))}

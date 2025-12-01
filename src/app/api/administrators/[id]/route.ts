@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
-const prisma = new PrismaClient();
+type RouteContext = { params: Promise<{ id: string }> };
 
 // GET single administrator
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  _request: NextRequest,
+  { params }: RouteContext
 ) {
   try {
+    const { id } = await params;
     const administrator = await prisma.administrator.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!administrator) {
@@ -34,7 +35,7 @@ export async function GET(
 // PUT update administrator
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: RouteContext
 ) {
   try {
     const { userId } = await auth();
@@ -42,15 +43,16 @@ export async function PUT(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const { id } = await params;
     const body = await request.json();
     const { title, name, imagePath, accountabilityStatement, duties, status, displayOrder } = body;
 
     const oldData = await prisma.administrator.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     const administrator = await prisma.administrator.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         title,
         name,
@@ -85,8 +87,8 @@ export async function PUT(
 
 // DELETE administrator
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  _request: NextRequest,
+  { params }: RouteContext
 ) {
   try {
     const { userId } = await auth();
@@ -94,8 +96,9 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const { id } = await params;
     const administrator = await prisma.administrator.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     // Create audit log
