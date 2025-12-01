@@ -20,7 +20,7 @@ import {
   Layers,
   Library,
   Newspaper
-  
+
 } from "lucide-react";
 
 const menuData: (Menu & { icon?: any })[] = [
@@ -179,10 +179,10 @@ const menuData: (Menu & { icon?: any })[] = [
       {
         id: 52,
         title: "Library",
-        path: "/library",
+        path: "/services/library",
         newTab: false,
         icon: Library,
-      },      
+      },
       {
         id: 53,
         title: "Community Engagement",
@@ -198,7 +198,7 @@ const menuData: (Menu & { icon?: any })[] = [
     title: "Blogs",
     path: "/blog",
     newTab: false,
-    icon: Newspaper, 
+    icon: Newspaper,
   },
   {
     id: 7,
