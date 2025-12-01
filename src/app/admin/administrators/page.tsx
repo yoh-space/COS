@@ -115,7 +115,7 @@ export default function AdministratorsPage() {
           </button>
           <button
             onClick={() => router.push("/admin/administrators/new")}
-            className="rounded bg-primary px-6 py-2 text-white hover:bg-primary/90"
+            className="rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700"
           >
             Add New
           </button>
@@ -154,8 +154,8 @@ export default function AdministratorsPage() {
                     <td className="p-3">
                       <span
                         className={`rounded px-2 py-1 text-xs ${admin.status === "active"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-gray-100 text-gray-800"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-gray-100 text-gray-800"
                           }`}
                       >
                         {admin.status}
@@ -166,7 +166,7 @@ export default function AdministratorsPage() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleEdit(admin)}
-                          className="rounded bg-blue-500 px-3 py-1 text-sm text-white hover:bg-blue-600"
+                          className="rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
                         >
                           Edit
                         </button>

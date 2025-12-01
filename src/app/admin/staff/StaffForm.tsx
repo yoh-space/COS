@@ -157,8 +157,8 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               value={formData.name}
               onChange={handleChange}
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.name
-                  ? 'border-red-500 dark:border-red-500'
-                  : 'border-gray-300 dark:border-gray-600'
+                ? 'border-red-500 dark:border-red-500'
+                : 'border-gray-300 dark:border-gray-600'
                 }`}
               placeholder="John Doe"
             />
@@ -178,8 +178,8 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               value={formData.email}
               onChange={handleChange}
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.email
-                  ? 'border-red-500 dark:border-red-500'
-                  : 'border-gray-300 dark:border-gray-600'
+                ? 'border-red-500 dark:border-red-500'
+                : 'border-gray-300 dark:border-gray-600'
                 }`}
               placeholder="john.doe@example.com"
             />
@@ -199,8 +199,8 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               value={formData.title}
               onChange={handleChange}
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.title
-                  ? 'border-red-500 dark:border-red-500'
-                  : 'border-gray-300 dark:border-gray-600'
+                ? 'border-red-500 dark:border-red-500'
+                : 'border-gray-300 dark:border-gray-600'
                 }`}
               placeholder="Professor, Assistant Professor, etc."
             />
@@ -220,8 +220,8 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               value={formData.specialization}
               onChange={handleChange}
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.specialization
-                  ? 'border-red-500 dark:border-red-500'
-                  : 'border-gray-300 dark:border-gray-600'
+                ? 'border-red-500 dark:border-red-500'
+                : 'border-gray-300 dark:border-gray-600'
                 }`}
               placeholder="Computer Science, Mathematics, etc."
             />
@@ -242,8 +242,8 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
               value={formData.departmentId}
               onChange={handleChange}
               className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white ${errors.departmentId
-                  ? 'border-red-500 dark:border-red-500'
-                  : 'border-gray-300 dark:border-gray-600'
+                ? 'border-red-500 dark:border-red-500'
+                : 'border-gray-300 dark:border-gray-600'
                 }`}
             >
               <option value="">Select Department</option>
@@ -395,7 +395,7 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`px-6 py-2 ${staffMember ? 'bg-blue-600 hover:bg-blue-700' : 'bg-green-600 hover:bg-green-700'} text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
         >
           {loading ? 'Saving...' : staffMember ? 'Update Staff Member' : 'Create Staff Member'}
         </button>

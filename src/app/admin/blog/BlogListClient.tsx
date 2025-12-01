@@ -52,17 +52,17 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
 
       console.log('Fetching blog posts from:', `/api/blog?${params}`);
       const response = await fetch(`/api/cms/blog?${params}`);
-      
+
       console.log('Response status:', response.status);
       console.log('Response ok:', response.ok);
-      
+
       const data = await response.json();
       console.log('API Response data:', JSON.stringify(data, null, 2));
-      
+
       if (!response.ok) {
         throw new Error(data.error || `HTTP ${response.status}: Failed to fetch blog posts`);
       }
-      
+
       // Handle multiple possible response structures
       if (data.blogPosts !== undefined) {
         // CMS API format: { blogPosts: [...], pagination: {...} }
@@ -204,7 +204,7 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
           <p className="text-gray-500 dark:text-gray-400 mb-4">No blog posts found</p>
           <Link
             href="/admin/blog/new"
-            className="inline-block px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors"
+            className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
           >
             Create Your First Post
           </Link>

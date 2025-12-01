@@ -140,7 +140,7 @@ export default function NewDepartmentPage() {
                         <button
                             type="submit"
                             disabled={saving}
-                            className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary/90 disabled:opacity-50"
+                            className="inline-flex items-center justify-center rounded-md bg-green-600 px-8 py-3 text-base font-medium text-white hover:bg-green-700 disabled:opacity-50"
                         >
                             {saving ? 'Creating...' : 'Create Department'}
                         </button>
