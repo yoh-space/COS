@@ -34,7 +34,7 @@ const PublicationPage = () => {
                             {/* Overview Section */}
                             <div className="mb-10 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:px-8 xl:p-[55px] hover:shadow-one transition-shadow duration-300">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary">
+                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                         <BookOpen size={28} />
                                     </div>
                                     <h2 className="text-3xl font-bold text-black dark:text-white">
@@ -57,7 +57,7 @@ const PublicationPage = () => {
                             <div className="mb-10 rounded-sm bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 px-8 py-11 border-2 border-primary/20 hover:border-primary/40 transition-all duration-300 sm:p-[55px] lg:px-8 xl:p-[55px]">
                                 <div className="flex flex-col md:flex-row items-start gap-8">
                                     <div className="flex-shrink-0">
-                                        <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-primary text-white shadow-lg">
+                                        <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg">
                                             <FileText size={40} />
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@ const PublicationPage = () => {
                                         <h3 className="mb-4 text-2xl font-bold text-black dark:text-white">
                                             Ethiopian Journal of Science and Technology (EJST)
                                         </h3>
-                                        <div className="mb-4 inline-block rounded-full bg-primary/20 px-4 py-1 text-sm font-semibold text-primary">
+                                        <div className="mb-4 inline-block rounded-full bg-blue-100 px-4 py-1 text-sm font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                             Volume 18, Issue 2
                                         </div>
 
@@ -84,7 +84,7 @@ const PublicationPage = () => {
                                             href="https://www.ajol.info/index.php/ejst"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg"
+                                            className="mt-6 inline-flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg"
                                         >
                                             Visit EJST Journal
                                             <ExternalLink size={18} />
@@ -101,7 +101,7 @@ const PublicationPage = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="rounded-sm bg-white p-8 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
                                             <Globe size={28} />
                                         </div>
                                         <h4 className="mb-3 text-xl font-bold text-black dark:text-white">
@@ -113,7 +113,7 @@ const PublicationPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-8 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white dark:bg-green-900/30 dark:text-green-400 dark:group-hover:bg-green-600 dark:group-hover:text-white transition-all duration-300">
                                             <TrendingUp size={28} />
                                         </div>
                                         <h4 className="mb-3 text-xl font-bold text-black dark:text-white">
@@ -125,7 +125,7 @@ const PublicationPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-8 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
                                             <Lightbulb size={28} />
                                         </div>
                                         <h4 className="mb-3 text-xl font-bold text-black dark:text-white">
@@ -137,7 +137,7 @@ const PublicationPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-8 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-md bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white dark:bg-green-900/30 dark:text-green-400 dark:group-hover:bg-green-600 dark:group-hover:text-white transition-all duration-300">
                                             <Megaphone size={28} />
                                         </div>
                                         <h4 className="mb-3 text-xl font-bold text-black dark:text-white">
@@ -153,7 +153,7 @@ const PublicationPage = () => {
                             {/* Practical Applications */}
                             <div className="mb-10 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:px-8 xl:p-[55px] hover:shadow-one transition-shadow duration-300">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary">
+                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
                                         <Users size={28} />
                                     </div>
                                     <h3 className="text-2xl font-bold text-black dark:text-white">
@@ -167,9 +167,9 @@ const PublicationPage = () => {
                                     </p>
 
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md border-l-4 border-primary">
+                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md border-l-4 border-blue-500">
                                             <div className="flex items-center gap-3 mb-2">
-                                                <Award className="text-primary" size={20} />
+                                                <Award className="text-blue-600 dark:text-blue-400" size={20} />
                                                 <span className="font-bold text-black dark:text-white">Policy Impact</span>
                                             </div>
                                             <p className="text-sm text-body-color">
@@ -177,9 +177,9 @@ const PublicationPage = () => {
                                             </p>
                                         </div>
 
-                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md border-l-4 border-primary">
+                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md border-l-4 border-green-500">
                                             <div className="flex items-center gap-3 mb-2">
-                                                <TrendingUp className="text-primary" size={20} />
+                                                <TrendingUp className="text-green-600 dark:text-green-400" size={20} />
                                                 <span className="font-bold text-black dark:text-white">Industry Partnership</span>
                                             </div>
                                             <p className="text-sm text-body-color">
@@ -187,9 +187,9 @@ const PublicationPage = () => {
                                             </p>
                                         </div>
 
-                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md border-l-4 border-primary">
+                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md border-l-4 border-blue-500">
                                             <div className="flex items-center gap-3 mb-2">
-                                                <Users className="text-primary" size={20} />
+                                                <Users className="text-blue-600 dark:text-blue-400" size={20} />
                                                 <span className="font-bold text-black dark:text-white">Local Communities</span>
                                             </div>
                                             <p className="text-sm text-body-color">
@@ -201,7 +201,7 @@ const PublicationPage = () => {
                             </div>
 
                             {/* Closing Statement */}
-                            <div className="rounded-sm bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 px-8 py-8 border-l-4 border-primary">
+                            <div className="rounded-sm bg-gradient-to-r from-blue-100 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/10 px-8 py-8 border-l-4 border-blue-500">
                                 <p className="text-lg font-medium text-black dark:text-white leading-relaxed">
                                     By fostering a strong research culture and prioritizing knowledge dissemination through platforms like the Ethiopian Journal of Science and Technology, the College of Science at Bahir Dar University continues to play a pivotal role in advancing scientific inquiry, addressing real-world challenges, and enhancing the impact of research at local, national, and international levels.
                                 </p>

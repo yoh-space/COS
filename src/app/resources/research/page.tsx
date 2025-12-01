@@ -34,7 +34,7 @@ const ResearchPage = () => {
                             {/* Overview Section */}
                             <div className="mb-10 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:px-8 xl:p-[55px] hover:shadow-one transition-shadow duration-300">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary">
+                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
                                         <Microscope size={28} />
                                     </div>
                                     <h2 className="text-3xl font-bold text-black dark:text-white">
@@ -61,7 +61,7 @@ const ResearchPage = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
                                             <Sparkles size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -73,7 +73,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white dark:bg-green-900/30 dark:text-green-400 dark:group-hover:bg-green-600 dark:group-hover:text-white transition-all duration-300">
                                             <Leaf size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -85,7 +85,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
                                             <FlaskConical size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -97,7 +97,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white dark:bg-green-900/30 dark:text-green-400 dark:group-hover:bg-green-600 dark:group-hover:text-white transition-all duration-300">
                                             <Cpu size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -109,7 +109,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
                                             <Lightbulb size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -121,7 +121,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white dark:bg-green-900/30 dark:text-green-400 dark:group-hover:bg-green-600 dark:group-hover:text-white transition-all duration-300">
                                             <Shield size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -133,7 +133,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
                                             <Apple size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -145,7 +145,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-green-100 text-green-600 group-hover:bg-green-600 group-hover:text-white dark:bg-green-900/30 dark:text-green-400 dark:group-hover:bg-green-600 dark:group-hover:text-white transition-all duration-300">
                                             <Heart size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -157,7 +157,7 @@ const ResearchPage = () => {
                                     </div>
 
                                     <div className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300 group">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-900/30 dark:text-blue-400 dark:group-hover:bg-blue-600 dark:group-hover:text-white transition-all duration-300">
                                             <TrendingUp size={24} />
                                         </div>
                                         <h4 className="mb-2 text-lg font-bold text-black dark:text-white">
@@ -174,7 +174,7 @@ const ResearchPage = () => {
                             <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="rounded-sm bg-white px-8 py-10 shadow-three dark:bg-gray-dark hover:shadow-one transition-shadow duration-300">
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-md bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                             <Users size={24} />
                                         </div>
                                         <h3 className="text-xl font-bold text-black dark:text-white">
@@ -204,7 +204,7 @@ const ResearchPage = () => {
 
                                 <div className="rounded-sm bg-white px-8 py-10 shadow-three dark:bg-gray-dark hover:shadow-one transition-shadow duration-300">
                                     <div className="flex items-center gap-4 mb-6">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-md bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
                                             <Target size={24} />
                                         </div>
                                         <h3 className="text-xl font-bold text-black dark:text-white">
@@ -237,13 +237,13 @@ const ResearchPage = () => {
                             <div className="mb-10 rounded-sm bg-gradient-to-br from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 px-8 py-11 border-2 border-primary/20 hover:border-primary/40 transition-all duration-300 sm:p-[55px] lg:px-8 xl:p-[55px]">
                                 <div className="flex flex-col md:flex-row items-start gap-8">
                                     <div className="flex-shrink-0">
-                                        <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-primary text-white shadow-lg">
+                                        <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-green-600 text-white shadow-lg">
                                             <Calendar size={40} />
                                         </div>
                                     </div>
 
                                     <div className="flex-1">
-                                        <div className="mb-4 inline-block rounded-full bg-primary/20 px-4 py-1 text-sm font-semibold text-primary">
+                                        <div className="mb-4 inline-block rounded-full bg-green-100 px-4 py-1 text-sm font-semibold text-green-600 dark:bg-green-900/30 dark:text-green-400">
                                             13th Annual Conference
                                         </div>
                                         <h3 className="mb-4 text-2xl font-bold text-black dark:text-white">
@@ -281,7 +281,7 @@ const ResearchPage = () => {
                             {/* Research Dissemination & Collaboration */}
                             <div className="mb-10 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:px-8 xl:p-[55px] hover:shadow-one transition-shadow duration-300">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 text-primary">
+                                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                         <Globe size={28} />
                                     </div>
                                     <h3 className="text-2xl font-bold text-black dark:text-white">
@@ -299,21 +299,21 @@ const ResearchPage = () => {
                                     </p>
 
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md text-center border-t-4 border-primary">
+                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md text-center border-t-4 border-blue-500">
                                             <p className="font-bold text-black dark:text-white mb-2">Industries</p>
                                             <p className="text-sm text-body-color">
                                                 Practical solutions development
                                             </p>
                                         </div>
 
-                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md text-center border-t-4 border-primary">
+                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md text-center border-t-4 border-green-500">
                                             <p className="font-bold text-black dark:text-white mb-2">Government</p>
                                             <p className="text-sm text-body-color">
                                                 Policy-informed research
                                             </p>
                                         </div>
 
-                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md text-center border-t-4 border-primary">
+                                        <div className="bg-gray-50 dark:bg-dark p-6 rounded-md text-center border-t-4 border-blue-500">
                                             <p className="font-bold text-black dark:text-white mb-2">International</p>
                                             <p className="text-sm text-body-color">
                                                 Global partnerships
@@ -324,7 +324,7 @@ const ResearchPage = () => {
                             </div>
 
                             {/* Closing Statement */}
-                            <div className="rounded-sm bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 px-8 py-8 border-l-4 border-primary">
+                            <div className="rounded-sm bg-gradient-to-r from-green-100 to-green-50 dark:from-green-900/20 dark:to-green-900/10 px-8 py-8 border-l-4 border-green-500">
                                 <p className="text-lg font-medium text-black dark:text-white leading-relaxed">
                                     By integrating thematic research, inclusivity, and knowledge dissemination, the College of Science at Bahir Dar University continues to be a leading center for scientific inquiry, innovation, and national development.
                                 </p>
