@@ -12,7 +12,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Providers } from "./providers";
 import { OrganizationJsonLd, LocalBusinessJsonLd, BreadcrumbJsonLd } from 'next-seo';
 import { BASE_URL } from '@/lib/seo.config';
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+import { suppressConsoleInProduction } from "@/lib/logger";
 
 // Fallback font configuration to handle Google Fonts timeout during build
 const fontFamily = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
@@ -22,6 +23,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Suppress console output in production for better performance
+  useEffect(() => {
+    suppressConsoleInProduction();
+  }, []);
+
   return (
     <html suppressHydrationWarning lang="en">
       <head>
