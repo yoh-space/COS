@@ -211,7 +211,7 @@ export default function NewAdministratorPage() {
             <button
               type="submit"
               disabled={loading}
-              className="rounded bg-primary px-6 py-2 text-white hover:bg-primary/90 disabled:opacity-50"
+              className="rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700 disabled:opacity-50"
             >
               {loading ? "Creating..." : "Create Administrator"}
             </button>

@@ -109,7 +109,7 @@ export default function AdministratorsPage() {
           </button>
           <button
             onClick={() => router.push("/admin/administrators/new")}
-            className="rounded bg-primary px-6 py-2 text-white hover:bg-primary/90"
+            className="rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700"
           >
             Add New
           </button>

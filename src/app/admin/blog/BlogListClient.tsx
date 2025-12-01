@@ -204,7 +204,7 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
           <p className="text-gray-500 dark:text-gray-400 mb-4">No blog posts found</p>
           <Link
             href="/admin/blog/new"
-            className="inline-block px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors"
+            className="inline-block px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
           >
             Create Your First Post
           </Link>
