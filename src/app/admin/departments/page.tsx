@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 interface Department {
     id: string;
@@ -74,6 +75,11 @@ export default function DepartmentsPage() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <AdminBreadcrumb
+                items={[{ label: "Departments" }]}
+                className="mb-4"
+            />
+
             <div className="mb-8 flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-bold text-black dark:text-white">

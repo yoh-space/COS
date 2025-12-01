@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import AdminBreadcrumb from "@/components/Admin/Breadcrumb";
 
 export default function NewAdministratorPage() {
   const { isLoaded, isSignedIn } = useUser();
@@ -70,6 +71,14 @@ export default function NewAdministratorPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <AdminBreadcrumb
+        items={[
+          { label: "Administrators", href: "/admin/administrators" },
+          { label: "New Administrator" }
+        ]}
+        className="mb-4"
+      />
+
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Add New Administrator</h1>
       </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import AdminBreadcrumb from "@/components/Admin/Breadcrumb";
 
 interface Administrator {
   id: string;
@@ -58,7 +59,7 @@ export default function AdministratorsPage() {
 
   const handleSeed = async () => {
     if (!confirm("This will seed administrators from the static data file. Continue?")) return;
-    
+
     try {
       const response = await fetch("/api/administrators/seed", {
         method: "POST",
@@ -98,6 +99,11 @@ export default function AdministratorsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <AdminBreadcrumb
+        items={[{ label: "Administrators" }]}
+        className="mb-4"
+      />
+
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Manage Administrators</h1>
         <div className="flex gap-2">
@@ -147,11 +153,10 @@ export default function AdministratorsPage() {
                     <td className="p-3">{admin.name || "-"}</td>
                     <td className="p-3">
                       <span
-                        className={`rounded px-2 py-1 text-xs ${
-                          admin.status === "active"
+                        className={`rounded px-2 py-1 text-xs ${admin.status === "active"
                             ? "bg-green-100 text-green-800"
                             : "bg-gray-100 text-gray-800"
-                        }`}
+                          }`}
                       >
                         {admin.status}
                       </span>

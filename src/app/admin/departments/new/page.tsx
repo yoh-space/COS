@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 export default function NewDepartmentPage() {
     const router = useRouter();
@@ -49,6 +50,14 @@ export default function NewDepartmentPage() {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <AdminBreadcrumb
+                items={[
+                    { label: "Departments", href: "/admin/departments" },
+                    { label: "New Department" }
+                ]}
+                className="mb-4"
+            />
+
             <div className="mb-8">
                 <h1 className="text-3xl font-bold text-black dark:text-white">
                     Add New Department
