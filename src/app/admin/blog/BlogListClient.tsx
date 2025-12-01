@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { DataLoader } from '@/components/Loading';
 import { useRouter } from 'next/navigation';
+
 
 interface Author {
   id: string;
@@ -141,11 +143,7 @@ export default function BlogListClient({ userId }: BlogListClientProps) {
   }
 
   if (loading && blogPosts.length === 0) {
-    return (
-      <div className="flex items-center justify-center py-12">
-        <div className="text-gray-500 dark:text-gray-400">Loading blog posts...</div>
-      </div>
-    );
+    return <DataLoader size="lg" text="Loading blog posts..." />;
   }
 
   if (error) {

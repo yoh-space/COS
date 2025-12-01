@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import AdminBreadcrumb from "@/components/Admin/Breadcrumb";
+import { DataLoader } from "@/components/Loading";
 
 interface Administrator {
   id: string;
@@ -124,7 +125,7 @@ export default function AdministratorsPage() {
 
       <div className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-dark">
         {loading ? (
-          <p>Loading...</p>
+          <DataLoader size="lg" text="Loading administrators..." />
         ) : administrators.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-body-color mb-4">No administrators found.</p>

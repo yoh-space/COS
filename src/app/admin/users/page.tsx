@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import AdminBreadcrumb from "@/components/Admin/Breadcrumb";
+import { DataLoader } from "@/components/Loading";
 
 interface Role {
   id: string;
@@ -222,9 +223,7 @@ export default function UsersPage() {
       {/* Users Table */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-          </div>
+          <DataLoader size="lg" text="Loading users..." />
         ) : users.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 dark:text-gray-400">No users found</p>
