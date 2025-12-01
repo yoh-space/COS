@@ -55,7 +55,7 @@ export default function LibraryPage() {
               {/* Overview Section */}
               <div className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:px-8 xl:p-[55px] hover:shadow-one transition-shadow duration-300">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white shadow-lg">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-blue-100 text-blue-600 shadow-lg">
                     <Library size={32} />
                   </div>
                   <h2 className="text-3xl font-bold text-black dark:text-white">
@@ -353,7 +353,7 @@ export default function LibraryPage() {
                   Discover a world of knowledge and resources. Whether you&apos;re conducting research, studying for exams, or exploring new topics, our library is here to support your academic journey.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <button className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-base font-medium text-white hover:bg-primary/90 transition-colors">
+                  <button className="inline-flex items-center justify-center rounded-md border-2 border-primary px-8 py-3 text-base font-medium text-primary hover:bg-primary hover:text-white transition-colors">
                     <Library className="mr-2" size={20} />
                     Plan Your Visit
                   </button>
