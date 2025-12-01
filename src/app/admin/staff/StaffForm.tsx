@@ -395,7 +395,11 @@ export default function StaffForm({ staffMember }: StaffFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`px-6 py-2 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+            staffMember 
+              ? 'bg-blue-600 hover:bg-blue-700' 
+              : 'bg-green-600 hover:bg-green-700'
+          }`}
         >
           {loading ? 'Saving...' : staffMember ? 'Update Staff Member' : 'Create Staff Member'}
         </button>

@@ -33,7 +33,7 @@ export default async function StaffListPage() {
           {canCreate && (
             <Link
               href="/admin/staff/new"
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors"
+              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
             >
               + Add Staff Member
             </Link>
