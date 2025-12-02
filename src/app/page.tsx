@@ -6,26 +6,27 @@ import Features from "@/components/Features";
 
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import SectionLoader from "@/components/Common/SectionLoader";
 
 // Dynamically import heavy components that are below the fold
 const Blog = dynamic(() => import("@/components/Blog"), {
-  loading: () => <div className="py-16 text-center">Loading blogs...</div>,
+  loading: () => <SectionLoader />,
 });
 
 const Partners = dynamic(() => import("@/components/Partners"), {
-  loading: () => <div className="py-16 text-center">Loading partners...</div>,
+  loading: () => <SectionLoader />,
 });
 
 const Contact = dynamic(() => import("@/components/Contact"), {
-  loading: () => <div className="py-16 text-center">Loading contact...</div>,
+  loading: () => <SectionLoader />,
 });
 
 const AcademicPrograms = dynamic(() => import("@/components/AcademicPrograms"), {
-  loading: () => <div className="py-16 text-center">Loading academic programs...</div>,
+  loading: () => <SectionLoader />,
 });
 
 const SuccessStories = dynamic(() => import("@/components/SuccessStories"), {
-  loading: () => <div className="py-16 text-center">Loading success stories...</div>,
+  loading: () => <SectionLoader />,
 });
 
 export const metadata: Metadata = {
