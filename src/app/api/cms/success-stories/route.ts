@@ -51,6 +51,18 @@ export const GET = withPermission(
       });
     } catch (error) {
       console.error('Error fetching success stories:', error);
+      // Return empty result instead of error if table doesn't exist
+      if (error instanceof Error && error.message.includes('does not exist')) {
+        return apiSuccess({
+          stories: [],
+          pagination: {
+            page: 1,
+            limit: 10,
+            total: 0,
+            pages: 0,
+          },
+        });
+      }
       return serverError('Failed to fetch success stories');
     }
   }

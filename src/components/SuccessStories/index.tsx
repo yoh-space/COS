@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { Award, MapPin, Calendar, Star, GraduationCap } from 'lucide-react';
 import Image from 'next/image';
+import TestimonialModal from '../ui/testimonial-modal';
+import Testimonials from './Testimonals';
 
 interface SuccessStory {
   id: string;
@@ -88,6 +90,8 @@ const SuccessStories = () => {
             setStories(fallbackStories);
           }
         } else {
+          // Use fallback for any API errors (including 500 when table doesn't exist)
+          console.warn('Success stories API failed, using fallback data');
           setStories(fallbackStories);
         }
       } catch (error) {
@@ -103,11 +107,9 @@ const SuccessStories = () => {
 
   return (
     <section id="success-stories" className="py-16 md:py-20 lg:py-28 bg-gray-light dark:bg-bg-color-dark">
+      <Testimonials/>
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
-            Success Stories
-          </h2>
           <p className="text-base text-body-color mt-4 max-w-3xl mx-auto">
             Discover how our graduates are making a difference in their fields and contributing to society through their achievements and innovations.
           </p>

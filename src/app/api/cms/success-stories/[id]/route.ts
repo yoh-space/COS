@@ -28,6 +28,10 @@ export const GET = withPermission(
       return apiSuccess(story);
     } catch (error) {
       console.error('Error fetching success story:', error);
+      // Return not found if table doesn't exist
+      if (error instanceof Error && error.message.includes('does not exist')) {
+        return notFound('Success story not found');
+      }
       return serverError('Failed to fetch success story');
     }
   }

@@ -38,12 +38,19 @@ export default function SuccessStoryListClient({ userId }: SuccessStoryListClien
       if (featuredFilter) params.append('featured', featuredFilter);
 
       const response = await fetch(`/api/cms/success-stories?${params}`);
-      const data = await response.json();
-
+      
       if (!response.ok) {
+        // If it's a 500 error, likely the table doesn't exist yet
+        if (response.status === 500) {
+          console.warn('Success stories table may not exist yet, using empty array');
+          setStories([]);
+          return;
+        }
+        const data = await response.json();
         throw new Error(data.error || 'Failed to fetch success stories');
       }
-
+      
+      const data = await response.json();
       setStories(data.stories || []);
     } catch (err) {
       console.error('Error fetching success stories:', err);
