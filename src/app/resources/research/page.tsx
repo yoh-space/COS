@@ -7,6 +7,8 @@ import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = generatePageMetadata('research');
 
+export const dynamic = 'force-dynamic';
+
 async function getResearchActivities() {
   try {
     const research = await prisma.researchActivity.findMany({

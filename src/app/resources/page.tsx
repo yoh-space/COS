@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: "Access publications, research activities, reports, and documentation from the College of Science at Bahir Dar University.",
 };
 
+export const dynamic = 'force-dynamic';
+
 async function getResourceCounts() {
   try {
     const [publicationsCount, researchCount, reportsCount] = await Promise.all([

@@ -195,7 +195,7 @@ const Footer = () => {
                       href="/resources/research"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
-                      Research Projects
+                      Researches
                     </Link>
                   </li>
                   <li>
@@ -216,7 +216,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link
-                      href="/reports"
+                      href="/resources/reports"
                       className="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
                     >
                       Annual Reports

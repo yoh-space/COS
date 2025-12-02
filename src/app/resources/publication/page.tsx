@@ -7,6 +7,8 @@ import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = generatePageMetadata('publication');
 
+export const dynamic = 'force-dynamic';
+
 async function getPublications() {
   try {
     const publications = await prisma.publication.findMany({
