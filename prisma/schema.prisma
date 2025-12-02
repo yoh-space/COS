@@ -263,6 +263,25 @@ model Report {
   auditLogs       AuditLog[] @relation("ReportAuditLogs")
 }
 
+model SuccessStory {
+  id              String   @id @default(cuid())
+  title           String
+  studentName     String
+  graduationYear  Int
+  degree          String   // e.g., "BSc Chemistry", "MSc Physics"
+  currentPosition String   // Current job/position
+  company         String?  // Current company/organization
+  story           String   @db.Text
+  image           String?
+  achievements    String[] // Array of achievement strings
+  status          String   @default("published") // draft, published, archived
+  featured        Boolean  @default(false)
+  displayOrder    Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("SuccessStoryAuditLogs")
+}
+
 // Supporting Models
 model ContentVersion {
   id              String   @id @default(cuid())
@@ -308,6 +327,7 @@ model AuditLog {
   publication     Publication? @relation("PublicationAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_publication_fkey")
   researchActivity ResearchActivity? @relation("ResearchActivityAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_researchActivity_fkey")
   report          Report? @relation("ReportAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_report_fkey")
+  successStory    SuccessStory? @relation("SuccessStoryAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_successStory_fkey")
 }
 
 model MediaFile {

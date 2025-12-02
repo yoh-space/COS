@@ -11,6 +11,7 @@ import {
     Shield,
     BookOpen,
     Library,
+    Award,
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -52,6 +53,12 @@ export default function AdminDashboard() {
                     href: '/admin/resources',
                     icon: Library,
                     description: 'Manage publications, research & reports',
+                },
+                {
+                    name: 'Success Stories',
+                    href: '/admin/success-stories',
+                    icon: Award,
+                    description: 'Manage alumni success stories',
                 },
                 {
                     name: 'Departments',

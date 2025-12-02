@@ -99,7 +99,7 @@ const AcademicPrograms = () => {
     };
 
     fetchPrograms();
-  }, []);
+  }, [fallbackPrograms]);
 
   const displayPrograms = programs.length > 0 ? programs : fallbackPrograms;
 

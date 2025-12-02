@@ -140,6 +140,13 @@ export const PERMISSIONS = {
   REPORT_DELETE: 'report:delete',
   REPORT_ALL: 'report:*',
 
+  // Success Stories
+  SUCCESS_STORY_CREATE: 'success_story:create',
+  SUCCESS_STORY_READ: 'success_story:read',
+  SUCCESS_STORY_UPDATE: 'success_story:update',
+  SUCCESS_STORY_DELETE: 'success_story:delete',
+  SUCCESS_STORY_ALL: 'success_story:*',
+
   // Super admin permission (all permissions)
   ALL: '*',
 } as const;

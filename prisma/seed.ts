@@ -7,6 +7,7 @@ import { PrismaClient } from '@prisma/client';
 import { PERMISSIONS, ROLES } from '../src/lib/permissions';
 import { seedAcademicPrograms } from './seed-academic-programs';
 import { seedResources } from './seed-resources';
+import seedSuccessStories from '../scripts/seed-success-stories';
 
 const prisma = new PrismaClient();
 
@@ -68,6 +69,7 @@ async function main() {
         PERMISSIONS.PUBLICATION_ALL,
         PERMISSIONS.RESEARCH_ALL,
         PERMISSIONS.REPORT_ALL,
+        PERMISSIONS.SUCCESS_STORY_ALL,
         PERMISSIONS.MEDIA_UPLOAD,
         PERMISSIONS.MEDIA_READ,
       ],
@@ -107,6 +109,9 @@ async function main() {
   
   // Seed resources
   await seedResources();
+  
+  // Seed success stories
+  await seedSuccessStories();
 
   console.log('\nDatabase seed completed successfully!');
 }
