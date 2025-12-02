@@ -2,21 +2,16 @@ import { redirect, notFound } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
 import { hasPermission } from '@/lib/permissions';
 import { PERMISSIONS } from '@/lib/permissions';
+import { prisma } from '@/lib/prisma';
 import ReportForm from '../ReportForm';
 import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 async function getReport(id: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/cms/reports/${id}`, {
-      cache: 'no-store',
+    const report = await prisma.report.findUnique({
+      where: { id },
     });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const data = await response.json();
-    return data;
+    return report;
   } catch (error) {
     console.error('Error fetching report:', error);
     return null;

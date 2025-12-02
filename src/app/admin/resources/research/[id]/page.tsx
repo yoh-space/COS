@@ -2,21 +2,16 @@ import { redirect, notFound } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
 import { hasPermission } from '@/lib/permissions';
 import { PERMISSIONS } from '@/lib/permissions';
+import { prisma } from '@/lib/prisma';
 import ResearchForm from '../ResearchForm';
 import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 async function getResearch(id: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/cms/research/${id}`, {
-      cache: 'no-store',
+    const research = await prisma.researchActivity.findUnique({
+      where: { id },
     });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const data = await response.json();
-    return data;
+    return research;
   } catch (error) {
     console.error('Error fetching research activity:', error);
     return null;

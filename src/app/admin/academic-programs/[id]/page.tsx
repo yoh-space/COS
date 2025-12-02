@@ -2,21 +2,16 @@ import { redirect, notFound } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
 import { hasPermission } from '@/lib/permissions';
 import { PERMISSIONS } from '@/lib/permissions';
+import { prisma } from '@/lib/prisma';
 import AcademicProgramForm from '../AcademicProgramForm';
 import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 async function getAcademicProgram(id: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/cms/academic-programs/${id}`, {
-      cache: 'no-store',
+    const program = await prisma.academicProgram.findUnique({
+      where: { id },
     });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const data = await response.json();
-    return data;
+    return program;
   } catch (error) {
     console.error('Error fetching academic program:', error);
     return null;

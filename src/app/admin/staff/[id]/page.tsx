@@ -2,24 +2,19 @@ import { redirect, notFound } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
 import { hasPermission } from '@/lib/permissions';
 import { PERMISSIONS } from '@/lib/permissions';
+import { prisma } from '@/lib/prisma';
 import StaffForm from '../StaffForm';
 import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 async function getStaffMember(id: string) {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/cms/staff/${id}`,
-      {
-        cache: 'no-store',
-      }
-    );
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const data = await response.json();
-    return data.data;
+    const staff = await prisma.staffMember.findUnique({
+      where: { id },
+      include: {
+        department: true,
+      },
+    });
+    return staff;
   } catch (error) {
     console.error('Error fetching staff member:', error);
     return null;

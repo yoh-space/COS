@@ -9,6 +9,8 @@ import {
     Target,
     UserCog,
     Shield,
+    BookOpen,
+    Library,
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -17,7 +19,7 @@ export default function AdminDashboard() {
             title: 'Content Management',
             items: [
                 {
-                    name: 'Dean&apos;s Message',
+                    name: 'College Dean Message',
                     href: '/admin/dean-message',
                     icon: MessageSquare,
                     description: 'Edit the message from the Dean',
@@ -39,6 +41,18 @@ export default function AdminDashboard() {
         {
             title: 'Academic Management',
             items: [
+                {
+                    name: 'Academic Programs',
+                    href: '/admin/academic-programs',
+                    icon: BookOpen,
+                    description: 'Manage degree programs and courses',
+                },
+                {
+                    name: 'Resources',
+                    href: '/admin/resources',
+                    icon: Library,
+                    description: 'Manage publications, research & reports',
+                },
                 {
                     name: 'Departments',
                     href: '/admin/departments',

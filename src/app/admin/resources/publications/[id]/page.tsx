@@ -2,21 +2,16 @@ import { redirect, notFound } from 'next/navigation';
 import { getCurrentUser } from '@/lib/auth';
 import { hasPermission } from '@/lib/permissions';
 import { PERMISSIONS } from '@/lib/permissions';
+import { prisma } from '@/lib/prisma';
 import PublicationForm from '../PublicationForm';
 import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
 
 async function getPublication(id: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/cms/publications/${id}`, {
-      cache: 'no-store',
+    const publication = await prisma.publication.findUnique({
+      where: { id },
     });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const data = await response.json();
-    return data;
+    return publication;
   } catch (error) {
     console.error('Error fetching publication:', error);
     return null;
