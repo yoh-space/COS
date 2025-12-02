@@ -124,17 +124,20 @@ const Testimonials = () => {
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 md:gap-6">
-          {testimonialData.map((testimonial, index) => (
-            <SuccessCard
-              key={testimonial.id}
-              testimonial={testimonial}
-              icon={cardIcons[index]}
-              colors={cardColors[index]}
-              index={index}
-              onClick={() => handleCardClick(testimonial)}
-            />
-          ))}
+        <div className="overflow-x-auto pb-4 -mx-4 px-4 md:overflow-visible md:mx-0 md:px-0">
+          <div className="flex md:grid gap-5 md:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 min-w-max md:min-w-0">
+            {testimonialData.map((testimonial, index) => (
+              <div key={testimonial.id} className="w-[280px] md:w-auto flex-shrink-0">
+                <SuccessCard
+                  testimonial={testimonial}
+                  icon={cardIcons[index]}
+                  colors={cardColors[index]}
+                  index={index}
+                  onClick={() => handleCardClick(testimonial)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

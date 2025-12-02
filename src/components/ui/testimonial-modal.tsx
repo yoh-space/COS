@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { X, ExternalLink, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -13,6 +13,17 @@ interface TestimonialModalProps {
 }
 
 export default function TestimonialModal({ testimonial, isOpen, onClose }: TestimonialModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!testimonial) return null;
 
   return (
@@ -25,7 +36,7 @@ export default function TestimonialModal({ testimonial, isOpen, onClose }: Testi
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[99999]"
           />
           
           {/* Modal */}
@@ -33,7 +44,7 @@ export default function TestimonialModal({ testimonial, isOpen, onClose }: Testi
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4"
+            className="fixed inset-0 z-[99999] flex items-end sm:items-center justify-center p-0 sm:p-4"
           >
             <div className="bg-white dark:bg-gray-900 rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
               {/* Header */}
