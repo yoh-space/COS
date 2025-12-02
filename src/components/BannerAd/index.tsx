@@ -1,33 +1,18 @@
+// BannerAd / AdSense removed for this site.
+// Keep a simple placeholder component to avoid breaking imports.
 "use client";
 
-import React, { use, useEffect } from "react";
+import React from "react";
 
-type BannerAd = {
-  dataAdSlot: string;
-  dataAdFormat: string;
-  dataFullWidthResponsive: boolean;
-  [key: string]: string | boolean; // For any other custom
+type BannerAdProps = {
+  dataAdSlot?: string;
+  dataAdFormat?: string;
+  dataFullWidthResponsive?: boolean;
 };
 
-const BannerAd = ({ dataAdFormat, dataAdSlot, dataFullWidthResponsive }: BannerAd) => {
-  return (
-    useEffect(() => {
-      try {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-      }
-      catch (e) {
-        console.error("Adsense error", e);
-      }
-    }, []),
-    
-    <ins
-      className="adsbygoogle"
-      style={{ display: "block" }}
-      data-ad-client="ca-pub-7604915619325589"
-      data-ad-slot={dataAdSlot}
-      data-ad-format={dataAdFormat}
-      data-full-width-responsive={dataFullWidthResponsive.toString()}
-    ></ins>
-  );
+const BannerAd = (_props: BannerAdProps) => {
+  // Intentionally render nothing — ads removed for governmental/university site
+  return null;
 };
+
 export default BannerAd;

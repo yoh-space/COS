@@ -1,22 +1,13 @@
+// AdSense integration removed for governmental/university site
+// Keep a no-op placeholder to avoid import errors in case any reference remains.
 import React from "react";
-import Script from "next/script";
 
 type AdSenseTypes = {
-  pId: string;
+  pId?: string;
 };
 
-const AdSenseComponent = ({ pId }: AdSenseTypes) => {
-  return (
-    <Script
-      async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${pId}`}
-      crossOrigin="anonymous"
-      strategy="lazyOnload"
-      onError={(e) => {
-        console.error("AdSense script failed to load", e);
-      }}
-    />
-  );
+const AdSenseComponent = (_props: AdSenseTypes) => {
+  return null;
 };
 
 export default AdSenseComponent;

@@ -2,9 +2,8 @@
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import AdSenseComponent from "@/components/AdSense";
 import ScrollToTop from "@/components/ScrollToTop";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
+import ChatTrigger from "@/components/ui/ChatTrigger";
 import SpotlightCursor from "@/components/SpotlightCursor";
 import { InitialLoader, NavigationLoader } from "@/components/Loading";
 import "../styles/index.css";
@@ -31,12 +30,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <head>
-        {/* ✅ Performance Optimizations */}
-        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-
-        {/* ✅ Load Google AdSense Auto Ads (deferred) */}
-        <AdSenseComponent pId="ca-pub-7604915619325589" />
+  {/* Performance-related external preconnects removed (no AdSense for this site) */}
       </head>
       <body className={`bg-[#FCFCFC] dark:bg-black`} style={{ fontFamily }}>
         <ClerkProvider>
@@ -121,7 +115,7 @@ export default function RootLayout({
             {children}
             <Footer />
             <ScrollToTop />
-            <ThemeSwitcher />
+            <ChatTrigger />
           </Providers>
         </ClerkProvider>
       </body>

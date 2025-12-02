@@ -18,7 +18,7 @@ The site was suffering from severe performance issues on mobile (Lighthouse scor
 ### High Impact (Immediate Implementation) ✅
 
 1. **Defer Render-Blocking Scripts** - ✅ COMPLETED
-   - Changed AdSense from `afterInteractive` to `lazyOnload`
+   - (AdSense removed from project)
    - Impact: High (TBT reduction), Difficulty: Low
 
 2. **Image Optimization** - ✅ COMPLETED

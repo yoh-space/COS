@@ -6,7 +6,6 @@ console.log('🔍 Validating Performance Optimizations...\n');
 // Check if all optimization files exist and are properly configured
 const filesToCheck = [
   'next.config.js',
-  'src/components/AdSense/index.tsx',
   'src/app/page.tsx',
   'src/components/Hero/index.tsx',
   'src/app/layout.tsx',
@@ -32,12 +31,7 @@ filesToCheck.forEach(file => {
       }
     }
     
-    if (file === 'src/components/AdSense/index.tsx') {
-      const content = fs.readFileSync(file, 'utf8');
-      if (content.includes('strategy="lazyOnload"')) {
-        console.log('   ↳ AdSense lazy loading enabled');
-      }
-    }
+    // AdSense checks removed — this project does not include AdSense integration
     
     if (file === 'src/app/page.tsx') {
       const content = fs.readFileSync(file, 'utf8');
@@ -58,7 +52,7 @@ console.log('=======================');
 
 const optimizations = [
   { name: 'Image Optimization (AVIF/WEBP)', status: '✅ IMPLEMENTED' },
-  { name: 'AdSense Lazy Loading', status: '✅ IMPLEMENTED' },
+  // AdSense removed from optimization checklist
   { name: 'Dynamic Imports', status: '✅ IMPLEMENTED' },
   { name: 'Font Optimization', status: '✅ IMPLEMENTED' },
   { name: 'Bundle Analyzer', status: '✅ IMPLEMENTED' },

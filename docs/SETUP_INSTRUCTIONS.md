@@ -43,11 +43,7 @@ cp .env.example .env.local
    - `NEXT_PUBLIC_CONVEX_URL`
    - `CONVEX_DEPLOYMENT`
 
-### Optional: Google AdSense
-
-1. Go to https://www.google.com/adsense
-2. Get your publisher ID:
-   - `NEXT_PUBLIC_ADSENSE_ID` (format: `ca-pub-xxxxxxxxxxxxxxxx`)
+<!-- Google AdSense section removed: this website is intended for a governmental/university audience and should not include ads -->
 
 ## Step 3: Run Development Server
 
