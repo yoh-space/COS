@@ -44,6 +44,11 @@ export function notFoundError(message: string = 'Resource not found') {
 }
 
 /**
+ * Alias for notFoundError for convenience
+ */
+export const notFound = notFoundError;
+
+/**
  * Validation error (400)
  */
 export function validationError(message: string = 'Invalid request data') {

@@ -112,6 +112,34 @@ export const PERMISSIONS = {
   MEDIA_DELETE: 'media:delete',
   MEDIA_ALL: 'media:*',
 
+  // Academic Programs
+  ACADEMIC_PROGRAM_CREATE: 'academic_program:create',
+  ACADEMIC_PROGRAM_READ: 'academic_program:read',
+  ACADEMIC_PROGRAM_UPDATE: 'academic_program:update',
+  ACADEMIC_PROGRAM_DELETE: 'academic_program:delete',
+  ACADEMIC_PROGRAM_ALL: 'academic_program:*',
+
+  // Publications
+  PUBLICATION_CREATE: 'publication:create',
+  PUBLICATION_READ: 'publication:read',
+  PUBLICATION_UPDATE: 'publication:update',
+  PUBLICATION_DELETE: 'publication:delete',
+  PUBLICATION_ALL: 'publication:*',
+
+  // Research Activities
+  RESEARCH_CREATE: 'research:create',
+  RESEARCH_READ: 'research:read',
+  RESEARCH_UPDATE: 'research:update',
+  RESEARCH_DELETE: 'research:delete',
+  RESEARCH_ALL: 'research:*',
+
+  // Reports
+  REPORT_CREATE: 'report:create',
+  REPORT_READ: 'report:read',
+  REPORT_UPDATE: 'report:update',
+  REPORT_DELETE: 'report:delete',
+  REPORT_ALL: 'report:*',
+
   // Super admin permission (all permissions)
   ALL: '*',
 } as const;

@@ -208,6 +208,61 @@ model Service {
   auditLogs       AuditLog[] @relation("ServiceAuditLogs")
 }
 
+model AcademicProgram {
+  id              String   @id @default(cuid())
+  name            String   // e.g., "Undergraduate", "Graduate", "Doctoral"
+  level           String   // "BSc", "MSc", "PhD"
+  duration        String   // e.g., "4 Years", "2 Years", "3-4 Years"
+  description     String?  @db.Text
+  subtitle        String?  @db.Text
+  features        String[] // Array of feature strings
+  status          String   @default("active") // active, inactive
+  displayOrder    Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("AcademicProgramAuditLogs")
+}
+
+model Publication {
+  id              String   @id @default(cuid())
+  title           String
+  description     String?  @db.Text
+  category        String   // e.g., "ejst", "conference", "journal", "dissemination"
+  content         String?  @db.Text
+  externalUrl     String?
+  status          String   @default("published") // draft, published, archived
+  publishedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("PublicationAuditLogs")
+}
+
+model ResearchActivity {
+  id              String   @id @default(cuid())
+  title           String
+  description     String?  @db.Text
+  category        String   // e.g., "thematic", "collaborative", "conference"
+  content         String?  @db.Text
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("ResearchActivityAuditLogs")
+}
+
+model Report {
+  id              String   @id @default(cuid())
+  title           String
+  year            Int
+  type            String   // "annual", "strategic", "policy"
+  description     String?  @db.Text
+  fileUrl         String?
+  status          String   @default("published")
+  publishedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  auditLogs       AuditLog[] @relation("ReportAuditLogs")
+}
+
 // Supporting Models
 model ContentVersion {
   id              String   @id @default(cuid())
@@ -249,6 +304,10 @@ model AuditLog {
   academicSection AcademicSection? @relation("AcademicSectionAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_academicSection_fkey")
   service         Service? @relation("ServiceAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_service_fkey")
   administrator   Administrator? @relation("AdministratorAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_administrator_fkey")
+  academicProgram AcademicProgram? @relation("AcademicProgramAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_academicProgram_fkey")
+  publication     Publication? @relation("PublicationAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_publication_fkey")
+  researchActivity ResearchActivity? @relation("ResearchActivityAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_researchActivity_fkey")
+  report          Report? @relation("ReportAuditLogs", fields: [entityId], references: [id], onDelete: Cascade, map: "AuditLog_report_fkey")
 }
 
 model MediaFile {

@@ -1,12 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 gsap.registerPlugin(SplitText, useGSAP);
+
+// Dynamically import shader to avoid SSR issues
+const AnoAI = dynamic(() => import("@/components/ui/animated-shader-background"), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface HeroProps {
   title: string;
@@ -16,6 +23,12 @@ interface HeroProps {
   ctaButtons?: Array<{ text: string; href: string; primary?: boolean }>;
   microDetails?: Array<string>;
   backgroundImage?: string;
+  shaderColors?: {
+    colorA?: string;
+    colorB?: string;
+    colorC?: string;
+  };
+  shaderOpacity?: number;
 }
 
 export default function ImageGradientHero({
@@ -28,7 +41,13 @@ export default function ImageGradientHero({
     { text: "View showcase", href: "#showcase" },
   ],
   microDetails = ["World-class education", "Cutting-edge research", "Academic excellence"],
-  backgroundImage = "/images/hero/science-building.jpg",
+  backgroundImage = "/images/hero/wisdom-building.jpeg",
+  shaderColors = {
+    colorA: "#0f172a",
+    colorB: "#1e40af", 
+    colorC: "#3b82f6",
+  },
+  shaderOpacity = 0.4,
 }: HeroProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLHeadingElement | null>(null);
@@ -138,10 +157,10 @@ export default function ImageGradientHero({
       ref={sectionRef}
       className="relative h-screen w-screen overflow-hidden"
     >
-      {/* Background Image with Gradient Overlay */}
+      {/* Background Image Layer */}
       <div
         ref={imageRef}
-        className="absolute inset-0 -z-10 h-full w-full"
+        className="absolute inset-0 -z-20 h-full w-full"
         aria-hidden
       >
         <Image
@@ -152,27 +171,87 @@ export default function ImageGradientHero({
           className="object-cover"
           quality={90}
         />
-        {/* Gradient Overlays */}
+      </div>
+
+      {/* Left Side Blur Overlay - Behind text area */}
+      <div 
+        className="absolute inset-y-0 left-0 w-full md:w-2/3 lg:w-1/2 -z-15"
+        aria-hidden
+      >
+        {/* Blur layer */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            maskImage: "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
+          }}
+        />
+        {/* Gradient overlay on blur */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to right, rgba(15, 23, 42, 0.85) 0%, rgba(30, 64, 175, 0.6) 50%, transparent 100%)",
+            maskImage: "linear-gradient(to right, black 0%, black 70%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, black 0%, black 70%, transparent 100%)",
+          }}
+        />
+      </div>
+
+      {/* Animated Shader Overlay */}
+      <Suspense fallback={null}>
+        <div className="absolute inset-0 -z-10" aria-hidden>
+          <AnoAI
+            colorA={shaderColors.colorA}
+            colorB={shaderColors.colorB}
+            colorC={shaderColors.colorC}
+            opacity={shaderOpacity}
+            blendMode="overlay"
+          />
+        </div>
+      </Suspense>
+
+      {/* Base Gradient Overlays */}
+      <div className="absolute inset-0 -z-10" aria-hidden>
+        {/* Primary gradient */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(26, 22, 109, 0.75) 50%, rgba(14, 15, 43, 0.65) 100%)",
+              "linear-gradient(135deg, rgba(37, 99, 235, 0.7) 0%, rgba(26, 22, 109, 0.5) 50%, rgba(14, 15, 43, 0.3) 100%)",
           }}
         />
-        <div className="pointer-events-none absolute dakrblue-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
-        <div className="pointer-events-none absolute navy-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+        {/* Left side darkening for text readability */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to right, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.3) 40%, transparent 70%)",
+          }}
+        />
+        {/* Top gradient */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent" />
+        {/* Bottom gradient */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       </div>
 
-      {/* Diagonal Accent Shape */}
+      {/* Diagonal Accent Shape - Right side */}
       <div
-        className="absolute right-0 top-0 -z-5 h-full w-1/2 opacity-30"
+        className="absolute right-0 top-0 -z-5 h-full w-1/2 opacity-20"
         style={{
           background:
             "linear-gradient(135deg, transparent 0%, rgba(251, 176, 64, 0.4) 50%, rgba(251, 176, 64, 0.6) 100%)",
           clipPath: "polygon(30% 0, 100% 0, 100% 100%, 0% 100%)",
         }}
       />
+
+      {/* Animated particles/dots overlay */}
+      <div className="absolute inset-0 -z-5 overflow-hidden" aria-hidden>
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-pulse" />
+        <div className="absolute top-1/3 left-1/3 w-1.5 h-1.5 bg-blue-400/30 rounded-full animate-pulse delay-300" />
+        <div className="absolute top-2/3 left-1/5 w-1 h-1 bg-white/15 rounded-full animate-pulse delay-700" />
+        <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-amber-400/20 rounded-full animate-pulse delay-500" />
+      </div>
 
       {/* Content */}
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 pb-24 pt-36 sm:gap-8 sm:pt-44 md:px-10 lg:px-16">

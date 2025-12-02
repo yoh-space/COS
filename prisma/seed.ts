@@ -5,6 +5,8 @@
 
 import { PrismaClient } from '@prisma/client';
 import { PERMISSIONS, ROLES } from '../src/lib/permissions';
+import { seedAcademicPrograms } from './seed-academic-programs';
+import { seedResources } from './seed-resources';
 
 const prisma = new PrismaClient();
 
@@ -27,6 +29,12 @@ async function main() {
         PERMISSIONS.BLOG_UPDATE,
         PERMISSIONS.BLOG_DELETE,
         PERMISSIONS.BLOG_PUBLISH,
+        PERMISSIONS.PUBLICATION_CREATE,
+        PERMISSIONS.PUBLICATION_READ,
+        PERMISSIONS.PUBLICATION_UPDATE,
+        PERMISSIONS.RESEARCH_CREATE,
+        PERMISSIONS.RESEARCH_READ,
+        PERMISSIONS.RESEARCH_UPDATE,
         PERMISSIONS.MEDIA_UPLOAD,
         PERMISSIONS.MEDIA_READ,
       ],
@@ -57,6 +65,9 @@ async function main() {
       description: 'Can manage research resources and publications',
       permissions: [
         PERMISSIONS.RESOURCE_ALL,
+        PERMISSIONS.PUBLICATION_ALL,
+        PERMISSIONS.RESEARCH_ALL,
+        PERMISSIONS.REPORT_ALL,
         PERMISSIONS.MEDIA_UPLOAD,
         PERMISSIONS.MEDIA_READ,
       ],
@@ -90,6 +101,12 @@ async function main() {
     });
     console.log(`✓ Created/Updated role: ${role.name}`);
   }
+
+  // Seed academic programs
+  await seedAcademicPrograms();
+  
+  // Seed resources
+  await seedResources();
 
   console.log('\nDatabase seed completed successfully!');
 }
