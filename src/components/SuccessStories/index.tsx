@@ -2,17 +2,24 @@
 
 import { useState } from "react";
 import { Testimonial } from "@/types/testimonial";
-import DisplayCards from "@/components/ui/display-cards";
 import TestimonialModal from "@/components/ui/testimonial-modal";
-import { Star, User, Award, Heart, Trophy } from "lucide-react";
+import { motion } from "framer-motion";
+import { 
+  Microscope, 
+  GraduationCap, 
+  FlaskConical, 
+  Trophy, 
+  Users,
+  ArrowRight,
+  Sparkles
+} from "lucide-react";
 
 const testimonialData: Testimonial[] = [
   {
     id: 1,
     name: "Research Excellence",
-    designation: "🔬 Our faculty and students publish cutting-edge research in international journals, contributing to scientific advancement in chemistry, physics, biology, and mathematics. Over 200+ publications annually in high-impact journals.",
-    content:
-      "200+ Annual Publications in Top Journals",
+    designation: "Our faculty and students publish cutting-edge research in international journals, contributing to scientific advancement in chemistry, physics, biology, and mathematics.",
+    content: "200+ Annual Publications in Top Journals. Our research teams consistently produce groundbreaking work that advances scientific knowledge globally.",
     image: "/images/success-stories/research.jpg",
     url: "/resources/publication",
     star: 5,
@@ -21,8 +28,7 @@ const testimonialData: Testimonial[] = [
     id: 2,
     name: "Alumni Success",
     designation: "Distinguished Graduates Leading in Academia and Industry",
-    content:
-      "Our alumni hold prestigious positions in universities, research institutions, and industries worldwide, making significant contributions to science and technology.",
+    content: "Our alumni hold prestigious positions in universities, research institutions, and industries worldwide, making significant contributions to science and technology.",
     image: "/images/success-stories/alumni.jpg",
     url: "/about/background",
     star: 5,
@@ -31,8 +37,7 @@ const testimonialData: Testimonial[] = [
     id: 3,
     name: "Laboratory Excellence",
     designation: "State-of-the-Art Research Facilities",
-    content:
-      "Equipped with modern instrumentation including GC-MS, ICP-OES, and advanced computing clusters for cutting-edge research across all departments.",
+    content: "Equipped with modern instrumentation including GC-MS, ICP-OES, and advanced computing clusters for cutting-edge research across all departments.",
     image: "/images/success-stories/lab.jpg",
     url: "/laboratories",
     star: 5,
@@ -41,8 +46,7 @@ const testimonialData: Testimonial[] = [
     id: 4,
     name: "Student Achievements",
     designation: "National and International Recognition",
-    content:
-      "Our students consistently win awards in national science competitions and secure scholarships for international graduate programs.",
+    content: "Our students consistently win awards in national science competitions and secure scholarships for international graduate programs.",
     image: "/images/success-stories/students.jpg",
     url: "/academics",
     star: 5,
@@ -51,12 +55,27 @@ const testimonialData: Testimonial[] = [
     id: 5,
     name: "Community Impact",
     designation: "Bridging Science and Society",
-    content:
-      "Through outreach programs, we engage with local communities, schools, and industries to promote STEM education and sustainable development.",
+    content: "Through outreach programs, we engage with local communities, schools, and industries to promote STEM education and sustainable development.",
     image: "/images/success-stories/community.jpg",
     url: "/services",
     star: 5,
   },
+];
+
+const cardIcons = [
+  <Microscope key="microscope" className="w-5 h-5 text-white" />,
+  <GraduationCap key="graduation" className="w-5 h-5 text-white" />,
+  <FlaskConical key="flask" className="w-5 h-5 text-white" />,
+  <Trophy key="trophy" className="w-5 h-5 text-white" />,
+  <Users key="users" className="w-5 h-5 text-white" />,
+];
+
+const cardColors = [
+  { gradient: "from-amber-500 to-orange-600", shadow: "shadow-amber-500/30", hover: "hover:shadow-amber-500/40" },
+  { gradient: "from-blue-500 to-indigo-600", shadow: "shadow-blue-500/30", hover: "hover:shadow-blue-500/40" },
+  { gradient: "from-emerald-500 to-teal-600", shadow: "shadow-emerald-500/30", hover: "hover:shadow-emerald-500/40" },
+  { gradient: "from-purple-500 to-violet-600", shadow: "shadow-purple-500/30", hover: "hover:shadow-purple-500/40" },
+  { gradient: "from-rose-500 to-pink-600", shadow: "shadow-rose-500/30", hover: "hover:shadow-rose-500/40" },
 ];
 
 const Testimonials = () => {
@@ -72,205 +91,159 @@ const Testimonials = () => {
     setIsModalOpen(false);
     setSelectedTestimonial(null);
   };
+
   return (
-    <section className="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
-      <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-black dark:text-white mb-4">
-            Our Success Stories
+    <section className="relative z-10 py-16 md:py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 right-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container relative">
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 mb-4">
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Our Achievements</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            Success Stories
           </h2>
-          <p className="text-base text-body-color dark:text-body-color-dark max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Celebrating achievements in research, education, and community impact at the College of Science.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="flex justify-center mt-16">
-          <DisplayCards
-            cards={[
-              {
-                icon: <Star className="size-4 text-yellow-300" />,
-                title: testimonialData[0].name,
-                description: testimonialData[0].content.slice(0, 45) + "...",
-                date: "⭐⭐⭐⭐⭐",
-                titleClassName: "text-yellow-500",
-                className: "[grid-area:stack] hover:-translate-y-12 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-                onClick: () => handleCardClick(testimonialData[0]),
-              },
-              {
-                icon: <User className="size-4 text-blue-300" />,
-                title: testimonialData[1].name,
-                description: testimonialData[1].content.slice(0, 45) + "...",
-                date: "⭐⭐⭐⭐⭐",
-                titleClassName: "text-blue-500",
-                className: "[grid-area:stack] translate-x-12 translate-y-8 hover:-translate-y-2 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-                onClick: () => handleCardClick(testimonialData[1]),
-              },
-              {
-                icon: <Award className="size-4 text-green-300" />,
-                title: testimonialData[2].name,
-                description: testimonialData[2].content.slice(0, 45) + "...",
-                date: "⭐⭐⭐⭐⭐",
-                titleClassName: "text-green-500",
-                className: "[grid-area:stack] translate-x-24 translate-y-16 hover:translate-y-6 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-                onClick: () => handleCardClick(testimonialData[2]),
-              },
-              {
-                icon: <Heart className="size-4 text-purple-300" />,
-                title: testimonialData[3].name,
-                description: testimonialData[3].content.slice(0, 45) + "...",
-                date: "⭐⭐⭐⭐⭐",
-                titleClassName: "text-purple-500",
-                className: "[grid-area:stack] translate-x-36 translate-y-24 hover:translate-y-14 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
-                onClick: () => handleCardClick(testimonialData[3]),
-              },
-              {
-                icon: <Trophy className="size-4 text-pink-300" />,
-                title: testimonialData[4].name,
-                description: testimonialData[4].content.slice(0, 45) + "...",
-                date: "⭐⭐⭐⭐⭐",
-                titleClassName: "text-pink-500",
-                className: "[grid-area:stack] translate-x-48 translate-y-32 hover:translate-y-22",
-                onClick: () => handleCardClick(testimonialData[4]),
-              },
-            ]}
-          />
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 md:gap-6">
+          {testimonialData.map((testimonial, index) => (
+            <SuccessCard
+              key={testimonial.id}
+              testimonial={testimonial}
+              icon={cardIcons[index]}
+              colors={cardColors[index]}
+              index={index}
+              onClick={() => handleCardClick(testimonial)}
+            />
+          ))}
         </div>
+      </div>
 
-        <TestimonialModal
-          testimonial={selectedTestimonial}
-          isOpen={isModalOpen}
-          onClose={closeModal}
-        />
-      </div>
-      <div className="absolute right-0 top-5 z-[-1]">
-        <svg
-          width="238"
-          height="531"
-          viewBox="0 0 238 531"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect
-            opacity="0.3"
-            x="422.819"
-            y="-70.8145"
-            width="196"
-            height="541.607"
-            rx="2"
-            transform="rotate(51.2997 422.819 -70.8145)"
-            fill="url(#paint0_linear_83:2)"
-          />
-          <rect
-            opacity="0.3"
-            x="426.568"
-            y="144.886"
-            width="59.7544"
-            height="541.607"
-            rx="2"
-            transform="rotate(51.2997 426.568 144.886)"
-            fill="url(#paint1_linear_83:2)"
-          />
-          <defs>
-            <linearGradient
-              id="paint0_linear_83:2"
-              x1="517.152"
-              y1="-251.373"
-              x2="517.152"
-              y2="459.865"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#4A6CF7" />
-              <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient
-              id="paint1_linear_83:2"
-              x1="455.327"
-              y1="-35.673"
-              x2="455.327"
-              y2="675.565"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#4A6CF7" />
-              <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <div className="absolute bottom-5 left-0 z-[-1]">
-        <svg
-          width="279"
-          height="106"
-          viewBox="0 0 279 106"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g opacity="0.5">
-            <path
-              d="M-57 12L50.0728 74.8548C55.5501 79.0219 70.8513 85.7589 88.2373 79.3692C109.97 71.3821 116.861 60.9642 156.615 63.7423C178.778 65.291 195.31 69.2985 205.911 62.3533C216.513 55.408 224.994 47.7682 243.016 49.1572C255.835 50.1453 265.278 50.8936 278 45.3373"
-              stroke="url(#paint0_linear_72:302)"
-            />
-            <path
-              d="M-57 1L50.0728 63.8548C55.5501 68.0219 70.8513 74.7589 88.2373 68.3692C109.97 60.3821 116.861 49.9642 156.615 52.7423C178.778 54.291 195.31 58.2985 205.911 51.3533C216.513 44.408 224.994 36.7682 243.016 38.1572C255.835 39.1453 265.278 39.8936 278 34.3373"
-              stroke="url(#paint1_linear_72:302)"
-            />
-            <path
-              d="M-57 23L50.0728 85.8548C55.5501 90.0219 70.8513 96.7589 88.2373 90.3692C109.97 82.3821 116.861 71.9642 156.615 74.7423C178.778 76.291 195.31 80.2985 205.911 73.3533C216.513 66.408 224.994 58.7682 243.016 60.1572C255.835 61.1453 265.278 61.8936 278 56.3373"
-              stroke="url(#paint2_linear_72:302)"
-            />
-            <path
-              d="M-57 35L50.0728 97.8548C55.5501 102.022 70.8513 108.759 88.2373 102.369C109.97 94.3821 116.861 83.9642 156.615 86.7423C178.778 88.291 195.31 92.2985 205.911 85.3533C216.513 78.408 224.994 70.7682 243.016 72.1572C255.835 73.1453 265.278 73.8936 278 68.3373"
-              stroke="url(#paint3_linear_72:302)"
-            />
-          </g>
-          <defs>
-            <linearGradient
-              id="paint0_linear_72:302"
-              x1="256.267"
-              y1="53.6717"
-              x2="-40.8688"
-              y2="8.15715"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#4A6CF7" stopOpacity="0" />
-              <stop offset="1" stopColor="#4A6CF7" />
-            </linearGradient>
-            <linearGradient
-              id="paint1_linear_72:302"
-              x1="256.267"
-              y1="42.6717"
-              x2="-40.8688"
-              y2="-2.84285"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#4A6CF7" stopOpacity="0" />
-              <stop offset="1" stopColor="#4A6CF7" />
-            </linearGradient>
-            <linearGradient
-              id="paint2_linear_72:302"
-              x1="256.267"
-              y1="64.6717"
-              x2="-40.8688"
-              y2="19.1572"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#4A6CF7" stopOpacity="0" />
-              <stop offset="1" stopColor="#4A6CF7" />
-            </linearGradient>
-            <linearGradient
-              id="paint3_linear_72:302"
-              x1="256.267"
-              y1="76.6717"
-              x2="-40.8688"
-              y2="31.1572"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#4A6CF7" stopOpacity="0" />
-              <stop offset="1" stopColor="#4A6CF7" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+      <TestimonialModal
+        testimonial={selectedTestimonial}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </section>
+  );
+};
+
+interface SuccessCardProps {
+  testimonial: Testimonial;
+  icon: React.ReactNode;
+  colors: { gradient: string; shadow: string; hover: string };
+  index: number;
+  onClick: () => void;
+}
+
+const SuccessCard = ({ testimonial, icon, colors, index, onClick }: SuccessCardProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ 
+        duration: 0.5, 
+        delay: index * 0.1,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
+      whileHover={{ y: -8 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={onClick}
+      className="group cursor-pointer"
+    >
+      <div className={`
+        relative h-full min-h-[280px] p-6 rounded-2xl
+        bg-white dark:bg-gray-800/80
+        border border-gray-200/80 dark:border-gray-700/50
+        shadow-lg ${colors.shadow} ${colors.hover}
+        hover:border-transparent
+        transition-all duration-500 ease-out
+        overflow-hidden
+      `}>
+        {/* Gradient border on hover */}
+        <div className={`
+          absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
+          bg-gradient-to-br ${colors.gradient}
+          transition-opacity duration-500
+          -z-10
+        `} />
+        <div className="absolute inset-[1px] rounded-2xl bg-white dark:bg-gray-800 -z-10" />
+
+        {/* Icon */}
+        <div className={`
+          inline-flex items-center justify-center
+          w-12 h-12 rounded-xl mb-4
+          bg-gradient-to-br ${colors.gradient}
+          shadow-lg ${colors.shadow}
+          group-hover:scale-110 group-hover:rotate-3
+          transition-transform duration-300
+        `}>
+          {icon}
+        </div>
+
+        {/* Title */}
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors duration-300">
+          {testimonial.name}
+        </h3>
+
+        {/* Subtitle */}
+        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+          {testimonial.designation}
+        </p>
+
+        {/* Description */}
+        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3 mb-4">
+          {testimonial.content}
+        </p>
+
+        {/* Rating */}
+        <div className="flex items-center gap-1 mb-4">
+          {[...Array(testimonial.star)].map((_, i) => (
+            <svg
+              key={i}
+              className="w-4 h-4 text-amber-400 fill-current"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          ))}
+        </div>
+
+        {/* Action */}
+        <div className="flex items-center text-sm font-medium text-primary group-hover:gap-2 transition-all duration-300">
+          <span>Learn more</span>
+          <ArrowRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+        </div>
+
+        {/* Decorative elements */}
+        <div className={`
+          absolute -top-20 -right-20 w-40 h-40 rounded-full
+          bg-gradient-to-br ${colors.gradient} opacity-5
+          group-hover:opacity-10 group-hover:scale-150
+          transition-all duration-700
+        `} />
+      </div>
+    </motion.div>
   );
 };
 
