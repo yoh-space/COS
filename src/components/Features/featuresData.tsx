@@ -26,7 +26,7 @@ const featuresData: Feature[] = [
   {
     id: 3,
     icon: <FlaskConical className="h-10 w-10 text-blue-600 dark:text-blue-300" />,
-    title: "State-of-the-Art Laboratories",
+    title: "State of the Art Laboratories",
     paragraph:
       "Equipped with modern facilities and advanced equipment, our laboratories provide students and researchers with hands-on experience in Chemistry, Physics, Biology, Mathematics, Statistics, and Industrial Chemistry.",
   },

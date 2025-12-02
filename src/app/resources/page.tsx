@@ -13,62 +13,26 @@ import {
   Users,
   Globe,
 } from "lucide-react";
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: "Resources | BDU College of Science",
   description: "Access publications, research activities, reports, and documentation from the College of Science at Bahir Dar University.",
 };
 
-const resourceSections = [
-  {
-    title: "Publications",
-    description:
-      "Access research publications, journal articles, and academic papers from our faculty and researchers.",
-    href: "/resources/publication",
-    icon: BookOpen,
-    color: "blue",
-    stats: "100+ Papers",
-    features: [
-      "Peer-reviewed journals",
-      "Conference proceedings",
-      "EJST publications",
-    ],
-  },
-  {
-    title: "Research Activities",
-    description:
-      "Explore ongoing research projects, thematic areas, and collaborative initiatives across departments.",
-    href: "/resources/research",
-    icon: Microscope,
-    color: "green",
-    stats: "50+ Projects",
-    features: [
-      "Thematic research",
-      "Collaborative projects",
-      "Annual conferences",
-    ],
-  },
-  {
-    title: "Reports & Documents",
-    description:
-      "Download annual reports, strategic plans, and official documents of the College of Science.",
-    href: "/resources/reports",
-    icon: FileText,
-    color: "blue",
-    stats: "Annual Reports",
-    features: ["Strategic plans", "Performance reports", "Policy documents"],
-  },
-  {
-    title: "Documentation",
-    description:
-      "Access guidelines, procedures, and academic documentation for students and faculty.",
-    href: "/resources/documentations",
-    icon: FolderOpen,
-    color: "green",
-    stats: "Guidelines",
-    features: ["Academic policies", "Procedures", "Forms & templates"],
-  },
-];
+async function getResourceCounts() {
+  try {
+    const [publicationsCount, researchCount, reportsCount] = await Promise.all([
+      prisma.publication.count({ where: { status: 'published' } }),
+      prisma.researchActivity.count({ where: { status: 'published' } }),
+      prisma.report.count({ where: { status: 'published' } }),
+    ]);
+    return { publicationsCount, researchCount, reportsCount };
+  } catch (error) {
+    console.error('Failed to fetch resource counts:', error);
+    return { publicationsCount: 0, researchCount: 0, reportsCount: 0 };
+  }
+}
 
 const highlights = [
   {
@@ -91,7 +55,59 @@ const highlights = [
   },
 ];
 
-const ResourcesPage = () => {
+const ResourcesPage = async () => {
+  const { publicationsCount, researchCount, reportsCount } = await getResourceCounts();
+  
+  const resourceSections = [
+    {
+      title: "Publications",
+      description:
+        "Access research publications, journal articles, and academic papers from our faculty and researchers.",
+      href: "/resources/publication",
+      icon: BookOpen,
+      color: "blue",
+      stats: publicationsCount > 0 ? `${publicationsCount} Publications` : "Publications",
+      features: [
+        "Peer-reviewed journals",
+        "Conference proceedings",
+        "EJST publications",
+      ],
+    },
+    {
+      title: "Research Activities",
+      description:
+        "Explore ongoing research projects, thematic areas, and collaborative initiatives across departments.",
+      href: "/resources/research",
+      icon: Microscope,
+      color: "green",
+      stats: researchCount > 0 ? `${researchCount} Projects` : "Research Projects",
+      features: [
+        "Thematic research",
+        "Collaborative projects",
+        "Annual conferences",
+      ],
+    },
+    {
+      title: "Reports & Documents",
+      description:
+        "Download annual reports, strategic plans, and official documents of the College of Science.",
+      href: "/resources/reports",
+      icon: FileText,
+      color: "blue",
+      stats: reportsCount > 0 ? `${reportsCount} Reports` : "Reports",
+      features: ["Strategic plans", "Performance reports", "Policy documents"],
+    },
+    {
+      title: "Documentation",
+      description:
+        "Access guidelines, procedures, and academic documentation for students and faculty.",
+      href: "/resources/documentations",
+      icon: FolderOpen,
+      color: "green",
+      stats: "Guidelines",
+      features: ["Academic policies", "Procedures", "Forms & templates"],
+    },
+  ];
   return (
     <>
       <BreadcrumbJsonLd

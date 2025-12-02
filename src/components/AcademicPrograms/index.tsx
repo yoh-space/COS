@@ -1,17 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SectionTitle from "../Common/SectionTitle";
 import ProgramGlassCard from "@/components/ui/program-glass-card";
 
 const AcademicPrograms = () => {
-  const [isMonthly, setIsMonthly] = useState(true);
+  const [programs, setPrograms] = useState([]);
 
-  const programs = [
+  // Fallback data
+  const fallbackPrograms = [
     {
       packageName: "Undergraduate",
       price: "BSc",
       duration: "4 Years",
-      bgColor: "bg-black text-white",
       subtitle: "Bachelor of Science programs across six departments.",
       features: [
         { text: "Chemistry", status: "active" as const },
@@ -32,7 +32,6 @@ const AcademicPrograms = () => {
       packageName: "Graduate",
       price: "MSc",
       duration: "2 Years",
-      bgColor: "bg-black text-white",
       subtitle: "Master of Science programs with research focus.",
       features: [
         { text: "Advanced Coursework", status: "active" as const },
@@ -53,7 +52,6 @@ const AcademicPrograms = () => {
       packageName: "Doctoral",
       price: "PhD",
       duration: "3-4 Years",
-      bgColor: "bg-black text-white",
       subtitle: "Doctor of Philosophy programs for research excellence.",
       features: [
         { text: "Original Research", status: "active" as const },
@@ -72,6 +70,39 @@ const AcademicPrograms = () => {
     },
   ];
 
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const response = await fetch('/api/cms/academic-programs?status=active');
+        if (response.ok) {
+          const data = await response.json();
+          const formattedPrograms = data.programs?.map((program: any) => ({
+            packageName: program.name,
+            price: program.level,
+            duration: program.duration,
+            subtitle: program.subtitle || program.description?.substring(0, 100) + '...',
+            features: program.features?.map((feature: string) => ({ text: feature, status: 'active' as const })) || [],
+          })) || [];
+          
+          if (formattedPrograms.length > 0) {
+            setPrograms(formattedPrograms);
+          } else {
+            setPrograms(fallbackPrograms);
+          }
+        } else {
+          setPrograms(fallbackPrograms);
+        }
+      } catch (error) {
+        console.error('Failed to fetch programs:', error);
+        setPrograms(fallbackPrograms);
+      }
+    };
+
+    fetchPrograms();
+  }, []);
+
+  const displayPrograms = programs.length > 0 ? programs : fallbackPrograms;
+
   return (
     <section id="programs" className="relative z-10 py-16 md:py-20 lg:py-28">
       <div className="container">
@@ -83,7 +114,7 @@ const AcademicPrograms = () => {
         />
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {programs.map((program, index) => (
+          {displayPrograms.map((program, index) => (
             <ProgramGlassCard
               key={index}
               packageName={program.packageName}

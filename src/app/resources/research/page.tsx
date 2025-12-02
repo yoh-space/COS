@@ -3,10 +3,26 @@ import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import { Microscope, Users, Calendar, Target, Sparkles, Globe, TrendingUp, Heart, Lightbulb, FlaskConical, Leaf, Cpu, Apple, Shield } from "lucide-react";
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = generatePageMetadata('research');
 
-const ResearchPage = () => {
+async function getResearchActivities() {
+  try {
+    const research = await prisma.researchActivity.findMany({
+      where: { status: 'published' },
+      orderBy: { createdAt: 'desc' },
+      take: 6,
+    });
+    return research;
+  } catch (error) {
+    console.error('Failed to fetch research activities:', error);
+    return [];
+  }
+}
+
+const ResearchPage = async () => {
+  const researchActivities = await getResearchActivities();
     return (
         <>
             <BreadcrumbJsonLd
@@ -322,6 +338,34 @@ const ResearchPage = () => {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Recent Research Activities */}
+                            {researchActivities.length > 0 && (
+                                <div className="mb-10">
+                                    <h3 className="mb-8 text-2xl font-bold text-black dark:text-white text-center">
+                                        Recent Research Activities
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {researchActivities.map((research) => (
+                                            <div key={research.id} className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300">
+                                                <div className="mb-3">
+                                                    <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-600 dark:bg-green-900/30 dark:text-green-400 capitalize">
+                                                        {research.category}
+                                                    </span>
+                                                </div>
+                                                <h4 className="mb-3 text-lg font-bold text-black dark:text-white line-clamp-2">
+                                                    {research.title}
+                                                </h4>
+                                                {research.description && (
+                                                    <p className="text-sm text-body-color leading-relaxed line-clamp-3">
+                                                        {research.description}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Closing Statement */}
                             <div className="rounded-sm bg-gradient-to-r from-green-100 to-green-50 dark:from-green-900/20 dark:to-green-900/10 px-8 py-8 border-l-4 border-green-500">

@@ -3,10 +3,26 @@ import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import { BookOpen, Globe, Users, Megaphone, FileText, Lightbulb, TrendingUp, Award, ExternalLink } from "lucide-react";
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = generatePageMetadata('publication');
 
-const PublicationPage = () => {
+async function getPublications() {
+  try {
+    const publications = await prisma.publication.findMany({
+      where: { status: 'published' },
+      orderBy: { publishedAt: 'desc' },
+      take: 6,
+    });
+    return publications;
+  } catch (error) {
+    console.error('Failed to fetch publications:', error);
+    return [];
+  }
+}
+
+const PublicationPage = async () => {
+  const publications = await getPublications();
     return (
         <>
             <BreadcrumbJsonLd
@@ -199,6 +215,45 @@ const PublicationPage = () => {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Recent Publications */}
+                            {publications.length > 0 && (
+                                <div className="mb-10">
+                                    <h3 className="mb-8 text-2xl font-bold text-black dark:text-white text-center">
+                                        Recent Publications
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {publications.map((publication) => (
+                                            <div key={publication.id} className="rounded-sm bg-white p-6 shadow-three dark:bg-gray-dark hover:shadow-one transition-all duration-300">
+                                                <div className="mb-3">
+                                                    <span className="inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 capitalize">
+                                                        {publication.category}
+                                                    </span>
+                                                </div>
+                                                <h4 className="mb-3 text-lg font-bold text-black dark:text-white line-clamp-2">
+                                                    {publication.title}
+                                                </h4>
+                                                {publication.description && (
+                                                    <p className="text-sm text-body-color leading-relaxed line-clamp-3 mb-4">
+                                                        {publication.description}
+                                                    </p>
+                                                )}
+                                                {publication.externalUrl && (
+                                                    <a
+                                                        href={publication.externalUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
+                                                    >
+                                                        Read More
+                                                        <ExternalLink size={14} />
+                                                    </a>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Closing Statement */}
                             <div className="rounded-sm bg-gradient-to-r from-blue-100 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/10 px-8 py-8 border-l-4 border-blue-500">
