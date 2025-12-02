@@ -173,7 +173,7 @@ export default function AIChatCard() {
             disabled={isLoading}
           />
           <button
-            onClick={handleSend}
+            onClick={() => handleSend()}
             disabled={!input.trim() || isLoading}
             className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 dark:bg-blue-600 dark:text-gray-50"
           >
