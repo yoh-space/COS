@@ -4,6 +4,16 @@ import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
+import DepartmentHero from '@/components/Department/DepartmentHero';
+import DepartmentContent from '@/components/Department/DepartmentContent';
+import VisionMission from '@/components/Department/VisionMission';
+import Objectives from '@/components/Department/Objectives';
+import LearningOutcomes from '@/components/Department/LearningOutcomes';
+import ResearchTeams from '@/components/Department/ResearchTeams';
+import Publications from '@/components/Department/Publications';
+import Events from '@/components/Department/Events';
+import Resources from '@/components/Department/Resources';
+import FacultyMembers from '@/components/Department/FacultyMembers';
 
 // Force dynamic rendering - no caching, always fetch fresh data
 export const dynamic = 'force-dynamic';
@@ -33,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-async function getDepartment(slug: string) {
+async function getDepartmentData(slug: string) {
     const department = await prisma.department.findUnique({
         where: { slug },
         include: {
@@ -49,6 +59,42 @@ async function getDepartment(slug: string) {
                 },
             },
             academicSections: true,
+            departmentContents: {
+                where: { status: 'published' },
+                orderBy: [
+                    { displayOrder: 'asc' },
+                    { createdAt: 'asc' }
+                ]
+            },
+            researchTeams: {
+                where: { status: 'active' },
+                orderBy: [
+                    { displayOrder: 'asc' },
+                    { createdAt: 'desc' }
+                ]
+            },
+            departmentPublications: {
+                where: { status: 'published' },
+                orderBy: [
+                    { year: 'desc' },
+                    { createdAt: 'desc' }
+                ],
+                take: 50 // Limit to recent publications
+            },
+            departmentEvents: {
+                where: { status: 'published' },
+                orderBy: [
+                    { eventDate: 'desc' }
+                ],
+                take: 20 // Limit to recent events
+            },
+            departmentResources: {
+                where: { status: 'published' },
+                orderBy: [
+                    { displayOrder: 'asc' },
+                    { createdAt: 'desc' }
+                ]
+            }
         },
     });
 
@@ -57,11 +103,24 @@ async function getDepartment(slug: string) {
 
 export default async function DepartmentPage({ params }: Props) {
     const { slug } = await params;
-    const department = await getDepartment(slug);
+    const department = await getDepartmentData(slug);
 
     if (!department) {
         notFound();
     }
+
+    // Organize content by section type
+    const contentSections = {
+        background: department.departmentContents.find(c => c.sectionType === 'background'),
+        vision: department.departmentContents.find(c => c.sectionType === 'vision'),
+        mission: department.departmentContents.find(c => c.sectionType === 'mission'),
+        generalObjectives: department.departmentContents.find(c => c.sectionType === 'general_objectives'),
+        specificObjectives: department.departmentContents.find(c => c.sectionType === 'specific_objectives'),
+        professionalProfile: department.departmentContents.find(c => c.sectionType === 'professional_profile'),
+        undergraduateOutcomes: department.departmentContents.find(c => c.sectionType === 'undergraduate_outcomes'),
+        postgraduateObjectives: department.departmentContents.find(c => c.sectionType === 'postgraduate_objectives'),
+        postgraduateOutcomes: department.departmentContents.find(c => c.sectionType === 'postgraduate_outcomes'),
+    };
 
     return (
         <>
@@ -81,62 +140,73 @@ export default async function DepartmentPage({ params }: Props) {
                     },
                 ]}
             />
-            <Breadcrumb
-                pageName={`Department of ${department.name}`}
-                description={department.description || `Explore the ${department.name} department.`}
+
+            <DepartmentHero
+                name={department.name}
+                description={department.description}
             />
-            <section className="pb-[120px] pt-[120px]">
-                <div className="container">
-                    <div className="-mx-4 flex flex-wrap justify-center">
-                        <div className="w-full px-4 lg:w-8/12">
-                            <div className="mb-12 rounded-sm bg-white px-8 py-11 shadow-three dark:bg-gray-dark sm:p-[55px] lg:mb-5 lg:px-8 xl:p-[55px]">
-                                <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-3xl lg:text-2xl xl:text-3xl">
-                                    About the Department
-                                </h2>
-                                <p className="mb-8 text-base font-medium text-body-color">
-                                    {department.description || `The Department of ${department.name} at Bahir Dar University is dedicated to excellence in teaching and research.`}
-                                </p>
 
-                                {department.academicSections && department.academicSections.length > 0 && (
-                                    <>
-                                        <h3 className="mb-3 text-xl font-bold text-black dark:text-white">
-                                            Academic Programs
-                                        </h3>
-                                        <ul className="mb-8 list-disc pl-5 text-body-color">
-                                            {department.academicSections.map((section) => (
-                                                <li key={section.id} className="mb-2">
-                                                    {section.name}
-                                                    {section.duration && ` (${section.duration})`}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </>
-                                )}
+            <div className="bg-gray-50 dark:bg-gray-900">
+                {/* Background Section */}
+                {contentSections.background && (
+                    <DepartmentContent
+                        title="Background"
+                        content={contentSections.background.content}
+                        sectionId="background"
+                    />
+                )}
 
-                                {department.staffMembers && department.staffMembers.length > 0 && (
-                                    <>
-                                        <h3 className="mb-3 text-xl font-bold text-black dark:text-white">
-                                            Faculty Members
-                                        </h3>
-                                        <div className="mb-8 space-y-4">
-                                            {department.staffMembers.slice(0, 5).map((staff) => (
-                                                <div key={staff.id} className="border-l-4 border-primary pl-4">
-                                                    <h4 className="font-semibold text-black dark:text-white">
-                                                        {staff.name}
-                                                    </h4>
-                                                    <p className="text-sm text-body-color">
-                                                        {staff.title} - {staff.specialization}
-                                                    </p>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                {/* Vision & Mission */}
+                {(contentSections.vision || contentSections.mission) && (
+                    <VisionMission
+                        vision={contentSections.vision?.content}
+                        mission={contentSections.mission?.content}
+                    />
+                )}
+
+                {/* Objectives */}
+                {(contentSections.generalObjectives || contentSections.specificObjectives) && (
+                    <Objectives
+                        generalObjectives={contentSections.generalObjectives?.content}
+                        specificObjectives={contentSections.specificObjectives?.content}
+                        professionalProfile={contentSections.professionalProfile?.content}
+                    />
+                )}
+
+                {/* Learning Outcomes */}
+                {(contentSections.undergraduateOutcomes || contentSections.postgraduateOutcomes) && (
+                    <LearningOutcomes
+                        undergraduateOutcomes={contentSections.undergraduateOutcomes?.content}
+                        postgraduateObjectives={contentSections.postgraduateObjectives?.content}
+                        postgraduateOutcomes={contentSections.postgraduateOutcomes?.content}
+                    />
+                )}
+
+                {/* Research Teams */}
+                {department.researchTeams.length > 0 && (
+                    <ResearchTeams teams={department.researchTeams} />
+                )}
+
+                {/* Publications */}
+                {department.departmentPublications.length > 0 && (
+                    <Publications publications={department.departmentPublications} />
+                )}
+
+                {/* Events */}
+                {department.departmentEvents.length > 0 && (
+                    <Events events={department.departmentEvents} />
+                )}
+
+                {/* Resources */}
+                {department.departmentResources.length > 0 && (
+                    <Resources resources={department.departmentResources} />
+                )}
+
+                {/* Faculty Members */}
+                {department.staffMembers.length > 0 && (
+                    <FacultyMembers staffMembers={department.staffMembers} />
+                )}
+            </div>
         </>
     );
 }

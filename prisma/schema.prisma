@@ -113,6 +113,11 @@ model Department {
   users           User[]   @relation("UserDepartment")
   staffMembers    StaffMember[]
   academicSections AcademicSection[]
+  departmentContents DepartmentContent[] @relation("DepartmentContents")
+  researchTeams   ResearchTeam[] @relation("DepartmentResearchTeams")
+  departmentPublications DepartmentPublication[] @relation("DepartmentPublications")
+  departmentEvents DepartmentEvent[] @relation("DepartmentEvents")
+  departmentResources DepartmentResource[] @relation("DepartmentResources")
   auditLogs       AuditLog[] @relation("DepartmentAuditLogs")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
@@ -342,4 +347,92 @@ model MediaFile {
   usageCount      Int      @default(0)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+// Department Content Models
+model DepartmentContent {
+  id              String   @id @default(cuid())
+  departmentId    String
+  department      Department @relation("DepartmentContents", fields: [departmentId], references: [id], onDelete: Cascade)
+  sectionType     String   // background, vision, mission, general_objectives, specific_objectives, professional_profile, undergraduate_outcomes, postgraduate_objectives, postgraduate_outcomes
+  title           String?
+  content         String   @db.Text
+  displayOrder    Int      @default(0)
+  status          String   @default("published") // draft, published
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([departmentId, sectionType])
+  @@index([departmentId])
+}
+
+model ResearchTeam {
+  id              String   @id @default(cuid())
+  departmentId    String
+  department      Department @relation("DepartmentResearchTeams", fields: [departmentId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?  @db.Text
+  teamLeader      String?
+  members         String[] // Array of member names or IDs
+  researchArea    String?
+  status          String   @default("active") // active, inactive
+  displayOrder    Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([departmentId])
+}
+
+model DepartmentPublication {
+  id              String   @id @default(cuid())
+  departmentId    String
+  department      Department @relation("DepartmentPublications", fields: [departmentId], references: [id], onDelete: Cascade)
+  title           String
+  authors         String[] // Array of author names
+  year            Int
+  publicationType String   // journal, conference, book, thesis
+  venue           String?  // Journal name, conference name, etc.
+  doi             String?
+  url             String?
+  abstract        String?  @db.Text
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([departmentId, year])
+}
+
+model DepartmentEvent {
+  id              String   @id @default(cuid())
+  departmentId    String
+  department      Department @relation("DepartmentEvents", fields: [departmentId], references: [id], onDelete: Cascade)
+  title           String
+  eventType       String   // phd_defense, seminar, presentation, math_camp, workshop, conference
+  description     String?  @db.Text
+  presenter       String?
+  eventDate       DateTime
+  location        String?
+  imageUrl        String?
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([departmentId, eventDate])
+}
+
+model DepartmentResource {
+  id              String   @id @default(cuid())
+  departmentId    String
+  department      Department @relation("DepartmentResources", fields: [departmentId], references: [id], onDelete: Cascade)
+  title           String
+  resourceType    String   // lab_photo, classroom_photo, equipment, document
+  description     String?  @db.Text
+  fileUrl         String
+  thumbnailUrl    String?
+  displayOrder    Int      @default(0)
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([departmentId])
 }
