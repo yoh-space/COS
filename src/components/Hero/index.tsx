@@ -11,10 +11,10 @@ interface HeroProps {
   primaryCTA: { text: string; href: string };
   secondaryCTA: { text: string; href: string };
   stats?: Array<{ value: string; label: string }>;
-  backgroundImage: string;
+  backgroundImages: string[];
 }
 
-export default function Hero({
+function Hero({
   title = "College of Science",
   subtitle = "Bahir Dar University",
   description = "Advancing knowledge and innovation in natural sciences. Excellence in education, research, and community service.",
@@ -25,9 +25,10 @@ export default function Hero({
     { value: "200+", label: "Faculty" },
     { value: "15+", label: "Programs" },
   ],
-  backgroundImage = "/images/hero/wisdom-building.jpeg",
+  backgroundImages = ["/images/hero/wisdom-building.jpeg"],
 }: HeroProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,21 +36,37 @@ export default function Hero({
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (backgroundImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
+
   return (
-    <section className="relative h-screen min-h-[600px] w-full overflow-hidden bg-slate-900">
-      {/* Background Image */}
+    <>
+      <div className="fixed top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/40 via-black/20 to-transparent dark:from-black/60 dark:via-black/30 z-30 pointer-events-none" />
+      
+      <section className="relative h-screen min-h-[600px] w-full overflow-hidden bg-white dark:bg-slate-900">
+      {/* Background Images */}
       <div className="absolute inset-0">
-        <Image
-          src={backgroundImage}
-          alt="Bahir Dar University College of Science"
-          fill
-          priority
-          quality={85}
-          className="object-cover"
-        />
-        {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+        {backgroundImages.map((img, index) => (
+          <Image
+            key={img}
+            src={img}
+            alt="Bahir Dar University College of Science"
+            fill
+            priority={index === 0}
+            quality={85}
+            className={`object-cover transition-opacity duration-1000 ${
+              index === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+        {/* Overlay Gradient - Enhanced for Light Theme */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/30 via-slate-800/20 to-transparent dark:from-slate-900/95 dark:via-slate-900/80 dark:to-slate-900/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent dark:from-slate-900/60" />
       </div>
 
       {/* Content Container */}
@@ -62,17 +79,17 @@ export default function Hero({
         >
           {/* Badge */}
           <div
-            className={`mb-6 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 backdrop-blur-sm transition-all delay-200 duration-700 ${
+            className={`mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/15 dark:border-blue-400/30 dark:bg-blue-500/10 px-4 py-2 backdrop-blur-sm transition-all delay-200 duration-700 ${
               isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
-            <div className="h-2 w-2 animate-pulse rounded-full bg-blue-400" />
-            <span className="text-sm font-medium text-blue-100">{subtitle}</span>
+            <div className="h-2 w-2 animate-pulse rounded-full bg-blue-500 dark:bg-blue-400" />
+            <span className="text-sm font-medium text-blue-700 dark:text-blue-100">{subtitle}</span>
           </div>
 
           {/* Main Title */}
           <h1
-            className={`mb-6 text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl transition-all delay-300 duration-700 ${
+            className={`mb-6 text-5xl font-bold leading-tight text-white drop-shadow-lg sm:text-6xl lg:text-7xl transition-all delay-300 duration-700 ${
               isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
@@ -81,7 +98,7 @@ export default function Hero({
 
           {/* Description */}
           <p
-            className={`mb-8 text-lg leading-relaxed text-slate-200 sm:text-xl transition-all delay-500 duration-700 ${
+            className={`mb-8 text-lg leading-relaxed text-white/95 drop-shadow-md sm:text-xl transition-all delay-500 duration-700 ${
               isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
             }`}
           >
@@ -110,7 +127,7 @@ export default function Hero({
             </Link>
             <Link
               href={secondaryCTA.href}
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-white/30 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:border-white/50"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-slate-300 bg-white/80 dark:border-white/30 dark:bg-white/10 px-8 py-4 font-semibold text-slate-900 dark:text-white backdrop-blur-sm transition-all hover:bg-white dark:hover:bg-white/20 hover:border-slate-400 dark:hover:border-white/50"
             >
               {secondaryCTA.text}
             </Link>
@@ -119,16 +136,16 @@ export default function Hero({
           {/* Stats */}
           {stats && stats.length > 0 && (
             <div
-              className={`flex flex-wrap gap-8 border-t border-white/20 pt-8 transition-all delay-900 duration-700 ${
+              className={`flex flex-wrap gap-8 border-t border-slate-300 dark:border-white/20 pt-8 transition-all delay-900 duration-700 ${
                 isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
               }`}
             >
               {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col">
-                  <span className="text-3xl font-bold text-white sm:text-4xl">
+                  <span className="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
                     {stat.value}
                   </span>
-                  <span className="text-sm text-slate-300">{stat.label}</span>
+                  <span className="text-sm text-slate-600 dark:text-slate-300">{stat.label}</span>
                 </div>
               ))}
             </div>
@@ -143,12 +160,35 @@ export default function Hero({
         }`}
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-xs text-slate-300">Scroll to explore</span>
-          <div className="h-8 w-5 rounded-full border-2 border-white/30 p-1">
-            <div className="h-2 w-1 animate-bounce rounded-full bg-white/60" />
+          <span className="text-xs text-slate-600 dark:text-slate-300">Scroll to explore</span>
+          <div className="h-8 w-5 rounded-full border-2 border-slate-400 dark:border-white/30 p-1">
+            <div className="h-2 w-1 animate-bounce rounded-full bg-slate-600 dark:bg-white/60" />
           </div>
         </div>
       </div>
     </section>
+    </>
+  );
+}
+
+export default function HeroSection() {
+  return (
+    <Hero
+      title="College of Science"
+      subtitle="Bahir Dar University"
+      description="Advancing knowledge and innovation in natural sciences. Excellence in education, research, and community service."
+      primaryCTA={{ text: "Apply Now", href: "/admissions" }}
+      secondaryCTA={{ text: "Explore Programs", href: "/programs" }}
+      stats={[
+        { value: "5000+", label: "Students" },
+        { value: "200+", label: "Faculty" },
+        { value: "15+", label: "Programs" },
+      ]}
+      backgroundImages={[
+        "/images/hero/wisdom-building.jpeg",
+        "/images/hero/peda-campus.jpeg",
+        "/images/hero/peda-campus2.jpeg",
+      ]}
+    />
   );
 }
