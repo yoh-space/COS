@@ -18,7 +18,7 @@ export default function Hero({
   title = "College of Science",
   subtitle = "Bahir Dar University",
   description = "Advancing knowledge and innovation in natural sciences. Excellence in education, research, and community service.",
-  primaryCTA = { text: "Apply Now", href: "/admissions" },
+  primaryCTA = { text: "Contact us", href: "/contact" },
   secondaryCTA = { text: "Explore Programs", href: "/programs" },
   stats = [
     { value: "5000+", label: "Students" },
