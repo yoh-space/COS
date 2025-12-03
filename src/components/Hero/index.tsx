@@ -70,7 +70,7 @@ function Hero({
       </div>
 
       {/* Content Container */}
-      <div className="relative mx-auto flex h-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
         <div
           ref={contentRef}
           className={`max-w-3xl transition-all duration-1000 ${

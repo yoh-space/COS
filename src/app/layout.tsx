@@ -32,7 +32,7 @@ export default function RootLayout({
       <head>
   {/* Performance-related external preconnects removed (no AdSense for this site) */}
       </head>
-      <body className={`bg-[#FCFCFC] dark:bg-black`} style={{ fontFamily }}>
+      <body className={`overflow-x-hidden bg-[#FCFCFC] dark:bg-black`} style={{ fontFamily }}>
         <ClerkProvider>
           <Providers>
             {/* ✅ Organization Structured Data using next-seo */}

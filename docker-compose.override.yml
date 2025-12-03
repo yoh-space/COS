@@ -4,8 +4,6 @@
 # Optimized for hot reload and development workflow
 # ============================================
 
-version: '3.9'
-
 services:
   nextjs-app:
     # Use polling for file watching (better for Docker on Linux)
