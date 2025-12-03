@@ -1,0 +1,314 @@
+{
+  "organization": {
+    "name": "Bahir Dar University College of Science",
+    "shortName": "BDU COS",
+    "tagline": "Wisdom at the source of Blue Nile",
+    "description": "Leading institution for science education and research in Ethiopia. Offering undergraduate and graduate programs in natural sciences with world-class faculty and state-of-the-art facilities.",
+    "mission": "To provide high-quality research-based teaching and learning in science and mathematics, preparing students for successful careers across diverse scientific disciplines.",
+    "vision": "To become one of the best research and teaching colleges in the university, producing graduates who serve as national models of excellence in science and mathematics.",
+    "location": {
+      "city": "Bahir Dar",
+      "region": "Amhara",
+      "country": "Ethiopia",
+      "coordinates": {
+        "latitude": 9.0320,
+        "longitude": 38.7469
+      }
+    },
+    "contact": {
+      "phone": "+251 583 20 9653",
+      "email": "bduinfo@bdu.edu.et",
+      "website": "https://www.bdu.edu.et/cos/",
+      "supportEmail": "support@bdu.edu.et",
+      "admissionsEmail": "admissions@bdu.edu.et"
+    },
+    "social": {
+      "facebook": "https://www.facebook.com/bduethiopia",
+      "twitter": "http://www.twitter.com/bdueduet",
+      "journals": "http://journals.bdu.edu.et/"
+    }
+  },
+  "departments": [
+    {
+      "name": "Chemistry",
+      "slug": "chemistry",
+      "description": "Comprehensive programs in organic, inorganic, physical, and analytical chemistry with state-of-the-art laboratory facilities.",
+      "specializations": ["Organic Chemistry", "Analytical Chemistry", "Physical Chemistry", "Inorganic Chemistry", "Biochemistry", "Environmental Chemistry"],
+      "facultyCount": 12
+    },
+    {
+      "name": "Industrial Chemistry",
+      "slug": "industrial-chemistry",
+      "description": "Focuses on applied chemistry, chemical engineering, and industrial processes with practical industry experience.",
+      "specializations": ["Chemical Engineering", "Process Engineering", "Industrial Catalysis", "Petroleum Chemistry", "Polymer Processing", "Pharmaceutical Chemistry"],
+      "facultyCount": 11
+    },
+    {
+      "name": "Biology",
+      "slug": "biology",
+      "description": "Covers molecular biology, genetics, ecology, and microbiology with modern research laboratories and field study opportunities.",
+      "specializations": ["Molecular Biology", "Genetics", "Microbiology", "Ecology", "Cell Biology", "Botany", "Zoology", "Parasitology"],
+      "facultyCount": 12
+    },
+    {
+      "name": "Physics",
+      "slug": "physics",
+      "description": "Programs in classical mechanics, quantum mechanics, thermodynamics, and modern physics with advanced experimental facilities.",
+      "specializations": ["Quantum Mechanics", "Thermodynamics", "Optics", "Electromagnetism", "Relativity", "Astrophysics", "Nuclear Physics", "Solid State Physics"],
+      "facultyCount": 11
+    },
+    {
+      "name": "Mathematics",
+      "slug": "mathematics",
+      "description": "Rigorous training in pure and applied mathematics, statistics, and computational methods.",
+      "specializations": ["Abstract Algebra", "Real Analysis", "Complex Analysis", "Topology", "Differential Equations", "Numerical Analysis", "Linear Algebra"],
+      "facultyCount": 12
+    },
+    {
+      "name": "Statistics",
+      "slug": "statistics",
+      "description": "Specializes in statistical theory, data analysis, probability, and computational statistics with applications across disciplines.",
+      "specializations": ["Probability Theory", "Statistical Inference", "Regression Analysis", "Time Series Analysis", "Bayesian Statistics", "Experimental Design"],
+      "facultyCount": 12
+    }
+  ],
+  "academics": {
+    "programs": [
+      {
+        "name": "Chemistry",
+        "level": ["Undergraduate", "Graduate"],
+        "description": "Study of matter, reactions, and molecular structures with hands-on laboratory experience"
+      },
+      {
+        "name": "Physics",
+        "level": ["Undergraduate", "Graduate"],
+        "description": "Study of matter, energy, and fundamental forces with advanced experimental facilities"
+      },
+      {
+        "name": "Mathematics",
+        "level": ["Undergraduate", "Graduate"],
+        "description": "Study of numbers, patterns, and abstract structures with computational methods"
+      },
+      {
+        "name": "Biology",
+        "level": ["Undergraduate", "Graduate"],
+        "description": "Study of living organisms and life processes with modern research laboratories"
+      },
+      {
+        "name": "Statistics",
+        "level": ["Undergraduate", "Graduate"],
+        "description": "Study of data analysis, probability, and computational statistics"
+      },
+      {
+        "name": "Industrial Chemistry",
+        "level": ["Undergraduate", "Graduate"],
+        "description": "Application of chemistry in industrial processes with practical industry experience"
+      },
+      {
+        "name": "Data Science",
+        "level": ["Undergraduate", "Graduate"],
+        "description": "Interdisciplinary program combining statistics, computer science, and domain expertise"
+      }
+    ],
+    "stats": {
+      "students": "5000+",
+      "annualStudents": "1000+",
+      "faculty": "200+",
+      "totalFaculty": 70,
+      "programs": "15+",
+      "departments": 6
+    }
+  },
+  "features": [
+    {
+      "title": "Quality Education",
+      "description": "High-quality research-based teaching and learning in science and mathematics with cutting-edge curriculum and experienced faculty"
+    },
+    {
+      "title": "Research Excellence",
+      "description": "Innovative research that addresses societal needs and contributes to scientific advancement with over 200+ annual publications in high-impact international journals"
+    },
+    {
+      "title": "State-of-the-Art Laboratories",
+      "description": "Modern facilities equipped with advanced equipment including GC-MS, ICP-OES, and advanced computing clusters"
+    },
+    {
+      "title": "Community Engagement",
+      "description": "Active collaboration with government and non-governmental institutions to support public service activities and promote scientific literacy"
+    },
+    {
+      "title": "Diverse Programs",
+      "description": "Comprehensive undergraduate and graduate programs in multiple scientific disciplines"
+    },
+    {
+      "title": "National Excellence",
+      "description": "Striving to become one of the best research and teaching colleges, producing graduates who serve as national models of excellence"
+    },
+    {
+      "title": "World-Class Faculty",
+      "description": "Experienced professors and researchers with expertise across all scientific disciplines"
+    },
+    {
+      "title": "International Collaborations",
+      "description": "Faculty and students collaborate with leading universities and research institutions worldwide"
+    },
+    {
+      "title": "Industry Partnerships",
+      "description": "Strong connections with industry partners for internships, research, and career opportunities"
+    },
+    {
+      "title": "Career Development",
+      "description": "Comprehensive career counseling and job placement support for graduates"
+    }
+  ],
+  "administration": {
+    "positions": [
+      {
+        "title": "College Dean",
+        "responsibilities": "Overall leadership, strategic planning, academic oversight, and external relations"
+      },
+      {
+        "title": "Academic Vice Dean",
+        "responsibilities": "Teaching-learning activities, curriculum development, and academic program management"
+      },
+      {
+        "title": "PGRCS Vice Dean",
+        "responsibilities": "Postgraduate programs, research coordination, and community service initiatives"
+      },
+      {
+        "title": "Registrar",
+        "responsibilities": "Student records, academic registration, examination processes, and graduation procedures"
+      },
+      {
+        "title": "Laboratory Manager",
+        "responsibilities": "Laboratory facilities, equipment maintenance, safety protocols, and resource allocation"
+      },
+      {
+        "title": "Academic Council",
+        "responsibilities": "Academic decision-making, curriculum approval, and policy establishment"
+      }
+    ]
+  },
+  "research": {
+    "areas": [
+      "Space Science",
+      "Environmental Sustainability",
+      "Biotechnology",
+      "Materials Science",
+      "Computational Methods",
+      "Applied Chemistry",
+      "Data Analytics"
+    ],
+    "facilities": [
+      "GC-MS (Gas Chromatography-Mass Spectrometry)",
+      "ICP-OES (Inductively Coupled Plasma Optical Emission Spectrometry)",
+      "Advanced Computing Clusters",
+      "Modern Biology Laboratories",
+      "Physics Experimental Facilities",
+      "Statistical Analysis Software"
+    ],
+    "publications": "200+ annual publications in high-impact international journals"
+  },
+  "admissions": {
+    "applicationDeadline": "Check website for current deadlines",
+    "requirements": "High school diploma or equivalent with strong performance in science and mathematics",
+    "applicationUrl": "https://www.bdu.edu.et/cos/admissions",
+    "contactEmail": "admissions@bdu.edu.et",
+    "process": "Submit application online, entrance examination, document verification, and enrollment"
+  },
+  "services": [
+    "Undergraduate education",
+    "Graduate education (Master's and PhD programs)",
+    "Research facilities and laboratories",
+    "Laboratory services and equipment access",
+    "Academic advising and mentorship",
+    "Career counseling and job placement",
+    "Student support services",
+    "Library and digital resources",
+    "International collaboration opportunities",
+    "Community outreach programs",
+    "Scientific workshops and seminars",
+    "Industry internship programs"
+  ],
+  "businessHours": {
+    "weekdays": "8:00 AM - 5:00 PM",
+    "weekends": "Closed",
+    "timezone": "EAT (East Africa Time)"
+  },
+  "faq": [
+    {
+      "question": "What programs do you offer?",
+      "answer": "We offer undergraduate and graduate programs in Chemistry, Physics, Mathematics, Biology, Statistics, Industrial Chemistry, and Data Science."
+    },
+    {
+      "question": "How many students are enrolled?",
+      "answer": "We have over 5000+ students enrolled across all programs, with 1000+ new students annually."
+    },
+    {
+      "question": "What research facilities are available?",
+      "answer": "We have state-of-the-art laboratories with GC-MS, ICP-OES, advanced computing clusters, and modern equipment for all scientific disciplines."
+    },
+    {
+      "question": "Do you have international collaborations?",
+      "answer": "Yes, our faculty and students collaborate with leading universities and research institutions worldwide."
+    },
+    {
+      "question": "How can I apply?",
+      "answer": "Visit our website at https://www.bdu.edu.et/cos/admissions or contact admissions@bdu.edu.et for application information."
+    }
+  ],
+  "programLevels": {
+    "undergraduate": {
+      "degree": "BSc (Bachelor of Science)",
+      "duration": "4 Years",
+      "description": "Bachelor of Science programs across six departments with laboratory training, research projects, industry internships, and career development."
+    },
+    "graduate": {
+      "degree": "MSc (Master of Science)",
+      "duration": "2 Years",
+      "description": "Master of Science programs with research focus including advanced coursework, thesis research, laboratory access, research publications, and teaching assistantships."
+    },
+    "doctoral": {
+      "degree": "PhD (Doctor of Philosophy)",
+      "duration": "3-4 Years",
+      "description": "Doctor of Philosophy programs for research excellence including original research, dissertation defense, advanced lab facilities, international publications, and post-doctoral opportunities."
+    }
+  },
+  "successStories": [
+    {
+      "name": "Dr. Alemayehu Tadesse",
+      "graduationYear": 2018,
+      "degree": "BSc Chemistry",
+      "currentPosition": "Senior Research Scientist at Ethiopian Institute of Agricultural Research",
+      "achievements": ["Published 15 peer-reviewed papers", "Led 3 major research projects", "Received National Science Award 2023"]
+    },
+    {
+      "name": "Hanan Mohammed",
+      "graduationYear": 2019,
+      "degree": "BSc Mathematics",
+      "currentPosition": "CEO & Founder of EduTech Solutions Ethiopia",
+      "achievements": ["Founded successful EdTech startup", "Served 50,000+ students", "Featured in Forbes Africa 30 Under 30"]
+    },
+    {
+      "name": "Dawit Bekele",
+      "graduationYear": 2017,
+      "degree": "MSc Physics",
+      "currentPosition": "Renewable Energy Engineer at Ethiopian Electric Power",
+      "achievements": ["Designed 5 major solar installations", "Contributed to 200MW renewable capacity", "International Energy Conference speaker"]
+    }
+  ],
+  "websitePages": {
+    "home": "/",
+    "about": "/about",
+    "departments": "/academics",
+    "programs": "/academic-programs",
+    "staff": "/staffs",
+    "research": "/resources/research",
+    "publications": "/resources/publication",
+    "documents": "/resources/documents",
+    "news": "/blog",
+    "contact": "/contact",
+    "faq": "/faq",
+    "support": "/support-center"
+  }
+}

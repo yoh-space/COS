@@ -4,6 +4,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, Bot, User } from "lucide-react";
+import { getChatResponse } from "@/lib/ai-chat";
 
 interface Message {
   id: string;
@@ -13,11 +14,33 @@ interface Message {
 }
 
 const QUICK_QUESTIONS = [
-  "What services do you offer?",
-  "How can I contact support?",
-  "Tell me about pricing",
-  "What are your business hours?",
+  "What programs do you offer?",
+  "Tell me about research facilities",
+  "How can I apply?",
+  "What are the departments?",
 ];
+
+// Format message to handle markdown-style formatting
+function formatMessage(text: string): string {
+  return text
+    // Bold text: **text** or __text__
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/__(.+?)__/g, '<strong>$1</strong>')
+    // Italic text: *text* or _text_
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/_(.+?)_/g, '<em>$1</em>')
+    // Line breaks
+    .replace(/\n/g, '<br/>')
+    // Escape HTML to prevent XSS
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    // Re-enable our formatted tags
+    .replace(/&lt;strong&gt;/g, '<strong>')
+    .replace(/&lt;\/strong&gt;/g, '</strong>')
+    .replace(/&lt;em&gt;/g, '<em>')
+    .replace(/&lt;\/em&gt;/g, '</em>')
+    .replace(/&lt;br\/&gt;/g, '<br/>');
+}
 
 export default function AIChatCard() {
   const [messages, setMessages] = useState<Message[]>([
@@ -57,17 +80,27 @@ export default function AIChatCard() {
     setShowQuickQuestions(false);
     setIsLoading(true);
 
-    // Simulate AI response (replace with actual API call)
-    setTimeout(() => {
+    try {
+      const aiResponse = await getChatResponse(content);
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "I'm a demo AI assistant. Replace this with your actual AI API integration.",
+        content: aiResponse,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      console.error("Error getting AI response:", error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: "Sorry, I encountered an error. Please try again.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -81,7 +114,7 @@ export default function AIChatCard() {
     <div className="flex h-full flex-col bg-white dark:bg-gray-dark">
       {/* Header */}
       <div className="flex items-center gap-3 border-b border-gray-200 p-4 dark:border-gray-700">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-purple-600">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full" style={{ background: "linear-gradient(to bottom right, #29b6ff, #1e90ff)" }}>
           <Bot className="h-5 w-5 text-white" />
         </div>
         <div>
@@ -103,8 +136,9 @@ export default function AIChatCard() {
               className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
                 message.role === "user"
                   ? "bg-primary dark:bg-blue-600"
-                  : "bg-gradient-to-br from-purple-500 to-primary"
+                  : ""
               }`}
+              style={message.role === "assistant" ? { background: "linear-gradient(to bottom right, #29b6ff, #1e90ff)" } : {}}
             >
               {message.role === "user" ? (
                 <User className="h-4 w-4 text-white dark:text-gray-50" />
@@ -119,7 +153,7 @@ export default function AIChatCard() {
                   : "bg-gray-100 text-black dark:bg-gray-800 dark:text-gray-100"
               }`}
             >
-              <p className="text-sm">{message.content}</p>
+              <div className="text-sm whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />
             </div>
           </motion.div>
         ))}
@@ -129,7 +163,7 @@ export default function AIChatCard() {
             animate={{ opacity: 1 }}
             className="flex gap-3"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-primary">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full" style={{ background: "linear-gradient(to bottom right, #29b6ff, #1e90ff)" }}>
               <Bot className="h-4 w-4 text-white" />
             </div>
             <div className="flex items-center gap-1 rounded-2xl bg-gray-100 px-4 py-2 dark:bg-gray-800">
@@ -151,7 +185,7 @@ export default function AIChatCard() {
               <button
                 key={index}
                 onClick={() => handleSend(question)}
-                className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs text-gray-700 transition-all hover:border-primary hover:bg-primary/5 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-primary dark:hover:bg-primary/10"
+                className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs text-gray-700 transition-all hover:border-[#29b6ff] hover:bg-[#29b6ff]/5 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-[#29b6ff] dark:hover:bg-[#29b6ff]/10"
               >
                 {question}
               </button>
@@ -169,13 +203,14 @@ export default function AIChatCard() {
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Type your message..."
-            className="flex-1 rounded-full border border-gray-300 bg-transparent px-4 py-2 text-sm text-black outline-none focus:border-primary dark:border-gray-600 dark:text-white"
+            className="flex-1 rounded-full border border-gray-300 bg-transparent px-4 py-2 text-sm text-black outline-none focus:border-[#29b6ff] dark:border-gray-600 dark:text-white"
             disabled={isLoading}
           />
           <button
             onClick={() => handleSend()}
             disabled={!input.trim() || isLoading}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 dark:bg-blue-600 dark:text-gray-50"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+            style={{ background: "#29b6ff" }}
           >
             <Send className="h-4 w-4" />
           </button>
