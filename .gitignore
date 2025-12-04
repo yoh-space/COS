@@ -40,3 +40,5 @@ task.md
 .kiro/
 /generated/prisma
 .env
+
+WEBSITE_PROPOSAL.md
