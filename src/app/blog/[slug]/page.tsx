@@ -8,6 +8,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // Force dynamic rendering - fetch fresh data from database
 export const dynamic = 'force-dynamic';
