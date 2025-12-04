@@ -1,37 +1,31 @@
-# robots.txt for yotech.space
+# robots.txt for BDU College of Science
+# https://cos.yotech.space
 
-# Allow all crawlers
+# Allow all search engines
 User-agent: *
 Allow: /
 
-# Disallow admin and private pages
-Disallow: /asdfjlk/
+# Disallow admin, API, and auth pages
+Disallow: /admin/
 Disallow: /api/
 Disallow: /sign-in/
 Disallow: /sign-up/
 Disallow: /_next/
 Disallow: /error/
 
-# Allow specific bots
+# Allow Googlebot full access
 User-agent: Googlebot
 Allow: /
+Allow: /api/blog
 
+# Allow Google Image Bot
 User-agent: Googlebot-Image
-Allow: /
+Allow: /images/
+Allow: /public/
 
+# Allow Bingbot
 User-agent: Bingbot
 Allow: /
 
-User-agent: Slurp
-Allow: /
-
-# Crawl delay for aggressive bots
-User-agent: *
-Crawl-delay: 1
-
 # Sitemap location
-Sitemap: https://www.yotech.space/sitemap.xml
-Sitemap: https://www.yotech.space/sitemap-blogs.xml
-
-# Host preference
-Host: https://www.yotech.space
+Sitemap: https://cos.yotech.space/sitemap.xml

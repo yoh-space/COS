@@ -3,26 +3,27 @@ import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import { Eye, Target, Lightbulb, Rocket, Users, Award, TrendingUp, Globe } from "lucide-react";
-import { prisma } from '@/lib/prisma';
+import { neonApi } from '@/lib/neon-api';
 import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = generatePageMetadata('vision-mission');
 
-// Force dynamic rendering - no caching, always fetch fresh data
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 async function getVisionMission() {
-  const [vision, mission] = await Promise.all([
-    prisma.visionMission.findFirst({
-      where: { type: 'vision' },
-    }),
-    prisma.visionMission.findFirst({
-      where: { type: 'mission' },
-    }),
-  ]);
-
-  return { vision, mission };
+  try {
+    const data = await neonApi.getVisionMission();
+    const vision = data.find((item: any) => item.type === 'vision');
+    const mission = data.find((item: any) => item.type === 'mission');
+    return { vision, mission };
+  } catch (error) {
+    console.error('Error fetching vision/mission:', error);
+    return {
+      vision: { content: 'The college has the vision of becoming one of the best research and teaching learning colleges in the university.' },
+      mission: { content: 'The college of science is committed to providing high quality research based teaching-learning in science and mathematics.' }
+    };
+  }
 }
 
 export default async function VisionMissionPage() {

@@ -5,37 +5,37 @@ const partnersData: Brand[] = [
   {
     id: 1,
     name: "Chemistry",
-    href: "https://www.bdu.edu.et/cos/",
+    href: "https://cos.yotech.space/academics/chemistry",
     icon: FlaskConical
   },
   {
     id: 2,
     name: "Physics",
-    href: "https://www.bdu.edu.et/cos/",
+    href: "https://cos.yotech.space/academics/physics",
     icon: Atom
   },
   {
     id: 3,
     name: "Mathematics",
-    href: "https://www.bdu.edu.et/cos/",
+    href: "https://cos.yotech.space/academics/mathematics",
     icon: Calculator
   },
   {
     id: 4,
     name: "Biology",
-    href: "https://www.bdu.edu.et/cos/",
+    href: "https://cos.yotech.space/academics/biology",
     icon: Dna
   },
   {
     id: 5,
     name: "Statistics",
-    href: "https://www.bdu.edu.et/cos/",
+    href: "https://cos.yotech.space/academics/statistics",
     icon: BarChart3
   },
   {
     id: 6,
-    name: "Data Science",
-    href: "https://www.bdu.edu.et/cos/",
+    name: "Industrial Chemistry",
+    href: "https://cos.yotech.space/academics/industrial-chemistry",
     icon: GraduationCap
   },
 ];

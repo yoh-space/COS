@@ -1,9 +1,9 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
-import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
+import { BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import Link from "next/link";
-import { prisma } from '@/lib/prisma';
+import { neonApi } from '@/lib/neon-api';
 
 export const metadata: Metadata = {
   title: 'Staff Directory | College of Science',
@@ -35,32 +35,46 @@ export const metadata: Metadata = {
   },
 };
 
-// Force dynamic rendering - fetch fresh data from database
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-async function getDepartmentsWithStaffCount() {
-  const departments = await prisma.department.findMany({
-    orderBy: { name: 'asc' },
-    include: {
-      _count: {
-        select: {
-          staffMembers: {
-            where: { status: 'active' }
-          }
-        }
-      }
-    }
-  });
+const fallbackDepartments = [
+  { slug: 'chemistry', name: 'Chemistry', description: 'Department of Chemistry', _count: { staffMembers: 0 } },
+  { slug: 'industrial-chemistry', name: 'Industrial Chemistry', description: 'Department of Industrial Chemistry', _count: { staffMembers: 0 } },
+  { slug: 'biology', name: 'Biology', description: 'Department of Biology', _count: { staffMembers: 0 } },
+  { slug: 'physics', name: 'Physics', description: 'Department of Physics', _count: { staffMembers: 0 } },
+  { slug: 'mathematics', name: 'Mathematics', description: 'Department of Mathematics', _count: { staffMembers: 0 } },
+  { slug: 'statistics', name: 'Statistics', description: 'Department of Statistics', _count: { staffMembers: 0 } },
+];
 
-  return departments;
+async function getDepartmentsWithStaffCount() {
+  try {
+    const departments = await neonApi.getDepartments();
+    return departments.map((dept: any) => ({
+      ...dept,
+      _count: { staffMembers: 0 }
+    }));
+  } catch (error) {
+    console.error('Error fetching departments:', error);
+    return fallbackDepartments;
+  }
 }
 
 export default async function StaffsPage() {
   const departments = await getDepartmentsWithStaffCount();
+  const isDatabaseDown = departments === fallbackDepartments;
 
   return (
     <>
+      {isDatabaseDown && (
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 border-b border-yellow-200 dark:border-yellow-800">
+          <div className="container mx-auto px-4 py-3">
+            <p className="text-sm text-yellow-800 dark:text-yellow-200 text-center">
+              ⚠️ We&apos;re experiencing temporary database connectivity issues. Displaying cached content.
+            </p>
+          </div>
+        </div>
+      )}
       <BreadcrumbJsonLd
         items={[
           {

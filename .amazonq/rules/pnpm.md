@@ -1,0 +1,1 @@
+always use pnpm package manager to run , install , remove ,build the next js app don't use npm 

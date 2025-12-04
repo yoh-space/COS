@@ -1,9 +1,9 @@
-import Breadcrumb from "@/components/Common/Breadcrumb";
-import { generatePageMetadata, BASE_URL } from '@/lib/seo.config';
+import { BASE_URL } from '@/lib/seo.config';
 import { BreadcrumbJsonLd } from 'next-seo';
 import { Metadata } from "next";
 import { notFound } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
+import { neonApi } from '@/lib/neon-api';
+import { fallbackDepartments } from '@/data/fallback-departments';
 import DepartmentHero from '@/components/Department/DepartmentHero';
 import DepartmentContent from '@/components/Department/DepartmentContent';
 import VisionMission from '@/components/Department/VisionMission';
@@ -15,9 +15,7 @@ import Events from '@/components/Department/Events';
 import Resources from '@/components/Department/Resources';
 import FacultyMembers from '@/components/Department/FacultyMembers';
 
-// Force dynamic rendering - no caching, always fetch fresh data
 export const dynamic = 'force-dynamic';
-// Revalidate on every request to show fresh data
 export const revalidate = 0;
 
 type Props = {
@@ -26,79 +24,45 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    const department = await prisma.department.findUnique({
-        where: { slug },
-        select: { name: true, description: true },
-    });
+    
+    try {
+        const department = await prisma.department.findUnique({
+            where: { slug },
+            select: { name: true, description: true },
+        });
 
-    if (!department) {
+        if (department) {
+            return {
+                title: `${department.name} | Bahir Dar University College of Science`,
+                description: department.description || `Department of ${department.name} at Bahir Dar University College of Science`,
+            };
+        }
+    } catch (error) {
+        console.error('Database error in generateMetadata:', error);
+    }
+
+    // Fallback metadata
+    const fallback = fallbackDepartments[slug as keyof typeof fallbackDepartments];
+    if (fallback) {
         return {
-            title: 'Department Not Found',
+            title: `${fallback.name} | Bahir Dar University College of Science`,
+            description: fallback.description,
         };
     }
 
     return {
-        title: `${department.name} | Bahir Dar University College of Science`,
-        description: department.description || `Department of ${department.name} at Bahir Dar University College of Science`,
+        title: 'Department | Bahir Dar University College of Science',
     };
 }
 
 async function getDepartmentData(slug: string) {
-    const department = await prisma.department.findUnique({
-        where: { slug },
-        include: {
-            staffMembers: {
-                where: { status: 'active' },
-                select: {
-                    id: true,
-                    name: true,
-                    title: true,
-                    specialization: true,
-                    email: true,
-                    profileImage: true,
-                },
-            },
-            academicSections: true,
-            departmentContents: {
-                where: { status: 'published' },
-                orderBy: [
-                    { displayOrder: 'asc' },
-                    { createdAt: 'asc' }
-                ]
-            },
-            researchTeams: {
-                where: { status: 'active' },
-                orderBy: [
-                    { displayOrder: 'asc' },
-                    { createdAt: 'desc' }
-                ]
-            },
-            departmentPublications: {
-                where: { status: 'published' },
-                orderBy: [
-                    { year: 'desc' },
-                    { createdAt: 'desc' }
-                ],
-                take: 50 // Limit to recent publications
-            },
-            departmentEvents: {
-                where: { status: 'published' },
-                orderBy: [
-                    { eventDate: 'desc' }
-                ],
-                take: 20 // Limit to recent events
-            },
-            departmentResources: {
-                where: { status: 'published' },
-                orderBy: [
-                    { displayOrder: 'asc' },
-                    { createdAt: 'desc' }
-                ]
-            }
-        },
-    });
-
-    return department;
+    try {
+        const data = await neonApi.getDepartmentBySlug(slug);
+        return data && data.length > 0 ? data[0] : null;
+    } catch (error) {
+        console.error('Error fetching department data:', error);
+        return fallbackDepartments[slug as keyof typeof fallbackDepartments] || null;
+    }
 }
 
 export default async function DepartmentPage({ params }: Props) {
@@ -108,6 +72,8 @@ export default async function DepartmentPage({ params }: Props) {
     if (!department) {
         notFound();
     }
+
+    const isDatabaseDown = !department.id.startsWith('fallback-') ? false : true;
 
     // Organize content by section type
     const contentSections = {
@@ -124,6 +90,15 @@ export default async function DepartmentPage({ params }: Props) {
 
     return (
         <>
+            {isDatabaseDown && (
+                <div className="bg-yellow-50 dark:bg-yellow-900/20 border-b border-yellow-200 dark:border-yellow-800">
+                    <div className="container mx-auto px-4 py-3">
+                        <p className="text-sm text-yellow-800 dark:text-yellow-200 text-center">
+                            ⚠️ We&apos;re experiencing temporary database connectivity issues. Displaying cached content.
+                        </p>
+                    </div>
+                </div>
+            )}
             <BreadcrumbJsonLd
                 items={[
                     {
