@@ -4,11 +4,12 @@ import Breadcrumb from "@/components/Common/Breadcrumb";
 import { BreadcrumbJsonLd } from 'next-seo';
 import { BASE_URL } from '@/lib/seo.config';
 import { prisma } from '@/lib/prisma';
+import { getCachedBlogPosts } from '@/lib/db-cache';
 import Link from "next/link";
 
-// Force dynamic rendering - fetch fresh data from database
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// Allow caching by removing force-dynamic
+// export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
 
 interface BlogPageProps {
   searchParams: Promise<{
@@ -19,54 +20,7 @@ interface BlogPageProps {
 
 async function getBlogPosts(page: number, search: string) {
   const limit = 9;
-  const skip = (page - 1) * limit;
-
-  // Build where clause - only published posts
-  const where: any = {
-    status: 'published',
-  };
-
-  if (search) {
-    where.OR = [
-      { title: { contains: search, mode: 'insensitive' } },
-      { content: { contains: search, mode: 'insensitive' } },
-      { excerpt: { contains: search, mode: 'insensitive' } },
-    ];
-  }
-
-  // Fetch blog posts with pagination
-  const [blogPosts, total] = await Promise.all([
-    prisma.blogPost.findMany({
-      where,
-      include: {
-        author: {
-          select: {
-            id: true,
-            email: true,
-            firstName: true,
-            lastName: true,
-            profileImage: true,
-          },
-        },
-      },
-      orderBy: {
-        publishedAt: 'desc',
-      },
-      skip,
-      take: limit,
-    }),
-    prisma.blogPost.count({ where }),
-  ]);
-
-  return {
-    blogPosts,
-    pagination: {
-      page,
-      limit,
-      total,
-      totalPages: Math.ceil(total / limit),
-    },
-  };
+  return await getCachedBlogPosts(page, limit, search);
 }
 
 const Blog = async ({ searchParams }: BlogPageProps) => {

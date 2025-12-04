@@ -4,25 +4,22 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { neonApi } from '@/lib/neon-api';
+import { getCachedBlogPosts } from '@/lib/db-cache';
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '9');
+    const page = parseInt(searchParams.get('page') || '1');
+    const search = searchParams.get('search') || '';
 
-    const blogPosts = await neonApi.getBlogPosts(limit);
+    const { blogPosts, pagination } = await getCachedBlogPosts(page, limit, search);
 
     return NextResponse.json({
       success: true,
       data: {
         blogPosts,
-        pagination: {
-          page: 1,
-          limit,
-          total: blogPosts.length,
-          totalPages: 1,
-        },
+        pagination,
       },
     });
   } catch (error) {

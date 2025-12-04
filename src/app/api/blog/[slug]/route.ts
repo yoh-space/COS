@@ -5,6 +5,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getCachedBlogPost } from '@/lib/db-cache';
 
 export async function GET(
   request: NextRequest,
@@ -13,23 +14,7 @@ export async function GET(
   try {
     const { slug } = await params;
 
-    const blogPost = await prisma.blogPost.findFirst({
-      where: {
-        slug,
-        status: 'published',
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            email: true,
-            firstName: true,
-            lastName: true,
-            profileImage: true,
-          },
-        },
-      },
-    });
+    const blogPost = await getCachedBlogPost(slug);
 
     if (!blogPost) {
       return NextResponse.json(

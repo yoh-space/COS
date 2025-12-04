@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getCachedSuccessStories } from '@/lib/db-cache';
 import {
   withPermission,
   apiSuccess,
@@ -26,19 +27,30 @@ export const GET = withPermission(
       if (status) where.status = status;
       if (featured !== null) where.featured = featured === 'true';
 
-      const [stories, total] = await Promise.all([
-        prisma.successStory.findMany({
-          where,
-          orderBy: [
-            { featured: 'desc' },
-            { displayOrder: 'asc' },
-            { graduationYear: 'desc' }
-          ],
-          skip,
-          take: limit,
-        }),
-        prisma.successStory.count({ where }),
-      ]);
+      let stories;
+      let total;
+
+      // Optimization for public website homepage
+      if (status === 'published' && featured === 'true' && page === 1 && limit === 6) {
+        stories = await getCachedSuccessStories('published', true, 6);
+        // For total, we might need another cached query or just return length if we don't need exact total for pagination on homepage
+        // But the homepage doesn't show pagination.
+        total = stories.length;
+      } else {
+        [stories, total] = await Promise.all([
+          prisma.successStory.findMany({
+            where,
+            orderBy: [
+              { featured: 'desc' },
+              { displayOrder: 'asc' },
+              { graduationYear: 'desc' }
+            ],
+            skip,
+            take: limit,
+          }),
+          prisma.successStory.count({ where }),
+        ]);
+      }
 
       return apiSuccess({
         stories,

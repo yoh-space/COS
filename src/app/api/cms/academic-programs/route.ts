@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getCachedAcademicPrograms } from '@/lib/db-cache';
 import {
   withPermission,
   apiSuccess,
@@ -28,12 +29,17 @@ export const GET = withPermission(
         where.status = status;
       }
 
-      const programs = await prisma.academicProgram.findMany({
-        where,
-        orderBy: {
-          displayOrder: 'asc',
-        },
-      });
+      let programs;
+      if (status === 'active' && !level) {
+        programs = await getCachedAcademicPrograms();
+      } else {
+        programs = await prisma.academicProgram.findMany({
+          where,
+          orderBy: {
+            displayOrder: 'asc',
+          },
+        });
+      }
 
       return apiSuccess({ programs });
     } catch (error) {
