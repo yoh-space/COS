@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { notFound } from 'next/navigation';
 import { neonApi } from '@/lib/neon-api';
 import { fallbackDepartments } from '@/data/fallback-departments';
+import { prisma } from '@/lib/prisma';
 import DepartmentHero from '@/components/Department/DepartmentHero';
 import DepartmentContent from '@/components/Department/DepartmentContent';
 import VisionMission from '@/components/Department/VisionMission';
