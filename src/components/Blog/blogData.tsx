@@ -20,7 +20,7 @@ const blogData: Blog[] = [
     excerpt: "A quick look at the best UI components.",
     slug: "best-ui-components",
     tags: ["creative"],
-    totalComment: 5,
+
   },
   {
     _id: 2,
@@ -41,7 +41,7 @@ const blogData: Blog[] = [
     excerpt: "Improve your design skills with these tips.",
     slug: "improve-design-skills",
     tags: ["computer"],
-    totalComment: 3,
+
   },
   {
     _id: 3,
@@ -62,7 +62,7 @@ const blogData: Blog[] = [
     excerpt: "Boost your coding speed with these tips.",
     slug: "improve-coding-speed",
     tags: ["design"],
-    totalComment: 7,
+
   },
 ];
 export default blogData;

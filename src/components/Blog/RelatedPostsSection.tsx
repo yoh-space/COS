@@ -1,63 +1,54 @@
-"use client";
-import blogData from "./blogData";
+import { prisma } from "@/lib/prisma";
 import RelatedPost from "./RelatedPost";
 
-export default function RelatedPostsSection({ blogId, tags }: { blogId: string, tags: string[] }) {
-  // Fetch all posts with at least one matching tag, excluding current post
-  const posts = blogData;
-  if (posts.length === 0) {
-    return <div className="mt-12 text-center text-gray-400">No posts found in the system.</div>;
-  }
-  // Debug: log posts, blogId, tags
-  if (process.env.NODE_ENV === "development") {
-    // eslint-disable-next-line no-console
-    console.log("[RelatedPostsSection] blogId:", blogId, "tags:", tags, "posts:", posts);
-  }
-  const related = posts.filter(
-    (post: any) =>
-      post._id !== blogId &&
-      tags.some((tag) =>
-        Array.isArray(post.tags)
-          ? post.tags.includes(tag)
-          : post.tags && post.tags.split(",").map((t: string) => t.trim()).includes(tag)
-      )
-  ).slice(0, 3);
+export default async function RelatedPostsSection({ blogId, tags }: { blogId: string, tags: string[] }) {
+  // Fetch related posts from database
+  // We'll look for posts that are published and not the current post
+  // Since we don't have tags in the DB yet (based on schema), we'll just fetch recent posts
+  // In a real scenario with tags, we would filter by tags
 
-  // If no related, show unrelated (excluding current post)
-  if (related.length === 0) {
-    const unrelated = posts.filter((post: any) => post._id !== blogId).slice(0, 3);
-    if (unrelated.length === 0) {
-      return <div className="mt-12 text-center text-gray-400">No other posts to explore.</div>;
-    }
-    return (
-      <div className="mt-12">
-        <h3 className="text-lg font-semibold mb-4">Explore More</h3>
-        <div className="space-y-4">
-          {unrelated.map((post: any) => (
-            <RelatedPost
-              key={post._id}
-              image={post.image_url}
-              slug={`/blog/${post.slug}`}
-              title={post.title}
-              date={new Date(post.created_at).toLocaleDateString()}
-            />
-          ))}
-        </div>
-      </div>
-    );
+  let relatedPosts = [];
+
+  try {
+    // Fetch recent published posts excluding the current one
+    relatedPosts = await prisma.blogPost.findMany({
+      where: {
+        id: { not: blogId },
+        status: "published",
+      },
+      orderBy: {
+        publishedAt: 'desc',
+      },
+      take: 3,
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        featuredImage: true,
+        publishedAt: true,
+        createdAt: true,
+      }
+    });
+  } catch (error) {
+    console.error("Error fetching related posts:", error);
+    return <div className="mt-12 text-center text-gray-400">Unable to load related posts.</div>;
+  }
+
+  if (relatedPosts.length === 0) {
+    return <div className="mt-12 text-center text-gray-400">No other posts to explore.</div>;
   }
 
   return (
     <div className="mt-12">
-      <h3 className="text-lg font-semibold mb-4">Related Posts</h3>
+      <h3 className="text-lg font-semibold mb-4">Explore More</h3>
       <div className="space-y-4">
-        {related.map((post: any) => (
+        {relatedPosts.map((post) => (
           <RelatedPost
-            key={post._id}
-            image={post.image_url}
+            key={post.id}
+            image={post.featuredImage || "/images/blog/blog-01.jpg"}
             slug={`/blog-details/${post.slug}`}
             title={post.title}
-            date={new Date(post.created_at).toLocaleDateString()}
+            date={new Date(post.publishedAt || post.createdAt).toLocaleDateString()}
           />
         ))}
       </div>

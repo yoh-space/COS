@@ -35,7 +35,7 @@ const Blog = () => {
             excerpt: post.excerpt || post.content.substring(0, 100) + "...",
             slug: post.slug,
             tags: [],
-            totalComment: 0,
+
           }));
           setBlogs(mappedBlogs);
         }

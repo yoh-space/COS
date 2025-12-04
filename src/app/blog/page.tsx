@@ -167,7 +167,7 @@ const Blog = async ({ searchParams }: BlogPageProps) => {
                   excerpt: blog.excerpt || blog.content.substring(0, 150) + '...',
                   slug: blog.slug,
                   tags: [],
-                  totalComment: 0,
+
                 };
                 return (
                   <div
@@ -211,8 +211,8 @@ const Blog = async ({ searchParams }: BlogPageProps) => {
                     key={pageNum}
                     href={getPageLink(pageNum)}
                     className={`px-4 py-2 rounded-md transition ${page === pageNum
-                        ? 'bg-primary text-white'
-                        : 'bg-gray-200 dark:bg-gray-700 hover:bg-primary hover:text-white'
+                      ? 'bg-primary text-white'
+                      : 'bg-gray-200 dark:bg-gray-700 hover:bg-primary hover:text-white'
                       }`}
                   >
                     {pageNum}

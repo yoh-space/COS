@@ -20,5 +20,5 @@ export type Blog = {
   slug: string;
   tags: string | string[];
   category?: string;
-  totalComment: number;
+
 };

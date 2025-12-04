@@ -1,7 +1,7 @@
 import React from "react";
 import SharePost from "@/components/Blog/SharePost";
 import RelatedPostsSection from "@/components/Blog/RelatedPostsSection";
-import CommentSection from "@/components/Blog/CommentSection";
+
 import TagButton from "@/components/Blog/TagButton";
 import BlogViewCounter from "@/components/Blog/BlogViewCounter";
 import Image from "next/image";
@@ -118,7 +118,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
       },
       content: blog.content,
       views: 0,
-      totalComment: 0,
+
       slug: blog.slug,
     };
 
@@ -151,7 +151,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                         <span className="mr-3">🗓️</span>
                         {new Date(mappedBlog.createdTime).toLocaleDateString()}
                       </p>
-                      <BlogViewCounter views={String(mappedBlog.views)} commentCount={mappedBlog.totalComment} />
+                      <BlogViewCounter views={String(mappedBlog.views)} />
                     </div>
                   </div>
                   {mappedBlog.tags.length > 0 && (
@@ -179,7 +179,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                 </div>
 
                 <SharePost slug={mappedBlog.slug} />
-                <CommentSection blogId={String(mappedBlog._id)} />
+
                 <RelatedPostsSection blogId={String(mappedBlog._id)} tags={mappedBlog.tags} />
               </div>
             </div>
