@@ -56,7 +56,7 @@ export default function Events({ events }: EventsProps) {
                         <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
                             Events & Activities
                         </h2>
-                        <div className="mx-auto h-1 w-20 rounded-full bg-primary"></div>
+                        <div className="mx-auto h-1 w-20 rounded-full bg-blue-600"></div>
                     </div>
 
                     {/* Event Type Filters */}
@@ -64,8 +64,8 @@ export default function Events({ events }: EventsProps) {
                         <button
                             onClick={() => setSelectedType('all')}
                             className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${selectedType === 'all'
-                                ? 'bg-primary text-white shadow-lg'
-                                : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                 }`}
                         >
                             All Events
@@ -75,8 +75,8 @@ export default function Events({ events }: EventsProps) {
                                 key={type}
                                 onClick={() => setSelectedType(type)}
                                 className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${selectedType === type
-                                    ? 'bg-primary text-white shadow-lg'
-                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                    ? 'bg-blue-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 {getEventTypeLabel(type)}
@@ -87,7 +87,7 @@ export default function Events({ events }: EventsProps) {
                     {/* Events Timeline */}
                     <div className="relative">
                         {/* Timeline line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/20 hidden md:block"></div>
+                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-600/20 hidden md:block"></div>
 
                         <div className="space-y-8">
                             {filteredEvents.map((event, index) => (
@@ -96,16 +96,16 @@ export default function Events({ events }: EventsProps) {
                                     className="relative pl-0 md:pl-20"
                                 >
                                     {/* Timeline dot */}
-                                    <div className="absolute left-6 top-6 hidden h-5 w-5 rounded-full border-4 border-primary bg-white dark:bg-gray-dark md:block"></div>
+                                    <div className="absolute left-6 top-6 hidden h-5 w-5 rounded-full border-4 border-blue-600 bg-white dark:bg-gray-dark md:block"></div>
 
-                                    <div className="group rounded-xl bg-gray-50 p-6 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800">
+                                    <div className="group rounded-xl bg-white p-6 shadow-three transition-all duration-300 hover:shadow-one dark:bg-gray-dark">
                                         <div className="mb-4 flex flex-wrap items-start justify-between gap-4">
                                             <div className="flex-1">
                                                 <div className="mb-2 flex flex-wrap items-center gap-3">
-                                                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                                                    <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                                         {getEventTypeLabel(event.eventType)}
                                                     </span>
-                                                    <span className="text-sm text-body-color dark:text-body-color-dark">
+                                                    <span className="text-sm text-body-color">
                                                         {formatDate(event.eventDate)}
                                                     </span>
                                                 </div>
@@ -129,14 +129,14 @@ export default function Events({ events }: EventsProps) {
                                                 <span className="font-semibold text-black dark:text-white">
                                                     Presenter:
                                                 </span>{' '}
-                                                <span className="text-body-color dark:text-body-color-dark">
+                                                <span className="text-body-color">
                                                     {event.presenter}
                                                 </span>
                                             </div>
                                         )}
 
                                         {event.location && (
-                                            <div className="mb-3 flex items-center text-sm text-body-color dark:text-body-color-dark">
+                                            <div className="mb-3 flex items-center text-sm text-body-color">
                                                 <svg
                                                     className="mr-2 h-4 w-4"
                                                     fill="none"
@@ -161,7 +161,7 @@ export default function Events({ events }: EventsProps) {
                                         )}
 
                                         {event.description && (
-                                            <p className="text-sm leading-relaxed text-body-color dark:text-body-color-dark">
+                                            <p className="text-sm leading-relaxed text-body-color">
                                                 {event.description}
                                             </p>
                                         )}
@@ -172,8 +172,8 @@ export default function Events({ events }: EventsProps) {
                     </div>
 
                     {filteredEvents.length === 0 && (
-                        <div className="rounded-xl bg-gray-50 p-12 text-center dark:bg-gray-800">
-                            <p className="text-body-color dark:text-body-color-dark">
+                        <div className="rounded-xl bg-white p-12 text-center shadow-three dark:bg-gray-dark">
+                            <p className="text-body-color">
                                 No events found for the selected type.
                             </p>
                         </div>

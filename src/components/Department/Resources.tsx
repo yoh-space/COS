@@ -46,7 +46,7 @@ export default function Resources({ resources }: ResourcesProps) {
                         <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
                             Resources & Facilities
                         </h2>
-                        <div className="mx-auto h-1 w-20 rounded-full bg-primary"></div>
+                        <div className="mx-auto h-1 w-20 rounded-full bg-blue-600"></div>
                     </div>
 
                     {/* Resource Type Filters */}
@@ -54,8 +54,8 @@ export default function Resources({ resources }: ResourcesProps) {
                         <button
                             onClick={() => setSelectedType('all')}
                             className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${selectedType === 'all'
-                                ? 'bg-primary text-white shadow-lg'
-                                : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                 }`}
                         >
                             All Resources
@@ -65,8 +65,8 @@ export default function Resources({ resources }: ResourcesProps) {
                                 key={type}
                                 onClick={() => setSelectedType(type)}
                                 className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${selectedType === type
-                                    ? 'bg-primary text-white shadow-lg'
-                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                    ? 'bg-blue-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 {getResourceTypeLabel(type)}
@@ -79,34 +79,16 @@ export default function Resources({ resources }: ResourcesProps) {
                         {filteredResources.map((resource) => (
                             <div
                                 key={resource.id}
-                                className="group overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-dark"
+                                className="group overflow-hidden rounded-xl bg-white shadow-three transition-all duration-300 hover:-translate-y-1 hover:shadow-one dark:bg-gray-dark"
                             >
-                                <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
-                                    {resource.thumbnailUrl || resource.fileUrl ? (
-                                        <img
-                                            src={resource.thumbnailUrl || resource.fileUrl}
-                                            alt={resource.title}
-                                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                        />
-                                    ) : (
-                                        <div className="flex h-full items-center justify-center">
-                                            <svg
-                                                className="h-16 w-16 text-gray-300 dark:text-gray-600"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                                />
-                                            </svg>
-                                        </div>
-                                    )}
+                                <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-dark">
+                                    <img
+                                        src={resource.thumbnailUrl || resource.fileUrl || '/images/hero/wisdom-building.jpeg'}
+                                        alt={resource.title}
+                                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                    />
                                     <div className="absolute top-3 right-3">
-                                        <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm dark:bg-gray-dark/90">
+                                        <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-blue-600 backdrop-blur-sm dark:bg-gray-dark/90 dark:text-blue-400">
                                             {getResourceTypeLabel(resource.resourceType)}
                                         </span>
                                     </div>
@@ -117,7 +99,7 @@ export default function Resources({ resources }: ResourcesProps) {
                                         {resource.title}
                                     </h3>
                                     {resource.description && (
-                                        <p className="mb-4 text-sm text-body-color dark:text-body-color-dark line-clamp-2">
+                                        <p className="mb-4 text-sm text-body-color line-clamp-2">
                                             {resource.description}
                                         </p>
                                     )}
@@ -125,7 +107,7 @@ export default function Resources({ resources }: ResourcesProps) {
                                         href={resource.fileUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center text-sm font-semibold text-primary hover:underline"
+                                        className="inline-flex items-center text-sm font-semibold text-blue-600 hover:underline dark:text-blue-400"
                                     >
                                         View Resource
                                         <svg
@@ -148,8 +130,8 @@ export default function Resources({ resources }: ResourcesProps) {
                     </div>
 
                     {filteredResources.length === 0 && (
-                        <div className="rounded-xl bg-white p-12 text-center shadow-lg dark:bg-gray-dark">
-                            <p className="text-body-color dark:text-body-color-dark">
+                        <div className="rounded-xl bg-white p-12 text-center shadow-three dark:bg-gray-dark">
+                            <p className="text-body-color">
                                 No resources found for the selected type.
                             </p>
                         </div>

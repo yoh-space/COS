@@ -24,22 +24,22 @@ export default function ResearchTeams({ teams }: ResearchTeamsProps) {
                         <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
                             Research Teams
                         </h2>
-                        <div className="mx-auto h-1 w-20 rounded-full bg-primary"></div>
+                        <div className="mx-auto h-1 w-20 rounded-full bg-green-600"></div>
                     </div>
 
                     <div className="grid gap-8 md:grid-cols-2">
                         {teams.map((team) => (
                             <div
                                 key={team.id}
-                                className="group rounded-xl bg-gray-50 p-8 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800"
+                                className="group rounded-xl bg-gradient-to-br from-green-50 to-green-100/50 dark:from-gray-dark dark:to-gray-dark p-8 shadow-three dark:shadow-none border-2 border-green-200 dark:border-green-800/30 hover:shadow-one transition-all duration-300 hover:-translate-y-1"
                             >
                                 <div className="mb-4 flex items-center justify-between">
                                     <h3 className="text-xl font-bold text-black dark:text-white">
                                         {team.name}
                                     </h3>
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-600 text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                                         <svg
-                                            className="h-6 w-6 text-primary"
+                                            className="h-6 w-6"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
@@ -56,14 +56,14 @@ export default function ResearchTeams({ teams }: ResearchTeamsProps) {
 
                                 {team.researchArea && (
                                     <div className="mb-4">
-                                        <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                                        <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-600 dark:bg-green-900/30 dark:text-green-400">
                                             {team.researchArea}
                                         </span>
                                     </div>
                                 )}
 
                                 {team.description && (
-                                    <p className="mb-4 text-base text-body-color dark:text-body-color-dark">
+                                    <p className="mb-4 text-base text-body-color">
                                         {team.description}
                                     </p>
                                 )}
@@ -73,7 +73,7 @@ export default function ResearchTeams({ teams }: ResearchTeamsProps) {
                                         <span className="text-sm font-semibold text-black dark:text-white">
                                             Team Leader:
                                         </span>{' '}
-                                        <span className="text-sm text-body-color dark:text-body-color-dark">
+                                        <span className="text-sm text-body-color">
                                             {team.teamLeader}
                                         </span>
                                     </div>
@@ -88,7 +88,7 @@ export default function ResearchTeams({ teams }: ResearchTeamsProps) {
                                             {team.members.map((member, index) => (
                                                 <span
                                                     key={index}
-                                                    className="rounded-full bg-white px-3 py-1 text-xs text-body-color dark:bg-gray-dark dark:text-body-color-dark"
+                                                    className="rounded-full bg-white px-3 py-1 text-xs text-body-color dark:bg-dark dark:text-white"
                                                 >
                                                     {member}
                                                 </span>

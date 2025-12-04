@@ -41,8 +41,8 @@ export default function Objectives({
                             <button
                                 onClick={() => setActiveTab('general')}
                                 className={`rounded-full px-6 py-3 font-semibold transition-all duration-300 ${activeTab === 'general'
-                                        ? 'bg-primary text-white shadow-lg'
-                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark dark:hover:bg-gray-700'
+                                    ? 'bg-blue-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 General Objectives
@@ -52,8 +52,8 @@ export default function Objectives({
                             <button
                                 onClick={() => setActiveTab('specific')}
                                 className={`rounded-full px-6 py-3 font-semibold transition-all duration-300 ${activeTab === 'specific'
-                                        ? 'bg-primary text-white shadow-lg'
-                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark dark:hover:bg-gray-700'
+                                    ? 'bg-green-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 Specific Objectives
@@ -63,8 +63,8 @@ export default function Objectives({
                             <button
                                 onClick={() => setActiveTab('profile')}
                                 className={`rounded-full px-6 py-3 font-semibold transition-all duration-300 ${activeTab === 'profile'
-                                        ? 'bg-primary text-white shadow-lg'
-                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark dark:hover:bg-gray-700'
+                                    ? 'bg-blue-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 Professional Profile
@@ -73,7 +73,7 @@ export default function Objectives({
                     </div>
 
                     {/* Content */}
-                    <div className="rounded-xl bg-gray-50 p-8 shadow-lg dark:bg-gray-800 sm:p-12">
+                    <div className="rounded-xl bg-gray-50 p-8 shadow-lg dark:bg-dark sm:p-12">
                         {activeTab === 'general' && generalObjectives && (
                             <div className="grid gap-4 md:grid-cols-2">
                                 {parseObjectives(generalObjectives).map((objective, index) => (
@@ -81,10 +81,10 @@ export default function Objectives({
                                         key={index}
                                         className="flex items-start rounded-lg bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-md dark:bg-gray-dark"
                                     >
-                                        <div className="mr-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/20 text-sm font-bold text-primary">
+                                        <div className="mr-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                             {index + 1}
                                         </div>
-                                        <p className="text-base text-body-color dark:text-body-color-dark">
+                                        <p className="text-base text-body-color">
                                             {objective}
                                         </p>
                                     </div>
@@ -99,10 +99,10 @@ export default function Objectives({
                                         key={index}
                                         className="flex items-start rounded-lg bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-md dark:bg-gray-dark"
                                     >
-                                        <div className="mr-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/20 text-sm font-bold text-primary">
+                                        <div className="mr-4 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-600 dark:bg-green-900/30 dark:text-green-400">
                                             {index + 1}
                                         </div>
-                                        <p className="text-base text-body-color dark:text-body-color-dark">
+                                        <p className="text-base text-body-color">
                                             {objective}
                                         </p>
                                     </div>
@@ -112,7 +112,7 @@ export default function Objectives({
 
                         {activeTab === 'profile' && professionalProfile && (
                             <div className="prose prose-lg max-w-none dark:prose-invert">
-                                <p className="text-base leading-relaxed text-body-color dark:text-body-color-dark">
+                                <p className="text-base leading-relaxed text-body-color">
                                     {professionalProfile}
                                 </p>
                             </div>

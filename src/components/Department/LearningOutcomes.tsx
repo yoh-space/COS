@@ -32,7 +32,7 @@ export default function LearningOutcomes({
                         <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
                             Learning Outcomes
                         </h2>
-                        <div className="mx-auto h-1 w-20 rounded-full bg-primary"></div>
+                        <div className="mx-auto h-1 w-20 rounded-full bg-blue-600"></div>
                     </div>
 
                     {/* Level Tabs */}
@@ -41,8 +41,8 @@ export default function LearningOutcomes({
                             <button
                                 onClick={() => setActiveLevel('undergraduate')}
                                 className={`rounded-full px-8 py-3 font-semibold transition-all duration-300 ${activeLevel === 'undergraduate'
-                                        ? 'bg-primary text-white shadow-lg'
-                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark dark:hover:bg-gray-700'
+                                    ? 'bg-blue-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 Undergraduate
@@ -52,8 +52,8 @@ export default function LearningOutcomes({
                             <button
                                 onClick={() => setActiveLevel('postgraduate')}
                                 className={`rounded-full px-8 py-3 font-semibold transition-all duration-300 ${activeLevel === 'postgraduate'
-                                        ? 'bg-primary text-white shadow-lg'
-                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark dark:hover:bg-gray-700'
+                                    ? 'bg-green-600 text-white shadow-lg'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 Postgraduate
@@ -67,16 +67,16 @@ export default function LearningOutcomes({
                             {parseOutcomes(undergraduateOutcomes).map((outcome, index) => (
                                 <div
                                     key={index}
-                                    className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-dark"
+                                    className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-three transition-all duration-300 hover:-translate-y-1 hover:shadow-one dark:bg-gray-dark"
                                 >
-                                    <div className="absolute right-4 top-4 text-6xl font-bold text-primary/5">
+                                    <div className="absolute right-4 top-4 text-6xl font-bold text-blue-600/5">
                                         {index + 1}
                                     </div>
                                     <div className="relative">
-                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
+                                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-lg font-bold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                             {index + 1}
                                         </div>
-                                        <p className="text-sm leading-relaxed text-body-color dark:text-body-color-dark">
+                                        <p className="text-sm leading-relaxed text-body-color">
                                             {outcome}
                                         </p>
                                     </div>
@@ -88,15 +88,15 @@ export default function LearningOutcomes({
                     {activeLevel === 'postgraduate' && (
                         <div className="space-y-8">
                             {postgraduateObjectives && (
-                                <div className="rounded-xl bg-white p-8 shadow-lg dark:bg-gray-dark">
+                                <div className="rounded-xl bg-white p-8 shadow-three dark:bg-gray-dark">
                                     <h3 className="mb-6 text-2xl font-bold text-black dark:text-white">
                                         Objectives
                                     </h3>
                                     <div className="grid gap-4 md:grid-cols-2">
                                         {parseOutcomes(postgraduateObjectives).map((objective, index) => (
                                             <div key={index} className="flex items-start">
-                                                <span className="mr-3 mt-1 text-primary">✓</span>
-                                                <p className="text-base text-body-color dark:text-body-color-dark">
+                                                <span className="mr-3 mt-1 text-green-600 dark:text-green-400">✓</span>
+                                                <p className="text-base text-body-color">
                                                     {objective}
                                                 </p>
                                             </div>
@@ -106,7 +106,7 @@ export default function LearningOutcomes({
                             )}
 
                             {postgraduateOutcomes && (
-                                <div className="rounded-xl bg-white p-8 shadow-lg dark:bg-gray-dark">
+                                <div className="rounded-xl bg-white p-8 shadow-three dark:bg-gray-dark">
                                     <h3 className="mb-6 text-2xl font-bold text-black dark:text-white">
                                         Learning Outcomes
                                     </h3>

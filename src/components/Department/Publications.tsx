@@ -55,7 +55,7 @@ export default function Publications({ publications }: PublicationsProps) {
                         <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
                             Publications
                         </h2>
-                        <div className="mx-auto h-1 w-20 rounded-full bg-primary"></div>
+                        <div className="mx-auto h-1 w-20 rounded-full bg-green-600"></div>
                     </div>
 
                     {/* Filters */}
@@ -64,8 +64,8 @@ export default function Publications({ publications }: PublicationsProps) {
                             <button
                                 onClick={() => setSelectedYear('all')}
                                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${selectedYear === 'all'
-                                    ? 'bg-primary text-white'
-                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                    ? 'bg-green-600 text-white'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 All Years
@@ -75,8 +75,8 @@ export default function Publications({ publications }: PublicationsProps) {
                                     key={year}
                                     onClick={() => setSelectedYear(year)}
                                     className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${selectedYear === year
-                                        ? 'bg-primary text-white'
-                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                        ? 'bg-green-600 text-white'
+                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                         }`}
                                 >
                                     {year}
@@ -88,8 +88,8 @@ export default function Publications({ publications }: PublicationsProps) {
                             <button
                                 onClick={() => setSelectedType('all')}
                                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${selectedType === 'all'
-                                    ? 'bg-primary text-white'
-                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                    ? 'bg-green-600 text-white'
+                                    : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
                                 All Types
@@ -99,8 +99,8 @@ export default function Publications({ publications }: PublicationsProps) {
                                     key={type}
                                     onClick={() => setSelectedType(type)}
                                     className={`rounded-full px-4 py-2 text-sm font-semibold capitalize transition-all duration-300 ${selectedType === type
-                                        ? 'bg-primary text-white'
-                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-gray-800 dark:text-body-color-dark'
+                                        ? 'bg-green-600 text-white'
+                                        : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                         }`}
                                 >
                                     {type}
@@ -114,18 +114,18 @@ export default function Publications({ publications }: PublicationsProps) {
                         {filteredPublications.map((pub) => (
                             <div
                                 key={pub.id}
-                                className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-dark"
+                                className="rounded-xl bg-white p-6 shadow-three transition-all duration-300 hover:shadow-one dark:bg-gray-dark"
                             >
                                 <div className="mb-3 flex flex-wrap items-start justify-between gap-4">
                                     <h3 className="flex-1 text-lg font-bold text-black dark:text-white">
                                         {pub.title}
                                     </h3>
-                                    <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                                    <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-600 dark:bg-green-900/30 dark:text-green-400">
                                         {pub.year}
                                     </span>
                                 </div>
 
-                                <div className="mb-3 text-sm text-body-color dark:text-body-color-dark">
+                                <div className="mb-3 text-sm text-body-color">
                                     <span className="font-semibold">Authors:</span> {pub.authors.join(', ')}
                                 </div>
 
@@ -136,7 +136,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                 )}
 
                                 {pub.abstract && (
-                                    <p className="mb-3 text-sm text-body-color dark:text-body-color-dark line-clamp-2">
+                                    <p className="mb-3 text-sm text-body-color line-clamp-2">
                                         {pub.abstract}
                                     </p>
                                 )}
@@ -147,7 +147,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                             href={`https://doi.org/${pub.doi}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm font-semibold text-primary hover:underline"
+                                            className="text-sm font-semibold text-green-600 hover:underline dark:text-green-400"
                                         >
                                             DOI: {pub.doi}
                                         </a>
@@ -157,7 +157,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                             href={pub.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm font-semibold text-primary hover:underline"
+                                            className="text-sm font-semibold text-green-600 hover:underline dark:text-green-400"
                                         >
                                             View Publication →
                                         </a>
@@ -168,8 +168,8 @@ export default function Publications({ publications }: PublicationsProps) {
                     </div>
 
                     {filteredPublications.length === 0 && (
-                        <div className="rounded-xl bg-white p-12 text-center shadow-lg dark:bg-gray-dark">
-                            <p className="text-body-color dark:text-body-color-dark">
+                        <div className="rounded-xl bg-white p-12 text-center shadow-three dark:bg-gray-dark">
+                            <p className="text-body-color">
                                 No publications found for the selected filters.
                             </p>
                         </div>
