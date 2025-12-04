@@ -19,7 +19,7 @@ function Hero({
   subtitle = "Bahir Dar University",
   description = "Advancing knowledge and innovation in natural sciences. Excellence in education, research, and community service.",
   primaryCTA = { text: "Contact us", href: "/contact" },
-  secondaryCTA = { text: "Explore Programs", href: "/programs" },
+  secondaryCTA = { text: "Explore Programs", href: "/academics" },
   stats = [
     { value: "5000+", label: "Students" },
     { value: "200+", label: "Faculty" },
