@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 import { apiSuccess, serverError, notFoundError, validationError, withPermission, withAdmin } from '@/lib/api-auth';
 import { PERMISSIONS } from '@/lib/permissions';
@@ -73,18 +74,33 @@ export async function GET(request: NextRequest) {
             return apiSuccess(department);
         }
 
+
+
+        // ...
+
         // Get all departments
-        const departments = await prisma.department.findMany({
-            orderBy: { name: 'asc' },
-            include: {
-                _count: {
-                    select: {
-                        staffMembers: true,
-                        academicSections: true,
+        const getCachedDepartmentsList = unstable_cache(
+            async () => {
+                return await prisma.department.findMany({
+                    orderBy: { name: 'asc' },
+                    include: {
+                        _count: {
+                            select: {
+                                staffMembers: true,
+                                academicSections: true,
+                            },
+                        },
                     },
-                },
+                });
             },
-        });
+            ['departments-list-api'],
+            {
+                revalidate: 3600,
+                tags: ['departments'],
+            }
+        );
+
+        const departments = await getCachedDepartmentsList();
 
         return apiSuccess(departments);
     } catch (error) {
@@ -229,6 +245,7 @@ export const DELETE = withAdmin(
                 where: { id },
             });
 
+            revalidateTag('departments');
             return apiSuccess({ message: 'Department deleted successfully' });
         } catch (error) {
             console.error('Error deleting department:', error);

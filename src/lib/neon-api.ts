@@ -1,51 +1,73 @@
-import { neon } from '@neondatabase/serverless';
-
-const sql = neon(process.env.DATABASE_URL!);
+import {
+  getCachedDepartments,
+  getCachedDepartmentBySlug,
+  getCachedVisionMission,
+  getCachedDeanMessage,
+  getCachedBlogPosts,
+  getCachedBlogPost,
+  getCachedSuccessStories,
+  getCachedAcademicPrograms,
+  getCachedAdministrators,
+  getCachedBackgroundContent,
+  getCachedServices
+} from './db-cache';
+import { prisma } from './prisma';
 
 export const neonApi = {
   async getDepartments() {
-    return await sql`SELECT * FROM "Department" ORDER BY "name" ASC`;
+    return await getCachedDepartments();
   },
 
   async getDepartmentBySlug(slug: string) {
-    const result = await sql`SELECT * FROM "Department" WHERE slug = ${slug}`;
-    return result[0];
+    return await getCachedDepartmentBySlug(slug);
   },
 
   async getVisionMission() {
-    return await sql`SELECT * FROM "VisionMission"`;
+    const data = await getCachedVisionMission();
+    // Transform array to object expected by consumers if necessary, 
+    // but the original query returned array. 
+    // Original: SELECT * FROM "VisionMission" -> returns array of rows.
+    return data;
   },
 
   async getDeanMessage() {
-    return await sql`SELECT * FROM "DeanMessage" WHERE status = 'published' ORDER BY "publishedAt" DESC LIMIT 1`;
+    return await getCachedDeanMessage();
   },
 
   async getBlogPosts(limit = 10) {
-    return await sql`SELECT * FROM "BlogPost" WHERE status = 'published' ORDER BY "publishedAt" DESC LIMIT ${limit}`;
+    const { blogPosts } = await getCachedBlogPosts(1, limit, '');
+    return blogPosts;
   },
 
   async getBlogPostBySlug(slug: string) {
-    const result = await sql`SELECT * FROM "BlogPost" WHERE slug = ${slug}`;
-    return result[0];
+    return await getCachedBlogPost(slug);
   },
 
   async getSuccessStories() {
-    return await sql`SELECT * FROM "SuccessStory" WHERE status = 'published' ORDER BY "displayOrder" ASC, "createdAt" DESC`;
+    return await getCachedSuccessStories('published');
   },
 
   async getAcademicPrograms() {
-    return await sql`SELECT * FROM "AcademicProgram" WHERE status = 'active' ORDER BY "displayOrder" ASC`;
+    return await getCachedAcademicPrograms('active');
   },
 
   async getAdministrators() {
-    return await sql`SELECT * FROM "Administrator" WHERE status = 'active' ORDER BY "displayOrder" ASC`;
+    return await getCachedAdministrators('active');
   },
 
   async getBackgroundContent() {
-    return await sql`SELECT * FROM "BackgroundContent" ORDER BY "createdAt" DESC LIMIT 1`;
+    const content = await getCachedBackgroundContent();
+    return [content]; // Original sql returns array
   },
 
   async getStaffByDepartment(departmentId: string) {
-    return await sql`SELECT * FROM "StaffMember" WHERE "departmentId" = ${departmentId} AND status = 'active'`;
+    // We don't have a cached function for this yet in db-cache.ts
+    // Let's use prisma directly for now, or add it to db-cache.ts
+    return await prisma.staffMember.findMany({
+      where: {
+        departmentId,
+        status: 'active',
+      },
+    });
   },
 };

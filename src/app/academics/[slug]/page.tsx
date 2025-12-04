@@ -25,7 +25,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    
+
     try {
         const department = await prisma.department.findUnique({
             where: { slug },
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 async function getDepartmentData(slug: string) {
     try {
         const data = await neonApi.getDepartmentBySlug(slug);
-        return data && data.length > 0 ? data[0] : null;
+        return data || null;
     } catch (error) {
         console.error('Error fetching department data:', error);
         return fallbackDepartments[slug as keyof typeof fallbackDepartments] || null;
@@ -91,7 +91,7 @@ export default async function DepartmentPage({ params }: Props) {
 
     return (
         <>
-            {isDatabaseDown && (
+            {/* {isDatabaseDown && (
                 <div className="bg-yellow-50 dark:bg-yellow-900/20 border-b border-yellow-200 dark:border-yellow-800">
                     <div className="container mx-auto px-4 py-3">
                         <p className="text-sm text-yellow-800 dark:text-yellow-200 text-center">
@@ -99,7 +99,7 @@ export default async function DepartmentPage({ params }: Props) {
                         </p>
                     </div>
                 </div>
-            )}
+            )} */}
             <BreadcrumbJsonLd
                 items={[
                     {

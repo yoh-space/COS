@@ -147,3 +147,197 @@ export const getCachedSuccessStories = unstable_cache(
         tags: ['success-stories'],
     }
 );
+
+/**
+ * Cached function to fetch background content
+ */
+export const getCachedBackgroundContent = unstable_cache(
+    async () => {
+        return await prisma.backgroundContent.findFirst({
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
+    },
+    ['background-content'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['background-content'],
+    }
+);
+
+/**
+ * Cached function to fetch vision and mission
+ */
+export const getCachedVisionMission = unstable_cache(
+    async () => {
+        return await prisma.visionMission.findMany();
+    },
+    ['vision-mission-list'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['vision-mission'],
+    }
+);
+
+/**
+ * Cached function to fetch dean's message
+ */
+export const getCachedDeanMessage = unstable_cache(
+    async () => {
+        return await prisma.deanMessage.findFirst({
+            where: {
+                status: 'published',
+            },
+            orderBy: {
+                publishedAt: 'desc',
+            },
+        });
+    },
+    ['dean-message'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['dean-message'],
+    }
+);
+
+/**
+ * Cached function to fetch departments
+ */
+export const getCachedDepartments = unstable_cache(
+    async () => {
+        return await prisma.department.findMany({
+            orderBy: {
+                name: 'asc',
+            },
+        });
+    },
+    ['departments-list'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['departments'],
+    }
+);
+
+/**
+ * Cached function to fetch department by slug with all relations
+ */
+export const getCachedDepartmentBySlug = unstable_cache(
+    async (slug: string) => {
+        return await prisma.department.findUnique({
+            where: {
+                slug,
+            },
+            include: {
+                head: {
+                    select: {
+                        id: true,
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                        profileImage: true,
+                    },
+                },
+                staffMembers: {
+                    where: { status: 'active' },
+                    orderBy: { name: 'asc' },
+                },
+                academicSections: true,
+                departmentContents: {
+                    orderBy: { displayOrder: 'asc' },
+                },
+                researchTeams: {
+                    where: { status: 'active' },
+                    orderBy: { displayOrder: 'asc' },
+                },
+                departmentPublications: {
+                    where: { status: 'published' },
+                    orderBy: { year: 'desc' },
+                },
+                departmentEvents: {
+                    where: { status: 'published' },
+                    orderBy: { eventDate: 'desc' },
+                },
+                departmentResources: {
+                    where: { status: 'published' },
+                    orderBy: { displayOrder: 'asc' },
+                },
+            },
+        });
+    },
+    ['department-single'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['departments'],
+    }
+);
+
+/**
+ * Cached function to fetch reports
+ */
+export const getCachedReports = unstable_cache(
+    async (type?: string, limit?: number) => {
+        const where: any = {
+            status: 'published',
+        };
+
+        if (type) {
+            where.type = type;
+        }
+
+        return await prisma.report.findMany({
+            where,
+            orderBy: {
+                year: 'desc',
+            },
+            take: limit,
+        });
+    },
+    ['reports-list'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['reports'],
+    }
+);
+
+/**
+ * Cached function to fetch services
+ */
+export const getCachedServices = unstable_cache(
+    async (status: string = 'active') => {
+        return await prisma.service.findMany({
+            where: {
+                status,
+            },
+            orderBy: {
+                name: 'asc',
+            },
+        });
+    },
+    ['services-list'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['services'],
+    }
+);
+
+/**
+ * Cached function to fetch administrators
+ */
+export const getCachedAdministrators = unstable_cache(
+    async (status: string = 'active') => {
+        return await prisma.administrator.findMany({
+            where: {
+                status,
+            },
+            orderBy: {
+                displayOrder: 'asc',
+            },
+        });
+    },
+    ['administrators-list'],
+    {
+        revalidate: DEFAULT_REVALIDATE,
+        tags: ['administrators'],
+    }
+);

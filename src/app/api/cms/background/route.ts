@@ -6,6 +6,8 @@
 
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { revalidateTag } from 'next/cache';
+import { getCachedBackgroundContent } from '@/lib/db-cache';
 import {
   withPermission,
   apiSuccess,
@@ -14,28 +16,16 @@ import {
 } from '@/lib/api-auth';
 import { PERMISSIONS } from '@/lib/permissions';
 
-/**
- * GET /api/cms/background
- * Get background content
- * Requires: background:read permission
- */
 export const GET = withPermission(
   PERMISSIONS.BACKGROUND_READ,
   async (request: NextRequest) => {
     try {
       console.log('[Background API] Attempting to fetch background content...');
-      
-      // Check if backgroundContent exists in Prisma client
-      if (!prisma.backgroundContent) {
-        console.error('[Background API] backgroundContent model not found in Prisma client!');
-        return serverError('Database model not available. Please contact support.');
-      }
 
-      // Get the first (and should be only) background content record
-      let backgroundContent = await prisma.backgroundContent.findFirst();
-      console.log('[Background API] Found content:', !!backgroundContent);
+      // Try to get from cache first
+      let backgroundContent = await getCachedBackgroundContent();
 
-      // If no content exists, create a default one
+      // If no content exists, create a default one (direct DB call)
       if (!backgroundContent) {
         console.log('[Background API] Creating default content...');
         backgroundContent = await prisma.backgroundContent.create({
@@ -81,6 +71,8 @@ export const GET = withPermission(
             }),
           },
         });
+        // Revalidate to ensure next cached fetch gets this new content
+        revalidateTag('background-content');
       }
 
       console.log('[Background API] Returning content successfully');
@@ -133,6 +125,7 @@ export const PUT = withPermission(
         });
       }
 
+      revalidateTag('background-content');
       return apiSuccess(backgroundContent);
     } catch (error) {
       console.error('Error updating background content:', error);

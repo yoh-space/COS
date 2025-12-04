@@ -1,5 +1,7 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { revalidateTag } from 'next/cache';
+import { getCachedDeanMessage } from '@/lib/db-cache';
 import {
     withPermission,
     withAdmin,
@@ -18,9 +20,8 @@ export const GET = withPermission(
     PERMISSIONS.DEAN_MESSAGE_READ,
     async (request: NextRequest, user) => {
         try {
-            const deanMessage = await prisma.deanMessage.findFirst({
-                orderBy: { createdAt: 'desc' },
-            });
+            // Use cached function for GET
+            const deanMessage = await getCachedDeanMessage();
 
             if (!deanMessage) {
                 return notFoundError('Dean message not found');
@@ -66,6 +67,7 @@ export const PUT = withPermission(
                     },
                 });
 
+                revalidateTag('dean-message');
                 return apiSuccess(newMessage);
             }
 
@@ -83,6 +85,7 @@ export const PUT = withPermission(
                 },
             });
 
+            revalidateTag('dean-message');
             return apiSuccess(updatedMessage);
         } catch (error) {
             console.error('Error updating dean message:', error);

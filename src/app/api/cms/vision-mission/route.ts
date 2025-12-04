@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { revalidateTag } from 'next/cache';
 import {
     withPermission,
     apiSuccess,
@@ -58,6 +59,7 @@ export const PUT = withPermission(
                 create: { id: 'mission-1', type: 'mission', content: mission },
             });
 
+            revalidateTag('vision-mission');
             return apiSuccess({ vision: updatedVision, mission: updatedMission });
         } catch (error) {
             console.error('Error updating vision/mission:', error);
