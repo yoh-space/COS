@@ -15,7 +15,12 @@ import {
   FormHelperText,
 } from '@mui/material';
 import { useTheme } from 'next-themes';
-import RichTextEditor from '@/components/RichTextEditor';
+import dynamic from 'next/dynamic';
+
+const LexicalEditor = dynamic(() => import('@/components/LexicalEditor'), {
+  ssr: false,
+  loading: () => <div className="p-4 text-center">Loading editor...</div>,
+});
 
 type Block =
   | { type: "paragraph"; text: string }
@@ -71,25 +76,9 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
     watch,
   } = methods;
 
-  // Parse content blocks from JSON if editing
-  useEffect(() => {
-    if (blogPost?.content) {
-      try {
-        const parsed = JSON.parse(blogPost.content);
-        if (Array.isArray(parsed)) {
-          setContentBlocks(parsed);
-        }
-      } catch (e) {
-        // If content is not JSON, create a single paragraph block
-        setContentBlocks([{ type: 'paragraph', text: blogPost.content }]);
-      }
-    }
-  }, [blogPost]);
-
-  // Update form content when blocks change
-  useEffect(() => {
-    setValue('content', JSON.stringify(contentBlocks));
-  }, [contentBlocks, setValue]);
+  const handleContentChange = (newContent: string) => {
+    setValue('content', newContent);
+  };
 
   const textFieldStyles = {
     '& .MuiOutlinedInput-root': {
@@ -115,6 +104,12 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
     try {
       setLoading(true);
 
+      // Ensure content is properly formatted
+      const submitData = {
+        ...data,
+        content: typeof data.content === 'string' ? data.content : JSON.stringify(contentBlocks),
+      };
+
       const url = blogPost
         ? `/api/cms/blog/${blogPost.id}`
         : '/api/cms/blog';
@@ -126,7 +121,7 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(submitData),
       });
 
       if (!response.ok) {
@@ -137,6 +132,7 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
       // Redirect to blog list on success
       window.location.href = '/admin/blog';
     } catch (error) {
+      console.error('Submit error:', error);
       alert(error instanceof Error ? error.message : 'Failed to save blog post');
     } finally {
       setLoading(false);
@@ -183,9 +179,9 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
               >
                 Content *
               </Typography>
-              <RichTextEditor
-                content={contentBlocks}
-                onChange={setContentBlocks}
+              <LexicalEditor
+                content={blogPost?.content || ''}
+                onChange={handleContentChange}
               />
               {errors.content && (
                 <Typography color="error" variant="caption" sx={{ mt: 1, display: 'block' }}>
@@ -206,13 +202,30 @@ export default function BlogPostForm({ blogPost }: BlogPostFormProps) {
             />
 
             {/* Featured Image */}
-            <TextField
-              label="Featured Image URL"
-              {...register('featuredImage')}
-              fullWidth
-              helperText="URL of the featured image for this post"
-              sx={textFieldStyles}
-            />
+            <Box>
+              <TextField
+                label="Featured Image URL"
+                {...register('featuredImage')}
+                fullWidth
+                helperText="Enter the full URL of the featured image (e.g., https://example.com/image.jpg)"
+                sx={textFieldStyles}
+              />
+              {watch('featuredImage') && (
+                <Box sx={{ mt: 2, p: 2, border: '1px solid', borderColor: theme === 'dark' ? '#444' : '#ccc', borderRadius: 1 }}>
+                  <Typography variant="caption" sx={{ mb: 1, display: 'block', color: theme === 'dark' ? '#fff' : 'inherit' }}>
+                    Image Preview:
+                  </Typography>
+                  <img
+                    src={watch('featuredImage')}
+                    alt="Featured image preview"
+                    style={{ maxWidth: '100%', maxHeight: '300px', objectFit: 'contain' }}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
+                </Box>
+              )}
+            </Box>
 
             {/* Status */}
             <FormControl fullWidth sx={textFieldStyles}>

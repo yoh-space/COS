@@ -16,11 +16,12 @@ const SingleBlog = ({ blog, compact = false }: { blog: Blog; compact?: boolean }
           </span>
           <Image
             src={image || "/images/blog/blog-01.jpg"}
-            alt="image"
+            alt={title || "blog image"}
             fill
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 33vw"
             priority={false}
+            unoptimized={image?.startsWith('http')}
           />
         </Link>
         <div className={compact ? "p-4" : "p-6 sm:p-8 md:px-6 md:py-8 lg:p-8 xl:px-5 xl:py-8 2xl:p-8"}>
@@ -40,7 +41,7 @@ const SingleBlog = ({ blog, compact = false }: { blog: Blog; compact?: boolean }
             <div className={`border-body-color/10 flex items-center dark:border-white/10 ${compact ? 'w-full justify-center' : 'mr-5 border-r pr-5 xl:mr-3 xl:pr-3 2xl:mr-5 2xl:pr-5'}`}>
               <div className={compact ? "mr-2" : "mr-4"}>
                 <div className={`relative overflow-hidden rounded-full ${compact ? 'h-8 w-8' : 'h-10 w-10'}`}>
-                  <Image src={author.image} alt="author" fill />
+                  <Image src={author.image} alt="author" fill unoptimized={author.image?.startsWith('http')} />
                 </div>
               </div>
               <div className="w-full">

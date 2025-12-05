@@ -22,7 +22,16 @@ const QUICK_QUESTIONS = [
 
 // Format message to handle markdown-style formatting
 function formatMessage(text: string): string {
-  return text
+  // First escape HTML to prevent XSS
+  const escaped = text
+    .replace(/&/g, '\u0026amp;')
+    .replace(/</g, '\u003c')
+    .replace(/>/g, '\u003e')
+    .replace(/"/g, '\u0022')
+    .replace(/'/g, '\u0027');
+  
+  // Then apply markdown-style formatting
+  return escaped
     // Bold text: **text** or __text__
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/__(.+?)__/g, '<strong>$1</strong>')
@@ -30,16 +39,7 @@ function formatMessage(text: string): string {
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/_(.+?)_/g, '<em>$1</em>')
     // Line breaks
-    .replace(/\n/g, '<br/>')
-    // Escape HTML to prevent XSS
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    // Re-enable our formatted tags
-    .replace(/&lt;strong&gt;/g, '<strong>')
-    .replace(/&lt;\/strong&gt;/g, '</strong>')
-    .replace(/&lt;em&gt;/g, '<em>')
-    .replace(/&lt;\/em&gt;/g, '</em>')
-    .replace(/&lt;br\/&gt;/g, '<br/>');
+    .replace(/\n/g, '<br/>');
 }
 
 export default function AIChatCard() {

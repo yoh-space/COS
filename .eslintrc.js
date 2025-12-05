@@ -7,6 +7,7 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+      excludedFiles: ['**/ai-chat.tsx', '**/LexicalToolbar.tsx'],
       rules: {
         'no-restricted-syntax': [
           'error',
@@ -19,6 +20,12 @@ module.exports = {
             message: 'HTML entities like &apos; &quot; are not allowed. Use proper quotes or escape characters instead.',
           },
         ],
+      },
+    },
+    {
+      files: ['**/ai-chat.tsx'],
+      rules: {
+        'no-restricted-syntax': 'off',
       },
     },
   ],

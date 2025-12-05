@@ -8,8 +8,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import LexicalContentRenderer from '@/components/Blog/LexicalContentRenderer';
 
 // Force dynamic rendering - fetch fresh data from database
 export const dynamic = 'force-dynamic';
@@ -122,7 +121,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                                         <div className="mr-10 mb-5 flex items-center">
                                             <div className="mr-4">
                                                 <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                                                    <Image src={mappedBlog.author.image} alt="author" fill />
+                                                    <Image src={mappedBlog.author.image} alt="author" fill unoptimized={mappedBlog.author.image?.startsWith('http')} />
                                                 </div>
                                             </div>
                                             <div className="w-full">
@@ -155,12 +154,13 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                                             alt={mappedBlog.title || "image"}
                                             fill
                                             className="object-cover object-center"
+                                            unoptimized={mappedBlog.image?.startsWith('http')}
                                         />
                                     </div>
                                 </div>
 
-                                <div className="text-body-color mb-10 text-base leading-relaxed font-medium sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed prose dark:prose-invert max-w-none">
-                                    <div dangerouslySetInnerHTML={{ __html: mappedBlog.content }} />
+                                <div className="text-body-color mb-10 text-base leading-relaxed font-medium sm:text-lg sm:leading-relaxed lg:text-base lg:leading-relaxed xl:text-lg xl:leading-relaxed">
+                                    <LexicalContentRenderer content={mappedBlog.content} />
                                 </div>
 
                                 <SharePost slug={mappedBlog.slug} />
