@@ -158,7 +158,7 @@ const StructurePage = () => {
                                 Commitment to Excellence
                             </h4>
                             <p className="text-base text-body-color dark:text-body-color-dark">
-                                The Academic Council ensures the College of Science maintains the highest standards in teaching, research, and community engagement, working collaboratively to advance our institution's mission and vision.
+                                The Academic Council ensures the College of Science maintains the highest standards in teaching, research, and community engagement, working collaboratively to advance our institution&apos;s mission and vision.
                             </p>
                         </div>
                     </div>
