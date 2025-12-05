@@ -39,20 +39,311 @@ async function main() {
             title: 'Breakthrough Research in Lake Tana Water Quality Analysis',
             slug: 'lake-tana-water-quality-research-2024',
             excerpt: 'College of Science researchers publish groundbreaking findings on Lake Tana ecosystem health and water quality parameters.',
-            content: JSON.stringify([
-                { type: "heading", text: "Breakthrough Research in Lake Tana Water Quality Analysis", level: 1 },
-                { type: "paragraph", text: "The College of Science at Bahir Dar University has achieved a significant milestone in environmental research with the publication of comprehensive findings on Lake Tana's water quality and ecosystem health." },
-                { type: "heading", text: "Research Overview", level: 2 },
-                { type: "paragraph", text: "A team of researchers from the Department of Chemistry and Biology conducted an extensive 18-month study analyzing various water quality parameters across different zones of Lake Tana. The research focused on:" },
-                { type: "bulletine", items: ["Physical Parameters: Temperature, turbidity, and conductivity measurements", "Chemical Analysis: pH levels, dissolved oxygen, nutrient concentrations (nitrogen and phosphorus)", "Biological Indicators: Phytoplankton diversity and abundance", "Pollution Assessment: Heavy metal concentrations and organic pollutants"] },
-                { type: "heading", text: "Key Findings", level: 2 },
-                { type: "paragraph", text: "The study revealed several important insights:" },
-                { type: "orderedList", items: ["Seasonal Variations: Significant fluctuations in water quality parameters were observed between wet and dry seasons, with nutrient levels peaking during the rainy season due to agricultural runoff.", "Spatial Distribution: Water quality varied considerably across different zones of the lake, with areas near river inflows showing higher turbidity and nutrient concentrations.", "Ecosystem Health: Despite some localized concerns, the overall ecosystem health of Lake Tana remains relatively stable, though continuous monitoring is recommended."] },
-                { type: "heading", text: "Implications for Conservation", level: 2 },
-                { type: "paragraph", text: "These findings have important implications for policy development, community awareness, and future research in watershed management and sustainable practices." },
-                { type: "divider" },
-                { type: "paragraph", text: "Published: November 2024 | Research Team: Dr. Meseret Abebe, Dr. Alemayehu Tadesse, and colleagues" }
-            ]),
+            content: JSON.stringify({
+                root: {
+                    children: [
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Breakthrough Research in Lake Tana Water Quality Analysis",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h1"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 0,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "The College of Science at Bahir Dar University has achieved a significant milestone in environmental research with the publication of comprehensive findings on Lake Tana's water quality and ecosystem health.",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Research Overview",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h2"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 0,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "A team of researchers from the Department of Chemistry and Biology conducted an extensive 18-month study analyzing various water quality parameters across different zones of Lake Tana. The research focused on:",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Physical Parameters: Temperature, turbidity, and conductivity measurements",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 1
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Chemical Analysis: pH levels, dissolved oxygen, nutrient concentrations (nitrogen and phosphorus)",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 2
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Biological Indicators: Phytoplankton diversity and abundance",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 3
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Pollution Assessment: Heavy metal concentrations and organic pollutants",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 4
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "list",
+                            version: 1,
+                            listType: "bullet",
+                            start: 1,
+                            tag: "ul"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Key Findings",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h2"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 0,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "The study revealed several important insights:",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Seasonal Variations: Significant fluctuations in water quality parameters were observed between wet and dry seasons.",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 1
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Spatial Distribution: Water quality varied considerably across different zones of the lake.",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 2
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Ecosystem Health: Overall ecosystem health remains relatively stable, though continuous monitoring is recommended.",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 3
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "list",
+                            version: 1,
+                            listType: "number",
+                            start: 1,
+                            tag: "ol"
+                        },
+                        {
+                            children: [],
+                            direction: null,
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 2,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Published: November 2024 | Research Team: Dr. Meseret Abebe, Dr. Alemayehu Tadesse",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        }
+                    ],
+                    direction: "ltr",
+                    format: "",
+                    indent: 0,
+                    type: "root",
+                    version: 1
+                }
+            }),
             featuredImage: '/images/blog/lake-tana-research.jpg',
             status: 'published',
             publishedAt: new Date('2024-11-15'),
@@ -64,22 +355,205 @@ async function main() {
             title: 'College of Science Hosts International Mathematics Symposium',
             slug: 'international-mathematics-symposium-2024',
             excerpt: 'Over 200 mathematicians from across Africa gathered at BDU for the 5th East African Mathematics Research Symposium.',
-            content: JSON.stringify([
-                { type: "heading", text: "College of Science Hosts International Mathematics Symposium", level: 1 },
-                { type: "paragraph", text: "The College of Science successfully hosted the 5th East African Mathematics Research Symposium, bringing together over 200 mathematicians, researchers, and students from 15 African countries." },
-                { type: "heading", text: "Event Highlights", level: 2 },
-                { type: "paragraph", text: "The three-day symposium, held from October 10-12, 2024, featured keynote presentations from distinguished speakers and 8 parallel research sessions." },
-                { type: "heading", text: "Keynote Presentations", level: 3 },
-                { type: "bulletine", items: ["Prof. Abebe Gellaw (MIT): Applications of Topology in Data Science", "Dr. Fatima Hassan (University of Nairobi): Mathematical Modeling of Disease Spread in Urban Africa", "Prof. John Kamau (University of Dar es Salaam): Advances in Numerical Methods for Partial Differential Equations"] },
-                { type: "heading", text: "Research Sessions", level: 3 },
-                { type: "orderedList", items: ["Pure Mathematics: Algebra, topology, and analysis", "Applied Mathematics: Mathematical modeling and computational methods", "Statistics and Data Science: Big data analytics and machine learning", "Mathematics Education: Innovative teaching methodologies", "Optimization Theory: Applications in engineering and economics", "Cryptography: Mathematical foundations of cybersecurity", "Financial Mathematics: Risk modeling and quantitative finance", "Biomathematics: Modeling biological systems"] },
-                { type: "heading", text: "Student Participation", level: 2 },
-                { type: "paragraph", text: "A special highlight was the strong participation of graduate students with 45 poster presentations and 12 oral presentations. Best Student Presentation Award won by Rahel Tefera (BDU) for her work on Machine Learning Applications in Agricultural Yield Prediction." },
-                { type: "heading", text: "Collaborative Outcomes", level: 2 },
-                { type: "bulletine", items: ["Formation of the East African Mathematics Research Network", "Joint research proposals on climate modeling and public health", "Student exchange programs between participating universities", "Plans for a collaborative online mathematics journal"] },
-                { type: "divider" },
-                { type: "paragraph", text: "Published: October 2024 | Event Coordinator: Dr. Getachew Worku, Department of Mathematics" }
-            ]),
+            content: JSON.stringify({
+                root: {
+                    children: [
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "International Mathematics Symposium 2024",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h1"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 0,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "The College of Science successfully hosted the 5th East African Mathematics Research Symposium, bringing together over 200 mathematicians, researchers, and students from 15 African countries.",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Event Highlights",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h2"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 0,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "The three-day symposium featured keynote presentations and 8 parallel research sessions covering pure mathematics, applied mathematics, statistics, and mathematics education.",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Research Topics",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h3"
+                        },
+                        {
+                            children: [
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Topology and Data Science",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 1
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Mathematical Modeling of Disease Spread",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 2
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Numerical Methods and Computational Mathematics",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 3
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "list",
+                            version: 1,
+                            listType: "bullet",
+                            start: 1,
+                            tag: "ul"
+                        },
+                        {
+                            children: [],
+                            direction: null,
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 2,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Published: October 2024 | Event Coordinator: Dr. Getachew Worku",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        }
+                    ],
+                    direction: "ltr",
+                    format: "",
+                    indent: 0,
+                    type: "root",
+                    version: 1
+                }
+            }),
             featuredImage: '/images/blog/math-symposium.jpg',
             status: 'published',
             publishedAt: new Date('2024-10-20'),
@@ -91,25 +565,205 @@ async function main() {
             title: 'New Chemistry Lab Opens with State-of-the-Art Equipment',
             slug: 'new-chemistry-lab-opening-2024',
             excerpt: 'The College of Science inaugurates a modern analytical chemistry laboratory equipped with advanced instrumentation for research and teaching.',
-            content: JSON.stringify([
-                { type: "heading", text: "New Chemistry Lab Opens with State-of-the-Art Equipment", level: 1 },
-                { type: "paragraph", text: "The College of Science celebrated the grand opening of its new Analytical Chemistry Laboratory, a state-of-the-art facility that will significantly enhance research capabilities and student training." },
-                { type: "heading", text: "Facility Overview", level: 2 },
-                { type: "paragraph", text: "The new laboratory, spanning 500 square meters, features advanced instrumentation and modern safety standards." },
-                { type: "heading", text: "Advanced Instrumentation", level: 3 },
-                { type: "bulletine", items: ["Gas Chromatography-Mass Spectrometry (GC-MS): For analyzing volatile organic compounds", "High-Performance Liquid Chromatography (HPLC): For separating and analyzing complex mixtures", "Atomic Absorption Spectrophotometer (AAS): For trace metal analysis", "Fourier Transform Infrared Spectrometer (FTIR): For molecular structure determination", "UV-Visible Spectrophotometer: For quantitative analysis"] },
-                { type: "heading", text: "Research Applications", level: 2 },
-                { type: "paragraph", text: "The new facility will support research in multiple areas:" },
-                { type: "orderedList", items: ["Environmental Chemistry: Water quality analysis, soil contamination studies, air pollution monitoring", "Pharmaceutical Analysis: Drug quality control, herbal medicine research, bioavailability studies", "Food Chemistry: Nutritional analysis, contamination detection, quality assurance", "Industrial Chemistry: Process optimization, product development, quality control"] },
-                { type: "heading", text: "Educational Impact", level: 2 },
-                { type: "paragraph", text: "Students will benefit from hands-on training with modern instruments, real-world analytical problem-solving, and industry-standard laboratory practices." },
-                { type: "heading", text: "Inauguration Ceremony", level: 2 },
-                { type: "paragraph", text: "The opening ceremony, held on September 15, 2024, was attended by Dr. Seleshi Bekele (Minister of Water and Energy), Prof. Baylie Damtie (President of BDU), Dr. Tigist Mekonnen (Dean of College of Science), and representatives from partner institutions." },
-                { type: "heading", text: "Funding and Investment", level: 2 },
-                { type: "paragraph", text: "Total investment: 15 million Ethiopian Birr through Ethiopian Ministry of Education grant, World Bank Higher Education Quality Enhancement Project, and international partnerships." },
-                { type: "divider" },
-                { type: "paragraph", text: "Published: September 2024 | Laboratory Director: Dr. Hanna Solomon, Department of Chemistry" }
-            ]),
+            content: JSON.stringify({
+                root: {
+                    children: [
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "New Chemistry Laboratory Opens",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h1"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 0,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "The College of Science celebrated the grand opening of its new Analytical Chemistry Laboratory, a state-of-the-art facility that will significantly enhance research capabilities and student training.",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 1,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Advanced Instrumentation",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "heading",
+                            version: 1,
+                            tag: "h2"
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 0,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "The laboratory features:",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Gas Chromatography-Mass Spectrometry (GC-MS)",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 1
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "High-Performance Liquid Chromatography (HPLC)",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 2
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Atomic Absorption Spectrophotometer (AAS)",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 3
+                                },
+                                {
+                                    children: [
+                                        {
+                                            detail: 0,
+                                            format: 0,
+                                            mode: "normal",
+                                            style: "",
+                                            text: "Fourier Transform Infrared Spectrometer (FTIR)",
+                                            type: "text",
+                                            version: 1
+                                        }
+                                    ],
+                                    direction: "ltr",
+                                    format: "",
+                                    indent: 0,
+                                    type: "listitem",
+                                    version: 1,
+                                    value: 4
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "list",
+                            version: 1,
+                            listType: "bullet",
+                            start: 1,
+                            tag: "ul"
+                        },
+                        {
+                            children: [],
+                            direction: null,
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        },
+                        {
+                            children: [
+                                {
+                                    detail: 0,
+                                    format: 2,
+                                    mode: "normal",
+                                    style: "",
+                                    text: "Published: September 2024 | Laboratory Director: Dr. Hanna Solomon",
+                                    type: "text",
+                                    version: 1
+                                }
+                            ],
+                            direction: "ltr",
+                            format: "",
+                            indent: 0,
+                            type: "paragraph",
+                            version: 1
+                        }
+                    ],
+                    direction: "ltr",
+                    format: "",
+                    indent: 0,
+                    type: "root",
+                    version: 1
+                }
+            }),
             featuredImage: '/images/blog/chemistry-lab.jpg',
             status: 'published',
             publishedAt: new Date('2024-09-25'),

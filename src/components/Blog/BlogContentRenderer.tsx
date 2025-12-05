@@ -16,15 +16,76 @@ interface BlogContentRendererProps {
   content: string;
 }
 
+// Helper function to convert Lexical nodes to our block format
+function convertLexicalToBlocks(nodes: any[]): Block[] {
+  const blocks: Block[] = [];
+
+  for (const node of nodes) {
+    if (node.type === 'paragraph') {
+      const text = extractTextFromNode(node);
+      if (text.trim()) {
+        blocks.push({ type: 'paragraph', text });
+      }
+    } else if (node.type === 'heading') {
+      const text = extractTextFromNode(node);
+      const level = parseInt(node.tag?.replace('h', '') || '2');
+      blocks.push({ type: 'heading', text, level });
+    } else if (node.type === 'list') {
+      const items = node.children?.map((item: any) => extractTextFromNode(item)) || [];
+      if (node.listType === 'bullet') {
+        blocks.push({ type: 'bulletine', items });
+      } else if (node.listType === 'number') {
+        blocks.push({ type: 'orderedList', items });
+      }
+    } else if (node.type === 'quote') {
+      const text = extractTextFromNode(node);
+      blocks.push({ type: 'paragraph', text }); // Render quotes as paragraphs for now
+    } else if (node.type === 'code') {
+      blocks.push({ type: 'code', code: node.code || '', language: node.language });
+    }
+  }
+
+  return blocks;
+}
+
+// Helper to extract text from a Lexical node
+function extractTextFromNode(node: any): string {
+  if (!node.children) return '';
+
+  return node.children
+    .map((child: any) => {
+      if (child.type === 'text') {
+        return child.text || '';
+      } else if (child.children) {
+        return extractTextFromNode(child);
+      }
+      return '';
+    })
+    .join('');
+}
+
+
 export default function BlogContentRenderer({ content }: BlogContentRendererProps) {
   let blocks: Block[] = [];
+  let isLexicalFormat = false;
 
   try {
-    blocks = JSON.parse(content);
-    if (!Array.isArray(blocks)) {
+    const parsed = JSON.parse(content);
+
+    // Check if it's Lexical format (has root object)
+    if (parsed.root && parsed.root.children) {
+      isLexicalFormat = true;
+      // Convert Lexical format to our block format for rendering
+      blocks = convertLexicalToBlocks(parsed.root.children);
+    } else if (Array.isArray(parsed)) {
+      // Legacy custom block format
+      blocks = parsed;
+    } else {
+      // Unknown format, fallback to HTML
       return <div dangerouslySetInnerHTML={{ __html: content }} />;
     }
   } catch {
+    // Not JSON, try as HTML
     return <div dangerouslySetInnerHTML={{ __html: content }} />;
   }
 

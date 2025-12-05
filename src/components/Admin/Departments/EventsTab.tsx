@@ -99,7 +99,7 @@ export default function EventsTab({ departmentId }: EventsTabProps) {
             const body = {
                 ...formData,
                 eventDate: new Date(formData.eventDate).toISOString(),
-                id: editingEvent?.id
+                eventId: editingEvent?.id
             };
 
             const response = await fetch(url, {
@@ -126,7 +126,7 @@ export default function EventsTab({ departmentId }: EventsTabProps) {
         if (!confirm('Are you sure you want to delete this event?')) return;
 
         try {
-            const response = await fetch(`/api/admin/departments/${departmentId}/events?id=${id}`, {
+            const response = await fetch(`/api/admin/departments/${departmentId}/events?eventId=${id}`, {
                 method: 'DELETE',
             });
 
@@ -238,7 +238,20 @@ export default function EventsTab({ departmentId }: EventsTabProps) {
                                     value={formData.imageUrl}
                                     onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                                     className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
+                                    placeholder="https://example.com/event-image.jpg"
                                 />
+                                {formData.imageUrl && (
+                                    <div className="mt-2">
+                                        <img
+                                            src={formData.imageUrl}
+                                            alt="Event preview"
+                                            className="max-h-48 w-full rounded border border-stroke object-cover"
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).style.display = 'none';
+                                            }}
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             <div className="mb-4">

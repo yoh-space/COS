@@ -90,7 +90,7 @@ export default function ResourcesTab({ departmentId }: ResourcesTabProps) {
 
             const body = {
                 ...formData,
-                id: editingResource?.id
+                resourceId: editingResource?.id
             };
 
             const response = await fetch(url, {
@@ -117,7 +117,7 @@ export default function ResourcesTab({ departmentId }: ResourcesTabProps) {
         if (!confirm('Are you sure you want to delete this resource?')) return;
 
         try {
-            const response = await fetch(`/api/admin/departments/${departmentId}/resources?id=${id}`, {
+            const response = await fetch(`/api/admin/departments/${departmentId}/resources?resourceId=${id}`, {
                 method: 'DELETE',
             });
 
@@ -192,20 +192,46 @@ export default function ResourcesTab({ departmentId }: ResourcesTabProps) {
                                     value={formData.fileUrl}
                                     onChange={(e) => setFormData({ ...formData, fileUrl: e.target.value })}
                                     className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
+                                    placeholder="https://example.com/image.jpg"
                                     required
                                 />
+                                {formData.fileUrl && (
+                                    <div className="mt-2">
+                                        <img
+                                            src={formData.fileUrl}
+                                            alt="Preview"
+                                            className="max-h-40 rounded border border-stroke object-contain"
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).style.display = 'none';
+                                            }}
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             <div className="mb-4">
                                 <label className="mb-2 block text-sm font-medium text-black dark:text-white">
-                                    Thumbnail URL
+                                    Thumbnail URL (Optional)
                                 </label>
                                 <input
                                     type="url"
                                     value={formData.thumbnailUrl}
                                     onChange={(e) => setFormData({ ...formData, thumbnailUrl: e.target.value })}
                                     className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
+                                    placeholder="https://example.com/thumbnail.jpg"
                                 />
+                                {formData.thumbnailUrl && (
+                                    <div className="mt-2">
+                                        <img
+                                            src={formData.thumbnailUrl}
+                                            alt="Thumbnail preview"
+                                            className="max-h-40 rounded border border-stroke object-contain"
+                                            onError={(e) => {
+                                                (e.target as HTMLImageElement).style.display = 'none';
+                                            }}
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             <div className="mb-4">

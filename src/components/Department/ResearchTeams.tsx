@@ -24,20 +24,20 @@ export default function ResearchTeams({ teams }: ResearchTeamsProps) {
                         <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
                             Research Teams
                         </h2>
-                        <div className="mx-auto h-1 w-20 rounded-full bg-green-600"></div>
+                        <div className="mx-auto h-1 w-20 rounded-full bg-blue-600"></div>
                     </div>
 
                     <div className="grid gap-8 md:grid-cols-2">
                         {teams.map((team) => (
                             <div
                                 key={team.id}
-                                className="group rounded-xl bg-gradient-to-br from-green-50 to-green-100/50 dark:from-gray-dark dark:to-gray-dark p-8 shadow-three dark:shadow-none border-2 border-green-200 dark:border-green-800/30 hover:shadow-one transition-all duration-300 hover:-translate-y-1"
+                                className="group rounded-xl bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-gray-dark dark:to-gray-dark p-8 shadow-three dark:shadow-none border-2 border-blue-200 dark:border-blue-800/30 hover:shadow-one transition-all duration-300 hover:-translate-y-1"
                             >
                                 <div className="mb-4 flex items-center justify-between">
                                     <h3 className="text-xl font-bold text-black dark:text-white">
                                         {team.name}
                                     </h3>
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-600 text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600 text-white shadow-md group-hover:scale-110 transition-transform duration-300">
                                         <svg
                                             className="h-6 w-6"
                                             fill="none"
@@ -56,7 +56,7 @@ export default function ResearchTeams({ teams }: ResearchTeamsProps) {
 
                                 {team.researchArea && (
                                     <div className="mb-4">
-                                        <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-600 dark:bg-green-900/30 dark:text-green-400">
+                                        <span className="inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                             {team.researchArea}
                                         </span>
                                     </div>

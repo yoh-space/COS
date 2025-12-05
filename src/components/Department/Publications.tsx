@@ -55,7 +55,7 @@ export default function Publications({ publications }: PublicationsProps) {
                         <h2 className="mb-4 text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-[45px]">
                             Publications
                         </h2>
-                        <div className="mx-auto h-1 w-20 rounded-full bg-green-600"></div>
+                        <div className="mx-auto h-1 w-20 rounded-full bg-blue-600"></div>
                     </div>
 
                     {/* Filters */}
@@ -64,7 +64,7 @@ export default function Publications({ publications }: PublicationsProps) {
                             <button
                                 onClick={() => setSelectedYear('all')}
                                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${selectedYear === 'all'
-                                    ? 'bg-green-600 text-white'
+                                    ? 'bg-blue-600 text-white'
                                     : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
@@ -75,7 +75,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                     key={year}
                                     onClick={() => setSelectedYear(year)}
                                     className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${selectedYear === year
-                                        ? 'bg-green-600 text-white'
+                                        ? 'bg-blue-600 text-white'
                                         : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                         }`}
                                 >
@@ -88,7 +88,7 @@ export default function Publications({ publications }: PublicationsProps) {
                             <button
                                 onClick={() => setSelectedType('all')}
                                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${selectedType === 'all'
-                                    ? 'bg-green-600 text-white'
+                                    ? 'bg-blue-600 text-white'
                                     : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                     }`}
                             >
@@ -99,7 +99,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                     key={type}
                                     onClick={() => setSelectedType(type)}
                                     className={`rounded-full px-4 py-2 text-sm font-semibold capitalize transition-all duration-300 ${selectedType === type
-                                        ? 'bg-green-600 text-white'
+                                        ? 'bg-blue-600 text-white'
                                         : 'bg-gray-100 text-body-color hover:bg-gray-200 dark:bg-dark dark:text-white dark:hover:bg-gray-700'
                                         }`}
                                 >
@@ -120,7 +120,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                     <h3 className="flex-1 text-lg font-bold text-black dark:text-white">
                                         {pub.title}
                                     </h3>
-                                    <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-600 dark:bg-green-900/30 dark:text-green-400">
+                                    <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                                         {pub.year}
                                     </span>
                                 </div>
@@ -147,7 +147,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                             href={`https://doi.org/${pub.doi}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm font-semibold text-green-600 hover:underline dark:text-green-400"
+                                            className="text-sm font-semibold text-blue-600 hover:underline dark:text-blue-400"
                                         >
                                             DOI: {pub.doi}
                                         </a>
@@ -157,7 +157,7 @@ export default function Publications({ publications }: PublicationsProps) {
                                             href={pub.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm font-semibold text-green-600 hover:underline dark:text-green-400"
+                                            className="text-sm font-semibold text-blue-600 hover:underline dark:text-blue-400"
                                         >
                                             View Publication →
                                         </a>
