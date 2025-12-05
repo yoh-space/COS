@@ -23,7 +23,7 @@ const StructurePage = () => {
         "Approve budget plan of the college.",
         "Allocate budget for course chairs in the college based on the standard formula.",
         "Approve strategic plan of the college.",
-        "Conduct scheduled meetings and extraordinary meeting(s) if requested by one-third of the members of the college&apos;s council.",
+        "Conduct scheduled meetings and extraordinary meeting(s) if requested by one-third of the members of the colleges council.",
         "Follow up issues that transcend the mandate of the Course Teams, Research Centers and Units representations.",
         "Ensure the quality of teaching-learning, research and community services based on established standards.",
         "Review the plans and reports of course teams, Research Centers and Units and Support offices.",
