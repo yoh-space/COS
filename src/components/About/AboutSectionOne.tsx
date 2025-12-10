@@ -1,72 +1,233 @@
 "use client";
+
+import { useRef } from "react";
 import Image from "next/image";
-import SectionTitle from "../Common/SectionTitle";
-import Lottie from "lottie-react";
+import { motion, useInView } from "framer-motion";
+import dynamic from "next/dynamic";
+import { 
+  GraduationCap, 
+  FlaskConical, 
+  Microscope, 
+  Users, 
+  Globe, 
+  Heart,
+  BookOpen,
+  Briefcase,
+  CheckCircle2,
+  Sparkles
+} from "lucide-react";
+
+// Dynamically import Lottie for better performance
+const Lottie = dynamic(() => import("lottie-react"), { 
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-64 bg-slate-800/50 rounded-2xl animate-pulse" />
+  )
+});
+
+// Import animations
 import ratingAnimation from "../../../public/images/lottie/rating.json";
 import Visa from "../../../public/images/lottie/Visa.json";
-// import GlassCard from "@/components/ui/glass-card";
 
-const checkIcon = (
-  <svg width="16" height="13" viewBox="0 0 16 13" className="fill-current">
-    <path d="M5.8535 12.6631C5.65824 12.8584 5.34166 12.8584 5.1464 12.6631L0.678505 8.1952C0.483242 7.99994 0.483242 7.68336 0.678505 7.4881L2.32921 5.83739C2.52467 5.64193 2.84166 5.64216 3.03684 5.83791L5.14622 7.95354C5.34147 8.14936 5.65859 8.14952 5.85403 7.95388L13.3797 0.420561C13.575 0.22513 13.8917 0.225051 14.087 0.420383L15.7381 2.07143C15.9333 2.26669 15.9333 2.58327 15.7381 2.77854L5.8535 12.6631Z" />
-  </svg>
-);
+const features = [
+  { icon: GraduationCap, text: "World-class faculty", color: "from-blue-500 to-blue-600" },
+  { icon: FlaskConical, text: "State-of-the-art laboratories", color: "from-emerald-500 to-emerald-600" },
+  { icon: Microscope, text: "Cutting-edge research", color: "from-purple-500 to-purple-600" },
+  { icon: Briefcase, text: "Industry partnerships", color: "from-amber-500 to-amber-600" },
+  { icon: Globe, text: "International collaborations", color: "from-cyan-500 to-cyan-600" },
+  { icon: Heart, text: "Community engagement", color: "from-rose-500 to-rose-600" },
+  { icon: BookOpen, text: "Quality education", color: "from-indigo-500 to-indigo-600" },
+  { icon: Users, text: "Career development", color: "from-teal-500 to-teal-600" },
+];
 
-const AboutSectionOne = () => {
-  const List = ({ text }) => (
-    <p className="text-body-color mb-5 flex items-center text-lg font-medium">
-      <span className="bg-primary/10 text-primary mr-4 flex h-[30px] w-[30px] items-center justify-center rounded-md">
-        {checkIcon}
-      </span>
-      {text}
-    </p>
-  );
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    },
+  },
+};
+
+const FeatureItem = ({ 
+  icon: Icon, 
+  text, 
+  color, 
+  index 
+}: { 
+  icon: typeof GraduationCap; 
+  text: string; 
+  color: string;
+  index: number;
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="about" className="pt-16 md:pt-20 lg:pt-28">
-      <div className="container">
-        <div className="border-b border-body-color/[.15] pb-16 dark:border-white/[.15] md:pb-20 lg:pb-28">
-          <div className="-mx-4 flex flex-wrap items-center">
-            <div className="w-full px-4 lg:w-1/2">
-              <SectionTitle
-                title="Excellence in Science Education & Research"
-                paragraph="Bahir Dar University College of Science is committed to advancing scientific knowledge through world-class education, cutting-edge research, and community engagement."
-                mb="44px"
-              />
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -30 }}
+      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-300"
+    >
+      <div className={`
+        relative flex items-center justify-center w-12 h-12 rounded-xl
+        bg-gradient-to-br ${color} shadow-lg
+        group-hover:scale-110 group-hover:shadow-xl
+        transition-all duration-300
+      `}>
+        <Icon className="w-5 h-5 text-white" />
+        <div className="absolute inset-0 rounded-xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </div>
+      <span className="text-base font-medium text-slate-300 group-hover:text-white transition-colors duration-300">
+        {text}
+      </span>
+      <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    </motion.div>
+  );
+};
 
-              <div
-                className="mb-12 max-w-[570px] lg:mb-0"
-                data-wow-delay=".15s"
-              >
-                <div className="mx-[-12px] flex flex-wrap">
-                  <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
-                    <List text="World-class faculty" />
-                    <List text="State-of-the-art laboratories" />
-                    <List text="Cutting-edge research" />
-                    <List text="Industry partnerships" />
-                  </div>
+const AboutSectionOne = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-                  <div className="w-full px-3 sm:w-1/2 lg:w-full xl:w-1/2">
-                    <List text="International collaborations" />
-                    <List text="Community engagement" />
-                    <List text="Quality education" />
-                    <List text="Career development" />
-                  </div>
-                </div>
-                <div className="mt-8 flex items-center gap-4">
-                  <Lottie animationData={ratingAnimation} className="w-16 h-16" />
-                  <p className="text-sm text-body-color dark:text-body-color-dark">
-                    Educating 1000+ students annually across 6 departments
-                  </p>
-                </div>
+  return (
+    <section 
+      id="about" 
+      ref={sectionRef}
+      className="relative py-20 md:py-28 lg:py-32 overflow-hidden"
+    >
+      {/* Background decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-blue-500/5 to-transparent rounded-full" />
+      </div>
+
+      <div className="container relative">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="order-2 lg:order-1"
+          >
+            {/* Badge */}
+            <motion.div
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
+            >
+              <Sparkles className="w-4 h-4 text-blue-400" />
+              <span className="text-sm font-medium text-blue-400">About Us</span>
+            </motion.div>
+
+            {/* Title */}
+            <motion.h2
+              variants={itemVariants}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
+            >
+              Excellence in Science{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                Education & Research
+              </span>
+            </motion.h2>
+
+            {/* Description */}
+            <motion.p
+              variants={itemVariants}
+              className="text-lg text-slate-400 mb-8 leading-relaxed"
+            >
+              Bahir Dar University College of Science is committed to advancing scientific 
+              knowledge through world-class education, cutting-edge research, and community engagement.
+            </motion.p>
+
+            {/* Features Grid */}
+            <div className="grid sm:grid-cols-2 gap-2 mb-8">
+              {features.map((feature, index) => (
+                <FeatureItem
+                  key={feature.text}
+                  icon={feature.icon}
+                  text={feature.text}
+                  color={feature.color}
+                  index={index}
+                />
+              ))}
+            </div>
+
+            {/* Stats Banner */}
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10"
+            >
+              <div className="flex-shrink-0 w-16 h-16">
+                <Lottie animationData={ratingAnimation} loop />
               </div>
-            </div>
+              <div>
+                <p className="text-white font-semibold">1000+ Students Annually</p>
+                <p className="text-sm text-slate-400">Across 6 departments of excellence</p>
+              </div>
+            </motion.div>
+          </motion.div>
 
-            <div className="w-full px-4 lg:w-1/2">
-              <Lottie animationData={Visa} />
+          {/* Right Content - Lottie Animation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, x: 50 }}
+            animate={isInView ? { opacity: 1, scale: 1, x: 0 } : { opacity: 0, scale: 0.9, x: 50 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="order-1 lg:order-2 relative"
+          >
+            {/* Decorative frame */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-50" />
+            
+            <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-3xl p-6 border border-white/10">
+              {/* Floating badges */}
+              <motion.div
+                animate={{ y: [-5, 5, -5] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 px-4 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full shadow-lg"
+              >
+                <span className="text-sm font-semibold text-white">Top Rated</span>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [5, -5, 5] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-4 -left-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg"
+              >
+                <span className="text-sm font-semibold text-white">Since 1963</span>
+              </motion.div>
+
+              <Lottie 
+                animationData={Visa} 
+                className="w-full max-w-md mx-auto"
+              />
             </div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Bottom border */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-20 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-center"
+        />
       </div>
     </section>
   );
