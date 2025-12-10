@@ -8,48 +8,100 @@ import {
   Award,
 } from "lucide-react";
 
-const featuresData: Feature[] = [
+export const featuresData: Feature[] = [
   {
     id: 1,
-    icon: <GraduationCap className="h-10 w-10 text-blue-600 dark:text-blue-300" />,
+    icon: <GraduationCap className="h-6 w-6" />,
     title: "Quality Education",
     paragraph:
-      "We provide high-quality research-based teaching and learning in science and mathematics, preparing students for successful careers across diverse scientific disciplines with cutting-edge curriculum and experienced faculty.",
+      "We provide high-quality research-based teaching and learning in science and mathematics, preparing students for successful careers across diverse scientific disciplines.",
   },
   {
     id: 2,
-    icon: <Microscope className="h-10 w-10 text-blue-600 dark:text-blue-300" />,
+    icon: <Microscope className="h-6 w-6" />,
     title: "Research Excellence",
     paragraph:
-      "Our college is committed to conducting innovative research that addresses societal needs and contributes to scientific advancement. We foster a culture of inquiry and discovery across all departments.",
+      "Our college is committed to conducting innovative research that addresses societal needs and contributes to scientific advancement across all departments.",
   },
   {
     id: 3,
-    icon: <FlaskConical className="h-10 w-10 text-blue-600 dark:text-blue-300" />,
-    title: "State of the Art Laboratories",
+    icon: <FlaskConical className="h-6 w-6" />,
+    title: "Modern Laboratories",
     paragraph:
-      "Equipped with modern facilities and advanced equipment, our laboratories provide students and researchers with hands-on experience in Chemistry, Physics, Biology, Mathematics, Statistics, and Industrial Chemistry.",
+      "Equipped with advanced facilities, our laboratories provide hands-on experience in Chemistry, Physics, Biology, Mathematics, Statistics, and Industrial Chemistry.",
   },
   {
     id: 4,
-    icon: <Users className="h-10 w-10 text-blue-600 dark:text-blue-300" />,
+    icon: <Users className="h-6 w-6" />,
     title: "Community Engagement",
     paragraph:
-      "We actively collaborate with government and non-governmental institutions to support public service activities, meet emerging community needs through research, and promote scientific literacy and development.",
+      "We actively collaborate with institutions to support public service activities, meet community needs through research, and promote scientific literacy.",
   },
   {
     id: 5,
-    icon: <BookOpen className="h-10 w-10 text-blue-600 dark:text-blue-300" />,
+    icon: <BookOpen className="h-6 w-6" />,
     title: "Diverse Programs",
     paragraph:
-      "Offering comprehensive undergraduate and graduate programs in multiple scientific disciplines, we enable students to achieve their full potential through rigorous academic programs designed to meet future challenges.",
+      "Offering comprehensive undergraduate and graduate programs in multiple scientific disciplines to help students achieve their full potential.",
   },
   {
     id: 6,
-    icon: <Award className="h-10 w-10 text-blue-600 dark:text-blue-300" />,
+    icon: <Award className="h-6 w-6" />,
     title: "National Excellence",
     paragraph:
-      "Striving to become one of the best research and teaching colleges in the university, we are dedicated to producing graduates who serve as national models of excellence in science and mathematics.",
+      "Striving to become one of the best research and teaching colleges, producing graduates who serve as national models of excellence.",
+  },
+];
+
+// Extended feature data with colors for the new design
+export const extendedFeaturesData = [
+  {
+    ...featuresData[0],
+    color: "from-blue-500 to-indigo-600",
+    bgColor: "bg-blue-500/10",
+    shadowColor: "shadow-blue-500/20",
+    hoverShadow: "hover:shadow-blue-500/30",
+    stats: { value: "6", label: "Departments" },
+  },
+  {
+    ...featuresData[1],
+    color: "from-purple-500 to-violet-600",
+    bgColor: "bg-purple-500/10",
+    shadowColor: "shadow-purple-500/20",
+    hoverShadow: "hover:shadow-purple-500/30",
+    stats: { value: "200+", label: "Publications" },
+  },
+  {
+    ...featuresData[2],
+    color: "from-emerald-500 to-teal-600",
+    bgColor: "bg-emerald-500/10",
+    shadowColor: "shadow-emerald-500/20",
+    hoverShadow: "hover:shadow-emerald-500/30",
+    stats: { value: "15+", label: "Labs" },
+  },
+  {
+    ...featuresData[3],
+    color: "from-amber-500 to-orange-600",
+    bgColor: "bg-amber-500/10",
+    shadowColor: "shadow-amber-500/20",
+    hoverShadow: "hover:shadow-amber-500/30",
+    stats: { value: "50+", label: "Partners" },
+  },
+  {
+    ...featuresData[4],
+    color: "from-rose-500 to-pink-600",
+    bgColor: "bg-rose-500/10",
+    shadowColor: "shadow-rose-500/20",
+    hoverShadow: "hover:shadow-rose-500/30",
+    stats: { value: "12+", label: "Programs" },
+  },
+  {
+    ...featuresData[5],
+    color: "from-cyan-500 to-blue-600",
+    bgColor: "bg-cyan-500/10",
+    shadowColor: "shadow-cyan-500/20",
+    hoverShadow: "hover:shadow-cyan-500/30",
+    stats: { value: "95%", label: "Success" },
   },
 ];
 

@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Award, MapPin, Calendar, Star, GraduationCap } from 'lucide-react';
 import Image from 'next/image';
-import TestimonialModal from '../ui/testimonial-modal';
 import Testimonials from './Testimonals';
 
 interface SuccessStory {
@@ -23,8 +22,8 @@ interface SuccessStory {
 const SuccessStories = () => {
   const [stories, setStories] = useState<SuccessStory[]>([]);
 
-  // Fallback data
-  const fallbackStories: SuccessStory[] = [
+  // Fallback data wrapped in useMemo to prevent re-creation on every render
+  const fallbackStories: SuccessStory[] = useMemo(() => [
     {
       id: '1',
       title: 'From Chemistry Student to Research Scientist',
@@ -76,7 +75,7 @@ const SuccessStories = () => {
       ],
       featured: false,
     },
-  ];
+  ], []);
 
   useEffect(() => {
     const fetchStories = async () => {

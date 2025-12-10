@@ -18,7 +18,7 @@ import {
 const Lottie = dynamic(() => import("lottie-react"), { 
   ssr: false,
   loading: () => (
-    <div className="w-full h-64 bg-slate-800/50 rounded-2xl animate-pulse" />
+    <div className="w-full h-64 bg-gray-200 dark:bg-slate-800/50 rounded-2xl animate-pulse" />
   )
 });
 
@@ -82,7 +82,7 @@ const ResearchCard = ({
         transition-all duration-500 ease-out
         ${isActive 
           ? `${item.bgColor} border-2 ${item.borderColor} shadow-xl` 
-          : 'bg-slate-800/30 border border-white/5 hover:bg-slate-800/50 hover:border-white/10'
+          : 'bg-gray-100 dark:bg-slate-800/30 border border-gray-200 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-slate-800/50 hover:border-gray-300 dark:hover:border-white/10'
         }
       `}
     >
@@ -114,15 +114,15 @@ const ResearchCard = ({
           <div className="flex items-center justify-between mb-2">
             <h3 className={`
               text-lg font-bold transition-colors duration-300
-              ${isActive ? 'text-white' : 'text-slate-200 group-hover:text-white'}
+              ${isActive ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-slate-200 group-hover:text-gray-900 dark:group-hover:text-white'}
             `}>
               {item.title}
             </h3>
             <ChevronRight className={`
               w-5 h-5 transition-all duration-300
               ${isActive 
-                ? 'text-white rotate-90' 
-                : 'text-slate-500 group-hover:text-white group-hover:translate-x-1'
+                ? 'text-gray-900 dark:text-white rotate-90' 
+                : 'text-gray-400 dark:text-slate-500 group-hover:text-gray-900 dark:group-hover:text-white group-hover:translate-x-1'
               }
             `} />
           </div>
@@ -135,18 +135,18 @@ const ResearchCard = ({
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                <p className="text-gray-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
                   {item.description}
                 </p>
                 
                 {/* Stats */}
-                <div className="flex items-center gap-4 pt-3 border-t border-white/10">
+                <div className="flex items-center gap-4 pt-3 border-t border-gray-200 dark:border-white/10">
                   <div className={`
                     px-3 py-1.5 rounded-lg bg-gradient-to-r ${item.color}
                   `}>
                     <span className="text-lg font-bold text-white">{item.stats.value}</span>
                   </div>
-                  <span className="text-sm text-slate-400">{item.stats.label}</span>
+                  <span className="text-sm text-gray-600 dark:text-slate-400">{item.stats.label}</span>
                 </div>
               </motion.div>
             )}
@@ -165,7 +165,7 @@ const AboutSectionTwo = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 md:py-28 lg:py-32 overflow-hidden"
+      className="relative py-20 md:py-28 lg:py-32 overflow-hidden bg-gray-50 dark:bg-slate-900"
     >
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
@@ -173,7 +173,7 @@ const AboutSectionTwo = () => {
         <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
         
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
       <div className="container relative">
@@ -193,18 +193,18 @@ const AboutSectionTwo = () => {
                 transition={{ duration: 0.5 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-4"
               >
-                <Target className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-medium text-purple-400">Research & Innovation</span>
+                <Target className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                <span className="text-sm font-medium text-purple-600 dark:text-purple-400">Research & Innovation</span>
               </motion.div>
               
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-3xl font-bold text-white mb-4"
+                className="text-3xl font-bold text-gray-900 dark:text-white mb-4"
               >
                 Advancing Scientific{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
                   Knowledge
                 </span>
               </motion.h2>
@@ -213,14 +213,14 @@ const AboutSectionTwo = () => {
             {/* Decorative frame */}
             <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-50" />
             
-            <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-3xl p-6 border border-white/10 overflow-hidden">
+            <div className="relative bg-white dark:bg-slate-800/50 backdrop-blur-sm rounded-3xl p-6 border border-gray-200 dark:border-white/10 overflow-hidden shadow-lg dark:shadow-none">
               {/* Animated background gradient */}
               <motion.div
                 animate={{
                   background: [
-                    "radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)",
-                    "radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)",
-                    "radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)",
+                    "radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)",
+                    "radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)",
+                    "radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)",
                   ],
                 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -264,17 +264,17 @@ const AboutSectionTwo = () => {
               ].map((stat, index) => (
                 <div 
                   key={stat.label}
-                  className="text-center p-4 rounded-xl bg-slate-800/50 border border-white/5"
+                  className="text-center p-4 rounded-xl bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-white/5 shadow-sm dark:shadow-none"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : { scale: 0 }}
                     transition={{ duration: 0.5, delay: 0.6 + index * 0.1, type: "spring" }}
-                    className="text-2xl font-bold text-white mb-1"
+                    className="text-2xl font-bold text-gray-900 dark:text-white mb-1"
                   >
                     {stat.value}
                   </motion.div>
-                  <div className="text-xs text-slate-400">{stat.label}</div>
+                  <div className="text-xs text-gray-600 dark:text-slate-400">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -294,18 +294,18 @@ const AboutSectionTwo = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 mb-4"
               >
-                <Target className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-medium text-purple-400">Research & Innovation</span>
+                <Target className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                <span className="text-sm font-medium text-purple-600 dark:text-purple-400">Research & Innovation</span>
               </motion.div>
               
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
               >
                 Advancing Scientific{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400">
                   Knowledge
                 </span>
               </motion.h2>
@@ -314,7 +314,7 @@ const AboutSectionTwo = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="text-lg text-slate-400"
+                className="text-lg text-gray-600 dark:text-slate-400"
               >
                 Cutting-edge research across chemistry, physics, biology, mathematics, and applied sciences.
               </motion.p>

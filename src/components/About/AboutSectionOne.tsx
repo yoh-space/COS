@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 import { 
@@ -21,7 +20,7 @@ import {
 const Lottie = dynamic(() => import("lottie-react"), { 
   ssr: false,
   loading: () => (
-    <div className="w-full h-64 bg-slate-800/50 rounded-2xl animate-pulse" />
+    <div className="w-full h-64 bg-gray-200 dark:bg-slate-800/50 rounded-2xl animate-pulse" />
   )
 });
 
@@ -83,7 +82,7 @@ const FeatureItem = ({
       initial={{ opacity: 0, x: -30 }}
       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-300"
+      className="group flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300"
     >
       <div className={`
         relative flex items-center justify-center w-12 h-12 rounded-xl
@@ -94,7 +93,7 @@ const FeatureItem = ({
         <Icon className="w-5 h-5 text-white" />
         <div className="absolute inset-0 rounded-xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
-      <span className="text-base font-medium text-slate-300 group-hover:text-white transition-colors duration-300">
+      <span className="text-base font-medium text-gray-700 dark:text-slate-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
         {text}
       </span>
       <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -110,7 +109,7 @@ const AboutSectionOne = () => {
     <section 
       id="about" 
       ref={sectionRef}
-      className="relative py-20 md:py-28 lg:py-32 overflow-hidden"
+      className="relative py-20 md:py-28 lg:py-32 overflow-hidden bg-white dark:bg-slate-900"
     >
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
@@ -133,17 +132,17 @@ const AboutSectionOne = () => {
               variants={itemVariants}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
             >
-              <Sparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-blue-400">About Us</span>
+              <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">About Us</span>
             </motion.div>
 
             {/* Title */}
             <motion.h2
               variants={itemVariants}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
             >
               Excellence in Science{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
                 Education & Research
               </span>
             </motion.h2>
@@ -151,7 +150,7 @@ const AboutSectionOne = () => {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-lg text-slate-400 mb-8 leading-relaxed"
+              className="text-lg text-gray-600 dark:text-slate-400 mb-8 leading-relaxed"
             >
               Bahir Dar University College of Science is committed to advancing scientific 
               knowledge through world-class education, cutting-edge research, and community engagement.
@@ -173,14 +172,14 @@ const AboutSectionOne = () => {
             {/* Stats Banner */}
             <motion.div
               variants={itemVariants}
-              className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10"
+              className="flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 dark:border-white/10"
             >
               <div className="flex-shrink-0 w-16 h-16">
                 <Lottie animationData={ratingAnimation} loop />
               </div>
               <div>
-                <p className="text-white font-semibold">1000+ Students Annually</p>
-                <p className="text-sm text-slate-400">Across 6 departments of excellence</p>
+                <p className="text-gray-900 dark:text-white font-semibold">1000+ Students Annually</p>
+                <p className="text-sm text-gray-600 dark:text-slate-400">Across 6 departments of excellence</p>
               </div>
             </motion.div>
           </motion.div>
@@ -195,7 +194,7 @@ const AboutSectionOne = () => {
             {/* Decorative frame */}
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-50" />
             
-            <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-3xl p-6 border border-white/10">
+            <div className="relative bg-gray-100 dark:bg-slate-800/50 backdrop-blur-sm rounded-3xl p-6 border border-gray-200 dark:border-white/10">
               {/* Floating badges */}
               <motion.div
                 animate={{ y: [-5, 5, -5] }}
@@ -226,7 +225,7 @@ const AboutSectionOne = () => {
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="mt-20 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-center"
+          className="mt-20 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-white/20 to-transparent origin-center"
         />
       </div>
     </section>

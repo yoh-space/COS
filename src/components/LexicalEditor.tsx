@@ -52,6 +52,7 @@ function InitialContentPlugin({ content }: { content: string }) {
         console.error('Failed to parse initial content:', e);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

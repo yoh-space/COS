@@ -1,13 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import SectionTitle from "../Common/SectionTitle";
 import ProgramGlassCard from "@/components/ui/program-glass-card";
 
 const AcademicPrograms = () => {
   const [programs, setPrograms] = useState([]);
 
-  // Fallback data
-  const fallbackPrograms = [
+  // Fallback data wrapped in useMemo to prevent re-creation on every render
+  const fallbackPrograms = useMemo(() => [
     {
       packageName: "Undergraduate",
       price: "BSc",
@@ -68,7 +68,7 @@ const AcademicPrograms = () => {
         { text: "Industry Leadership Roles", status: "active" as const },
       ],
     },
-  ];
+  ], []);
 
   useEffect(() => {
     const fetchPrograms = async () => {
