@@ -43,8 +43,8 @@ const Header = () => {
   return (
     <>
       <header
-        className={`header top-0 left-0 z-40 flex w-full items-center ${sticky
-          ? "dark:bg-gray-dark dark:shadow-sticky-dark shadow-sticky fixed z-9999 bg-white/80 backdrop-blur-xs transition"
+        className={`header top-0 left-0 z-40 flex w-full items-center transition-all duration-300 ${sticky
+          ? "dark:bg-slate-900/95 dark:shadow-2xl dark:shadow-black/30 shadow-lg shadow-gray-200/50 fixed z-9999 bg-white/95 backdrop-blur-md border-b border-gray-200/50 dark:border-white/5"
           : "absolute bg-transparent"
           }`}
       >
@@ -91,13 +91,13 @@ const Header = () => {
                 </button>
                 <nav
                   id="navbarCollapse"
-                  className={`navbar border-body-color/50 dark:border-body-color/20 dark:bg-dark absolute right-0 z-30 w-[220px] rounded border-[.5px] bg-white px-6 py-4 duration-300 
-                    lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 ${navbarOpen
-                      ? "visibility top-full opacity-100"
-                      : "invisible top-[120%] opacity-0"
+                  className={`navbar border-gray-200 dark:border-white/10 dark:bg-slate-800/95 absolute right-0 z-30 w-[250px] rounded-xl border backdrop-blur-md bg-white/95 px-6 py-4 shadow-lg shadow-gray-200/50 dark:shadow-black/20 transition-all duration-300 
+                    lg:visible lg:static lg:w-auto lg:border-none lg:!bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none ${navbarOpen
+                      ? "visibility top-full opacity-100 translate-y-0"
+                      : "invisible top-[120%] opacity-0 -translate-y-2"
                     }`}
                 >
-                  <ul className="block lg:flex lg:items-center lg:space-x-6">
+                  <ul className="block lg:flex lg:items-center lg:space-x-2">
                     {menuData.map((menuItem, index) => (
                       <li key={index} className="group relative">
                         {menuItem.submenu ? (
@@ -105,22 +105,22 @@ const Header = () => {
                             <Link
                               href={menuItem.path || "#"}
                               onClick={menuItem.path ? undefined : () => handleSubmenu(index)}
-                              className={`flex cursor-pointer items-center justify-between py-2 text-sm lg:px-2 lg:py-4 lg:text-sm group-hover:text-primary dark:group-hover:text-white ${usePathName === menuItem.path
-                                ? "text-primary dark:text-white"
-                                : "text-dark dark:text-white/70"
+                              className={`flex cursor-pointer items-center justify-between py-3 px-3 text-sm font-medium rounded-lg transition-all duration-200 lg:px-3 lg:py-2 lg:text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:bg-blue-50 dark:group-hover:bg-blue-500/10 ${usePathName === menuItem.path
+                                ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10"
+                                : "text-gray-700 dark:text-slate-300"
                                 }`}
                             >
                               <div className="flex items-center gap-2">
                                 {menuItem.icon && (
-                                  <menuItem.icon className="w-4 h-4 mr-1" aria-hidden="true" />
+                                  <menuItem.icon className="w-4 h-4" aria-hidden="true" />
                                 )}
                                 <span>{menuItem.title}</span>
                               </div>
-                              <span className="pl-2" onClick={(e) => {
+                              <span className="pl-2 transition-transform duration-200 group-hover:rotate-180" onClick={(e) => {
                                 e.preventDefault();
                                 handleSubmenu(index);
                               }}>
-                                <svg width="20" height="20" viewBox="0 0 25 24">
+                                <svg width="16" height="16" viewBox="0 0 25 24">
                                   <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
@@ -131,18 +131,18 @@ const Header = () => {
                               </span>
                             </Link>
                             <div
-                              className={`submenu dark:bg-dark relative top-full left-0 rounded-sm bg-white transition-[top] duration-300 group-hover:opacity-100 
-                              lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[200px] lg:p-3 lg:opacity-0 lg:shadow-md lg:group-hover:visible lg:group-hover:top-full ${openIndex === index ? "block" : "hidden"
+                              className={`submenu dark:bg-slate-800/95 relative top-full left-0 rounded-xl bg-white/95 backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-lg shadow-gray-200/50 dark:shadow-black/20 transition-all duration-300 group-hover:opacity-100 
+                              lg:invisible lg:absolute lg:top-[110%] lg:block lg:w-[220px] lg:p-3 lg:opacity-0 lg:group-hover:visible lg:group-hover:top-full lg:group-hover:translate-y-0 lg:-translate-y-2 ${openIndex === index ? "block" : "hidden"
                                 }`}
                             >
                               {menuItem.submenu.map((submenuItem, subIndex) => (
                                 <Link
                                   href={submenuItem.path}
                                   key={subIndex}
-                                  className="text-dark hover:text-primary flex items-center gap-2 block rounded-sm py-2 text-sm lg:px-2 dark:text-white/70 dark:hover:text-white"
+                                  className="text-gray-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 flex items-center gap-3 rounded-lg py-2.5 px-3 text-sm font-medium transition-all duration-200"
                                 >
                                   {submenuItem.icon && (
-                                    <submenuItem.icon className="w-3 h-3 mr-1" aria-hidden="true" />
+                                    <submenuItem.icon className="w-4 h-4" aria-hidden="true" />
                                   )}
                                   <span>{submenuItem.title}</span>
                                 </Link>
@@ -152,13 +152,13 @@ const Header = () => {
                         ) : (
                           <Link
                             href={menuItem.path}
-                            className={`flex items-center gap-2 py-2 text-sm lg:px-2 lg:py-4 lg:text-sm transition-colors ${usePathName === menuItem.path
-                              ? "text-primary dark:text-white"
-                              : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+                            className={`flex items-center gap-2 py-3 px-3 text-sm font-medium rounded-lg transition-all duration-200 lg:px-3 lg:py-2 lg:text-sm hover:bg-blue-50 dark:hover:bg-blue-500/10 ${usePathName === menuItem.path
+                              ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10"
+                              : "text-gray-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
                               }`}
                           >
                             {menuItem.icon && (
-                              <menuItem.icon className="w-4 h-4 mr-1" aria-hidden="true" />
+                              <menuItem.icon className="w-4 h-4" aria-hidden="true" />
                             )}
                             <span>{menuItem.title}</span>
                           </Link>

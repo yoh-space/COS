@@ -124,17 +124,18 @@ model Department {
 }
 
 model DeanMessage {
-  id              String   @id @default(cuid())
-  title           String
-  content         String   @db.Text
-  image           String?
-  status          String   @default("draft")
-  publishedAt     DateTime?
-  scheduledFor    DateTime?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  versions        ContentVersion[] @relation("DeanMessageVersions")
-  auditLogs       AuditLog[] @relation("DeanMessageAuditLogs")
+  id               String   @id @default(cuid())
+  title            String
+  content          String   @db.Text
+  closingMessages  String[] // NEW: Array of closing message bullets
+  image            String?
+  status           String   @default("draft")
+  publishedAt      DateTime?
+  scheduledFor     DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  versions         ContentVersion[] @relation("DeanMessageVersions")
+  auditLogs        AuditLog[] @relation("DeanMessageAuditLogs")
 }
 
 model VisionMission {

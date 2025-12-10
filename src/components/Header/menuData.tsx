@@ -74,7 +74,7 @@ const menuData: (Menu & { icon?: any })[] = [
       },
       {
         id: 26,
-        title: "Staff Memebers",
+        title: "Staff Members",
         path: "/staffs",
         newTab: false,
         icon: Users,

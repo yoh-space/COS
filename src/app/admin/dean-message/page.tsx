@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminBreadcrumb from '@/components/Admin/Breadcrumb';
+import { Plus, X } from 'lucide-react';
 
 export default function DeanMessagePage() {
     const router = useRouter();
@@ -11,6 +12,7 @@ export default function DeanMessagePage() {
     const [message, setMessage] = useState({
         title: '',
         content: '',
+        closingMessages: [] as string[],
         image: '',
         status: 'draft',
     });
@@ -27,6 +29,7 @@ export default function DeanMessagePage() {
                 setMessage({
                     title: data.title || '',
                     content: data.content || '',
+                    closingMessages: data.closingMessages || [],
                     image: data.image || '',
                     status: data.status || 'draft',
                 });
@@ -69,6 +72,30 @@ export default function DeanMessagePage() {
         }
     };
 
+    const addClosingMessage = () => {
+        setMessage({
+            ...message,
+            closingMessages: [...message.closingMessages, '']
+        });
+    };
+
+    const updateClosingMessage = (index: number, value: string) => {
+        const updated = [...message.closingMessages];
+        updated[index] = value;
+        setMessage({
+            ...message,
+            closingMessages: updated
+        });
+    };
+
+    const removeClosingMessage = (index: number) => {
+        const updated = message.closingMessages.filter((_, i) => i !== index);
+        setMessage({
+            ...message,
+            closingMessages: updated
+        });
+    };
+
     if (loading) {
         return (
             <div className="flex min-h-screen items-center justify-center">
@@ -97,7 +124,7 @@ export default function DeanMessagePage() {
             </div>
 
             <form onSubmit={handleSubmit} className="max-w-4xl">
-                <div className="rounded-sm bg-white px-8 py-8 shadow-three dark:bg-gray-dark">
+                <div className="rounded-sm bg-white dark:bg-gray-dark px-8 py-8 shadow-three">
                     {/* Title */}
                     <div className="mb-6">
                         <label
@@ -111,7 +138,7 @@ export default function DeanMessagePage() {
                             id="title"
                             value={message.title}
                             onChange={(e) => setMessage({ ...message, title: e.target.value })}
-                            className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
+                            className="w-full rounded-md border border-stroke dark:border-dark-3 bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary"
                             placeholder="e.g., Welcome to the College of Science"
                             required
                         />
@@ -130,7 +157,7 @@ export default function DeanMessagePage() {
                             id="image"
                             value={message.image}
                             onChange={(e) => setMessage({ ...message, image: e.target.value })}
-                            className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
+                            className="w-full rounded-md border border-stroke dark:border-dark-3 bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary"
                             placeholder="https://example.com/dean-photo.jpg"
                         />
                     </div>
@@ -148,13 +175,55 @@ export default function DeanMessagePage() {
                             value={message.content}
                             onChange={(e) => setMessage({ ...message, content: e.target.value })}
                             rows={20}
-                            className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
+                            className="w-full rounded-md border border-stroke dark:border-dark-3 bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary"
                             placeholder="Enter the dean&apos;s message here. Use double line breaks for paragraphs."
                             required
                         />
                         <p className="mt-2 text-sm text-body-color">
                             Tip: Use double line breaks (press Enter twice) to create new paragraphs.
                         </p>
+                    </div>
+
+                    {/* Closing Messages */}
+                    <div className="mb-6">
+                        <div className="flex items-center justify-between mb-3">
+                            <label className="text-sm font-medium text-black dark:text-white">
+                                Closing Messages (Bullet Points)
+                            </label>
+                            <button
+                                type="button"
+                                onClick={addClosingMessage}
+                                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-primary text-white rounded-md hover:bg-primary/90"
+                            >
+                                <Plus size={16} />
+                                Add Point
+                            </button>
+                        </div>
+                        <div className="space-y-3">
+                            {message.closingMessages.map((msg, index) => (
+                                <div key={index} className="flex gap-3">
+                                    <input
+                                        type="text"
+                                        value={msg}
+                                        onChange={(e) => updateClosingMessage(index, e.target.value)}
+                                        className="flex-1 rounded-md border border-stroke dark:border-dark-3 bg-transparent px-4 py-2 text-base text-body-color outline-none focus:border-primary"
+                                        placeholder="Enter closing message point..."
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => removeClosingMessage(index)}
+                                        className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md"
+                                    >
+                                        <X size={16} />
+                                    </button>
+                                </div>
+                            ))}
+                            {message.closingMessages.length === 0 && (
+                                <p className="text-sm text-body-color italic">
+                                    No closing messages added yet. Click "Add Point" to create bullet points.
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     {/* Status */}
@@ -169,7 +238,7 @@ export default function DeanMessagePage() {
                             id="status"
                             value={message.status}
                             onChange={(e) => setMessage({ ...message, status: e.target.value })}
-                            className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3"
+                            className="w-full rounded-md border border-stroke dark:border-dark-3 bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary"
                         >
                             <option value="draft">Draft</option>
                             <option value="published">Published</option>
@@ -200,7 +269,7 @@ export default function DeanMessagePage() {
                         <button
                             type="button"
                             onClick={() => router.push('/admin')}
-                            className="inline-flex items-center justify-center rounded-md border border-stroke px-8 py-3 text-base font-medium text-body-color hover:bg-gray-2 dark:border-dark-3 dark:hover:bg-dark-3"
+                            className="inline-flex items-center justify-center rounded-md border border-stroke dark:border-dark-3 px-8 py-3 text-base font-medium text-body-color hover:bg-gray-2 dark:hover:bg-dark-3"
                         >
                             Cancel
                         </button>
