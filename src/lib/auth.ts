@@ -7,6 +7,7 @@ import {
   hasRole as checkRole,
   hasAnyRole as checkAnyRole,
   isAdmin as checkIsAdmin,
+  hasAdminAccess as checkHasAdminAccess,
   canAccessDepartment,
   canManageContentType,
   getUserPermissions,
@@ -92,6 +93,19 @@ export async function isAdmin(): Promise<boolean> {
   }
 
   return checkIsAdmin(user);
+}
+
+/**
+ * Check if the current user has admin access (any management role)
+ */
+export async function hasAdminAccess(): Promise<boolean> {
+  const user = await getCurrentUser();
+  
+  if (!user) {
+    return false;
+  }
+
+  return checkHasAdminAccess(user);
 }
 
 /**

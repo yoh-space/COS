@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     console.log('User found:', {
       id: user.id,
       email: user.email,
-      roles: user.roles?.map(r => r.name) || [],
+      roles: user.roles?.map(r => ({ name: r.name, permissions: r.permissions })) || [],
     });
 
     return apiSuccess({
@@ -26,7 +26,11 @@ export async function GET(request: NextRequest) {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        roles: user.roles?.map(r => ({ id: r.id, name: r.name })) || [],
+        roles: user.roles?.map(r => ({ 
+          id: r.id, 
+          name: r.name,
+          permissions: r.permissions || []
+        })) || [],
         department: user.department ? {
           id: user.department.id,
           name: user.department.name,

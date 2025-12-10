@@ -245,6 +245,20 @@ export function isAdmin(user: User & { roles: Role[] }): boolean {
 }
 
 /**
+ * Check if user has admin access (any management role)
+ */
+export function hasAdminAccess(user: User & { roles: Role[] }): boolean {
+  const adminRoles = [
+    ROLES.ADMIN,
+    'Resource_Manager',
+    'Staff_Manager', 
+    'Content_Manager',
+    'Academic_Manager'
+  ];
+  return user.roles.some(role => adminRoles.includes(role.name));
+}
+
+/**
  * Check if user can access a specific department's content
  * Department leads can only access their assigned department
  */

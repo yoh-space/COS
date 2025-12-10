@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import AdminBreadcrumb from "@/components/Admin/Breadcrumb";
+import AddAdminModal from "@/components/Admin/AddAdminModal";
 import { DataLoader } from "@/components/Loading";
 
 interface Role {
@@ -54,6 +55,7 @@ export default function UsersPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [departmentFilter, setDepartmentFilter] = useState("");
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     if (isLoaded && !userId) {
@@ -181,57 +183,25 @@ export default function UsersPage() {
       />
 
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          User Management
-        </h1>
-        <p className="mt-2 text-gray-600 dark:text-slate-400">
-          Manage user roles and permissions
-        </p>
-        
-        {/* Debug button - remove after fixing */}
-        <div className="mt-2 space-x-2">
-          <button
-            onClick={async () => {
-              try {
-                const response = await fetch('/api/test-auth');
-                const data = await response.json();
-                console.log('Auth test result:', data);
-                alert(`Auth test: ${response.ok ? 'Success' : 'Failed'} - Check console for details`);
-              } catch (err) {
-                console.error('Auth test error:', err);
-                alert('Auth test failed - Check console for details');
-              }
-            }}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm"
-          >
-            Test Authentication
-          </button>
-          
-          <button
-            onClick={async () => {
-              try {
-                const response = await fetch('/api/debug-users');
-                const data = await response.json();
-                console.log('Debug users result:', data);
-                if (response.ok) {
-                  setUsers(data.users || []);
-                  setPagination(data.pagination || { page: 1, limit: 50, total: 0, totalPages: 0 });
-                  setLoading(false);
-                  alert('Debug API worked! Check the page.');
-                } else {
-                  alert(`Debug API failed: ${data.error}`);
-                }
-              } catch (err) {
-                console.error('Debug users error:', err);
-                alert('Debug API failed - Check console for details');
-              }
-            }}
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm"
-          >
-            Test Debug Users API
-          </button>
+      <div className="mb-8 flex justify-between items-start">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            User Management
+          </h1>
+          <p className="mt-2 text-gray-600 dark:text-slate-400">
+            Manage user roles and permissions
+          </p>
         </div>
+        
+        <button
+          onClick={() => setShowAddModal(true)}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          Add Admin
+        </button>
       </div>
 
       {/* Filters */}
@@ -483,6 +453,16 @@ export default function UsersPage() {
           </>
         )}
       </div>
+
+      {/* Add Admin Modal */}
+      <AddAdminModal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSuccess={() => {
+          fetchUsers();
+          setShowAddModal(false);
+        }}
+      />
     </div>
   );
 }

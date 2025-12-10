@@ -1,14 +1,14 @@
 import { redirect } from "next/navigation";
-import { isAdmin } from "@/lib/auth";
+import { hasAdminAccess } from "@/lib/auth";
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const isUserAdmin = await isAdmin();
+  const userHasAdminAccess = await hasAdminAccess();
 
-  if (!isUserAdmin) {
+  if (!userHasAdminAccess) {
     redirect("/");
   }
 
