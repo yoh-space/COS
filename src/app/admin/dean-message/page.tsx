@@ -220,7 +220,7 @@ export default function DeanMessagePage() {
                             ))}
                             {message.closingMessages.length === 0 && (
                                 <p className="text-sm text-body-color italic">
-                                    No closing messages added yet. Click "Add Point" to create bullet points.
+                                    No closing messages added yet. Click &quot;Add Point&quot; to create bullet points.
                                 </p>
                             )}
                         </div>
