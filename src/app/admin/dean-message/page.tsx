@@ -46,6 +46,9 @@ export default function DeanMessagePage() {
         setSaving(true);
 
         try {
+            // Filter out empty closing messages
+            const filteredClosingMessages = message.closingMessages.filter(msg => msg.trim() !== '');
+            
             const response = await fetch('/api/cms/dean-message', {
                 method: 'PUT',
                 headers: {
@@ -53,6 +56,7 @@ export default function DeanMessagePage() {
                 },
                 body: JSON.stringify({
                     ...message,
+                    closingMessages: filteredClosingMessages,
                     status: newStatus || message.status,
                 }),
             });
@@ -193,7 +197,7 @@ export default function DeanMessagePage() {
                             <button
                                 type="button"
                                 onClick={addClosingMessage}
-                                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-primary text-white rounded-md hover:bg-primary/90"
+                                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 shadow-sm hover:shadow-md"
                             >
                                 <Plus size={16} />
                                 Add Point
@@ -212,7 +216,7 @@ export default function DeanMessagePage() {
                                     <button
                                         type="button"
                                         onClick={() => removeClosingMessage(index)}
-                                        className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md"
+                                        className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-all duration-200"
                                     >
                                         <X size={16} />
                                     </button>

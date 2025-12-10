@@ -44,10 +44,15 @@ export const PUT = withPermission(
     async (request: NextRequest, user) => {
         try {
             const body = await request.json();
-            const { title, content, image, status } = body;
+            const { title, content, closingMessages, image, status } = body;
 
             if (!title || !content) {
                 return validationError('Title and content are required');
+            }
+
+            // Validate closingMessages is an array if provided
+            if (closingMessages && !Array.isArray(closingMessages)) {
+                return validationError('Closing messages must be an array');
             }
 
             // Get the current dean message
@@ -61,6 +66,7 @@ export const PUT = withPermission(
                     data: {
                         title,
                         content,
+                        closingMessages: closingMessages || [],
                         image: image || null,
                         status: status || 'draft',
                         publishedAt: status === 'published' ? new Date() : null,
@@ -77,6 +83,7 @@ export const PUT = withPermission(
                 data: {
                     title,
                     content,
+                    closingMessages: closingMessages || [],
                     image: image || null,
                     status: status || currentMessage.status,
                     publishedAt: status === 'published' && !currentMessage.publishedAt

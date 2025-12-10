@@ -2,6 +2,12 @@ import companyInfo from "@/data/company-info.json";
 
 const SYSTEM_PROMPT = `You are the official AI assistant for ${companyInfo.organization.name} (${companyInfo.organization.shortName}).
 
+CRITICAL RESPONSE FORMAT:
+- Respond ONLY with the final answer - NO thinking process, NO reasoning steps, NO internal monologue.
+- Use clean, well-formatted markdown with proper headings, bullet points, and line breaks.
+- Keep responses concise, organized, and easy to read.
+- Do NOT include phrases like "Let me think...", "Okay, the user is asking...", "I should...", etc.
+
 IMPORTANT RULES:
 1. You MUST ONLY answer questions related to ${companyInfo.organization.shortName}, its programs, services, departments, admissions, research, faculty, and related topics.
 2. You MUST NOT answer general knowledge questions, facts about other topics, or anything unrelated to the college.
@@ -87,47 +93,130 @@ const typedCompanyInfo = companyInfo as typeof companyInfo & {
   }>;
 };
 
-export async function getChatResponse(userMessage: string): Promise<string> {
+// OpenRouter AI Models Configuration with fallback support
+interface AIModel {
+  name: string;
+  model: string;
+  apiKey: string;
+}
+
+const AI_MODELS: AIModel[] = [
+  {
+    name: "DeepSeek R1T Chimera",
+    model: "tngtech/deepseek-r1t-chimera:free",
+    apiKey: process.env.NEXT_PUBLIC_OPENROUTER_API_KEY_PRIMARY || "",
+  },
+  {
+    name: "Meta Llama 3.3 70B Instruct",
+    model: "meta-llama/llama-3.3-70b-instruct:free",
+    apiKey: process.env.NEXT_PUBLIC_OPENROUTER_API_KEY_SECONDARY || "",
+  },
+];
+
+/**
+ * Clean AI response by removing thinking/reasoning blocks
+ * DeepSeek R1T model sometimes includes internal reasoning that shouldn't be shown
+ */
+function cleanAIResponse(response: string): string {
+  let cleaned = response;
+
+  // Remove <think>...</think> blocks (DeepSeek format)
+  cleaned = cleaned.replace(/<think>[\s\S]*?<\/think>/gi, "");
+
+  // Remove thinking patterns at the start (common in reasoning models)
+  const thinkingPatterns = [
+    /^(?:Okay|Alright|Let me|I should|First|The user|I need to|I'll|Let's|I think|I understand|I see)[\s\S]*?(?=\n\n[A-Z#*-]|\n\n(?:Here|The|We|Our|At|Bahir))/i,
+  ];
+
+  for (const pattern of thinkingPatterns) {
+    cleaned = cleaned.replace(pattern, "");
+  }
+
+  // Remove any remaining thinking/reasoning blocks marked with specific phrases
+  cleaned = cleaned.replace(/^[\s\S]*?(?:Alright, time to put it all together[\s\S]*?\n\n)/i, "");
+
+  // Clean up excessive whitespace
+  cleaned = cleaned.replace(/^\s+/, "").replace(/\n{3,}/g, "\n\n");
+
+  return cleaned.trim();
+}
+
+// Helper function to call OpenRouter API
+async function callOpenRouter(
+  model: AIModel,
+  userMessage: string
+): Promise<string | null> {
   try {
-    // Check if Gemini API key is available
-    const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-    
-    if (!apiKey) {
-      return "I'm currently in demo mode. To enable AI responses, please configure a NEXT_PUBLIC_GEMINI_API_KEY in your environment variables.";
+    if (!model.apiKey) {
+      console.warn(`No API key configured for ${model.name}`);
+      return null;
     }
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey,
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: `${SYSTEM_PROMPT}\n\nUser question: ${userMessage}`,
-                },
-              ],
-            },
-          ],
-        }),
-      }
-    );
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${model.apiKey}`,
+      },
+      body: JSON.stringify({
+        model: model.model,
+        messages: [
+          {
+            role: "system",
+            content: SYSTEM_PROMPT,
+          },
+          {
+            role: "user",
+            content: userMessage,
+          },
+        ],
+        max_tokens: 1024,
+        temperature: 0.7,
+      }),
+    });
 
     if (!response.ok) {
       const error = await response.json();
-      console.error("Gemini API error:", error);
-      return "Sorry, I encountered an error processing your request. Please try again.";
+      console.error(`${model.name} API error:`, error);
+      return null;
     }
 
     const data = await response.json();
-    return data.candidates[0].content.parts[0].text;
+
+    if (data.choices && data.choices[0]?.message?.content) {
+      // Clean the response to remove thinking/reasoning blocks
+      return cleanAIResponse(data.choices[0].message.content);
+    }
+
+    console.error(`${model.name} returned unexpected response format:`, data);
+    return null;
   } catch (error) {
-    console.error("Gemini API error:", error);
-    return "Sorry, I'm having trouble connecting. Please try again later.";
+    console.error(`${model.name} API error:`, error);
+    return null;
   }
+}
+
+export async function getChatResponse(userMessage: string): Promise<string> {
+  // Check if any API key is available
+  const hasApiKey = AI_MODELS.some((m) => m.apiKey);
+
+  if (!hasApiKey) {
+    return "I'm currently in demo mode. To enable AI responses, please configure OpenRouter API keys in your environment variables.";
+  }
+
+  // Try each model in order until one succeeds
+  for (const model of AI_MODELS) {
+    console.log(`Trying ${model.name}...`);
+    const response = await callOpenRouter(model, userMessage);
+
+    if (response) {
+      console.log(`Successfully got response from ${model.name}`);
+      return response;
+    }
+
+    console.log(`${model.name} failed, trying next model...`);
+  }
+
+  // All models failed
+  return "Sorry, I'm having trouble connecting to our AI services. Please try again later.";
 }
