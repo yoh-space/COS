@@ -33,7 +33,6 @@ function Hero({
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Preload images
@@ -48,7 +47,6 @@ function Hero({
         });
       });
       await Promise.all(promises);
-      setImagesLoaded(true);
       setIsLoading(false);
     };
     loadImages();
@@ -100,10 +98,11 @@ function Hero({
         minDuration={1800}
       />
 
-      {/* Header gradient overlay */}
-      <div className="fixed top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/40 via-black/20 to-transparent dark:from-black/60 dark:via-black/30 z-30 pointer-events-none" />
+      {/* Header gradient overlay - Light theme: light gradient, Dark theme: dark gradient */}
+      <div className="fixed top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/60 via-white/30 to-transparent dark:from-black/50 dark:via-black/25 dark:to-transparent z-30 pointer-events-none" />
 
-      <section className="relative h-screen min-h-[600px] w-full overflow-hidden bg-slate-900">
+      {/* Hero section */}
+      <section className="relative h-screen min-h-[600px] w-full overflow-hidden bg-gray-100 dark:bg-slate-900">
         {/* Background Images with smooth transitions */}
         <div className="absolute inset-0">
           <AnimatePresence mode="wait">
@@ -130,17 +129,17 @@ function Hero({
             ))}
           </AnimatePresence>
 
-          {/* Overlay Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-slate-900/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-slate-900/40" />
+          {/* Light Theme Overlay - Light/white gradient for visibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/40 dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-white/50 dark:from-slate-900/80 dark:via-transparent dark:to-slate-900/40" />
           
           {/* Animated gradient overlay */}
           <motion.div
             animate={{
               background: [
-                "radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)",
-                "radial-gradient(circle at 30% 60%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)",
-                "radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)",
+                "radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%)",
+                "radial-gradient(circle at 30% 60%, rgba(59, 130, 246, 0.05) 0%, transparent 50%)",
+                "radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%)",
               ],
             }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -169,23 +168,23 @@ function Hero({
                 animate="visible"
                 className="max-w-3xl"
               >
-                {/* Badge */}
+                {/* Badge - theme aware */}
                 <motion.div
                   variants={itemVariants}
-                  className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/40 bg-blue-500/15 px-4 py-2 backdrop-blur-sm"
+                  className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 dark:border-blue-400/40 dark:bg-blue-500/20 px-4 py-2 backdrop-blur-sm"
                 >
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
-                    className="h-2 w-2 rounded-full bg-blue-500"
+                    className="h-2 w-2 rounded-full bg-blue-600 dark:bg-blue-400"
                   />
-                  <span className="text-sm font-medium text-blue-100">{subtitle}</span>
+                  <span className="text-sm font-medium text-blue-700 dark:text-blue-100">{subtitle}</span>
                 </motion.div>
 
-                {/* Main Title */}
+                {/* Main Title - dark text in light mode, white in dark mode */}
                 <motion.h1
                   variants={itemVariants}
-                  className="mb-6 text-3xl font-bold leading-tight text-white drop-shadow-lg sm:text-5xl lg:text-7xl"
+                  className="mb-6 text-3xl font-bold leading-tight text-gray-900 dark:text-white drop-shadow-sm dark:drop-shadow-lg sm:text-5xl lg:text-7xl"
                 >
                   {title.split(" ").map((word, i) => (
                     <motion.span
@@ -200,19 +199,19 @@ function Hero({
                   ))}
                 </motion.h1>
 
-                {/* Description */}
+                {/* Description - theme aware text */}
                 <motion.p
                   variants={itemVariants}
-                  className="mb-8 text-base leading-relaxed text-white/90 sm:text-lg lg:text-xl"
+                  className="mb-8 text-base leading-relaxed text-gray-700 dark:text-white/90 sm:text-lg lg:text-xl"
                 >
                   {description}
                 </motion.p>
 
-                {/* CTA Buttons */}
+                {/* CTA Buttons - theme aware */}
                 <motion.div variants={itemVariants} className="mb-12 flex flex-wrap gap-4">
                   <Link
                     href={primaryCTA.href}
-                    className="group relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-blue-600 px-8 py-4 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:shadow-blue-500/25"
+                    className="group relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-blue-600 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-600/30 transition-all hover:shadow-xl hover:shadow-blue-500/40"
                   >
                     <span className="relative z-10">{primaryCTA.text}</span>
                     <svg
@@ -233,7 +232,7 @@ function Hero({
                   </Link>
                   <Link
                     href={secondaryCTA.href}
-                    className="group inline-flex items-center gap-2 rounded-lg border-2 border-white/30 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:border-white/50"
+                    className="group inline-flex items-center gap-2 rounded-lg border-2 border-gray-800/30 bg-gray-900/10 dark:border-white/40 dark:bg-white/15 px-8 py-4 font-semibold text-gray-900 dark:text-white backdrop-blur-sm transition-all hover:bg-gray-900/20 dark:hover:bg-white/25 hover:border-gray-800/50 dark:hover:border-white/60"
                   >
                     {secondaryCTA.text}
                     <motion.span
@@ -245,14 +244,14 @@ function Hero({
                   </Link>
                 </motion.div>
 
-                {/* Animated Stats */}
+                {/* Animated Stats - theme aware */}
                 {stats && stats.length > 0 && (
                   <motion.div
                     variants={itemVariants}
                     className="relative"
                   >
                     {/* Stats container with glass effect */}
-                    <div className="flex flex-wrap gap-8 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:gap-12">
+                    <div className="flex flex-wrap gap-8 rounded-xl border border-gray-200/50 bg-white/60 dark:border-white/15 dark:bg-white/10 p-6 backdrop-blur-md shadow-lg dark:shadow-none sm:gap-12">
                       {stats.map((stat, index) => (
                         <AnimatedStatCard
                           key={index}
@@ -269,7 +268,7 @@ function Hero({
           </AnimatePresence>
         </div>
 
-        {/* Image indicators */}
+        {/* Image indicators - theme aware */}
         {backgroundImages.length > 1 && showContent && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -283,8 +282,8 @@ function Hero({
                 onClick={() => setCurrentImageIndex(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === currentImageIndex
-                    ? "w-8 bg-white"
-                    : "w-2 bg-white/40 hover:bg-white/60"
+                    ? "w-8 bg-gray-900 dark:bg-white"
+                    : "w-2 bg-gray-900/40 dark:bg-white/50 hover:bg-gray-900/60 dark:hover:bg-white/70"
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -292,7 +291,7 @@ function Hero({
           </motion.div>
         )}
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator - theme aware */}
         {showContent && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -301,16 +300,16 @@ function Hero({
             className="absolute bottom-8 left-1/2 -translate-x-1/2"
           >
             <div className="flex flex-col items-center gap-2">
-              <span className="text-xs text-slate-400">Scroll to explore</span>
+              <span className="text-xs text-gray-600 dark:text-white/70">Scroll to explore</span>
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="h-10 w-6 rounded-full border-2 border-white/30 p-1"
+                className="h-10 w-6 rounded-full border-2 border-gray-400 dark:border-white/40 p-1"
               >
                 <motion.div
                   animate={{ y: [0, 12, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="h-2 w-2 rounded-full bg-white/60"
+                  className="h-2 w-2 rounded-full bg-gray-600 dark:bg-white/70"
                 />
               </motion.div>
             </div>

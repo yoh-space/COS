@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
 
 interface AnimatedCounterProps {
@@ -100,7 +100,7 @@ export function AnimatedStatCard({ value, label, index = 0, icon }: StatCardProp
       
       <div className="relative flex items-baseline gap-1">
         {icon && (
-          <span className="mr-2 text-blue-400">{icon}</span>
+          <span className="mr-2 text-blue-600 dark:text-blue-400">{icon}</span>
         )}
         <AnimatedCounter
           value={number}
@@ -108,7 +108,7 @@ export function AnimatedStatCard({ value, label, index = 0, icon }: StatCardProp
           suffix={suffix}
           duration={2}
           delay={0.3 + index * 0.2}
-          className="text-2xl font-bold text-white sm:text-4xl tabular-nums"
+          className="text-2xl font-bold text-gray-900 dark:text-white sm:text-4xl tabular-nums"
         />
       </div>
       
@@ -117,7 +117,7 @@ export function AnimatedStatCard({ value, label, index = 0, icon }: StatCardProp
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
-        className="text-sm text-slate-300 mt-1"
+        className="text-sm text-gray-600 dark:text-slate-300 mt-1"
       >
         {label}
       </motion.span>
@@ -128,7 +128,7 @@ export function AnimatedStatCard({ value, label, index = 0, icon }: StatCardProp
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 1 + index * 0.2, duration: 0.6, ease: "easeOut" }}
-        className="absolute -bottom-2 left-0 h-0.5 w-full origin-left bg-gradient-to-r from-blue-500 to-blue-400/0"
+        className="absolute -bottom-2 left-0 h-0.5 w-full origin-left bg-gradient-to-r from-blue-600 dark:from-blue-500 to-blue-400/0"
       />
     </motion.div>
   );
