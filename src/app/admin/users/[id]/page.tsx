@@ -66,30 +66,35 @@ export default function UserDetailPage() {
       // Fetch user, roles, and departments in parallel
       const [userResponse, rolesResponse, departmentsResponse] =
         await Promise.all([
-          fetch(`/api/cms/users?search=${userId}`),
+          fetch(`/api/cms/users/${userId}`),
           fetch("/api/cms/roles"),
           fetch("/api/cms/departments"),
         ]);
 
-      if (!userResponse.ok || !rolesResponse.ok || !departmentsResponse.ok) {
-        throw new Error("Failed to fetch data");
+      if (!userResponse.ok) {
+        if (userResponse.status === 404) {
+          throw new Error("User not found");
+        }
+        throw new Error("Failed to fetch user data");
+      }
+
+      if (!rolesResponse.ok) {
+        throw new Error("Failed to fetch roles");
+      }
+
+      if (!departmentsResponse.ok) {
+        throw new Error("Failed to fetch departments");
       }
 
       const userData = await userResponse.json();
       const rolesData = await rolesResponse.json();
       const departmentsData = await departmentsResponse.json();
 
-      // Find the specific user
-      const foundUser = userData.users.find((u: User) => u.id === userId);
-      if (!foundUser) {
-        throw new Error("User not found");
-      }
-
-      setUser(foundUser);
+      setUser(userData.user);
       setAllRoles(rolesData.roles);
       setAllDepartments(departmentsData.departments);
-      setSelectedRoleIds(foundUser.roles.map((r: Role) => r.id));
-      setSelectedDepartmentId(foundUser.department?.id || "");
+      setSelectedRoleIds(userData.user.roles.map((r: Role) => r.id));
+      setSelectedDepartmentId(userData.user.department?.id || "");
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
       console.error("Error fetching data:", err);
@@ -210,7 +215,7 @@ export default function UserDetailPage() {
   if (!user) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-4">
           <p className="text-red-800 dark:text-red-200">User not found</p>
         </div>
       </div>
@@ -248,31 +253,31 @@ export default function UserDetailPage() {
           </svg>
           Back to Users
         </button>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Manage User Roles
         </h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-400">
+        <p className="mt-2 text-gray-600 dark:text-slate-400">
           Assign roles and department to {getUserDisplayName(user)}
         </p>
       </div>
 
       {/* Success Message */}
       {success && (
-        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
+        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-2xl p-4 mb-6">
           <p className="text-green-800 dark:text-green-200">{success}</p>
         </div>
       )}
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-4 mb-6">
           <p className="text-red-800 dark:text-red-200">{error}</p>
         </div>
       )}
 
       {/* User Info Card */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+      <div className="bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-white/5 rounded-2xl shadow-lg shadow-gray-200/50 dark:shadow-none p-6 mb-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
           User Information
         </h2>
         <div className="flex items-center space-x-4">
@@ -293,20 +298,20 @@ export default function UserDetailPage() {
             </div>
           )}
           <div>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               {getUserDisplayName(user)}
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">{user.email}</p>
+            <p className="text-gray-600 dark:text-slate-400">{user.email}</p>
           </div>
         </div>
       </div>
 
       {/* Role Assignment */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+      <div className="bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-white/5 rounded-2xl shadow-lg shadow-gray-200/50 dark:shadow-none p-6 mb-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
           Assign Roles
         </h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
           Select one or more roles for this user. Each role grants specific
           permissions.
         </p>
@@ -314,7 +319,7 @@ export default function UserDetailPage() {
           {allRoles.map((role) => (
             <label
               key={role.id}
-              className="flex items-start p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors"
+              className="flex items-start p-4 border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors"
             >
               <input
                 type="checkbox"
@@ -324,15 +329,15 @@ export default function UserDetailPage() {
               />
               <div className="ml-3 flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">
                     {role.name}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                  <span className="text-xs text-gray-500 dark:text-slate-400">
                     {role.userCount} {role.userCount === 1 ? "user" : "users"}
                   </span>
                 </div>
                 {role.description && (
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  <p className="text-sm text-gray-600 dark:text-slate-400 mt-1">
                     {role.description}
                   </p>
                 )}
@@ -340,13 +345,13 @@ export default function UserDetailPage() {
                   {role.permissions.slice(0, 5).map((permission, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                      className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-slate-300"
                     >
                       {permission}
                     </span>
                   ))}
                   {role.permissions.length > 5 && (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-slate-300">
                       +{role.permissions.length - 5} more
                     </span>
                   )}
@@ -358,11 +363,11 @@ export default function UserDetailPage() {
       </div>
 
       {/* Department Assignment */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+      <div className="bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-white/5 rounded-2xl shadow-lg shadow-gray-200/50 dark:shadow-none p-6 mb-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
           Department Assignment
         </h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
           {isDepartmentLeadSelected()
             ? "Department Lead role requires a department assignment."
             : "Optionally assign this user to a department."}
@@ -370,7 +375,7 @@ export default function UserDetailPage() {
         <div>
           <label
             htmlFor="department"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            className="block text-sm font-medium text-gray-700 dark:text-white mb-2"
           >
             Department {isDepartmentLeadSelected() && <span className="text-red-500">*</span>}
           </label>
@@ -378,7 +383,7 @@ export default function UserDetailPage() {
             id="department"
             value={selectedDepartmentId}
             onChange={handleDepartmentChange}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="">No Department</option>
             {allDepartments.map((dept) => (
@@ -395,7 +400,7 @@ export default function UserDetailPage() {
       <div className="flex justify-end space-x-4">
         <button
           onClick={() => router.push("/admin/users")}
-          className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          className="px-6 py-2 border border-gray-300 dark:border-slate-600 rounded-md text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
         >
           Cancel
         </button>
