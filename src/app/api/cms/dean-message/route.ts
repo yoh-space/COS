@@ -44,7 +44,7 @@ export const PUT = withPermission(
     async (request: NextRequest, user) => {
         try {
             const body = await request.json();
-            const { title, content, closingMessages, image, status } = body;
+            const { title, introduction, content, closingMessages, closing, image, status } = body;
 
             if (!title || !content) {
                 return validationError('Title and content are required');
@@ -65,8 +65,10 @@ export const PUT = withPermission(
                 const newMessage = await prisma.deanMessage.create({
                     data: {
                         title,
+                        introduction: introduction || null,
                         content,
                         closingMessages: closingMessages || [],
+                        closing: closing || null,
                         image: image || null,
                         status: status || 'draft',
                         publishedAt: status === 'published' ? new Date() : null,
@@ -82,8 +84,10 @@ export const PUT = withPermission(
                 where: { id: currentMessage.id },
                 data: {
                     title,
+                    introduction: introduction || null,
                     content,
                     closingMessages: closingMessages || [],
+                    closing: closing || null,
                     image: image || null,
                     status: status || currentMessage.status,
                     publishedAt: status === 'published' && !currentMessage.publishedAt

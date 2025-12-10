@@ -11,8 +11,10 @@ export default function DeanMessagePage() {
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState({
         title: '',
+        introduction: '',
         content: '',
         closingMessages: [] as string[],
+        closing: '',
         image: '',
         status: 'draft',
     });
@@ -28,8 +30,10 @@ export default function DeanMessagePage() {
                 const data = await response.json();
                 setMessage({
                     title: data.title || '',
+                    introduction: data.introduction || '',
                     content: data.content || '',
                     closingMessages: data.closingMessages || [],
+                    closing: data.closing || '',
                     image: data.image || '',
                     status: data.status || 'draft',
                 });
@@ -166,33 +170,48 @@ export default function DeanMessagePage() {
                         />
                     </div>
 
-                    {/* Content */}
+                    {/* Introduction */}
+                    <div className="mb-6">
+                        <label
+                            htmlFor="introduction"
+                            className="mb-3 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            Introduction (Optional)
+                        </label>
+                        <textarea
+                            id="introduction"
+                            value={message.introduction}
+                            onChange={(e) => setMessage({ ...message, introduction: e.target.value })}
+                            rows={4}
+                            className="w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-3 text-base text-gray-700 dark:text-slate-300 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors duration-200"
+                            placeholder="Brief introduction or opening statement..."
+                        />
+                    </div>
+
+                    {/* Main Content */}
                     <div className="mb-6">
                         <label
                             htmlFor="content"
-                            className="mb-3 block text-sm font-medium text-black dark:text-white"
+                            className="mb-3 block text-sm font-medium text-gray-900 dark:text-white"
                         >
-                            Message Content
+                            Main Message Content
                         </label>
                         <textarea
                             id="content"
                             value={message.content}
                             onChange={(e) => setMessage({ ...message, content: e.target.value })}
-                            rows={20}
-                            className="w-full rounded-md border border-stroke dark:border-dark-3 bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary"
-                            placeholder="Enter the dean&apos;s message here. Use double line breaks for paragraphs."
+                            rows={12}
+                            className="w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-3 text-base text-gray-700 dark:text-slate-300 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors duration-200"
+                            placeholder="Enter the main dean&apos;s message content here..."
                             required
                         />
-                        <p className="mt-2 text-sm text-body-color">
-                            Tip: Use double line breaks (press Enter twice) to create new paragraphs.
-                        </p>
                     </div>
 
-                    {/* Closing Messages */}
+                    {/* Key Messages */}
                     <div className="mb-6">
                         <div className="flex items-center justify-between mb-3">
-                            <label className="text-sm font-medium text-black dark:text-white">
-                                Closing Messages (Bullet Points)
+                            <label className="text-sm font-medium text-gray-900 dark:text-white">
+                                Key Messages (Bullet Points)
                             </label>
                             <button
                                 type="button"
@@ -200,7 +219,7 @@ export default function DeanMessagePage() {
                                 className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-200 shadow-sm hover:shadow-md"
                             >
                                 <Plus size={16} />
-                                Add Point
+                                Add Key Point
                             </button>
                         </div>
                         <div className="space-y-3">
@@ -210,8 +229,8 @@ export default function DeanMessagePage() {
                                         type="text"
                                         value={msg}
                                         onChange={(e) => updateClosingMessage(index, e.target.value)}
-                                        className="flex-1 rounded-md border border-stroke dark:border-dark-3 bg-transparent px-4 py-2 text-base text-body-color outline-none focus:border-primary"
-                                        placeholder="Enter closing message point..."
+                                        className="flex-1 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2 text-base text-gray-700 dark:text-slate-300 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors duration-200"
+                                        placeholder="Enter key message point..."
                                     />
                                     <button
                                         type="button"
@@ -223,11 +242,29 @@ export default function DeanMessagePage() {
                                 </div>
                             ))}
                             {message.closingMessages.length === 0 && (
-                                <p className="text-sm text-body-color italic">
-                                    No closing messages added yet. Click &quot;Add Point&quot; to create bullet points.
+                                <p className="text-sm text-gray-600 dark:text-slate-400 italic">
+                                    No key messages added yet. Click &quot;Add Key Point&quot; to create bullet points.
                                 </p>
                             )}
                         </div>
+                    </div>
+
+                    {/* Closing */}
+                    <div className="mb-6">
+                        <label
+                            htmlFor="closing"
+                            className="mb-3 block text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                            Closing Statement (Optional)
+                        </label>
+                        <textarea
+                            id="closing"
+                            value={message.closing}
+                            onChange={(e) => setMessage({ ...message, closing: e.target.value })}
+                            rows={4}
+                            className="w-full rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-3 text-base text-gray-700 dark:text-slate-300 outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors duration-200"
+                            placeholder="Final thoughts or closing remarks..."
+                        />
                     </div>
 
                     {/* Status */}

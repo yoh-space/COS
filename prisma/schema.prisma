@@ -126,8 +126,10 @@ model Department {
 model DeanMessage {
   id               String   @id @default(cuid())
   title            String
-  content          String   @db.Text
-  closingMessages  String[] // NEW: Array of closing message bullets
+  introduction     String?  @db.Text // NEW: Introduction section
+  content          String   @db.Text // Main content
+  closingMessages  String[] // Key messages bullets
+  closing          String?  @db.Text // NEW: Closing section
   image            String?
   status           String   @default("draft")
   publishedAt      DateTime?

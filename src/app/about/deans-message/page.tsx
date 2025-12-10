@@ -65,7 +65,7 @@ export default async function DeansMessagePage() {
                                     {/* Profile Image */}
                                     {deanMessage.image && (
                                         <div className="relative w-48 h-48 md:w-56 md:h-56 flex-shrink-0">
-                                            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 dark:from-blue-400/20 to-purple-600/5 dark:to-purple-400/5 rounded-lg transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
                                             <div className="relative w-full h-full rounded-lg overflow-hidden border-4 border-white dark:border-slate-800 shadow-lg">
                                                 <Image
                                                     src={deanMessage.image}
@@ -99,32 +99,42 @@ export default async function DeansMessagePage() {
                                 </div>
                             </div>
 
+                            {/* Introduction Section */}
+                            {deanMessage.introduction && (
+                                <div className="mb-10 rounded-2xl bg-white dark:bg-slate-800/50 px-8 py-11 shadow-lg shadow-gray-200/50 dark:shadow-none border border-gray-200 dark:border-white/5 sm:p-[55px] lg:px-8 xl:p-[55px] hover:border-gray-300 dark:hover:border-white/10 transition-all duration-300">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="p-2 bg-blue-500/10 rounded-lg">
+                                            <Quote className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                                            Welcome Message
+                                        </h3>
+                                    </div>
+                                    <div className="text-lg leading-relaxed text-gray-600 dark:text-slate-400">
+                                        <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 dark:first-letter:text-blue-400 first-letter:mr-1 first-letter:float-left">
+                                            {deanMessage.introduction}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Main Message Content */}
                             <div className="mb-10 rounded-2xl bg-white dark:bg-slate-800/50 px-8 py-11 shadow-lg shadow-gray-200/50 dark:shadow-none border border-gray-200 dark:border-white/5 sm:p-[55px] lg:px-8 xl:p-[55px] hover:border-gray-300 dark:hover:border-white/10 transition-all duration-300">
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                                    Dean&apos;s Message
+                                </h3>
                                 <div className="space-y-6 text-base leading-relaxed text-gray-600 dark:text-slate-400">
                                     {paragraphs.map((paragraph, index) => (
-                                        <p
-                                            key={index}
-                                            className={index === 0 ? "first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 dark:first-letter:text-blue-400 first-letter:mr-1 first-letter:float-left" : ""}
-                                        >
+                                        <p key={index}>
                                             {paragraph}
                                         </p>
                                     ))}
                                 </div>
-
-                                <div className="mt-10 pt-8 border-t border-gray-200 dark:border-white/10">
-                                    <p className="text-lg font-bold text-gray-900 dark:text-white">
-                                        Dean, College of Science
-                                    </p>
-                                    <p className="text-sm text-gray-600 dark:text-slate-400 mt-1">
-                                        Bahir Dar University
-                                    </p>
-                                </div>
                             </div>
 
-                            {/* Closing Messages Section */}
+                            {/* Key Messages Section */}
                             {deanMessage.closingMessages && deanMessage.closingMessages.length > 0 && (
-                                <div className="rounded-2xl bg-white dark:bg-slate-800/50 px-8 py-11 shadow-lg shadow-gray-200/50 dark:shadow-none border border-gray-200 dark:border-white/5 sm:p-[55px] lg:px-8 xl:p-[55px] hover:border-gray-300 dark:hover:border-white/10 transition-all duration-300">
+                                <div className="mb-10 rounded-2xl bg-white dark:bg-slate-800/50 px-8 py-11 shadow-lg shadow-gray-200/50 dark:shadow-none border border-gray-200 dark:border-white/5 sm:p-[55px] lg:px-8 xl:p-[55px] hover:border-gray-300 dark:hover:border-white/10 transition-all duration-300">
                                     <div className="flex items-center gap-3 mb-6">
                                         <div className="p-2 bg-blue-500/10 rounded-lg">
                                             <CheckCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -142,6 +152,23 @@ export default async function DeansMessagePage() {
                                                 </p>
                                             </div>
                                         ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Closing Section */}
+                            {deanMessage.closing && (
+                                <div className="mb-10 rounded-2xl bg-white dark:bg-slate-800/50 px-8 py-11 shadow-lg shadow-gray-200/50 dark:shadow-none border border-gray-200 dark:border-white/5 sm:p-[55px] lg:px-8 xl:p-[55px] hover:border-gray-300 dark:hover:border-white/10 transition-all duration-300">
+                                    <div className="text-base leading-relaxed text-gray-600 dark:text-slate-400 mb-8">
+                                        <p>{deanMessage.closing}</p>
+                                    </div>
+                                    <div className="pt-8 border-t border-gray-200 dark:border-white/10">
+                                        <p className="text-lg font-bold text-gray-900 dark:text-white">
+                                            Dean, College of Science
+                                        </p>
+                                        <p className="text-sm text-gray-600 dark:text-slate-400 mt-1">
+                                            Bahir Dar University
+                                        </p>
                                     </div>
                                 </div>
                             )}
