@@ -4,7 +4,29 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, Bot, User } from "lucide-react";
-import { getChatResponse } from "@/lib/ai-chat";
+
+// Function to get chat response from API
+async function getChatResponse(message: string): Promise<string> {
+  try {
+    const response = await fetch("/api/ai/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to get response");
+    }
+
+    const data = await response.json();
+    return data.response;
+  } catch (error) {
+    console.error("Chat API error:", error);
+    throw error;
+  }
+}
 
 interface Message {
   id: string;
@@ -29,7 +51,7 @@ function formatMessage(text: string): string {
     .replace(/>/g, '\u003e')
     .replace(/"/g, '\u0022')
     .replace(/'/g, '\u0027');
-  
+
   // Then apply markdown-style formatting
   return escaped
     // Bold text: **text** or __text__
@@ -133,11 +155,10 @@ export default function AIChatCard() {
             className={`flex gap-3 ${message.role === "user" ? "flex-row-reverse" : ""}`}
           >
             <div
-              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
-                message.role === "user"
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${message.role === "user"
                   ? "bg-primary dark:bg-blue-600"
                   : ""
-              }`}
+                }`}
               style={message.role === "assistant" ? { background: "linear-gradient(to bottom right, #29b6ff, #1e90ff)" } : {}}
             >
               {message.role === "user" ? (
@@ -147,11 +168,10 @@ export default function AIChatCard() {
               )}
             </div>
             <div
-              className={`max-w-[75%] rounded-2xl px-4 py-2 ${
-                message.role === "user"
+              className={`max-w-[75%] rounded-2xl px-4 py-2 ${message.role === "user"
                   ? "bg-primary text-white dark:bg-blue-600 dark:text-gray-50"
                   : "bg-gray-100 text-black dark:bg-gray-800 dark:text-gray-100"
-              }`}
+                }`}
             >
               <div className="text-sm whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />
             </div>
